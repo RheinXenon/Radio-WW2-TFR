@@ -1,0 +1,46 @@
+.watch {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-direction: row-reverse;
+}
+.watch__face {
+  width: 118px;
+  height: 108px;
+  filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.6)) drop-shadow(0 2px 3px rgba(0, 0, 0, 0.5));
+}
+.watch__num {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 12.5px;
+  fill: #efe9cc;
+}
+.watch__date {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.8);
+}
+.watch__time {
+  font-size: 34px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  color: var(--cream);
+}
+.watch__time i {
+  font-style: normal;
+  display: inline-block;
+  margin: 0 1px;
+  animation: colon 2s steps(1) infinite;
+  color: var(--brass-hi);
+}
+@keyframes colon {
+  50% { opacity: 0.25; }
+}
+.watch__day {
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  color: var(--cream-dim);
+}

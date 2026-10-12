@@ -1,0 +1,131 @@
+.dyi {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: #07080c;
+  color: #f2f3f7;
+  font-family: var(--sans);
+}
+.dyi.is-leaving {
+  animation: dyi-out 1s var(--ease-io) forwards;
+}
+@keyframes dyi-out {
+  to { opacity: 0; filter: blur(12px); visibility: hidden; }
+}
+
+.dyi__aura {
+  position: absolute;
+  inset: -20%;
+  background:
+    radial-gradient(40% 40% at 35% 40%, color-mix(in srgb, var(--a) 45%, transparent), transparent 70%),
+    radial-gradient(40% 40% at 65% 60%, color-mix(in srgb, var(--b) 40%, transparent), transparent 70%);
+  filter: blur(60px);
+  opacity: 0;
+  animation: dyi-aura 3s 0.4s ease forwards, dyi-drift 12s ease-in-out infinite alternate;
+}
+@keyframes dyi-aura {
+  to { opacity: 0.75; }
+}
+@keyframes dyi-drift {
+  to { transform: translate(3%, -2%) rotate(6deg); }
+}
+
+.dyi__center {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dyi__line {
+  width: min(560px, 70vw);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--a), #fff, var(--b), transparent);
+  box-shadow: 0 0 18px var(--a);
+  transform: scaleX(0);
+  animation: dyi-line 1.4s 0.3s cubic-bezier(0.5, 0, 0.1, 1) forwards;
+  margin-bottom: 34px;
+}
+@keyframes dyi-line {
+  to { transform: scaleX(1); }
+}
+
+.dyi__title {
+  font-size: clamp(56px, 7.6vw, 108px);
+  font-weight: 600;
+  letter-spacing: 0.5em;
+  margin-right: -0.5em;
+  line-height: 1.05;
+  opacity: 0;
+  filter: blur(16px);
+  animation: dyi-title 1.8s 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+@keyframes dyi-title {
+  to { opacity: 1; filter: blur(0); letter-spacing: 0.14em; margin-right: -0.14em; }
+}
+
+.dyi__latin {
+  margin-top: 16px;
+  font-size: 13px;
+  letter-spacing: 0.6em;
+  margin-right: -0.6em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--a) 60%, #fff);
+  opacity: 0;
+  animation: dyi-fade 1.2s 1.7s ease forwards;
+}
+.dyi__sub {
+  margin-top: 12px;
+  font-size: 14px;
+  letter-spacing: 0.3em;
+  color: rgba(242, 243, 247, 0.55);
+  opacity: 0;
+  animation: dyi-fade 1.2s 2s ease forwards;
+}
+
+.dyi__chips {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 44px;
+  max-width: 80vw;
+}
+.dyi__chip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 16px 8px 8px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  opacity: 0;
+  transform: translateY(10px) scale(0.96);
+  animation: dyi-chip 0.9s calc(2.5s + var(--i) * 0.18s) cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+@keyframes dyi-chip {
+  to { opacity: 1; transform: none; }
+}
+
+.dyi__sweep {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 30vw;
+  left: -40vw;
+  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+  animation: dyi-sweep 1.6s 4s cubic-bezier(0.6, 0, 0.3, 1) forwards;
+}
+@keyframes dyi-sweep {
+  to { left: 120vw; }
+}
+
+@keyframes dyi-fade {
+  to { opacity: 1; }
+}

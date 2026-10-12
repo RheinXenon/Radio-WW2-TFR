@@ -1,0 +1,204 @@
+.boot {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: radial-gradient(ellipse at 50% 46%, #15100b 0%, #070504 70%);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  overflow: hidden;
+}
+.boot.is-on {
+  cursor: default;
+  animation: boot-out 0.9s 3.9s var(--ease-io) forwards;
+}
+@keyframes boot-out {
+  to { opacity: 0; filter: blur(6px); }
+}
+
+/* 开机后整片暖光自中心晕开，如同电子管后的灯泡 */
+.boot__warm {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 50% 32% at 50% 47%, rgba(255, 150, 60, 0.16), transparent 70%);
+  opacity: 0;
+}
+.is-on .boot__warm {
+  animation: warm 2.6s 0.5s ease-out forwards;
+}
+@keyframes warm {
+  0% { opacity: 0; }
+  30% { opacity: 0.4; }
+  38% { opacity: 0.25; }
+  100% { opacity: 1; }
+}
+
+.boot__plate {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+  transform: translateY(-4vh);
+}
+
+.boot__name {
+  font-family: var(--zh);
+  font-weight: 900;
+  font-size: clamp(40px, 5.4vw, 84px);
+  letter-spacing: 0.42em;
+  margin-right: -0.42em;
+  line-height: 1;
+  white-space: nowrap;
+}
+/* 未点亮：压在乌玻璃上的雕刻字，只有极淡的反光 */
+.boot__name span {
+  display: inline-block;
+  color: rgba(239, 227, 198, 0.055);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.04), 0 -1px 0 rgba(0, 0, 0, 0.6);
+}
+.is-on .boot__name span {
+  animation: lamp 1.3s calc(1.05s + var(--i) * 0.13s) var(--ease-out) forwards;
+}
+@keyframes lamp {
+  0% { color: rgba(239, 227, 198, 0.055); text-shadow: none; }
+  18% { color: #ffcf8f; text-shadow: 0 0 16px rgba(255, 160, 70, 0.9), 0 0 48px rgba(255, 110, 30, 0.6); }
+  26% { color: rgba(255, 200, 140, 0.3); text-shadow: 0 0 6px rgba(255, 140, 60, 0.3); }
+  40% { color: #ffd9a0; text-shadow: 0 0 14px color-mix(in srgb, var(--accent-glow) 85%, transparent), 0 0 46px rgba(255, 120, 40, 0.55); }
+  100% { color: #fbe3b6; text-shadow: 0 0 10px rgba(255, 175, 90, 0.6), 0 0 38px rgba(255, 120, 40, 0.35); }
+}
+
+/* 灯丝：自中心向两侧加热，带轻微闪烁 */
+.boot__filament {
+  height: 2px;
+  width: min(62vw, 760px);
+  background: linear-gradient(90deg, transparent, #ffb15c 22%, #fff0c8 50%, #ffb15c 78%, transparent);
+  border-radius: 2px;
+  transform: scaleX(0);
+  opacity: 0;
+  filter: drop-shadow(0 0 6px rgba(255, 150, 60, 0.9)) drop-shadow(0 0 22px rgba(255, 110, 30, 0.6));
+}
+.is-on .boot__filament {
+  animation: filament 2.2s 0.25s var(--ease-out) forwards;
+}
+@keyframes filament {
+  0% { transform: scaleX(0); opacity: 0; }
+  12% { transform: scaleX(0.04); opacity: 1; }
+  20% { opacity: 0.45; }
+  28% { opacity: 1; }
+  100% { transform: scaleX(1); opacity: 0.85; }
+}
+
+.boot__meta {
+  display: flex;
+  gap: 14px;
+  font-size: 13px;
+  letter-spacing: 0.5em;
+  color: rgba(239, 227, 198, 0.06);
+}
+.boot__meta i {
+  font-style: normal;
+}
+.is-on .boot__meta {
+  animation: meta 1.2s 2.3s ease forwards;
+}
+@keyframes meta {
+  to { color: rgba(239, 227, 198, 0.55); }
+}
+
+/* 魔眼：开机最后睁开的绿色荧光 */
+.boot__eye {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #0a0c0a;
+  box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--brass) 25%, transparent), 0 0 0 4px rgba(0, 0, 0, 0.5);
+  display: grid;
+  place-items: center;
+  margin-bottom: 8px;
+}
+.boot__eye i {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, #0a0c0a 0 28deg, #7dffb2 40deg 320deg, #0a0c0a 332deg);
+  opacity: 0;
+  transform: scale(0.4);
+}
+.is-on .boot__eye i {
+  animation: eye 1.4s 2.5s var(--ease-out) forwards;
+}
+@keyframes eye {
+  0% { opacity: 0; transform: scale(0.4) rotate(-40deg); filter: drop-shadow(0 0 0 #7dffb2); }
+  100% { opacity: 1; transform: scale(1) rotate(0deg); filter: drop-shadow(0 0 8px color-mix(in srgb, var(--phosphor) 70%, transparent)); }
+}
+
+/* 电源开关 */
+.boot__switch {
+  position: absolute;
+  bottom: 14vh;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  transition: opacity 0.6s ease;
+}
+.is-on .boot__switch {
+  opacity: 0;
+  pointer-events: none;
+}
+.boot__knob {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 50% 50%, #1b1510 0 34%, transparent 35%),
+    repeating-conic-gradient(from 0deg, #2a2017 0deg 5deg, #17110c 5deg 10deg);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--brass) 35%, transparent), 0 10px 24px rgba(0, 0, 0, 0.6), inset 0 2px 3px rgba(255, 255, 255, 0.06);
+  position: relative;
+  animation: breathe 3.2s ease-in-out infinite;
+}
+.boot__knob::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 8px;
+  width: 2px;
+  height: 12px;
+  margin-left: -1px;
+  border-radius: 1px;
+  background: var(--brass);
+  box-shadow: 0 0 6px color-mix(in srgb, var(--accent-glow) 60%, transparent);
+}
+.boot__switch:hover .boot__knob {
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--brass-hi) 70%, transparent), 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 26px color-mix(in srgb, var(--accent-glow) 18%, transparent);
+}
+@keyframes breathe {
+  0%, 100% { box-shadow: 0 0 0 1px color-mix(in srgb, var(--brass) 30%, transparent), 0 10px 24px rgba(0, 0, 0, 0.6); }
+  50% { box-shadow: 0 0 0 1px color-mix(in srgb, var(--brass) 60%, transparent), 0 10px 24px rgba(0, 0, 0, 0.6), 0 0 28px color-mix(in srgb, var(--accent-glow) 16%, transparent); }
+}
+.boot__hint {
+  font-size: 12px;
+  letter-spacing: 0.6em;
+  margin-right: -0.6em;
+  color: var(--cream-faint);
+}
+
+.boot__grain {
+  position: absolute;
+  inset: -50%;
+  pointer-events: none;
+  opacity: 0.09;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation: grain 0.9s steps(5) infinite;
+}
+@keyframes grain {
+  0% { transform: translate(0, 0); }
+  20% { transform: translate(-3%, 2%); }
+  40% { transform: translate(2%, -4%); }
+  60% { transform: translate(-4%, -1%); }
+  80% { transform: translate(3%, 3%); }
+  100% { transform: translate(0, 0); }
+}

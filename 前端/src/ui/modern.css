@@ -1,0 +1,176 @@
+.deck {
+  position: absolute;
+  left: 40px;
+  right: 40px;
+  bottom: 28px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 0 14px;
+  border-radius: 20px;
+  background: rgba(20, 18, 16, 0.42);
+  -webkit-backdrop-filter: blur(26px) saturate(1.5);
+  backdrop-filter: blur(26px) saturate(1.5);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 20px 50px rgba(0, 0, 0, 0.4);
+  color: rgba(255, 255, 255, 0.88);
+}
+.deck button {
+  display: grid;
+  place-items: center;
+  transition: color 0.25s, background 0.25s, opacity 0.25s;
+}
+
+.deck__transport {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.deck__transport > button {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  color: rgba(255, 255, 255, 0.72);
+}
+.deck__transport > button:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.08);
+}
+.deck__transport > .deck__play {
+  width: 44px;
+  height: 44px;
+  background: rgba(255, 255, 255, 0.92);
+  color: #15120e;
+}
+.deck__transport > .deck__play:hover {
+  background: #fff;
+  color: #15120e;
+  transform: scale(1.05);
+}
+
+.deck__stations {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+}
+/* 空间不足时频道钮按内容比例收缩、台名截断省略，保证每个都完整可见、可点按 */
+.deck__st {
+  position: relative;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  height: 38px;
+  padding: 0 13px;
+  min-width: 0;
+  border-radius: 12px;
+  font-size: 13.5px;
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+  color: rgba(255, 255, 255, 0.6);
+}
+.deck__st > * {
+  position: relative;
+}
+.deck__st svg {
+  flex: none;
+}
+.deck__st > span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.deck__st:hover {
+  color: #fff;
+}
+.deck__st.is-cur {
+  color: #fff;
+}
+.deck__st.is-off {
+  opacity: 0.4;
+}
+.deck__ind {
+  position: absolute !important;
+  inset: 0;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.14), 0 0 22px color-mix(in srgb, var(--glow) 30%, transparent);
+}
+
+.deck__right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.deck__seg {
+  display: flex;
+  padding: 3px;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.22);
+}
+.deck__seg button {
+  position: relative;
+  height: 30px;
+  padding: 0 12px;
+  font-size: 12.5px;
+  letter-spacing: 0.12em;
+  color: rgba(255, 255, 255, 0.6);
+}
+.deck__seg button span {
+  position: relative;
+}
+.deck__seg button.is-on {
+  color: #15120e;
+}
+.deck__segbg {
+  position: absolute !important;
+  inset: 0;
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.9);
+}
+.deck__order {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  color: rgba(255, 255, 255, 0.72);
+}
+.deck__order:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.mvol {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255, 255, 255, 0.72);
+}
+.mvol__track {
+  position: relative;
+  width: 96px;
+  height: 22px;
+  cursor: pointer;
+}
+.mvol__track::before,
+.mvol__fill {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  height: 4px;
+  margin-top: -2px;
+  border-radius: 2px;
+}
+.mvol__track::before {
+  right: 0;
+  background: rgba(255, 255, 255, 0.16);
+}
+.mvol__fill {
+  background: #fff;
+}

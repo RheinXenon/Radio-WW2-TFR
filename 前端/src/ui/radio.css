@@ -1,0 +1,410 @@
+/* ——————————————— 复古收音机 ——————————————— */
+
+.radio {
+  position: absolute;
+  left: 40px;
+  right: 40px;
+  bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.radio__body {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+/* —— 旋钮 —— */
+.knob {
+  position: relative;
+  width: var(--size);
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.knob__grip {
+  position: relative;
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  cursor: grab;
+  touch-action: none;
+}
+.knob__grip:active {
+  cursor: grabbing;
+}
+.knob__body {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  /* 胶木滚花边 */
+  background: repeating-conic-gradient(from 0deg, #2e2218 0deg 3.6deg, #110b07 3.6deg 7.2deg);
+  box-shadow:
+    0 16px 28px rgba(0, 0, 0, 0.66),
+    0 3px 6px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(0, 0, 0, 0.8),
+    inset 0 0 0 1px rgba(255, 220, 160, 0.07);
+}
+.knob__cap {
+  position: absolute;
+  inset: 13%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 38%, #3b2b1d, #150e09 72%);
+  box-shadow:
+    0 0 0 1.5px rgba(201, 164, 92, 0.6),
+    0 0 0 3px rgba(10, 7, 5, 0.9),
+    inset 0 2px 3px rgba(255, 255, 255, 0.08),
+    inset 0 -4px 8px rgba(0, 0, 0, 0.6);
+}
+/* 中心的拉丝黄铜盖 */
+.knob__cap::before {
+  content: '';
+  position: absolute;
+  inset: 31%;
+  border-radius: 50%;
+  background: conic-gradient(from 20deg, #9b7f45, #f4e2ad, #87703c, #ecd59c, #a3874c, #f8e8b8, #9b7f45);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.7), inset 0 0 0 1px rgba(255, 245, 210, 0.35);
+}
+.knob__cap i {
+  position: absolute;
+  top: 7%;
+  left: 50%;
+  width: 3px;
+  height: 22%;
+  margin-left: -1.5px;
+  border-radius: 2px;
+  background: #f7e5b8;
+  box-shadow: 0 0 6px rgba(255, 200, 120, 0.7);
+}
+/* 固定不动的高光：转动时只有滚花在转，光留在原地 */
+.knob__sheen {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 33% 24%, rgba(255, 244, 220, 0.24), transparent 38%),
+    radial-gradient(circle at 70% 82%, rgba(255, 170, 90, 0.06), transparent 40%);
+}
+.knob__grip:hover .knob__body {
+  box-shadow:
+    0 16px 28px rgba(0, 0, 0, 0.66),
+    0 3px 6px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(0, 0, 0, 0.8),
+    0 0 24px rgba(255, 180, 100, 0.12);
+}
+.knob__scale {
+  position: absolute;
+  left: 50%;
+  top: calc(var(--size) / 2);
+  width: calc(var(--size) * 1.36);
+  height: calc(var(--size) * 1.36);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  stroke: var(--cream-faint);
+  stroke-width: 1.4;
+}
+.knob__label {
+  font-size: 11px;
+  letter-spacing: 0.42em;
+  margin-right: -0.42em;
+  color: var(--cream-faint);
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.9);
+}
+
+/* —— 魔眼 —— */
+.eye {
+  /* 扇面默认值,运行时由组件逐帧写入 */
+  --gap: 60deg;
+  --lit: 0.8;
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.eye__glass {
+  position: relative;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #0d120e 0%, #040504 80%);
+  box-shadow:
+    0 0 0 2px #241b12,
+    0 0 0 3.5px rgba(201, 164, 92, 0.55),
+    0 0 0 5px rgba(10, 7, 5, 0.9),
+    0 10px 22px rgba(0, 0, 0, 0.7),
+    inset 0 0 14px rgba(0, 0, 0, 0.95);
+}
+.eye__fan {
+  position: absolute;
+  inset: 5px;
+  border-radius: 50%;
+  background: conic-gradient(
+    from calc(var(--gap) / -2),
+    transparent 0deg var(--gap),
+    rgba(125, 255, 178, var(--lit)) calc(var(--gap) + 3deg) calc(360deg - 3deg),
+    transparent 360deg
+  );
+  -webkit-mask: radial-gradient(circle, transparent 0 34%, #000 46% 80%, rgba(0, 0, 0, 0.5) 100%);
+  mask: radial-gradient(circle, transparent 0 34%, #000 46% 80%, rgba(0, 0, 0, 0.5) 100%);
+  filter: drop-shadow(0 0 4px rgba(125, 255, 178, 0.75)) drop-shadow(0 0 10px rgba(80, 230, 150, 0.4));
+}
+.eye__cap {
+  position: absolute;
+  inset: 34%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 35%, #3a3a34, #0b0b09 70%);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.8);
+}
+
+/* —— 刻度盘 —— */
+.dial {
+  flex: 1;
+  min-width: 0;
+  --needle: 0.5;
+}
+.dial__glass {
+  position: relative;
+  height: 116px;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: ew-resize;
+  touch-action: none;
+  background: linear-gradient(180deg, rgba(22, 16, 11, 0.8), rgba(9, 7, 5, 0.88));
+  -webkit-backdrop-filter: blur(16px) saturate(1.25);
+  backdrop-filter: blur(16px) saturate(1.25);
+  box-shadow:
+    0 0 0 1px rgba(201, 164, 92, 0.55),
+    0 0 0 4px rgba(14, 10, 7, 0.88),
+    0 0 0 5px rgba(201, 164, 92, 0.26),
+    0 26px 54px rgba(0, 0, 0, 0.62),
+    inset 0 1px 0 rgba(255, 235, 190, 0.12),
+    inset 0 -24px 40px rgba(255, 140, 50, 0.05);
+}
+/* 刻度灯：玻璃背后的暖光，随指针移动 */
+.dial__lamp {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: calc(34px + (100% - 68px) * var(--needle));
+  width: 420px;
+  transform: translateX(-50%);
+  background: radial-gradient(ellipse 50% 80% at 50% 62%, rgba(255, 168, 80, 0.2), rgba(255, 130, 50, 0.06) 55%, transparent 75%);
+  pointer-events: none;
+}
+.dial__glass::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, rgba(255, 150, 60, 0.07), transparent 46%);
+  pointer-events: none;
+}
+.dial__track {
+  position: absolute;
+  inset: 0 34px;
+}
+.dial__row {
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+.dial__row > * {
+  position: absolute;
+  transform: translateX(-50%);
+  white-space: nowrap;
+}
+.dial__row--st {
+  top: 13px;
+  height: 26px;
+}
+.dial__st {
+  --near: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 26px;
+  padding: 0 6px;
+  font-size: 13.5px;
+  letter-spacing: 0.14em;
+  color: rgba(239, 227, 198, calc(0.46 + var(--near) * 0.54));
+  text-shadow: 0 0 calc(var(--near) * 16px) var(--glow), 0 0 2px rgba(0, 0, 0, 0.6);
+  transition: opacity 0.4s;
+}
+.dial__st svg {
+  opacity: calc(0.6 + var(--near) * 0.4);
+  filter: drop-shadow(0 0 calc(var(--near) * 8px) var(--glow));
+}
+.dial__st:hover {
+  color: var(--cream);
+}
+.dial__st.is-cur::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -5px;
+  width: 4px;
+  height: 4px;
+  margin-left: -2px;
+  border-radius: 50%;
+  background: var(--glow);
+  box-shadow: 0 0 6px var(--glow);
+}
+.dial__st.is-off {
+  opacity: 0.38;
+}
+.dial__st.is-off .dial__city {
+  text-decoration: line-through;
+  text-decoration-color: rgba(255, 90, 54, 0.7);
+  text-decoration-thickness: 1px;
+}
+
+.dial__ticks {
+  position: absolute;
+  top: 48px;
+  left: 0;
+  width: 100%;
+  height: 16px;
+  overflow: visible;
+}
+.dial__ticks line {
+  stroke: rgba(239, 227, 198, 0.42);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+.dial__ticks line.major {
+  stroke: rgba(239, 227, 198, 0.75);
+}
+.dial__row--num {
+  top: 66px;
+  font-size: 13px;
+  color: rgba(239, 227, 198, 0.6);
+}
+.dial__row--latin {
+  top: 88px;
+  font-size: 10px;
+  letter-spacing: 0.28em;
+  color: rgba(239, 227, 198, 0.3);
+}
+
+.dial__needle {
+  position: absolute;
+  top: 7px;
+  bottom: 7px;
+  left: calc(var(--needle) * 100%);
+  width: 2px;
+  margin-left: -1px;
+  border-radius: 1px;
+  background: linear-gradient(180deg, rgba(255, 140, 100, 0.4), #ff4f2c 18%, #ff4f2c 82%, rgba(255, 140, 100, 0.4));
+  box-shadow: 0 0 6px rgba(255, 80, 40, 0.95), 0 0 20px rgba(255, 80, 40, 0.45);
+  pointer-events: none;
+}
+.dial__needle i {
+  position: absolute;
+  top: -3px;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  margin-left: -4px;
+  background: #ff6a44;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+}
+
+.dial__corner {
+  position: absolute;
+  bottom: 9px;
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  color: rgba(201, 164, 92, 0.55);
+}
+.dial__corner--l { left: 12px; }
+.dial__corner--r { right: 10px; }
+
+/* 玻璃反光 */
+.dial__sheen {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(172deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 34%, transparent 35%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.05), transparent 12%);
+  border-radius: inherit;
+}
+
+/* —— 琴键 —— */
+.keys {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  padding-right: 120px;
+}
+.keys__group {
+  display: flex;
+  gap: 3px;
+  padding: 7px 5px 5px;
+  border-radius: 6px;
+  background: linear-gradient(180deg, #120d09, #1d150f);
+  box-shadow:
+    inset 0 3px 7px rgba(0, 0, 0, 0.85),
+    0 0 0 1px rgba(201, 164, 92, 0.28),
+    0 10px 24px rgba(0, 0, 0, 0.45);
+}
+.key {
+  position: relative;
+  width: 58px;
+  height: 32px;
+}
+.key--wide {
+  width: 78px;
+}
+.key__face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border-radius: 3px 3px 5px 5px;
+  background: linear-gradient(180deg, #f1e7d1 0%, #e2d5b7 62%, #c9b994 100%);
+  color: #2a1f14;
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  box-shadow:
+    0 4px 0 #8f7f5e,
+    0 6px 9px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.75),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.06);
+  transform: translateY(-4px);
+  transition: transform 0.08s ease, box-shadow 0.08s ease, background 0.2s ease;
+}
+.key__face em {
+  font-style: normal;
+}
+.key:hover .key__face {
+  background: linear-gradient(180deg, #fbf4e4 0%, #ebdfc3 62%, #d2c39f 100%);
+}
+.key.is-down .key__face {
+  transform: translateY(0);
+  background: linear-gradient(180deg, #ddcfae 0%, #d3c4a1 100%);
+  box-shadow:
+    0 1px 0 #8f7f5e,
+    0 1px 2px rgba(0, 0, 0, 0.6),
+    inset 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+.key.is-down .key__face::after {
+  content: '';
+  position: absolute;
+  top: 4px;
+  right: 5px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #e0472c;
+  box-shadow: 0 0 5px rgba(255, 80, 40, 0.8);
+}
+.keys__group:first-child .key.is-down .key__face::after {
+  display: none;
+}

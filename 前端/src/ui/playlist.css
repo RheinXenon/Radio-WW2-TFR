@@ -1,0 +1,508 @@
+/* 歌单面板：左栏选来源，右栏列歌，两栏各自滚动 */
+.panel--split .panel__body {
+  overflow: hidden;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.pl {
+  display: grid;
+  grid-template-columns: 184px 1fr;
+  gap: 24px;
+  height: 100%;
+}
+.pl__side,
+.pl__main {
+  min-height: 0;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--brass) 30%, transparent) transparent;
+}
+.pl__side {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 18px 2px 24px 0;
+}
+.pl__main {
+  position: relative;
+  padding: 0 6px 28px 0;
+}
+
+/* —— 左栏 —— */
+.pl__search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: none;
+  padding: 8px 10px;
+  margin-bottom: 8px;
+  border-radius: 6px;
+  color: var(--cream-faint);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--brass) 28%, transparent);
+  transition: box-shadow 0.25s;
+}
+.pl__search:focus-within {
+  box-shadow: inset 0 0 0 1px var(--brass-hi);
+}
+.pl__search input {
+  flex: 1;
+  min-width: 0;
+  font: inherit;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  color: var(--cream);
+  background: none;
+  border: none;
+  outline: none;
+  user-select: text;
+}
+.pl__search input::placeholder {
+  color: var(--cream-faint);
+}
+.pl__label {
+  margin: 14px 0 6px 6px;
+  font-size: 11px;
+  letter-spacing: 0.4em;
+  color: var(--brass-hi);
+}
+.pl__src {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: none;
+  padding: 7px 10px;
+  border-radius: 6px;
+  font-size: 13.5px;
+  letter-spacing: 0.12em;
+  text-align: left;
+  color: var(--cream-dim);
+  transition: background 0.25s, color 0.25s, opacity 0.3s;
+}
+.pl__src svg {
+  flex: none;
+}
+.pl__src span {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.pl__src em {
+  font-style: normal;
+  font-family: var(--serif);
+  font-size: 12px;
+  color: var(--cream-faint);
+}
+.pl__src:hover {
+  background: rgba(239, 227, 198, 0.05);
+  color: var(--cream);
+}
+.pl__src.is-on {
+  background: color-mix(in srgb, var(--brass) 12%, transparent);
+  color: var(--cream);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--brass) 40%, transparent);
+}
+.pl__src.is-off {
+  opacity: 0.5;
+}
+.pl__src.is-new {
+  margin-top: 2px;
+  color: var(--cream-faint);
+}
+.pl__src.is-new:hover {
+  color: var(--cream);
+}
+/* 正在播放的来源旁亮一盏琥珀小灯 */
+.pl__live {
+  width: 6px;
+  height: 6px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--accent-glow);
+  box-shadow: 0 0 8px color-mix(in srgb, var(--accent-glow) 90%, transparent);
+}
+
+/* —— 右栏表头 —— */
+.pl__head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 20px 4px 16px;
+  border-bottom: 1px solid color-mix(in srgb, var(--brass) 18%, transparent);
+}
+.pl__head > svg {
+  flex: none;
+  filter: drop-shadow(0 0 10px var(--glow, transparent));
+}
+.pl__badge {
+  width: 36px;
+  height: 36px;
+  flex: none;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: var(--brass-hi);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--brass) 45%, transparent);
+}
+.pl__headmain {
+  flex: 1;
+  min-width: 0;
+}
+.pl__headmain h3,
+.pl__name {
+  font-size: 19px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  color: var(--cream);
+}
+.pl__headmain h3 em {
+  margin-left: 12px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12.5px;
+  letter-spacing: 0.12em;
+  color: var(--cream-faint);
+}
+.pl__headmain p {
+  margin-top: 4px;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: var(--cream-faint);
+}
+.pl__name {
+  width: 100%;
+  padding: 0 0 2px;
+  font-family: inherit;
+  background: none;
+  border: none;
+  border-bottom: 1px dashed color-mix(in srgb, var(--brass) 35%, transparent);
+  outline: none;
+  user-select: text;
+}
+.pl__name:focus {
+  border-bottom: 1px solid var(--brass-hi);
+}
+.pbtn--warn,
+.pbtn--warn:hover {
+  color: #ffc2b0;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--needle) 60%, transparent);
+}
+
+/* —— 分组标题：吸附在右栏顶部，长列表里也能随时开关；点整栏收起或展开 —— */
+.pl__ghead {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 6px 10px;
+  background: linear-gradient(180deg, rgba(13, 10, 8, 0.97) 78%, rgba(13, 10, 8, 0));
+  cursor: pointer;
+  user-select: none;
+}
+.pl__ghead:focus-visible {
+  outline: 1px solid var(--brass-hi);
+  outline-offset: -1px;
+}
+.pl__ghead strong {
+  font-size: 12.5px;
+  font-weight: 500;
+  letter-spacing: 0.36em;
+  color: var(--brass-hi);
+}
+.pl__ghead em {
+  flex: 1;
+  font-style: normal;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: var(--cream-faint);
+}
+/* 收起标志：小箭头，展开时朝下，收起后转向右 */
+.pl__fold {
+  flex: none;
+  color: var(--cream-faint);
+  transition: transform 0.25s, color 0.25s;
+}
+.pl__ghead:hover .pl__fold,
+.pl__ghead.is-folded .pl__fold {
+  color: var(--brass-hi);
+}
+.pl__ghead.is-folded .pl__fold {
+  transform: rotate(-90deg);
+}
+/* 启停开关独自响应点击，不牵动整栏收起 */
+.pl__gtoggle {
+  display: flex;
+  flex: none;
+}
+
+/* —— 歌曲行 —— */
+.pl__row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 6px;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+.pl__row:hover {
+  background: rgba(239, 227, 198, 0.045);
+}
+.pl__row.is-cur {
+  background: color-mix(in srgb, var(--brass) 10%, transparent);
+}
+.pl__row.is-cur .pl__title,
+.pl__row.is-cur .pl__no {
+  color: var(--brass-hi);
+}
+.pl__row.is-off .pl__song,
+.pl__row.is-off .pl__no {
+  opacity: 0.36;
+}
+/* 云音乐歌曲：歌名下划线作标记，行尾可移除 */
+.pl__row.is-cloud .pl__title {
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--brass) 55%, transparent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+/* CJK 歌名的行盒紧，offset 出的下划线会被 overflow:hidden 裁掉，补一段下方空间 */
+.pl__row.is-cloud .pl__title:not(.latin) {
+  padding-bottom: 5px;
+}
+/* 歌名行：歌名与 VIP 标签横向排布 */
+.pl__titleline {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+.pl__row > svg {
+  flex: none;
+}
+.pl__no {
+  width: 22px;
+  flex: none;
+  display: flex;
+  justify-content: flex-end;
+  font-size: 13px;
+  color: var(--cream-faint);
+}
+.pl__song {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  text-align: left;
+  transition: opacity 0.3s;
+}
+.pl__title,
+.pl__sub {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.pl__title {
+  font-size: 14.5px;
+  letter-spacing: 0.04em;
+  color: var(--cream);
+}
+.pl__title.latin {
+  font-size: 16px;
+}
+.pl__sub {
+  font-size: 11.5px;
+  letter-spacing: 0.06em;
+  color: var(--cream-faint);
+}
+
+/* 跳过开关：与拨动开关同款的琥珀指示灯 */
+.pl__lamp {
+  width: 18px;
+  height: 18px;
+  flex: none;
+  display: grid;
+  place-items: center;
+}
+.pl__lamp::before {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--brass) 20%, var(--ink));
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.7), 0 0 0 1px color-mix(in srgb, var(--brass) 25%, transparent);
+  transition: background 0.3s, box-shadow 0.3s;
+}
+.pl__lamp.is-on::before {
+  background: var(--accent-glow);
+  box-shadow: 0 0 8px color-mix(in srgb, var(--accent-glow) 90%, transparent), 0 0 2px color-mix(in srgb, var(--accent-glow) 55%, #fff);
+}
+
+.pl__grip {
+  width: 18px;
+  flex: none;
+  display: grid;
+  place-items: center;
+  color: var(--cream-faint);
+  cursor: grab;
+  touch-action: none;
+}
+.pl__grip:active {
+  cursor: grabbing;
+}
+
+/* 行尾操作按钮平时隐去，悬停时浮现；触屏上常显 */
+.pl__act {
+  width: 28px;
+  height: 28px;
+  flex: none;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: var(--cream-faint);
+  opacity: 0;
+  transition: opacity 0.2s, color 0.2s, background 0.2s;
+}
+.pl__row:hover .pl__act,
+.pl__act.is-open,
+.pl__act:focus-visible {
+  opacity: 1;
+}
+.pl__act:hover,
+.pl__act.is-open {
+  color: var(--cream);
+  background: rgba(239, 227, 198, 0.08);
+}
+@media (hover: none) {
+  .pl__act {
+    opacity: 1;
+  }
+}
+
+/* —— 加入歌单菜单 —— */
+.pl__menuwrap {
+  position: relative;
+  flex: none;
+}
+.pl__menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  right: 0;
+  z-index: 5;
+  min-width: 190px;
+  padding: 6px;
+  border-radius: 8px;
+  background: rgba(20, 15, 11, 0.98);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--brass) 36%, transparent), 0 14px 34px rgba(0, 0, 0, 0.6);
+}
+.pl__menu.is-up {
+  top: auto;
+  bottom: calc(100% + 4px);
+}
+.pl__menulabel {
+  padding: 6px 10px 4px;
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  color: var(--brass-hi);
+}
+.pl__menu button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 10px;
+  border-radius: 5px;
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  text-align: left;
+  color: var(--cream-dim);
+}
+.pl__menu button span {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.pl__menu button:hover {
+  background: color-mix(in srgb, var(--brass) 14%, transparent);
+  color: var(--cream);
+}
+.pl__menu svg {
+  flex: none;
+  color: var(--brass-hi);
+}
+.pl__menu hr {
+  height: 1px;
+  margin: 4px 2px;
+  border: none;
+  background: color-mix(in srgb, var(--brass) 18%, transparent);
+}
+
+.pl__empty {
+  padding: 48px 12px;
+  text-align: center;
+  font-size: 13px;
+  line-height: 2;
+  letter-spacing: 0.1em;
+  color: var(--cream-faint);
+}
+
+/* 窄屏：左栏收成顶部一条横向滚动的来源条 */
+@media (max-width: 640px) {
+  .pl {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    gap: 0;
+  }
+  .pl__side {
+    flex-direction: row;
+    align-items: center;
+    gap: 4px;
+    padding: 12px 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+  .pl__search {
+    width: 160px;
+    margin: 0 6px 0 0;
+  }
+  .pl__label {
+    display: none;
+  }
+  .pl__src span {
+    flex: none;
+  }
+}
+
+/* 失效条目提示与清理(本地文件移走后仍留在歌单里的收藏) */
+.pl__missing {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 6px;
+  padding: 5px 10px;
+  border: 1px dashed color-mix(in srgb, var(--brass) 28%, transparent);
+  border-radius: 6px;
+  font-size: 12px;
+  color: var(--cream-faint);
+}
+
+.pl__missclear {
+  margin-left: auto;
+  background: none;
+  border: 1px solid color-mix(in srgb, var(--brass) 40%, transparent);
+  border-radius: 5px;
+  padding: 2px 10px;
+  font-size: 12px;
+  color: color-mix(in srgb, var(--brass) 90%, transparent);
+  cursor: pointer;
+  flex: none;
+}
+
+.pl__missclear:hover {
+  color: var(--cream);
+  border-color: color-mix(in srgb, var(--brass) 70%, transparent);
+}

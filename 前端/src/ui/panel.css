@@ -1,0 +1,290 @@
+.panel {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  bottom: 24px;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  border-radius: 14px;
+  overflow: hidden;
+  background: linear-gradient(180deg, rgba(18, 14, 10, 0.84), rgba(10, 8, 6, 0.9));
+  -webkit-backdrop-filter: blur(24px) saturate(1.2);
+  backdrop-filter: blur(24px) saturate(1.2);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--brass) 36%, transparent),
+    0 0 0 4px rgba(10, 8, 6, 0.6),
+    0 34px 90px rgba(0, 0, 0, 0.65),
+    inset 0 1px 0 rgba(255, 235, 190, 0.08);
+}
+.panel__head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 28px 30px 18px;
+}
+.panel__sub {
+  font-size: 10.5px;
+  color: var(--brass);
+  margin-bottom: 8px;
+}
+.panel__title {
+  font-size: 23px;
+  font-weight: 600;
+  letter-spacing: 0.26em;
+  color: var(--cream);
+}
+.panel__close {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: var(--cream-dim);
+  transition: background 0.25s, color 0.25s;
+}
+.panel__close:hover {
+  color: var(--cream);
+  background: rgba(239, 227, 198, 0.08);
+}
+.panel__body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px 30px 30px;
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--brass) 30%, transparent) transparent;
+}
+.panel__foot {
+  padding: 14px 30px 18px;
+  border-top: 1px solid color-mix(in srgb, var(--brass) 16%, transparent);
+  font-size: 12px;
+  color: var(--cream-faint);
+  letter-spacing: 0.08em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.psec {
+  margin-top: 26px;
+}
+.psec__title {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.4em;
+  color: var(--brass-hi);
+  margin-bottom: 14px;
+}
+.psec__title em {
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  color: var(--cream-faint);
+}
+
+/* —— 开关 —— */
+.toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: none;
+}
+.toggle__lamp {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--brass) 20%, var(--ink));
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.7);
+  transition: background 0.3s, box-shadow 0.3s;
+}
+.toggle.is-on .toggle__lamp {
+  background: var(--accent-glow);
+  box-shadow: 0 0 8px color-mix(in srgb, var(--accent-glow) 90%, transparent), 0 0 2px color-mix(in srgb, var(--accent-glow) 55%, #fff);
+}
+.toggle__slot {
+  position: relative;
+  width: 42px;
+  height: 22px;
+  border-radius: 11px;
+  background: linear-gradient(180deg, #0a0806, #1a130d);
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.9), 0 0 0 1px color-mix(in srgb, var(--brass) 30%, transparent);
+}
+.toggle__knob {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: conic-gradient(from 30deg, var(--brass-lo), var(--brass-hi), var(--brass), var(--brass-hi), var(--brass-lo));
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
+  transition: transform 0.35s var(--ease-out);
+}
+.toggle.is-on .toggle__knob {
+  transform: translateX(20px);
+}
+
+/* —— 滑杆 —— */
+.pslider {
+  position: relative;
+  height: 24px;
+  cursor: pointer;
+  touch-action: none;
+  --p: 0.5;
+}
+.pslider__track,
+.pslider__fill {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  height: 2px;
+  margin-top: -1px;
+  border-radius: 1px;
+}
+.pslider__track {
+  right: 0;
+  background: rgba(239, 227, 198, 0.16);
+}
+.pslider__fill {
+  width: calc(var(--p) * 100%);
+  background: linear-gradient(90deg, var(--brass-lo), var(--brass-hi));
+}
+.pslider__thumb {
+  position: absolute;
+  top: 50%;
+  left: calc(var(--p) * 100%);
+  width: 14px;
+  height: 14px;
+  margin: -7px 0 0 -7px;
+  border-radius: 50%;
+  background: conic-gradient(from 30deg, var(--brass-lo), var(--brass-hi), var(--brass), var(--brass-hi), var(--brass-lo));
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
+}
+/* 档位节点：吸附位的小刻度点，深色描边使其在黄铜填充上也清晰 */
+.pslider__node {
+  position: absolute;
+  top: 50%;
+  width: 5px;
+  height: 5px;
+  margin: -2.5px 0 0 -2.5px;
+  border-radius: 50%;
+  background: rgba(239, 227, 198, 0.4);
+  box-shadow: 0 0 0 2px rgba(12, 9, 7, 0.8);
+  pointer-events: none;
+}
+
+/* —— 设置中的行 —— */
+.prow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(239, 227, 198, 0.06);
+}
+.prow:last-child {
+  border-bottom: none;
+}
+.prow__main {
+  flex: 1;
+  min-width: 0;
+}
+.prow__name {
+  font-size: 14.5px;
+  letter-spacing: 0.12em;
+  color: var(--cream);
+}
+.prow__desc {
+  margin-top: 3px;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: var(--cream-faint);
+}
+.prow__val {
+  width: 150px;
+  flex: none;
+}
+/* 值标签 + 控件竖排（档位滑动条行） */
+.prow__stack {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+.prow__steplabel {
+  font-size: 12.5px;
+  color: var(--cream-dim);
+  text-align: right;
+}
+
+/* 二选一的风格卡片 */
+.choices {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.choice {
+  position: relative;
+  text-align: left;
+  padding: 16px 16px 14px;
+  border-radius: 8px;
+  background: rgba(239, 227, 198, 0.03);
+  box-shadow: inset 0 0 0 1px rgba(239, 227, 198, 0.1);
+  transition: box-shadow 0.3s, background 0.3s;
+}
+.choice:hover {
+  background: rgba(239, 227, 198, 0.06);
+}
+.choice.is-on {
+  background: color-mix(in srgb, var(--brass) 10%, transparent);
+  box-shadow: inset 0 0 0 1px var(--brass), 0 0 24px color-mix(in srgb, var(--brass) 12%, transparent);
+}
+.choice__art {
+  height: 54px;
+  margin-bottom: 12px;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.choice__name {
+  font-size: 14.5px;
+  letter-spacing: 0.18em;
+  color: var(--cream);
+}
+.choice__desc {
+  margin-top: 4px;
+  font-size: 11.5px;
+  line-height: 1.6;
+  color: var(--cream-faint);
+}
+.choice.is-off {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.pbtn {
+  padding: 8px 16px;
+  font-size: 12.5px;
+  letter-spacing: 0.24em;
+  color: var(--cream);
+  border-radius: 3px;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--brass) 45%, transparent);
+  transition: background 0.25s, box-shadow 0.25s;
+}
+.pbtn:hover {
+  background: color-mix(in srgb, var(--brass) 14%, transparent);
+  box-shadow: inset 0 0 0 1px var(--brass-hi);
+}
+
+/* 会员歌曲小标签：云音乐面板与歌单面板共用 */
+.ncm__vip {
+  flex: none;
+  font-size: 10.5px;
+  font-style: normal;
+  padding: 1px 5px;
+  border-radius: 4px;
+  color: var(--accent-glow);
+  background: color-mix(in srgb, var(--brass) 18%, transparent);
+  border: 1px solid color-mix(in srgb, var(--brass) 40%, transparent);
+}

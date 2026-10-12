@@ -1,0 +1,15 @@
+{
+  "width": 1920,
+  "height": 1200,
+  "light": {
+    "x": 0.2099,
+    "y": 0.5083,
+    "strength": 0.183
+  },
+  "palette": {
+    "light": "#b18599",
+    "shadow": "#010101",
+    "accent": "#508dbc",
+    "mean": "#476f92"
+  }
+}

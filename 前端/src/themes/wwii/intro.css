@@ -1,0 +1,163 @@
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  display: grid;
+  place-items: center;
+  background: radial-gradient(ellipse at 50% 50%, #120d09 0%, #050403 75%);
+  animation: intro-out 1.1s 6.3s var(--ease-io) forwards;
+}
+/* 中途跳过时快速退场 */
+.intro.is-leaving {
+  animation: intro-out 0.45s var(--ease-io) forwards;
+}
+@keyframes intro-out {
+  0% { opacity: 1; }
+  100% { opacity: 0; visibility: hidden; }
+}
+
+.intro__center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: intro-push 1.2s 6.2s var(--ease-io) forwards;
+}
+@keyframes intro-push {
+  to { transform: scale(1.08); filter: blur(4px); }
+}
+
+.intro__kicker {
+  font-size: 12px;
+  letter-spacing: 0.7em;
+  margin-right: -0.7em;
+  color: var(--cream-faint);
+  opacity: 0;
+  animation: fade-in 1.4s 0.6s ease forwards;
+  margin-bottom: 28px;
+}
+
+.intro__line {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+.intro__year {
+  font-size: clamp(28px, 3vw, 46px);
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  color: var(--brass-hi);
+  opacity: 0;
+  text-shadow: 0 0 18px rgba(255, 190, 110, 0.35);
+}
+.intro__year--l { animation: year-l 1.6s 1.4s var(--ease-out) forwards; }
+.intro__year--r { animation: year-r 1.6s 1.6s var(--ease-out) forwards; }
+@keyframes year-l { from { opacity: 0; transform: translateX(24px); } to { opacity: 1; transform: none; } }
+@keyframes year-r { from { opacity: 0; transform: translateX(-24px); } to { opacity: 1; transform: none; } }
+
+.intro__rule {
+  position: relative;
+  width: min(48vw, 620px);
+  height: 22px;
+  display: flex;
+  align-items: center;
+}
+.intro__rule::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--brass) 12%, var(--brass) 88%, transparent);
+  transform: scaleX(0);
+  animation: rule 1.1s 0.1s var(--ease-out) forwards;
+  opacity: 0.6;
+}
+@keyframes rule { to { transform: scaleX(1); } }
+
+.intro__morse {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+.intro__morse i {
+  display: block;
+  height: 4px;
+  border-radius: 2px;
+  background: #fff1cf;
+  box-shadow: 0 0 8px rgba(255, 200, 120, 0.9);
+  opacity: 0;
+  animation: morse 0.5s calc(0.35s + var(--i) * 0.075s) ease-out forwards;
+}
+.intro__morse .dot { width: 4px; }
+.intro__morse .dash { width: 13px; }
+.intro__morse .gap { width: 4px; background: none; box-shadow: none; }
+@keyframes morse {
+  0% { opacity: 0; transform: scale(2.2); }
+  30% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0.72; transform: scale(1); }
+}
+
+.intro__title {
+  margin-top: 44px;
+  font-family: var(--zh);
+  font-weight: 900;
+  font-size: clamp(54px, 7.4vw, 112px);
+  letter-spacing: 0.32em;
+  margin-right: -0.32em;
+  line-height: 1;
+  color: #f6e7c4;
+}
+.intro__title span {
+  display: inline-block;
+  opacity: 0;
+  filter: blur(18px);
+  animation: title-in 2s calc(2.5s + var(--i) * 0.16s) var(--ease-out) forwards;
+}
+@keyframes title-in {
+  0% { opacity: 0; filter: blur(18px); transform: translateY(10px) scale(1.06); text-shadow: 0 0 60px rgba(255, 140, 60, 0.9); }
+  100% { opacity: 1; filter: blur(0); transform: none; text-shadow: 0 0 30px rgba(255, 150, 70, 0.28), 0 2px 0 rgba(0, 0, 0, 0.6); }
+}
+
+.intro__sub {
+  margin-top: 22px;
+  font-size: 15px;
+  letter-spacing: 0.62em;
+  margin-right: -0.62em;
+  color: var(--cream-dim);
+  opacity: 0;
+  animation: fade-in 1.4s 3.4s ease forwards;
+}
+
+.intro__emblems {
+  margin-top: 54px;
+  display: flex;
+  gap: clamp(16px, 2.4vw, 34px);
+}
+.intro__emblem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  margin-right: -0.3em;
+  color: var(--cream-dim);
+  opacity: 0;
+  animation: emblem-in 0.9s calc(4.3s + var(--i) * 0.11s) var(--ease-out) forwards;
+}
+.intro__emblem svg {
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.6));
+}
+@keyframes emblem-in {
+  0% { opacity: 0; transform: translateY(8px); filter: brightness(3) drop-shadow(0 0 12px var(--glow)); }
+  40% { opacity: 1; filter: brightness(1.6) drop-shadow(0 0 16px var(--glow)); }
+  100% { opacity: 1; transform: none; filter: none; }
+}
+
+@keyframes fade-in {
+  to { opacity: 1; }
+}

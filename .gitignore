@@ -1,0 +1,58 @@
+# 媒体资源不入库：壁纸、照片、音效由使用者自备，仓库只保留 json 描述与派生元数据
+*.mp3
+*.flac
+*.wav
+*.ogg
+*.oga
+*.m4a
+*.aac
+*.wma
+*.ape
+*.opus
+*.mid
+Resources/**/*.png
+Resources/**/*.jpg
+Resources/**/*.jpeg
+Resources/**/*.webp
+前端/public/gen/**/*.png
+前端/public/gen/**/*.jpg
+前端/public/gen/**/*.jpeg
+前端/public/gen/**/*.webp
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Node / 前端
+node_modules/
+dist/
+build/
+.cache/
+# 网易云登录态（cookie），不入库
+前端/.netease-session.json
+# 壁纸派生资源（深度图、缩略图）由 前端/scripts/derive.py 本地生成，不入库
+# 旧的派生资源目录，已迁移到 前端/public/gen，删除后移除此行
+.generated/
+
+# 日志与临时文件
+*.log
+*.tmp
+~$*
+
+# 操作系统
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store
+
+# 编辑器
+.idea/
+.vscode/
+
+# 生成过程的中间产物（转绘报告与事件文案草稿），代码不读取，不入库
+Resources/_report.json
+Resources/_super_events.json
+Resources/_super_events.md
+转绘工作区/

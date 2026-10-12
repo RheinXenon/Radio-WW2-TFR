@@ -1,0 +1,309 @@
+.gal__tabs {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 6px;
+  margin: 18px 0 22px;
+}
+.gal__tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 0 10px;
+  border-radius: 8px;
+  font-size: 12.5px;
+  letter-spacing: 0.16em;
+  color: var(--cream-dim);
+  transition: background 0.25s, color 0.25s;
+}
+.gal__tab svg {
+  transition: transform 0.4s var(--ease-out), filter 0.4s;
+}
+.gal__tab em {
+  font-style: normal;
+  font-family: var(--serif);
+  font-size: 11px;
+  color: var(--cream-faint);
+}
+.gal__tab:hover {
+  background: rgba(239, 227, 198, 0.05);
+  color: var(--cream);
+}
+.gal__tab.is-on {
+  background: color-mix(in srgb, var(--brass) 10%, transparent);
+  color: var(--cream);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--brass) 40%, transparent);
+}
+.gal__tab.is-on svg {
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 10px var(--glow));
+}
+
+.gal__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.gal__card {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #0b0907;
+  box-shadow: 0 0 0 1px rgba(239, 227, 198, 0.1), 0 10px 26px rgba(0, 0, 0, 0.5);
+  transition: box-shadow 0.35s, transform 0.5s var(--ease-out);
+}
+.gal__card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.9s var(--ease-out), filter 0.5s;
+  filter: saturate(0.92) brightness(0.92);
+}
+.gal__card:not(.is-missing):hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--brass-hi) 60%, transparent), 0 16px 34px rgba(0, 0, 0, 0.6);
+}
+.gal__card:not(.is-missing):hover img {
+  transform: scale(1.05);
+  filter: saturate(1.05) brightness(1);
+}
+.gal__card.is-cur {
+  box-shadow: 0 0 0 2px var(--brass-hi), 0 0 30px color-mix(in srgb, var(--brass) 30%, transparent), 0 16px 34px rgba(0, 0, 0, 0.6);
+}
+.gal__cap {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 26px 14px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  font-size: 12.5px;
+  letter-spacing: 0.2em;
+  text-align: left;
+  color: var(--cream);
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.72), transparent);
+}
+.gal__cap em {
+  font-style: normal;
+  font-size: 11px;
+  color: var(--brass-hi);
+  letter-spacing: 0.24em;
+}
+
+/* 未冲洗的底片：暗房红灯下的空白相纸 */
+.gal__card.is-missing {
+  background: radial-gradient(ellipse at 50% 40%, rgba(120, 30, 20, 0.22), transparent 70%), #0d0a08;
+  box-shadow: inset 0 0 0 1px rgba(239, 227, 198, 0.08);
+  outline: 1px dashed color-mix(in srgb, var(--brass) 25%, transparent);
+  outline-offset: -8px;
+}
+.gal__pat {
+  position: absolute;
+  inset: 0;
+}
+.gal__ph {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-align: center;
+}
+.gal__ph strong {
+  margin-top: 4px;
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 0.4em;
+  margin-right: -0.4em;
+  color: var(--cream-dim);
+}
+.gal__ph span {
+  font-size: 11.5px;
+  letter-spacing: 0.3em;
+  margin-right: -0.3em;
+  color: var(--cream-faint);
+}
+
+/* —— 史实转绘 —— */
+.gal__tab {
+  position: relative;
+}
+/* 含史实转绘的国别：页签右上一粒琥珀小灯 */
+.gal__pip {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent-glow);
+  box-shadow: 0 0 6px color-mix(in srgb, var(--accent-glow) 90%, transparent);
+}
+.gal__legend {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: -8px 0 16px;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  color: var(--cream-faint);
+}
+.gal__legend i {
+  flex: none;
+  width: 18px;
+  height: 11px;
+  border-radius: 2px;
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--brass-hi) 70%, transparent), 0 0 10px color-mix(in srgb, var(--accent-glow) 55%, transparent);
+}
+
+/* 静态琥珀光晕 + 黄铜内衬框（不做呼吸动画：卡片多时逐帧重绘阴影开销太大） */
+.gal__card.is-history {
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--brass-hi) 60%, transparent), 0 0 22px color-mix(in srgb, var(--accent-glow) 24%, transparent), 0 10px 26px rgba(0, 0, 0, 0.5);
+}
+.gal__card.is-history.is-cur {
+  box-shadow: 0 0 0 2px var(--brass-hi), 0 0 32px color-mix(in srgb, var(--accent-glow) 34%, transparent), 0 16px 34px rgba(0, 0, 0, 0.6);
+}
+.gal__card.is-history:hover {
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--brass-hi) 85%, transparent), 0 0 40px color-mix(in srgb, var(--accent-glow) 40%, transparent), 0 16px 34px rgba(0, 0, 0, 0.6);
+}
+.gal__card.is-history.is-cur:hover {
+  box-shadow: 0 0 0 2px var(--brass-hi), 0 0 44px color-mix(in srgb, var(--accent-glow) 45%, transparent), 0 16px 34px rgba(0, 0, 0, 0.6);
+}
+.gal__card.is-history::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
+  pointer-events: none;
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--brass-hi) 45%, transparent),
+    inset 0 0 0 5px rgba(12, 9, 7, 0.32),
+    inset 0 0 0 6px color-mix(in srgb, var(--brass) 38%, transparent);
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.35), transparent 28%);
+}
+
+.gal__pick {
+  position: absolute;
+  inset: 0;
+  display: block;
+}
+.gal__pick img {
+  position: absolute;
+  inset: 0;
+}
+/* 悬停时浮现的原照：黑白，带一点相纸的暖色 */
+.gal__card .gal__orig {
+  opacity: 0;
+  filter: grayscale(1) sepia(0.18) contrast(1.05) brightness(0.95);
+  transition: opacity 0.8s var(--ease-io), transform 0.9s var(--ease-out);
+}
+.gal__card.can-peek:hover .gal__orig {
+  opacity: 1;
+  filter: grayscale(1) sepia(0.18) contrast(1.05) brightness(0.95);
+}
+
+/* 折角：右上角向前折起的相纸角。::before 是折走后露出的纸底，::after 是纸背；
+   掠过整卡时纸角微微翘起，指向折角（或待转绘卡悬停）时沿折痕掀开 */
+.gal__fold {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 2;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  perspective: 220px;
+  transition: width 0.45s var(--ease-out), height 0.45s var(--ease-out);
+}
+.gal__fold::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(43, 33, 20, 0.92), rgba(15, 11, 7, 0.97));
+}
+.gal__fold::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  clip-path: polygon(0 0, 100% 100%, 0 100%);
+  background: linear-gradient(225deg, #f2e6c8, #d9c391 52%, #b9a06a);
+  transform-origin: 0 0;
+  transform: rotate3d(1, 1, 0, 0deg);
+  filter: drop-shadow(-1px 2px 2px rgba(0, 0, 0, 0.45));
+  transition: transform 0.5s var(--ease-out), filter 0.5s;
+}
+.gal__card:hover .gal__fold {
+  width: 48px;
+  height: 48px;
+}
+.gal__card:hover .gal__fold::after {
+  transform: rotate3d(1, 1, 0, -18deg);
+}
+.gal__fold:hover,
+.gal__fold:focus-visible,
+.gal__card.is-pending:hover .gal__fold {
+  width: 58px;
+  height: 58px;
+}
+.gal__fold:hover::after,
+.gal__fold:focus-visible::after,
+.gal__card.is-pending:hover .gal__fold::after {
+  transform: rotate3d(1, 1, 0, -46deg);
+  filter: drop-shadow(-3px 5px 7px rgba(0, 0, 0, 0.6));
+}
+/* 待转绘的卡整卡即入口，折角只作提示、不抢点击 */
+.gal__card.is-pending .gal__fold {
+  pointer-events: none;
+}
+
+.gal__card.is-history .gal__cap {
+  z-index: 2;
+  pointer-events: none;
+}
+/* 场景名与“历史原照”随悬停交替 */
+.gal__swap {
+  display: grid;
+}
+.gal__swap b {
+  grid-area: 1 / 1;
+  font-weight: inherit;
+  transition: opacity 0.5s, transform 0.5s var(--ease-out);
+}
+.gal__swap b + b {
+  opacity: 0;
+  transform: translateY(6px);
+}
+.gal__card.can-peek:hover .gal__swap b:first-child {
+  opacity: 0;
+  transform: translateY(-6px);
+}
+.gal__card.can-peek:hover .gal__swap b + b {
+  opacity: 1;
+  transform: none;
+}
+
+/* 尚未转绘：原照浸在暗房红灯里 */
+.gal__card.is-pending img {
+  filter: grayscale(1) brightness(0.62) contrast(1.1);
+}
+.gal__card.is-pending:hover img {
+  filter: grayscale(1) brightness(0.85) contrast(1.05);
+}
+.gal__card.is-pending::after {
+  background:
+    radial-gradient(ellipse at 50% 45%, rgba(150, 30, 18, 0.32), rgba(60, 10, 6, 0.4) 80%),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.35), transparent 28%);
+}
+.gal__card.is-pending .gal__cap em {
+  color: #ff9a7a;
+}

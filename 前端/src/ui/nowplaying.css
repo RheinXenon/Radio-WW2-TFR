@@ -1,0 +1,388 @@
+.np {
+  position: absolute;
+  left: 56px;
+  bottom: var(--np-bottom, 206px);
+  width: min(56vw, 860px);
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.75), 0 1px 2px rgba(0, 0, 0, 0.6);
+  transition: bottom 0.9s var(--ease-out), opacity 1.2s var(--ease-io);
+}
+
+/* 唱片：缀在歌名行尾的行内元素，直径随歌名字号（em 缩放），与文字行中心对齐 */
+.np__disc-wrap {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 0.3em;
+  width: 1.6em;
+  height: 1.6em;
+  border-radius: 50%;
+  box-shadow:
+    0 0.1em 0.34em rgba(0, 0, 0, 0.55),
+    0 0 calc(0.1em + var(--beat, 0) * 0.26em) calc(-0.02em + var(--beat, 0) * 0.04em)
+      color-mix(in srgb, var(--glow) calc(26% + var(--beat, 0) * 42%), transparent);
+  /* 不加过渡:--beat 在 JS 里已低通平滑,这里若再有过渡,每帧写入都会重启它 */
+  animation: discIn 1s var(--ease-out) backwards;
+}
+/* 盘缘：窄窄一圈胶边，刻纹叠一道随盘旋转的高光扇面——纹路转不出动静，转动靠这道光泽显形 */
+.np__disc {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background:
+    repeating-radial-gradient(circle at 50% 50%, rgba(245, 240, 225, 0.045) 0 1px, transparent 1px 3px),
+    radial-gradient(circle at 38% 32%, #22222a, #101014 74%);
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--accent) 30%, rgba(255, 255, 255, 0.08)),
+    inset 0 0 0.16em rgba(0, 0, 0, 0.75);
+  animation: discSpin 22s linear infinite;
+  animation-play-state: paused;
+  will-change: transform;
+  filter: saturate(0.85) brightness(0.82);
+  transition: filter 0.6s ease;
+}
+.np__disc.is-playing {
+  animation-play-state: running;
+  filter: none;
+}
+.np__disc::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: conic-gradient(from 18deg,
+    transparent 0deg, rgba(245, 240, 225, 0.12) 28deg, transparent 64deg,
+    transparent 196deg, rgba(245, 240, 225, 0.055) 232deg, transparent 268deg);
+  mix-blend-mode: screen;
+}
+/* 盘面主体：封面圆标占满绝大部分，只给黑胶留边缘装饰；inset 撑出与盘同心 */
+.np__label {
+  position: absolute;
+  inset: 9%;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 0 1.5px rgba(0, 0, 0, 0.65), inset 0 0 0.1em rgba(0, 0, 0, 0.45);
+  animation: labelIn 0.55s var(--ease-out);
+}
+/* 封面填满圆标：百分比基于圆标而非整盘，否则圆标会被撑大而偏心 */
+.np__label img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.np__label--st {
+  background: radial-gradient(circle at 50% 36%,
+    color-mix(in srgb, var(--accent) 58%, #000),
+    color-mix(in srgb, var(--accent) 14%, #000) 80%);
+}
+/* 台徽随盘等比缩放：覆盖构件自带的像素尺寸 */
+.np__label--st svg {
+  width: 56%;
+  height: auto;
+}
+@keyframes discSpin {
+  to { transform: rotate(1turn); }
+}
+/* 出场与逐字显影同一语言：只做淡入与浮出，不带旋转缩放，免得卡帧时盘面停在歪的姿态 */
+@keyframes discIn {
+  from { opacity: 0; translate: 0 14px; filter: blur(6px); }
+  to { opacity: 1; translate: 0 0; filter: blur(0); }
+}
+@keyframes labelIn {
+  from { opacity: 0; transform: scale(0.86); }
+  to { opacity: 1; transform: none; }
+}
+
+.np__head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12.5px;
+  letter-spacing: 0.32em;
+  color: var(--cream-dim);
+}
+.np__head svg {
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.6));
+  margin-right: 2px;
+}
+.np__dot {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--brass);
+  opacity: 0.7;
+}
+.np__band {
+  color: var(--glow);
+}
+/* 子歌单名取自用户数据，可能很长：超宽时收缩省略，不挤掉两侧 */
+.np__genre {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.np__pattern {
+  margin: 12px 0 10px;
+  width: 240px !important;
+  mask-image: linear-gradient(90deg, #000 30%, transparent);
+}
+
+.np__title {
+  font-weight: 500;
+  line-height: 1.04;
+  letter-spacing: -0.005em;
+  color: #f8ecd2;
+  margin: 2px 0 6px;
+  text-wrap: balance;
+}
+.np__title--zh {
+  font-family: var(--zh);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+}
+.np__zh {
+  font-size: 19px;
+  letter-spacing: 0.24em;
+  color: var(--cream-dim);
+  margin-bottom: 10px;
+}
+.np__artist {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  font-size: 15px;
+  color: var(--cream-dim);
+}
+.np__artist-o {
+  font-style: italic;
+  font-size: 20px;
+  color: var(--cream);
+}
+.np__artist-anon {
+  font-style: normal;
+  font-size: 15px;
+  letter-spacing: 0.3em;
+  color: var(--cream-dim);
+}
+.np__artist-zh {
+  letter-spacing: 0.14em;
+  font-size: 13px;
+}
+
+/* 云音乐歌词：当前句随行切换淡入，上一句留一抹淡影，译文小字缀在下方 */
+.np__lyric {
+  margin-top: 12px;
+  min-height: 62px;
+  display: grid;
+  gap: 3px;
+  justify-items: center;
+  text-align: center;
+}
+.np__lyric-prev {
+  font-size: 12.5px;
+  letter-spacing: 0.06em;
+  color: var(--cream-faint);
+  max-width: 34em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.np__lyric-line {
+  font-family: var(--zh);
+  font-size: 17px;
+  letter-spacing: 0.1em;
+  color: var(--cream);
+  text-shadow: 0 0 18px color-mix(in srgb, var(--glow) 35%, transparent);
+  max-width: 34em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  animation: lyricIn 0.55s var(--ease-out);
+}
+/* 歌词的官方中文翻译：小字淡色缀在原文下方 */
+.np__lyric-trans {
+  display: block;
+  margin-top: 3px;
+  font-size: 12.5px;
+  letter-spacing: 0.12em;
+  color: var(--cream-dim);
+  text-shadow: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+@keyframes lyricIn {
+  from { opacity: 0; transform: translateY(6px); filter: blur(3px); }
+  to { opacity: 1; transform: none; filter: none; }
+}
+
+/* 逐字显影：从失焦的墨迹中浮出 */
+.np__ch {
+  display: inline-block;
+  white-space: pre;
+  opacity: 0;
+  animation: ink 1.1s var(--ease-out) forwards;
+}
+@keyframes ink {
+  0% { opacity: 0; filter: blur(8px); transform: translateY(0.18em); }
+  60% { opacity: 1; }
+  100% { opacity: 1; filter: blur(0); transform: none; }
+}
+
+/* 信号微弱：文字随静电闪烁、轻微错位 */
+.np.is-weak .np__inner {
+  animation: weak 0.42s steps(2) infinite;
+}
+@keyframes weak {
+  0% { opacity: 0.55; transform: translateX(0); text-shadow: -1px 0 color-mix(in srgb, var(--needle) 50%, transparent), 1px 0 color-mix(in srgb, var(--phosphor) 35%, transparent); }
+  25% { opacity: 0.3; transform: translateX(1px); }
+  50% { opacity: 0.6; transform: translateX(-1px); }
+  75% { opacity: 0.25; }
+  100% { opacity: 0.5; }
+}
+
+.np__foot {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  margin-top: 20px;
+}
+
+.np__progress {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  max-width: 560px;
+}
+.np__time {
+  font-size: 14px;
+  color: var(--cream-dim);
+  min-width: 38px;
+}
+.np__time:last-child {
+  text-align: right;
+}
+.np__bar {
+  position: relative;
+  flex: 1;
+  height: 18px;
+  cursor: pointer;
+  --p: 0;
+}
+.np__track,
+.np__fill {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 1px;
+  margin-top: -0.5px;
+  /* transform 线性补间接住量化后的 scaleX 写入:进度本身匀速,补间与逐帧写视觉等价 */
+  transition: height 0.25s ease, margin 0.25s ease, transform 0.3s linear;
+}
+.np__track {
+  background: rgba(239, 227, 198, 0.2);
+}
+.np__fill {
+  transform-origin: left center;
+  background: linear-gradient(90deg, var(--brass-lo), var(--brass-hi));
+}
+.np__bead {
+  position: absolute;
+  top: 50%;
+  left: calc(var(--p) * 100%);
+  width: 7px;
+  height: 7px;
+  margin: -3.5px 0 0 -3.5px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--accent-glow) 55%, #fff);
+  box-shadow: 0 0 10px color-mix(in srgb, var(--accent-glow) 90%, transparent), 0 0 2px #fff;
+  transition: transform 0.25s ease;
+}
+.np__bar:hover .np__track,
+.np__bar:hover .np__fill {
+  height: 3px;
+  margin-top: -1.5px;
+}
+.np__bar:hover .np__bead {
+  transform: scale(1.4);
+}
+
+/* 珍藏印章：方框与勋章描边，收入后整枚填朱红 */
+.seal-wrap {
+  position: relative;
+  flex: none;
+}
+.seal {
+  width: 40px;
+  height: 40px;
+  transition: transform 0.3s var(--ease-out), filter 0.3s;
+}
+.seal svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.seal__body {
+  fill: none;
+  stroke: rgba(239, 227, 198, 0.4);
+  stroke-width: 1.4;
+}
+.seal__mark {
+  fill: none;
+  stroke: rgba(239, 227, 198, 0.4);
+  stroke-width: 2.4;
+  stroke-linecap: square;
+  stroke-linejoin: miter;
+}
+.seal:hover {
+  transform: rotate(-4deg) scale(1.06);
+}
+.seal:hover .seal__body { stroke: rgba(239, 227, 198, 0.8); }
+.seal:hover .seal__mark { stroke: rgba(239, 227, 198, 0.8); }
+.seal.is-on .seal__body {
+  fill: #b8291f;
+  stroke: #d0392c;
+}
+.seal.is-on .seal__mark {
+  stroke: #fbeedd;
+}
+.seal.is-on {
+  transform: rotate(-6deg);
+  filter: drop-shadow(0 2px 8px rgba(184, 41, 31, 0.45));
+  animation: stamp 0.55s var(--ease-out);
+}
+@keyframes stamp {
+  0% { transform: rotate(-16deg) scale(1.9); opacity: 0; }
+  55% { transform: rotate(-5deg) scale(0.92); opacity: 1; }
+  100% { transform: rotate(-6deg) scale(1); }
+}
+.seal__menu {
+  z-index: 20;
+}
+
+/* 停播 */
+.np__restore {
+  margin-top: 18px;
+  padding: 9px 18px;
+  font-size: 13px;
+  letter-spacing: 0.3em;
+  color: var(--cream);
+  border: 1px solid color-mix(in srgb, var(--brass) 50%, transparent);
+  border-radius: 2px;
+  background: rgba(14, 11, 8, 0.4);
+  backdrop-filter: blur(6px);
+  transition: background 0.3s, border-color 0.3s;
+}
+.np__restore:hover {
+  background: color-mix(in srgb, var(--brass) 16%, transparent);
+  border-color: var(--brass-hi);
+}
+.np.is-offair .np__title {
+  margin-top: 16px;
+  color: var(--cream-dim);
+}

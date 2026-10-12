@@ -1,0 +1,695 @@
+/* 云音乐导入面板：沿用面板的乌玻璃与黄铜配色 */
+
+.ncm__notice {
+  margin: 12px 18px 0;
+  padding: 8px 12px;
+  border: 1px solid color-mix(in srgb, var(--brass) 35%, transparent);
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--brass) 10%, transparent);
+  font-size: 13px;
+  color: var(--cream);
+}
+
+.ncm__account,
+.ncm__item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 7px 2px;
+}
+
+.ncm__account .ncm__who {
+  flex: 1;
+  min-width: 0;
+  display: grid;
+  gap: 3px;
+}
+
+.ncm__who strong {
+  font-size: 15px;
+  color: var(--cream);
+  font-weight: 600;
+}
+
+.ncm__who em {
+  font-style: normal;
+  font-size: 12px;
+  color: var(--cream-faint);
+}
+
+.ncm__avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--brass-lo);
+  object-fit: cover;
+}
+
+/* 未登录引导：黄铜描边卡片，说明登录的两点理由 */
+.ncm__guide {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 6px 0 2px;
+  padding: 10px 12px;
+  border: 1px solid color-mix(in srgb, var(--brass) 45%, transparent);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--brass) 12%, transparent);
+}
+
+.ncm__guidetext {
+  flex: 1;
+  min-width: 0;
+  display: grid;
+  gap: 4px;
+}
+
+.ncm__guidetext strong {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--cream);
+}
+
+.ncm__guidetext p {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--cream-dim);
+}
+
+/* 未登录引导弹卡：居中等待选择，点背景或「暂不」即收起 */
+.login-guide {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  display: grid;
+  place-items: center;
+  background: rgba(5, 4, 3, 0.55);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+
+.login-guide__card {
+  width: min(400px, calc(100vw - 48px));
+  padding: 26px 30px 24px;
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(20, 15, 11, 0.94), rgba(11, 9, 7, 0.96));
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--brass) 36%, transparent), 0 0 0 4px rgba(10, 8, 6, 0.6), 0 34px 90px rgba(0, 0, 0, 0.65);
+}
+
+.login-guide__text {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.8;
+  color: var(--cream-dim);
+}
+
+.login-guide__btns {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.login-guide__primary {
+  background: color-mix(in srgb, var(--brass) 20%, transparent);
+}
+
+/* 我的歌单翻页 */
+.ncm__pager {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 10px;
+}
+
+.ncm__pager em {
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  color: var(--cream-faint);
+}
+
+/* 扫码区 */
+.ncm__loginqr {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  padding: 6px 2px;
+}
+
+.ncm__qr {
+  border: 4px solid #f4efe4;
+  border-radius: 6px;
+  box-shadow: 0 0 0 1px var(--brass-lo), 0 8px 24px rgba(0, 0, 0, 0.5);
+  flex: none;
+}
+
+.ncm__loginhint {
+  display: grid;
+  gap: 10px;
+  justify-items: start;
+}
+
+.ncm__loginhint p {
+  font-size: 13.5px;
+  color: var(--cream-dim);
+  line-height: 1.6;
+}
+
+/* 目的地选择：频道徽记行 + 子歌单 chips */
+.ncm__stations {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 4px 0 10px;
+}
+
+.ncm__stbtn {
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  padding: 7px 9px 5px;
+  border-radius: 7px;
+  border: 1px solid color-mix(in srgb, var(--brass) 22%, transparent);
+  background: rgba(0, 0, 0, 0.28);
+  color: var(--cream-dim);
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+  transition: border-color 0.25s, color 0.25s, background 0.25s;
+}
+
+.ncm__stbtn:hover { color: var(--cream); border-color: color-mix(in srgb, var(--brass) 50%, transparent); }
+
+.ncm__stbtn.is-on {
+  color: var(--cream);
+  border-color: var(--brass);
+  background: color-mix(in srgb, var(--brass) 13%, transparent);
+}
+
+.ncm__groups {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}
+
+.ncm__chip,
+.ncm__newgroup {
+  padding: 4px 11px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--brass) 22%, transparent);
+  background: rgba(0, 0, 0, 0.28);
+  color: var(--cream-dim);
+  font: inherit;
+  font-size: 12.5px;
+  cursor: pointer;
+  transition: border-color 0.25s, color 0.25s;
+}
+
+.ncm__chip:hover { color: var(--cream); border-color: color-mix(in srgb, var(--brass) 50%, transparent); }
+
+.ncm__chip.is-on,
+.ncm__newgroup.is-on {
+  color: var(--cream);
+  border-color: var(--brass);
+  background: color-mix(in srgb, var(--brass) 13%, transparent);
+}
+
+.ncm__newgroup {
+  width: 130px;
+  cursor: text;
+}
+
+.ncm__newgroup::placeholder { color: var(--cream-faint); }
+
+.ncm__newgroup:focus { outline: none; border-color: var(--brass); }
+
+/* 管理区：每组可展开，组内拖动排序 */
+.ncm__manage {
+  margin: 8px 0 2px;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 10px;
+  max-height: 360px;
+  overflow: auto;
+}
+
+.ncm__grp {
+  display: grid;
+  gap: 5px;
+}
+
+.ncm__mgroup {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ncm__mgroup strong {
+  font-size: 13px;
+  color: var(--cream);
+  font-weight: 600;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ncm__mgroup em {
+  font-style: normal;
+  font-size: 11.5px;
+  color: var(--cream-faint);
+}
+
+/* 展开箭头：收起时转向右 */
+.ncm__foldbtn {
+  border: none;
+  background: none;
+  padding: 3px;
+  display: grid;
+  place-items: center;
+  color: var(--cream-faint);
+  cursor: pointer;
+}
+
+.ncm__foldbtn:hover {
+  color: var(--cream);
+}
+
+.ncm__fold {
+  transform: rotate(-90deg);
+  transition: transform 0.2s;
+}
+
+.ncm__fold.is-on {
+  transform: none;
+}
+
+/* 组名编辑框 */
+.ncm__gname {
+  font: inherit;
+  font-size: 13px;
+  color: var(--cream);
+  background: rgba(0, 0, 0, 0.32);
+  border: 1px solid var(--brass);
+  border-radius: 5px;
+  padding: 2px 8px;
+  width: 160px;
+  outline: none;
+}
+
+/* 组内歌曲行 */
+.ncm__glist {
+  margin: 0;
+  padding: 0 0 0 22px;
+  list-style: none;
+  display: grid;
+  gap: 2px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.ncm__grow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 3px 6px;
+  border-radius: 5px;
+  font-size: 12.5px;
+  color: var(--cream-dim);
+}
+
+.ncm__grip {
+  width: 16px;
+  flex: none;
+  display: grid;
+  place-items: center;
+  color: var(--cream-faint);
+  cursor: grab;
+  touch-action: none;
+}
+
+.ncm__grip:active {
+  cursor: grabbing;
+}
+
+.ncm__gsong {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.ncm__gsong:hover {
+  color: var(--cream);
+}
+
+.ncm__gtitle {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ncm__gsong em {
+  font-style: normal;
+  font-size: 11.5px;
+  color: var(--cream-faint);
+  flex: none;
+}
+
+.ncm__grow .ncm__mdel {
+  margin-left: 0;
+  display: grid;
+  place-items: center;
+  opacity: 0.55;
+}
+
+.ncm__grow:hover .ncm__mdel {
+  opacity: 1;
+}
+
+.ncm__mdel {
+  margin-left: auto;
+  border: none;
+  background: none;
+  color: var(--cream-faint);
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 4px;
+  transition: color 0.2s, background 0.2s;
+}
+
+.ncm__mdel:hover { color: #ff8a6b; background: color-mix(in srgb, var(--needle) 10%, transparent); }
+
+/* 组名旁的改名按钮：一枚铅笔，悬停浮出黄铜色 */
+.ncm__mren {
+  border: none;
+  background: none;
+  color: var(--cream-faint);
+  cursor: pointer;
+  padding: 2px 5px;
+  border-radius: 4px;
+  transition: color 0.2s, background 0.2s;
+}
+
+.ncm__mren:hover { color: color-mix(in srgb, var(--brass) 95%, transparent); background: color-mix(in srgb, var(--brass) 12%, transparent); }
+
+.ncm__mdel.is-warn {
+  color: #ff8a6b;
+  border: 1px solid rgba(255, 138, 107, 0.45);
+}
+
+/* 「并入」轻量文字按钮：把内容并进当前选中的子歌单 */
+.ncm__merge {
+  flex: none;
+  border: none;
+  background: none;
+  padding: 2px 4px;
+  font: inherit;
+  font-size: 12px;
+  color: color-mix(in srgb, var(--brass) 90%, transparent);
+  cursor: pointer;
+}
+
+.ncm__merge:hover {
+  color: var(--cream);
+}
+
+.ncm__merge:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+/* 库的导出导入行：说明当前库的存放位置 */
+.ncm__libio {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.ncm__libio span {
+  font-size: 11.5px;
+  color: var(--cream-faint);
+  margin-right: auto;
+}
+
+/* 搜索与链接输入行 */
+.ncm__searchbar {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin: 4px 2px 8px;
+  padding: 8px 12px;
+  border: 1px solid color-mix(in srgb, var(--brass) 30%, transparent);
+  border-radius: 7px;
+  background: rgba(0, 0, 0, 0.32);
+  color: var(--cream-faint);
+}
+
+.ncm__searchbar input {
+  flex: 1;
+  min-width: 0;
+  background: none;
+  border: none;
+  outline: none;
+  color: var(--cream);
+  font: inherit;
+  font-size: 14px;
+}
+
+.ncm__searchbar input::placeholder {
+  color: var(--cream-faint);
+}
+
+/* 列表行（我的歌单、搜索结果、链接查询） */
+.ncm__item {
+  border-radius: 7px;
+}
+
+.ncm__item + .ncm__item {
+  border-top: 1px dashed color-mix(in srgb, var(--brass) 14%, transparent);
+}
+
+.ncm__item img {
+  width: 34px;
+  height: 34px;
+  border-radius: 5px;
+  object-fit: cover;
+  border: 1px solid color-mix(in srgb, var(--brass) 25%, transparent);
+  flex: none;
+}
+
+.ncm__itemname {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 14px;
+  color: var(--cream);
+}
+
+.ncm__itemname em {
+  font-style: normal;
+  margin-left: 8px;
+  font-size: 12px;
+  color: var(--cream-faint);
+}
+
+.ncm__item > em {
+  font-style: normal;
+  font-size: 12px;
+  color: var(--cream-faint);
+  flex: none;
+}
+
+.ncm__empty {
+  font-size: 13px;
+  color: var(--cream-faint);
+  padding: 6px 2px;
+}
+
+/* 进度 */
+.ncm__prog {
+  display: grid;
+  gap: 8px;
+  padding: 4px 2px;
+}
+
+.ncm__proghead {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.ncm__proghead strong {
+  font-size: 14.5px;
+  color: var(--cream);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ncm__proghead span {
+  color: var(--cream-dim);
+  font-size: 13px;
+}
+
+.ncm__bar {
+  height: 6px;
+  border-radius: 3px;
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid color-mix(in srgb, var(--brass) 25%, transparent);
+  overflow: hidden;
+}
+
+.ncm__bar i {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, var(--brass-lo), var(--brass), var(--brass-hi));
+  transition: width 0.5s var(--ease-out);
+}
+
+.ncm__current {
+  font-size: 12.5px;
+  color: var(--cream-dim);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ncm__err {
+  color: #ff8a6b;
+}
+
+.ncm__detail summary {
+  cursor: pointer;
+  font-size: 12.5px;
+  color: var(--cream-faint);
+  user-select: none;
+}
+
+.ncm__detail ul {
+  margin: 8px 0 2px;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 5px;
+  max-height: 200px;
+  overflow: auto;
+}
+
+.ncm__detail li {
+  font-size: 12.5px;
+  color: var(--cream-dim);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ncm__detail li em {
+  font-style: normal;
+  color: var(--cream-faint);
+  margin-right: 8px;
+  font-size: 11.5px;
+}
+
+/* archive.org 合集导入区 */
+.ncm__extbar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 10px 0 6px;
+}
+
+.ncm__extbar strong {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 14px;
+  color: var(--cream);
+}
+
+.ncm__extbar > em {
+  font-style: normal;
+  font-size: 12px;
+  color: var(--cream-faint);
+  flex: none;
+}
+
+.ncm__exttoggle {
+  background: none;
+  border: none;
+  padding: 2px 4px;
+  font-size: 12px;
+  color: color-mix(in srgb, var(--brass) 90%, transparent);
+  cursor: pointer;
+}
+
+.ncm__exttoggle:hover {
+  color: var(--cream);
+}
+
+.ncm__extlist {
+  max-height: 232px;
+  overflow-y: auto;
+  border: 1px solid color-mix(in srgb, var(--brass) 18%, transparent);
+  border-radius: 7px;
+  padding: 2px 0;
+}
+
+.ncm__extfile {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 4px 10px;
+  font-size: 13px;
+  color: var(--cream-faint);
+  cursor: pointer;
+}
+
+.ncm__extfile + .ncm__extfile {
+  border-top: 1px dashed color-mix(in srgb, var(--brass) 10%, transparent);
+}
+
+.ncm__extfile:hover,
+.ncm__extfile.is-on {
+  color: var(--cream);
+}
+
+.ncm__extfile span {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ncm__extfile em {
+  font-style: normal;
+  font-size: 11px;
+  flex: none;
+}
+
+.ncm__extfile input {
+  flex: none;
+  accent-color: var(--brass);
+}

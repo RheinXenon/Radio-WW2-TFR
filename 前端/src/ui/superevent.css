@@ -1,0 +1,291 @@
+/* ——————————————— 超级事件 ———————————————
+   霓虹弹窗：插画在上、事件条在下，标题与引语按游戏超级事件的排式陈列 */
+
+.sev {
+  position: fixed;
+  inset: 0;
+  z-index: 32;
+  display: grid;
+  place-items: center;
+  background: rgba(6, 2, 13, 0.93);
+}
+
+.sev__backdrop {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.sev__backdrop img {
+  position: absolute;
+  inset: -60px;
+  width: calc(100% + 120px);
+  height: calc(100% + 120px);
+  object-fit: cover;
+  filter: blur(40px) saturate(1.15) brightness(0.3);
+}
+.sev__vignette {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 50% 42%, transparent 28%, rgba(4, 1, 10, 0.78) 100%),
+    linear-gradient(180deg, rgba(4, 1, 10, 0.35), transparent 30%, transparent 70%, rgba(4, 1, 10, 0.55));
+}
+
+/* —— 弹窗箱体：顶部一道霓虹灯管；不滚动，空间不足时压插画保文字 —— */
+.sev__case {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: min(980px, calc(100vw - 96px));
+  max-height: calc(100vh - 72px);
+  overflow: hidden;
+  border-radius: 10px;
+  background:
+    radial-gradient(ellipse at 50% 0%, color-mix(in srgb, var(--accent) 9%, transparent), transparent 60%),
+    linear-gradient(180deg, rgba(14, 5, 28, 0.94), rgba(8, 3, 18, 0.97));
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--brass) 55%, transparent),
+    0 0 46px color-mix(in srgb, var(--accent-glow) 20%, transparent),
+    0 40px 110px rgba(0, 0, 0, 0.8),
+    inset 0 1px 0 rgba(240, 220, 255, 0.08);
+}
+.sev__case::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 12%;
+  right: 12%;
+  height: 2px;
+  z-index: 3;
+  background: linear-gradient(90deg, transparent, var(--accent-glow), transparent);
+  box-shadow: 0 0 14px color-mix(in srgb, var(--accent-glow) 65%, transparent);
+}
+.sev__close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 4;
+}
+
+.sev__page {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+/* —— 插画：显像管式显影，罩扫描线与游走亮带，底缘渐入事件条；矮屏时按比例收缩 —— */
+.sev__plate {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  flex: 0 1 auto;
+  min-height: 180px;
+  background: #05010c;
+}
+.sev__plate img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.sev__full {
+  opacity: 0;
+}
+.sev__full.is-in {
+  opacity: 1;
+  animation: sev-in 1.15s var(--ease-out);
+}
+@keyframes sev-in {
+  from { filter: brightness(2.6) contrast(0.45) saturate(0.3); }
+  to { filter: brightness(1) contrast(1) saturate(1); }
+}
+.sev__scan {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: repeating-linear-gradient(180deg, transparent 0 3px, rgba(0, 0, 0, 0.15) 3px 4px);
+}
+.sev__beam {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -9%;
+  height: 8%;
+  z-index: 2;
+  pointer-events: none;
+  background: linear-gradient(180deg, transparent, color-mix(in srgb, var(--accent-glow) 9%, transparent), transparent);
+  animation: sev-beam 6.5s linear infinite;
+}
+@keyframes sev-beam {
+  to { transform: translateY(1500%); }
+}
+.sev__plate::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 96px;
+  z-index: 2;
+  pointer-events: none;
+  background: linear-gradient(180deg, transparent, rgba(8, 3, 18, 0.88));
+}
+.sev__plate--empty {
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 14px;
+}
+.sev__plate--empty strong {
+  font-size: 13px;
+  letter-spacing: 0.24em;
+  color: var(--cream-faint);
+}
+
+/* —— 事件条：左缘竖霓虹，眉题、标题、引语、署名、工具行 —— */
+.sev__strip {
+  position: relative;
+  flex: none;
+  padding: 20px 36px 26px;
+}
+.sev__strip::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 20px;
+  bottom: 24px;
+  width: 3px;
+  background: linear-gradient(180deg, var(--accent-glow), color-mix(in srgb, var(--accent-glow) 15%, transparent));
+  box-shadow: 0 0 14px color-mix(in srgb, var(--accent-glow) 55%, transparent);
+}
+.sev__brow {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  font-size: 11px;
+  letter-spacing: 0.24em;
+  color: var(--cream-faint);
+  text-transform: uppercase;
+}
+.sev__tick {
+  flex: none;
+  align-self: center;
+  width: 16px;
+  height: 1px;
+  background: var(--accent-glow);
+  box-shadow: 0 0 8px color-mix(in srgb, var(--accent-glow) 70%, transparent);
+}
+.sev__num {
+  margin-left: auto;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  color: var(--cream-dim);
+}
+.sev__num i {
+  font-style: normal;
+  opacity: 0.45;
+  margin: 0 2px;
+}
+.sev__title {
+  margin: 12px 0 0;
+  font-size: clamp(26px, 4vw, 37px);
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  line-height: 1.25;
+  color: var(--cream);
+  text-shadow: 0 0 26px color-mix(in srgb, var(--accent-glow) 38%, transparent);
+}
+.sev__latin {
+  margin-top: 7px;
+  font-size: 13px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--cream-faint);
+}
+.sev__quote {
+  margin: 18px 0 0;
+  font-size: clamp(17px, 2.2vw, 21px);
+  line-height: 1.75;
+  letter-spacing: 0.09em;
+  color: var(--cream);
+  text-shadow: 0 0 18px color-mix(in srgb, var(--accent-glow) 30%, transparent);
+}
+.sev__author {
+  margin: 10px 0 0;
+  font-size: 14px;
+  letter-spacing: 0.14em;
+  color: var(--cream-dim);
+  text-align: right;
+}
+.sev__author .latin {
+  font-size: 12px;
+  color: var(--cream-faint);
+}
+.sev__enq {
+  margin: 6px 0 0;
+  font-style: italic;
+  font-size: 12.5px;
+  letter-spacing: 0.04em;
+  color: var(--cream-faint);
+  text-align: right;
+}
+.sev__bar {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+.sev__showing {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  color: var(--cream-dim);
+}
+.sev__showing i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-glow);
+  box-shadow: 0 0 8px var(--accent-glow);
+  animation: sev-blink 2.2s ease-in-out infinite;
+}
+@keyframes sev-blink {
+  50% { opacity: 0.35; }
+}
+.sev__pager {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: auto;
+}
+.sev__pager button {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 30px;
+  padding: 0;
+  border: 1px solid color-mix(in srgb, var(--brass) 45%, transparent);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--cream-dim);
+  cursor: pointer;
+  transition: color 0.25s, border-color 0.25s, box-shadow 0.25s;
+}
+.sev__pager button:hover {
+  color: var(--cream);
+  border-color: var(--brass-hi);
+  box-shadow: 0 0 14px color-mix(in srgb, var(--accent-glow) 28%, transparent);
+}
+
+@media (max-width: 640px) {
+  .sev__strip {
+    padding: 16px 22px 20px;
+  }
+  .sev__author,
+  .sev__enq {
+    text-align: left;
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "RADIO_DEPLOY=1 vite build",
+  "regions": ["hkg1"],
+  "rewrites": [
+    { "source": "/netease/:path*", "destination": "/api/netease/:path*" },
+    { "source": "/ext/:path*", "destination": "/api/ext/:path*" }
+  ]
+}

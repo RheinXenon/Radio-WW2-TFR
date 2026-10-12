@@ -1,0 +1,3233 @@
+{
+  "level": "exhigh",
+  "stations": {
+    "tfr-east": {
+      "东方之星": [
+        {
+          "nid": 27785104,
+          "title": "迷航",
+          "titleZh": "The Lost Generation",
+          "artist": "发光曲线",
+          "album": "迷航",
+          "vip": true
+        },
+        {
+          "nid": 1437251162,
+          "title": "河流 demo",
+          "titleZh": "",
+          "artist": "蛙池",
+          "album": "河流 demo",
+          "vip": true
+        },
+        {
+          "nid": 1406498247,
+          "title": "东莞 (Dong Guan)",
+          "titleZh": "",
+          "artist": "白纸扇 (Hardcore Raver in Tears)/Yanlo",
+          "album": "东莞 (Dong Guan)",
+          "vip": true
+        },
+        {
+          "nid": 1888390788,
+          "title": "花桥",
+          "titleZh": "",
+          "artist": "回春丹",
+          "album": "耳鬼出风",
+          "vip": true
+        },
+        {
+          "nid": 1997294929,
+          "title": "大地雷公",
+          "titleZh": "",
+          "artist": "回春丹",
+          "album": "珍珠走廊",
+          "vip": true
+        },
+        {
+          "nid": 528272281,
+          "title": "火车驶向云外，梦安魂于九霄",
+          "titleZh": "",
+          "artist": "刺猬",
+          "album": "火车驶向云外，梦安魂于九霄",
+          "vip": true
+        },
+        {
+          "nid": 452614959,
+          "title": "食人梦",
+          "titleZh": "The City is Eating Me Alive",
+          "artist": "VH",
+          "album": "次等秘密",
+          "vip": true
+        },
+        {
+          "nid": 351245,
+          "title": "甭过",
+          "titleZh": "",
+          "artist": "渡鸦乐队",
+          "album": "拾月",
+          "vip": true
+        },
+        {
+          "nid": 1303019637,
+          "title": "说书人",
+          "titleZh": "",
+          "artist": "暗杠/寅子",
+          "album": "说书人",
+          "vip": true
+        },
+        {
+          "nid": 25731313,
+          "title": "玛卡瑞纳",
+          "titleZh": "",
+          "artist": "海龟先生",
+          "album": "海龟先生",
+          "vip": true
+        },
+        {
+          "nid": 150617,
+          "title": "找自己",
+          "titleZh": "",
+          "artist": "陶喆",
+          "album": "I'm OK",
+          "vip": true
+        },
+        {
+          "nid": 5282452,
+          "title": "我不能随便说",
+          "titleZh": "",
+          "artist": "Ado",
+          "album": "中国火",
+          "vip": true
+        },
+        {
+          "nid": 155910,
+          "title": "怒放的生命",
+          "titleZh": "",
+          "artist": "汪峰",
+          "album": "怒放的生命",
+          "vip": false
+        },
+        {
+          "nid": 168091,
+          "title": "蓝莲花",
+          "titleZh": "",
+          "artist": "许巍",
+          "album": "时光.漫步",
+          "vip": true
+        },
+        {
+          "nid": 386830,
+          "title": "大石碎胸口",
+          "titleZh": "",
+          "artist": "万能青年旅店",
+          "album": "万能青年旅店 同名专辑",
+          "vip": true
+        },
+        {
+          "nid": 1805290276,
+          "title": "泥河",
+          "titleZh": "",
+          "artist": "万能青年旅店",
+          "album": "冀西南林路行",
+          "vip": true
+        },
+        {
+          "nid": 2156912919,
+          "title": "恶人先告状",
+          "titleZh": "",
+          "artist": "快乐老家",
+          "album": "水库街生活指南",
+          "vip": true
+        },
+        {
+          "nid": 2014917358,
+          "title": "皮囊",
+          "titleZh": "",
+          "artist": "犬儒乐队",
+          "album": "犬儒",
+          "vip": false
+        },
+        {
+          "nid": 109069,
+          "title": "火车",
+          "titleZh": "",
+          "artist": "罗大佑",
+          "album": "原乡",
+          "vip": true
+        },
+        {
+          "nid": 411314657,
+          "title": "大风吹",
+          "titleZh": "",
+          "artist": "草东没有派对",
+          "album": "丑奴儿",
+          "vip": true
+        },
+        {
+          "nid": 411314656,
+          "title": "烂泥",
+          "titleZh": "",
+          "artist": "草东没有派对",
+          "album": "丑奴儿",
+          "vip": true
+        },
+        {
+          "nid": 1397160266,
+          "title": "最后一个海滩少年",
+          "titleZh": "Last Beach Boy",
+          "artist": "当代电影大师",
+          "album": "拍谱",
+          "vip": true
+        },
+        {
+          "nid": 63705,
+          "title": "新长征路上的摇滚",
+          "titleZh": "",
+          "artist": "崔健",
+          "album": "新长征路上的摇滚",
+          "vip": true
+        },
+        {
+          "nid": 385408,
+          "title": "汉人",
+          "titleZh": "",
+          "artist": "惘闻",
+          "album": "二十八天失眠日记",
+          "vip": true
+        },
+        {
+          "nid": 64266,
+          "title": "油菜花",
+          "titleZh": "",
+          "artist": "成龙",
+          "album": "油菜花",
+          "vip": false
+        },
+        {
+          "nid": 1360587311,
+          "title": "你看到的我",
+          "titleZh": "",
+          "artist": "黄勇/任书怀",
+          "album": "你看到的我",
+          "vip": true
+        },
+        {
+          "nid": 77444,
+          "title": "明天更漫长",
+          "titleZh": "",
+          "artist": "窦唯",
+          "album": "黑梦",
+          "vip": true
+        },
+        {
+          "nid": 167595,
+          "title": "向阳花",
+          "titleZh": "",
+          "artist": "谢天笑",
+          "album": "X.T.X",
+          "vip": true
+        },
+        {
+          "nid": 353700,
+          "title": "允许部分艺术家先富起来",
+          "titleZh": "",
+          "artist": "二手玫瑰",
+          "album": "二手玫瑰",
+          "vip": false
+        },
+        {
+          "nid": 381962,
+          "title": "国际歌",
+          "titleZh": "",
+          "artist": "唐朝乐队",
+          "album": "唐朝 同名专辑",
+          "vip": true
+        },
+        {
+          "nid": 381933,
+          "title": "天堂",
+          "titleZh": "",
+          "artist": "唐朝乐队",
+          "album": "唐朝 同名专辑",
+          "vip": true
+        },
+        {
+          "nid": 5282076,
+          "title": "烽火扬州路",
+          "titleZh": "",
+          "artist": "轮回乐队",
+          "album": "摇滚北京1",
+          "vip": true
+        },
+        {
+          "nid": 5280755,
+          "title": "北京时钟",
+          "titleZh": "",
+          "artist": "石头乐队",
+          "album": "摇滚北京2",
+          "vip": false
+        },
+        {
+          "nid": 27698128,
+          "title": "嚎叫俱乐部",
+          "titleZh": "",
+          "artist": "反光镜",
+          "album": "反光镜",
+          "vip": true
+        },
+        {
+          "nid": 1853981513,
+          "title": "漫步人生路",
+          "titleZh": "",
+          "artist": "谢婉霖",
+          "album": "谢婉霖完整翻唱合集",
+          "vip": false
+        },
+        {
+          "nid": 10308046,
+          "title": "抓狂歌",
+          "titleZh": "",
+          "artist": "施文彬",
+          "album": "台语半调子",
+          "vip": true
+        },
+        {
+          "nid": 28815250,
+          "title": "平凡之路",
+          "titleZh": "",
+          "artist": "朴树",
+          "album": "猎户星座",
+          "vip": true
+        },
+        {
+          "nid": 451991976,
+          "title": "新时期的力量",
+          "titleZh": "",
+          "artist": "张卫",
+          "album": "张卫作品集",
+          "vip": true
+        },
+        {
+          "nid": 357279,
+          "title": "无地自容",
+          "titleZh": "",
+          "artist": "黑豹乐队",
+          "album": "黑豹",
+          "vip": true
+        },
+        {
+          "nid": 1386660232,
+          "title": "一块红布 (Live)",
+          "titleZh": "",
+          "artist": "安伦泰伦/杨楚骁",
+          "album": "一起乐队吧 第2期",
+          "vip": false
+        },
+        {
+          "nid": 185726,
+          "title": "再见",
+          "titleZh": "",
+          "artist": "张震岳",
+          "album": "再见",
+          "vip": true
+        }
+      ]
+    },
+    "tfr-moshi": {
+      "嗨，日本": [
+        {
+          "nid": 424264520,
+          "title": "セツナ",
+          "titleZh": "刹那",
+          "artist": "Sunny Day Service",
+          "album": "DANCE TO YOU",
+          "vip": true
+        },
+        {
+          "nid": 36357556,
+          "title": "青春狂走曲",
+          "titleZh": "",
+          "artist": "Sunny Day Service",
+          "album": "Sunny Day Service BEST 1995-2000",
+          "vip": false
+        },
+        {
+          "nid": 2695919292,
+          "title": "川のない橋",
+          "titleZh": "无川之桥",
+          "artist": "ソウル・フラワー・ユニオン",
+          "album": "ハビタブル･ゾーン",
+          "vip": true
+        },
+        {
+          "nid": 22714578,
+          "title": "革命",
+          "titleZh": "",
+          "artist": "andymori",
+          "album": "革命",
+          "vip": true
+        },
+        {
+          "nid": 22652373,
+          "title": "ワンダーフォーゲル",
+          "titleZh": "Wandervogel",
+          "artist": "くるり",
+          "album": "TEAM ROCK",
+          "vip": true
+        },
+        {
+          "nid": 22652382,
+          "title": "ばらの花",
+          "titleZh": "Bara no hana (Flower of roses)",
+          "artist": "くるり",
+          "album": "TEAM ROCK",
+          "vip": true
+        },
+        {
+          "nid": 29431208,
+          "title": "オドループ",
+          "titleZh": "奇妙循环",
+          "artist": "フレデリック",
+          "album": "oddloop",
+          "vip": true
+        },
+        {
+          "nid": 679429,
+          "title": "未来の破片",
+          "titleZh": "未来的碎片",
+          "artist": "ASIAN KUNG-FU GENERATION",
+          "album": "君繋ファイブエム",
+          "vip": true
+        },
+        {
+          "nid": 678938,
+          "title": "転がる岩、君に朝が降る",
+          "titleZh": "翻转岩石，晨光洒落你身",
+          "artist": "ASIAN KUNG-FU GENERATION",
+          "album": "ワールド ワールド ワールド",
+          "vip": true
+        },
+        {
+          "nid": 554245806,
+          "title": "ロマンス宣言",
+          "titleZh": "浪漫宣言",
+          "artist": "カネコアヤノ",
+          "album": "祝祭",
+          "vip": true
+        },
+        {
+          "nid": 1976618038,
+          "title": "Flyday Chinatown",
+          "titleZh": "",
+          "artist": "泰葉",
+          "album": "Flyday Chinatown",
+          "vip": true
+        },
+        {
+          "nid": 1317285056,
+          "title": "真夜中のドア〜stay with me (シングルver.)",
+          "titleZh": "午夜之门/留在我身边",
+          "artist": "松原みき",
+          "album": "Light Mellow 松原みき",
+          "vip": true
+        },
+        {
+          "nid": 26082402,
+          "title": "4:00A.M.",
+          "titleZh": "",
+          "artist": "大貫妙子",
+          "album": "MIGNONNE (Mastered by Bernie Grundman)",
+          "vip": true
+        },
+        {
+          "nid": 674071,
+          "title": "ダイナマイト　ラブ (2012 Remaster)",
+          "titleZh": "",
+          "artist": "八神純子",
+          "album": "ヤガマニア (+1) [2012 Remaster]",
+          "vip": true
+        },
+        {
+          "nid": 22824940,
+          "title": "黄昏のBay City",
+          "titleZh": "黄昏下的BAY CITY",
+          "artist": "八神純子",
+          "album": "FULL MOON",
+          "vip": true
+        },
+        {
+          "nid": 3410793,
+          "title": "Lucky",
+          "titleZh": "",
+          "artist": "SUPERCAR",
+          "album": "スリーアウトチェンジ",
+          "vip": true
+        },
+        {
+          "nid": 1342511981,
+          "title": "サマースクール",
+          "titleZh": "暑期学校",
+          "artist": "SEAPOOL",
+          "album": "スイート Q ラブ",
+          "vip": true
+        },
+        {
+          "nid": 22680347,
+          "title": "透明少女",
+          "titleZh": "",
+          "artist": "Number Girl",
+          "album": "School Girl Distortional Addict",
+          "vip": true
+        },
+        {
+          "nid": 564042998,
+          "title": "Zundoko",
+          "titleZh": "",
+          "artist": "Pink Martini",
+          "album": "Zundoko-Bushi",
+          "vip": false
+        },
+        {
+          "nid": 1331582593,
+          "title": "1999",
+          "titleZh": "",
+          "artist": "羊文学",
+          "album": "1999",
+          "vip": true
+        },
+        {
+          "nid": 22702200,
+          "title": "桜の時",
+          "titleZh": "樱之时",
+          "artist": "aiko",
+          "album": "まとめⅠ",
+          "vip": true
+        },
+        {
+          "nid": 28282720,
+          "title": "マラソン",
+          "titleZh": "马拉松",
+          "artist": "花澤香菜",
+          "album": "25",
+          "vip": true
+        },
+        {
+          "nid": 864648423,
+          "title": "拝啓、少年よ",
+          "titleZh": "致敬:少年啊！",
+          "artist": "Hump Back",
+          "album": "拝啓、少年よ",
+          "vip": true
+        },
+        {
+          "nid": 28835612,
+          "title": "爆裂パニエさん",
+          "titleZh": "",
+          "artist": "tricot",
+          "album": "爆裂トリコさん",
+          "vip": false
+        },
+        {
+          "nid": 36586155,
+          "title": "YOUTHFUL ANGER",
+          "titleZh": "",
+          "artist": "きのこ帝国",
+          "album": "猫とアレルギー",
+          "vip": true
+        },
+        {
+          "nid": 22769455,
+          "title": "青い、濃い、橙色の日",
+          "titleZh": "蓝色、深色和橙色的日子",
+          "artist": "MASS OF THE FERMENTING DREGS",
+          "album": "ワールドイズユアーズ",
+          "vip": true
+        },
+        {
+          "nid": 2105398919,
+          "title": "たんたんたん",
+          "titleZh": "越发",
+          "artist": "MASS OF THE FERMENTING DREGS",
+          "album": "たんたんたん",
+          "vip": true
+        },
+        {
+          "nid": 22769450,
+          "title": "ズレる",
+          "titleZh": "",
+          "artist": "MASS OF THE FERMENTING DREGS",
+          "album": "ゼロコンマ、色とりどりの世界",
+          "vip": true
+        },
+        {
+          "nid": 22729978,
+          "title": "待ち合わせの途中",
+          "titleZh": "",
+          "artist": "plenty",
+          "album": "plenty",
+          "vip": true
+        },
+        {
+          "nid": 41632287,
+          "title": "BODY",
+          "titleZh": "",
+          "artist": "Suchmos",
+          "album": "LOVE&VICE",
+          "vip": true
+        },
+        {
+          "nid": 1892533602,
+          "title": "Pretty Old Man",
+          "titleZh": "",
+          "artist": "No Buses",
+          "album": "Boys Missed The Bus",
+          "vip": true
+        },
+        {
+          "nid": 845316,
+          "title": "ALRIGHT",
+          "titleZh": "",
+          "artist": "The Birthday",
+          "album": "プレスファクトリー",
+          "vip": true
+        },
+        {
+          "nid": 1387099651,
+          "title": "誰かが",
+          "titleZh": "某人",
+          "artist": "The Birthday",
+          "album": "WATCH YOUR BLINDSIDE 2",
+          "vip": true
+        },
+        {
+          "nid": 34834920,
+          "title": "涙がこぼれそう",
+          "titleZh": "",
+          "artist": "The Birthday",
+          "album": "Gold Trash",
+          "vip": true
+        },
+        {
+          "nid": 2154219378,
+          "title": "はいよろこんで",
+          "titleZh": "乐意效劳",
+          "artist": "こっちのけんと",
+          "album": "はいよろこんで",
+          "vip": true
+        },
+        {
+          "nid": 1405853682,
+          "title": "Good News Is Bad News",
+          "titleZh": "",
+          "artist": "Helsinki Lambda Club",
+          "album": "Good News Is Bad News",
+          "vip": true
+        },
+        {
+          "nid": 22781091,
+          "title": "琉球愛歌",
+          "titleZh": "",
+          "artist": "MONGOL800",
+          "album": "Message",
+          "vip": false
+        },
+        {
+          "nid": 22781102,
+          "title": "夢叶う",
+          "titleZh": "",
+          "artist": "MONGOL800",
+          "album": "Message",
+          "vip": false
+        },
+        {
+          "nid": 554241863,
+          "title": "TOKYO NEON",
+          "titleZh": "",
+          "artist": "Mili",
+          "album": "Millennium Mother",
+          "vip": true
+        },
+        {
+          "nid": 29460124,
+          "title": "From Noon Till Dawn",
+          "titleZh": "",
+          "artist": "ストレイテナー",
+          "album": "From Noon Till Dawn",
+          "vip": true
+        },
+        {
+          "nid": 22810680,
+          "title": "セツナレンサ",
+          "titleZh": "刹那连锁",
+          "artist": "RADWIMPS",
+          "album": "RADWIMPS 4 ~おかずのごはん~",
+          "vip": true
+        },
+        {
+          "nid": 28284658,
+          "title": "アホンダラ行進曲",
+          "titleZh": "",
+          "artist": "GOING STEADY",
+          "album": "さくらの唄",
+          "vip": false
+        },
+        {
+          "nid": 29005290,
+          "title": "攻撃的国民的音楽",
+          "titleZh": "",
+          "artist": "八十八ヶ所巡礼",
+          "album": "攻撃的国民的音楽",
+          "vip": true
+        },
+        {
+          "nid": 3449538,
+          "title": "Where're the Good Times",
+          "titleZh": "",
+          "artist": "Super Junky Monkey",
+          "album": "Screw Up",
+          "vip": true
+        },
+        {
+          "nid": 22658337,
+          "title": "少年",
+          "titleZh": "",
+          "artist": "黒夢",
+          "album": "黒夢コンプリート・シングルズ",
+          "vip": true
+        },
+        {
+          "nid": 31245731,
+          "title": "庭師KING",
+          "titleZh": "Gardener King",
+          "artist": "平沢進",
+          "album": "救済の技法",
+          "vip": true
+        },
+        {
+          "nid": 1323455816,
+          "title": "Rosy Days",
+          "titleZh": "",
+          "artist": "THE YELLOW MONKEY",
+          "album": "Rosy Days",
+          "vip": true
+        },
+        {
+          "nid": 22802937,
+          "title": "Rusty Nail",
+          "titleZh": "锈钉",
+          "artist": "X JAPAN",
+          "album": "X Complete SINGLES",
+          "vip": false
+        }
+      ]
+    },
+    "tfr-dekabr": {
+      "十二月之子": [
+        {
+          "nid": 1832817037,
+          "title": "Огоньки",
+          "titleZh": "小彩灯",
+          "artist": "Lyapis Trubetskoy",
+          "album": "Капитал",
+          "vip": true
+        },
+        {
+          "nid": 1832817036,
+          "title": "Капитал",
+          "titleZh": "资本",
+          "artist": "Lyapis Trubetskoy",
+          "album": "Капитал",
+          "vip": true
+        },
+        {
+          "nid": 559538562,
+          "title": "Офисный Стиляга",
+          "titleZh": "",
+          "artist": "Валентин Стрыкало",
+          "album": "Часть Чего-то Большего",
+          "vip": false
+        },
+        {
+          "nid": 1436255989,
+          "title": "Хороший царь и знакомая вонь",
+          "titleZh": "贤明的君主，与那股熟悉的臭味",
+          "artist": "Lumen",
+          "album": "Хороший царь и знакомая вонь",
+          "vip": true
+        },
+        {
+          "nid": 406304663,
+          "title": "Туман",
+          "titleZh": "雾",
+          "artist": "Сектор Газа",
+          "album": "Газовая атака",
+          "vip": true
+        },
+        {
+          "nid": 529546734,
+          "title": "Life",
+          "titleZh": "",
+          "artist": "Сектор Газа/JUriy KHoy",
+          "album": "Voy Na Lunu. Luchshee I Neizdannoe",
+          "vip": true
+        },
+        {
+          "nid": 865813991,
+          "title": "Не беда",
+          "titleZh": "无所谓",
+          "artist": "Кукрыниксы",
+          "album": "Последняя песня",
+          "vip": true
+        },
+        {
+          "nid": 865816356,
+          "title": "Солдатская печаль",
+          "titleZh": "士兵的忧伤",
+          "artist": "Кукрыниксы",
+          "album": "Последняя песня",
+          "vip": true
+        },
+        {
+          "nid": 1421710228,
+          "title": "Полковнику никто не пишет",
+          "titleZh": "没人给上校写信",
+          "artist": "Би-2",
+          "album": "Би-2",
+          "vip": true
+        },
+        {
+          "nid": 1421710231,
+          "title": "Серебро",
+          "titleZh": "银",
+          "artist": "Би-2",
+          "album": "Би-2",
+          "vip": true
+        },
+        {
+          "nid": 1816177275,
+          "title": "Там, где за ветхою избой",
+          "titleZh": "在破旧的小屋后面",
+          "artist": "ДМЦ",
+          "album": "Там, где за ветхою избой...",
+          "vip": true
+        },
+        {
+          "nid": 518760694,
+          "title": "Devushka po gorodu",
+          "titleZh": "",
+          "artist": "YU-Piter",
+          "album": "Biografika",
+          "vip": false
+        },
+        {
+          "nid": 1296851259,
+          "title": "Гибралтар-лабрадор",
+          "titleZh": "",
+          "artist": "Вячеслав Бутусов",
+          "album": "Избранное",
+          "vip": true
+        },
+        {
+          "nid": 34770721,
+          "title": "Слово - Товарищ",
+          "titleZh": "同志",
+          "artist": "Гражданская Оборона",
+          "album": "Звездопад",
+          "vip": false
+        },
+        {
+          "nid": 34770707,
+          "title": "Долгая счастливая жизнь",
+          "titleZh": "漫长的幸福生活",
+          "artist": "Гражданская Оборона",
+          "album": "Долгая счастливая жизнь",
+          "vip": false
+        },
+        {
+          "nid": 523013287,
+          "title": "Далеко бежит дорога (Впереди веселья много)",
+          "titleZh": "长路漫漫，所行皆坦途",
+          "artist": "Гражданская Оборона",
+          "album": "Лунный переворот",
+          "vip": true
+        },
+        {
+          "nid": 562950374,
+          "title": "Soviet Zeppelin",
+          "titleZh": "苏维埃齐柏林飞艇",
+          "artist": "MAMA RUSSIA",
+          "album": "The First Russian Steampunk",
+          "vip": false
+        },
+        {
+          "nid": 1994685218,
+          "title": "Вставай, товарищ",
+          "titleZh": "站起来，同志",
+          "artist": "MAMA RUSSIA",
+          "album": "Опасные механизмы",
+          "vip": true
+        },
+        {
+          "nid": 1208443,
+          "title": "Орбит без сахара",
+          "titleZh": "无糖轨道",
+          "artist": "Сплин",
+          "album": "Гранатовый альбом",
+          "vip": true
+        },
+        {
+          "nid": 1208253,
+          "title": "Линия жизни",
+          "titleZh": "生活路线",
+          "artist": "Сплин",
+          "album": "25 кадр",
+          "vip": true
+        },
+        {
+          "nid": 1208452,
+          "title": "Выхода нет",
+          "titleZh": "没有出口",
+          "artist": "Сплин",
+          "album": "Гранатовый альбом",
+          "vip": true
+        },
+        {
+          "nid": 1401413537,
+          "title": "Однажды Мир Прогнется под Нас",
+          "titleZh": "",
+          "artist": "Машина Времени",
+          "album": "Отрываясь",
+          "vip": true
+        },
+        {
+          "nid": 4469318,
+          "title": "Что такое осень",
+          "titleZh": "什么是秋天",
+          "artist": "ДДТ",
+          "album": "ДДТ.Лучшее.Часть 1",
+          "vip": false
+        },
+        {
+          "nid": 1931054594,
+          "title": "Вечно молодой",
+          "titleZh": "永远年轻",
+          "artist": "Смысловые галлюцинации",
+          "album": "Мысленный волк. Лучшее (2000-2014)",
+          "vip": true
+        },
+        {
+          "nid": 4257856,
+          "title": "Королевство Кривых",
+          "titleZh": "扭曲之人的王国",
+          "artist": "Piknik",
+          "album": "Королевство кривых",
+          "vip": false
+        },
+        {
+          "nid": 567159002,
+          "title": "Пикник",
+          "titleZh": "野餐",
+          "artist": "Piknik",
+          "album": "Иероглиф",
+          "vip": false
+        },
+        {
+          "nid": 1839712905,
+          "title": "Молодые ветра",
+          "titleZh": "",
+          "artist": "7Б",
+          "album": "Молодые ветра",
+          "vip": true
+        },
+        {
+          "nid": 3870841,
+          "title": "Ариведерчи",
+          "titleZh": "",
+          "artist": "Земфира",
+          "album": "Земфира",
+          "vip": false
+        },
+        {
+          "nid": 26710584,
+          "title": "Хочу перемен",
+          "titleZh": "渴望改变",
+          "artist": "Кино",
+          "album": "Последний герой",
+          "vip": false
+        },
+        {
+          "nid": 26710590,
+          "title": "Группа крови",
+          "titleZh": "血型",
+          "artist": "Кино",
+          "album": "Последний герой",
+          "vip": false
+        },
+        {
+          "nid": 1634168,
+          "title": "Невесёлая песня",
+          "titleZh": "忧伤的曲",
+          "artist": "Кино",
+          "album": "Звезда по имени Солнце",
+          "vip": false
+        },
+        {
+          "nid": 2635431510,
+          "title": "Волшебные деньги",
+          "titleZh": "",
+          "artist": "Элизиум",
+          "album": "Рок-Планета!",
+          "vip": true
+        },
+        {
+          "nid": 865809715,
+          "title": "Брокен сонг",
+          "titleZh": "破碎的歌",
+          "artist": "1.5 кг Отличного Пюре",
+          "album": "Летние дни",
+          "vip": true
+        },
+        {
+          "nid": 1854158817,
+          "title": "Последний день на Земле",
+          "titleZh": "在地球上的最后一天",
+          "artist": "ПОРТ(812)",
+          "album": "Порт(812)",
+          "vip": true
+        },
+        {
+          "nid": 1321368141,
+          "title": "Лондон, гуд бай",
+          "titleZh": "伦敦，再见",
+          "artist": "Приключения электроников",
+          "album": "Детство наше прошло?",
+          "vip": true
+        },
+        {
+          "nid": 865810354,
+          "title": "Мы",
+          "titleZh": "",
+          "artist": "Декабрь",
+          "album": "Любовь. Война. Вера",
+          "vip": true
+        },
+        {
+          "nid": 1951971064,
+          "title": "Alleya Stalina",
+          "titleZh": "",
+          "artist": "KYPCK",
+          "album": "Nizhe",
+          "vip": true
+        },
+        {
+          "nid": 1947318121,
+          "title": "Фантом",
+          "titleZh": "鬼怪",
+          "artist": "The Чиж & Co",
+          "album": "Эрогенная зона",
+          "vip": true
+        },
+        {
+          "nid": 2023392248,
+          "title": "Moscow Calling",
+          "titleZh": "",
+          "artist": "Gorky Park",
+          "album": "Best Hits",
+          "vip": true
+        },
+        {
+          "nid": 5189101,
+          "title": "Я остаюсь",
+          "titleZh": "",
+          "artist": "Чёрный Обелиск",
+          "album": "Легенды русского рока - The Best 3",
+          "vip": false
+        },
+        {
+          "nid": 1841884373,
+          "title": "Вставай, Донбасс!",
+          "titleZh": "起来，顿巴斯！",
+          "artist": "Куба",
+          "album": "Вставай, Донбасс!",
+          "vip": true
+        },
+        {
+          "nid": 1841883282,
+          "title": "СССР-ДНР-ЛНР",
+          "titleZh": "苏联—顿涅茨克—卢甘斯克",
+          "artist": "Куба",
+          "album": "Вставай, Донбасс!",
+          "vip": true
+        },
+        {
+          "nid": 511937810,
+          "title": "AMTV",
+          "titleZh": "",
+          "artist": "Король и Шут",
+          "album": "Тень клоуна",
+          "vip": true
+        },
+        {
+          "nid": 511948925,
+          "title": "Марионетки",
+          "titleZh": "木偶",
+          "artist": "Король и Шут",
+          "album": "Продавец кошмаров",
+          "vip": false
+        },
+        {
+          "nid": 2015586179,
+          "title": "Последний Воин Мёртвой Земли",
+          "titleZh": "",
+          "artist": "Оргия праведников",
+          "album": "Последний Воин Мёртвой Земли",
+          "vip": true
+        },
+        {
+          "nid": 568225417,
+          "title": "Поднимая знамя",
+          "titleZh": "高举旗帜",
+          "artist": "Северный Флот",
+          "album": "Мизантропия",
+          "vip": true
+        },
+        {
+          "nid": 530886729,
+          "title": "Алмазами",
+          "titleZh": "《钻石》",
+          "artist": "Mumiy Troll",
+          "album": "Mumiy Troll - The Best",
+          "vip": false
+        },
+        {
+          "nid": 530886719,
+          "title": "Владивосток 2000",
+          "titleZh": "千禧元年的海参崴",
+          "artist": "Mumiy Troll",
+          "album": "Mumiy Troll - The Best",
+          "vip": false
+        },
+        {
+          "nid": 1296845317,
+          "title": "Скованные одной цепью",
+          "titleZh": "一样的枷锁束缚我们",
+          "artist": "Наутилус Помпилиус",
+          "album": "Князь тишины",
+          "vip": true
+        },
+        {
+          "nid": 1296845321,
+          "title": "Последнее письмо (Гудбай Америка)",
+          "titleZh": "最后一封信（再会，美国）",
+          "artist": "Наутилус Помпилиус",
+          "album": "Князь тишины",
+          "vip": true
+        },
+        {
+          "nid": 5189091,
+          "title": "Вавилон",
+          "titleZh": "",
+          "artist": "Кипелов",
+          "album": "Легенды русского рока - The Best 3",
+          "vip": false
+        },
+        {
+          "nid": 1388209130,
+          "title": "Благородный дон",
+          "titleZh": "光荣的顿河",
+          "artist": "Зверобой",
+          "album": "Благородный дон",
+          "vip": true
+        },
+        {
+          "nid": 862595587,
+          "title": "Как на войне",
+          "titleZh": "",
+          "artist": "Агата Кристи",
+          "album": "Золотая коллекция хитов",
+          "vip": false
+        },
+        {
+          "nid": 1353723406,
+          "title": "Твой папа — фашист",
+          "titleZh": "",
+          "artist": "Телевизор",
+          "album": "Отечество иллюзий",
+          "vip": true
+        },
+        {
+          "nid": 1852745114,
+          "title": "Полюса",
+          "titleZh": "极点",
+          "artist": "Louna",
+          "album": "Полюса",
+          "vip": true
+        },
+        {
+          "nid": 489525167,
+          "title": "БСК",
+          "titleZh": "白-蓝-红",
+          "artist": "CG Bros",
+          "album": "Жизнь за зря",
+          "vip": true
+        },
+        {
+          "nid": 1420633201,
+          "title": "Как Же Я Был Слаб В Те Дни",
+          "titleZh": "在那些日子里，我是多么虚弱",
+          "artist": "Utro",
+          "album": "Утро",
+          "vip": true
+        }
+      ],
+      "“春日”": [
+        {
+          "nid": 31587271,
+          "title": "За тебя, Родина-мать",
+          "titleZh": "为了你，祖国母亲",
+          "artist": "Lube",
+          "album": "За тебя, Родина-мать",
+          "vip": true
+        },
+        {
+          "nid": 4151641,
+          "title": "Солдат",
+          "titleZh": "战士",
+          "artist": "Lube",
+          "album": "Полустаночки",
+          "vip": true
+        },
+        {
+          "nid": 1380410239,
+          "title": "Прорвемся! (Опера)",
+          "titleZh": "突出重围",
+          "artist": "Lube",
+          "album": "Полустаночки",
+          "vip": true
+        },
+        {
+          "nid": 1825902052,
+          "title": "Ильич",
+          "titleZh": "伊里奇",
+          "artist": "АнимациЯ",
+          "album": "Ильич",
+          "vip": false
+        },
+        {
+          "nid": 24582823,
+          "title": "Schweine",
+          "titleZh": "猪",
+          "artist": "Глюк'oZa",
+          "album": "Grand Theft Auto IV: Vladivostok FM",
+          "vip": true
+        },
+        {
+          "nid": 29819614,
+          "title": "Moscow Never Sleeps",
+          "titleZh": "莫斯科永不眠",
+          "artist": "DJ Smash",
+          "album": "Moscow Never Sleeps",
+          "vip": false
+        },
+        {
+          "nid": 1353467117,
+          "title": "Господин президент",
+          "titleZh": "",
+          "artist": "Игорь Тальков",
+          "album": "Родина моя",
+          "vip": true
+        },
+        {
+          "nid": 1296857565,
+          "title": "Город",
+          "titleZh": "城市",
+          "artist": "Танцы минус",
+          "album": "Флора и фауна",
+          "vip": true
+        },
+        {
+          "nid": 2141833965,
+          "title": "Цветет герань",
+          "titleZh": "天竺葵花",
+          "artist": "Врата Овертона",
+          "album": "Цветет герань",
+          "vip": true
+        },
+        {
+          "nid": 525197310,
+          "title": "Чёрные очки",
+          "titleZh": "黑色遮阳镜",
+          "artist": "Комсомольск",
+          "album": "90210",
+          "vip": true
+        },
+        {
+          "nid": 1294842211,
+          "title": "Всё исчезло",
+          "titleZh": "一切都消失了",
+          "artist": "Комсомольск",
+          "album": "Дорогие москвичи",
+          "vip": true
+        },
+        {
+          "nid": 1966248029,
+          "title": "Самарканд",
+          "titleZh": "",
+          "artist": "SKOOKINY DETI",
+          "album": "Диего",
+          "vip": true
+        },
+        {
+          "nid": 21154398,
+          "title": "Кровь на танцполе",
+          "titleZh": "血洒舞池",
+          "artist": "Mujuice",
+          "album": "Downshifting",
+          "vip": true
+        },
+        {
+          "nid": 2116467226,
+          "title": "Так и надо",
+          "titleZh": "就该这样",
+          "artist": "Запад-81",
+          "album": "Knife City",
+          "vip": true
+        },
+        {
+          "nid": 2021720703,
+          "title": "Сонные омуты",
+          "titleZh": "梦境漩涡",
+          "artist": "Аура",
+          "album": "Сонные омуты",
+          "vip": true
+        },
+        {
+          "nid": 1430950657,
+          "title": "Держава",
+          "titleZh": "",
+          "artist": "Василий К.",
+          "album": "Найти человека",
+          "vip": true
+        },
+        {
+          "nid": 1925356924,
+          "title": "Маленький мальчик",
+          "titleZh": "",
+          "artist": "Куба",
+          "album": "Маленькое счастье",
+          "vip": true
+        },
+        {
+          "nid": 1296528093,
+          "title": "Все, что тебя касается",
+          "titleZh": "",
+          "artist": "Звери",
+          "album": "Лучшие",
+          "vip": true
+        },
+        {
+          "nid": 563153373,
+          "title": "Хару мамбуру",
+          "titleZh": "",
+          "artist": "Nogu Svelo!",
+          "album": "Откровенные фотографии",
+          "vip": true
+        },
+        {
+          "nid": 31680187,
+          "title": "Эскадрон",
+          "titleZh": "《骑兵中队》",
+          "artist": "Олег Газманов",
+          "album": "Эскадрон",
+          "vip": true
+        },
+        {
+          "nid": 1408380072,
+          "title": "СССР",
+          "titleZh": "",
+          "artist": "Олег Газманов",
+          "album": "Песни Победы",
+          "vip": true
+        },
+        {
+          "nid": 1310677054,
+          "title": "Московская песня",
+          "titleZh": "莫斯科之韵",
+          "artist": "Сергей Трофимов",
+          "album": "Лучшие песни (Deluxe version)",
+          "vip": true
+        },
+        {
+          "nid": 24582820,
+          "title": "О Тебе",
+          "titleZh": "关于你",
+          "artist": "Ranetki",
+          "album": "Grand Theft Auto IV: Vladivostok FM",
+          "vip": true
+        },
+        {
+          "nid": 458391089,
+          "title": "Ljubochka",
+          "titleZh": "",
+          "artist": "Masha i Medvedi",
+          "album": "Solntseklesh",
+          "vip": true
+        },
+        {
+          "nid": 518787904,
+          "title": "Tu-lu-la",
+          "titleZh": "",
+          "artist": "Chicherina",
+          "album": "Sny",
+          "vip": false
+        },
+        {
+          "nid": 2152468351,
+          "title": "Невеста",
+          "titleZh": "新娘",
+          "artist": "Глюк'oZa",
+          "album": "Глюк'oZa Nostra",
+          "vip": true
+        },
+        {
+          "nid": 1822193423,
+          "title": "Жили-были (radio edit)",
+          "titleZh": "从前",
+          "artist": "Юта",
+          "album": "Телерадиосны",
+          "vip": true
+        },
+        {
+          "nid": 518640253,
+          "title": "CHio-CHio-san",
+          "titleZh": "",
+          "artist": "Кар-мэн",
+          "album": "Vokrug sveta",
+          "vip": false
+        },
+        {
+          "nid": 4331647,
+          "title": "Show Me Love",
+          "titleZh": "",
+          "artist": "t.A.T.u.",
+          "album": "200 KM/H In The Wrong Lane",
+          "vip": true
+        },
+        {
+          "nid": 4331639,
+          "title": "Not Gonna Get Us",
+          "titleZh": "",
+          "artist": "t.A.T.u.",
+          "album": "200 KM/H In The Wrong Lane",
+          "vip": true
+        }
+      ],
+      "维克多·崔": [
+        {
+          "nid": 2008662088,
+          "title": "Место для шага вперед",
+          "titleZh": "向前迈进的地方",
+          "artist": "Кино",
+          "album": "12_22",
+          "vip": true
+        },
+        {
+          "nid": 26710584,
+          "title": "Хочу перемен",
+          "titleZh": "渴望改变",
+          "artist": "Кино",
+          "album": "Последний герой",
+          "vip": false
+        },
+        {
+          "nid": 26710590,
+          "title": "Группа крови",
+          "titleZh": "血型",
+          "artist": "Кино",
+          "album": "Последний герой",
+          "vip": false
+        },
+        {
+          "nid": 26710593,
+          "title": "Спокойная ночь",
+          "titleZh": "夜如此寂静",
+          "artist": "Кино",
+          "album": "Последний герой",
+          "vip": false
+        },
+        {
+          "nid": 1634119,
+          "title": "Кукушка",
+          "titleZh": "布谷鸟",
+          "artist": "Кино",
+          "album": "Чёрный Альбом",
+          "vip": false
+        },
+        {
+          "nid": 1634184,
+          "title": "Пачка сигарет",
+          "titleZh": "一包烟",
+          "artist": "Кино",
+          "album": "Звезда по имени Солнце",
+          "vip": false
+        },
+        {
+          "nid": 1634162,
+          "title": "Звезда по имени Солнце",
+          "titleZh": "名为太阳的星星",
+          "artist": "Кино",
+          "album": "Звезда по имени Солнце",
+          "vip": false
+        },
+        {
+          "nid": 1634190,
+          "title": "Печаль",
+          "titleZh": "忧愁",
+          "artist": "Кино",
+          "album": "Звезда по имени Солнце",
+          "vip": false
+        },
+        {
+          "nid": 1634123,
+          "title": "Когда твоя девушка больна",
+          "titleZh": "当你心爱的姑娘痛苦难熬",
+          "artist": "Кино",
+          "album": "Чёрный Альбом",
+          "vip": false
+        },
+        {
+          "nid": 1634157,
+          "title": "Песня без слов",
+          "titleZh": "无言的歌",
+          "artist": "Кино",
+          "album": "Звезда по имени Солнце",
+          "vip": false
+        },
+        {
+          "nid": 1634108,
+          "title": "Красно-желтые дни",
+          "titleZh": "橙色岁月",
+          "artist": "Кино",
+          "album": "Чёрный Альбом",
+          "vip": false
+        },
+        {
+          "nid": 1634104,
+          "title": "Кончится лето",
+          "titleZh": "盛夏将逝",
+          "artist": "Кино",
+          "album": "Чёрный Альбом",
+          "vip": false
+        },
+        {
+          "nid": 1634115,
+          "title": "Звезда",
+          "titleZh": "星",
+          "artist": "Кино",
+          "album": "Чёрный Альбом",
+          "vip": false
+        },
+        {
+          "nid": 26710585,
+          "title": "Электричка",
+          "titleZh": "电气列车",
+          "artist": "Кино",
+          "album": "Последний герой",
+          "vip": false
+        },
+        {
+          "nid": 1634168,
+          "title": "Невесёлая песня",
+          "titleZh": "忧伤的曲",
+          "artist": "Кино",
+          "album": "Звезда по имени Солнце",
+          "vip": false
+        },
+        {
+          "nid": 1634127,
+          "title": "Муравейник",
+          "titleZh": "蚁丘",
+          "artist": "Кино",
+          "album": "Чёрный Альбом",
+          "vip": false
+        },
+        {
+          "nid": 26710589,
+          "title": "Последний герой",
+          "titleZh": "最后的英雄",
+          "artist": "Кино",
+          "album": "Последний герой",
+          "vip": false
+        },
+        {
+          "nid": 1634174,
+          "title": "Сказка",
+          "titleZh": "童话",
+          "artist": "Кино",
+          "album": "Звезда по имени Солнце",
+          "vip": false
+        },
+        {
+          "nid": 26710591,
+          "title": "Мама, мы все тяжело больны",
+          "titleZh": "妈妈，我们都病入膏肓",
+          "artist": "Кино",
+          "album": "Последний герой",
+          "vip": false
+        },
+        {
+          "nid": 1634132,
+          "title": "Следи за собой",
+          "titleZh": "注意自己",
+          "artist": "Кино",
+          "album": "Чёрный Альбом",
+          "vip": false
+        },
+        {
+          "nid": 1634111,
+          "title": "Нам с тобой",
+          "titleZh": "与你同在",
+          "artist": "Кино",
+          "album": "Чёрный Альбом",
+          "vip": false
+        },
+        {
+          "nid": 26668134,
+          "title": "Закрой за мной дверь, я ухожу",
+          "titleZh": "在我离开时，请为我关上门",
+          "artist": "Кино",
+          "album": "Группа крови",
+          "vip": false
+        },
+        {
+          "nid": 26710592,
+          "title": "В наших глазах",
+          "titleZh": "在我们的眼中",
+          "artist": "Кино",
+          "album": "Последний герой",
+          "vip": false
+        },
+        {
+          "nid": 26668142,
+          "title": "Дальше действовать будем мы",
+          "titleZh": "我们将要采取行动",
+          "artist": "Кино",
+          "album": "Группа крови",
+          "vip": false
+        },
+        {
+          "nid": 1634362,
+          "title": "Алюминиевые огурцы",
+          "titleZh": "铝黄瓜",
+          "artist": "Кино",
+          "album": "45",
+          "vip": false
+        },
+        {
+          "nid": 26710586,
+          "title": "Война",
+          "titleZh": "战争",
+          "artist": "Кино",
+          "album": "Последний герой",
+          "vip": false
+        },
+        {
+          "nid": 26710587,
+          "title": "Троллейбус",
+          "titleZh": "无轨电车",
+          "artist": "Кино",
+          "album": "Последний герой",
+          "vip": false
+        },
+        {
+          "nid": 1634136,
+          "title": "Сосны на морском берегу (bonus track)",
+          "titleZh": "海岸线上的松树",
+          "artist": "Кино",
+          "album": "Чёрный Альбом",
+          "vip": false
+        },
+        {
+          "nid": 1634187,
+          "title": "Стук",
+          "titleZh": "敲击声",
+          "artist": "Кино",
+          "album": "Звезда по имени Солнце",
+          "vip": false
+        },
+        {
+          "nid": 1634193,
+          "title": "Апрель",
+          "titleZh": "四月",
+          "artist": "Кино",
+          "album": "Звезда по имени Солнце",
+          "vip": false
+        },
+        {
+          "nid": 1634377,
+          "title": "Восьмиклассница",
+          "titleZh": "八年级女生",
+          "artist": "Кино",
+          "album": "45",
+          "vip": false
+        },
+        {
+          "nid": 26668141,
+          "title": "Прохожий",
+          "titleZh": "过路人",
+          "artist": "Кино",
+          "album": "Группа крови",
+          "vip": false
+        },
+        {
+          "nid": 1634356,
+          "title": "Время есть,а денег нет",
+          "titleZh": "有闲没钱",
+          "artist": "Кино",
+          "album": "45",
+          "vip": false
+        },
+        {
+          "nid": 1634368,
+          "title": "Бездельник",
+          "titleZh": "闲人",
+          "artist": "Кино",
+          "album": "45",
+          "vip": false
+        },
+        {
+          "nid": 1634371,
+          "title": "Бездельник-2",
+          "titleZh": "闲人2",
+          "artist": "Кино",
+          "album": "45",
+          "vip": false
+        },
+        {
+          "nid": 1634389,
+          "title": "На кухне",
+          "titleZh": "在厨房",
+          "artist": "Кино",
+          "album": "45",
+          "vip": false
+        },
+        {
+          "nid": 1634392,
+          "title": "Я асфальт",
+          "titleZh": "我只是沥青",
+          "artist": "Кино",
+          "album": "45",
+          "vip": false
+        },
+        {
+          "nid": 1634359,
+          "title": "Просто хочешь ты знать",
+          "titleZh": "你只是想知道",
+          "artist": "Кино",
+          "album": "45",
+          "vip": false
+        },
+        {
+          "nid": 1634365,
+          "title": "Солнечные дни",
+          "titleZh": "阳光灿烂的日子",
+          "artist": "Кино",
+          "album": "45",
+          "vip": false
+        },
+        {
+          "nid": 1634380,
+          "title": "Мои друзья",
+          "titleZh": "我的朋友们",
+          "artist": "Кино",
+          "album": "45",
+          "vip": false
+        },
+        {
+          "nid": 1634382,
+          "title": "Ситар играл",
+          "titleZh": "演奏西塔尔的人",
+          "artist": "Кино",
+          "album": "45",
+          "vip": false
+        },
+        {
+          "nid": 1634384,
+          "title": "Дерево",
+          "titleZh": "树",
+          "artist": "Кино",
+          "album": "45",
+          "vip": false
+        },
+        {
+          "nid": 1634386,
+          "title": "Когда то ты был битником",
+          "titleZh": "你曾经是个垮派",
+          "artist": "Кино",
+          "album": "45",
+          "vip": false
+        },
+        {
+          "nid": 1634324,
+          "title": "Камчатка",
+          "titleZh": "勘察加",
+          "artist": "Кино",
+          "album": "46",
+          "vip": false
+        },
+        {
+          "nid": 1634326,
+          "title": "Транквилизатор",
+          "titleZh": "镇静剂",
+          "artist": "Кино",
+          "album": "46",
+          "vip": false
+        },
+        {
+          "nid": 1634328,
+          "title": "Я иду по улице",
+          "titleZh": "沿街行走",
+          "artist": "Кино",
+          "album": "46",
+          "vip": false
+        },
+        {
+          "nid": 1634332,
+          "title": "Пора",
+          "titleZh": "时候已到",
+          "artist": "Кино",
+          "album": "46",
+          "vip": false
+        },
+        {
+          "nid": 1634334,
+          "title": "Каждую ночь",
+          "titleZh": "每个夜里",
+          "artist": "Кино",
+          "album": "46",
+          "vip": false
+        },
+        {
+          "nid": 1634336,
+          "title": "Без десяти",
+          "titleZh": "差十分钟九点",
+          "artist": "Кино",
+          "album": "46",
+          "vip": false
+        },
+        {
+          "nid": 1634338,
+          "title": "Музыка волн",
+          "titleZh": "海浪的音符",
+          "artist": "Кино",
+          "album": "46",
+          "vip": false
+        }
+      ]
+    },
+    "tfr-europe": {
+      "雄伟欧洲": [
+        {
+          "nid": 17403179,
+          "title": "Disco in Moskau",
+          "titleZh": "",
+          "artist": "Die Toten Hosen",
+          "album": "Damenwahl (Deluxe-Edition mit Bonus-Tracks)",
+          "vip": true
+        },
+        {
+          "nid": 469347587,
+          "title": "Ballast der Republik",
+          "titleZh": "",
+          "artist": "Die Toten Hosen",
+          "album": "\"Ballast der Republik\" plus Jubiläums-Album \"Die Geister, die wir riefen\"",
+          "vip": true
+        },
+        {
+          "nid": 19086497,
+          "title": "Alors on danse",
+          "titleZh": "然后我们跳舞",
+          "artist": "Stromae",
+          "album": "Cheese",
+          "vip": true
+        },
+        {
+          "nid": 16596462,
+          "title": "J't'emmène au vent",
+          "titleZh": "",
+          "artist": "Louise Attaque",
+          "album": "Louise Attaque",
+          "vip": true
+        },
+        {
+          "nid": 19151753,
+          "title": "Tchi Cum Bah",
+          "titleZh": "",
+          "artist": "Superbus",
+          "album": "Aeromusical",
+          "vip": true
+        },
+        {
+          "nid": 35720042,
+          "title": "C'est la guerre",
+          "titleZh": "这是战争",
+          "artist": "Luke",
+          "album": "Pornographie",
+          "vip": true
+        },
+        {
+          "nid": 20980224,
+          "title": "La Sentinelle",
+          "titleZh": "哨兵",
+          "artist": "Luke",
+          "album": "La Tête En Arrière",
+          "vip": false
+        },
+        {
+          "nid": 1999158232,
+          "title": "Cos Rebel",
+          "titleZh": "",
+          "artist": "Camarada Kalashnikov",
+          "album": "Mans, Ment i Cor",
+          "vip": true
+        },
+        {
+          "nid": 5052313,
+          "title": "Independent",
+          "titleZh": "",
+          "artist": "Sportfreunde Stiller",
+          "album": "FIFA 2003",
+          "vip": false
+        },
+        {
+          "nid": 2011074796,
+          "title": "Schrei nach Liebe",
+          "titleZh": "",
+          "artist": "Die Ärzte",
+          "album": "Das Beste von kurz nach früher bis jetze",
+          "vip": true
+        },
+        {
+          "nid": 1305917503,
+          "title": "Der Hoffnung entgegen",
+          "titleZh": "",
+          "artist": "Massendefekt",
+          "album": "Tangodiesel",
+          "vip": false
+        },
+        {
+          "nid": 17205314,
+          "title": "Lass die Musik an",
+          "titleZh": "",
+          "artist": "Madsen",
+          "album": "Wo es beginnt",
+          "vip": true
+        },
+        {
+          "nid": 473007530,
+          "title": "Du schreibst Geschichte",
+          "titleZh": "",
+          "artist": "Madsen",
+          "album": "Goodbye Logik",
+          "vip": true
+        },
+        {
+          "nid": 22359664,
+          "title": "Nur ein Wort",
+          "titleZh": "只有一个字",
+          "artist": "Wir Sind Helden",
+          "album": "Nur Ein Wort",
+          "vip": true
+        },
+        {
+          "nid": 1403378019,
+          "title": "Macron",
+          "titleZh": "",
+          "artist": "Les Sales Majestes",
+          "album": "Overdose",
+          "vip": true
+        },
+        {
+          "nid": 1408322977,
+          "title": "Sois pauvre et tais toi !",
+          "titleZh": "穷就闭嘴!",
+          "artist": "Les Sales Majestes",
+          "album": "Sois pauvre et tais toi!",
+          "vip": true
+        },
+        {
+          "nid": 5169669,
+          "title": "Mala Vida",
+          "titleZh": "糟糕的生活",
+          "artist": "Mano Negra",
+          "album": "Compilation - Pop Rock Party 80",
+          "vip": false
+        },
+        {
+          "nid": 573691455,
+          "title": "Llueve Sobre La Ciudad",
+          "titleZh": "城市在下雨",
+          "artist": "Los Bunkers",
+          "album": "Vida de perros",
+          "vip": true
+        },
+        {
+          "nid": 4330114,
+          "title": "Zombie",
+          "titleZh": "",
+          "artist": "The Cranberries",
+          "album": "Stars: The Best of 1992-2002",
+          "vip": true
+        },
+        {
+          "nid": 4195100,
+          "title": "I Cento Passi",
+          "titleZh": "",
+          "artist": "Modena City Ramblers",
+          "album": "Viva la Vida, Muera la Muerte!",
+          "vip": true
+        },
+        {
+          "nid": 19554832,
+          "title": "La parabola dei battagghi",
+          "titleZh": "争战的预言",
+          "artist": "Talco",
+          "album": "La cretina commedia",
+          "vip": true
+        },
+        {
+          "nid": 1344797688,
+          "title": "Il Libro In Una Mano, La Bomba Nell'Altra (Remastered 2019)",
+          "titleZh": "",
+          "artist": "Negrita",
+          "album": "I Ragazzi Stanno Bene (1994-2019)",
+          "vip": true
+        },
+        {
+          "nid": 1408275397,
+          "title": "Il mondo prima",
+          "titleZh": "曾经的世界",
+          "artist": "Tre Allegri Ragazzi Morti",
+          "album": "La seconda rivoluzione sessuale",
+          "vip": true
+        },
+        {
+          "nid": 1411078751,
+          "title": "Gelati",
+          "titleZh": "",
+          "artist": "Skiantos",
+          "album": "La kreme (1977-2010)",
+          "vip": true
+        },
+        {
+          "nid": 22456713,
+          "title": "Acida",
+          "titleZh": "",
+          "artist": "Prozac+",
+          "album": "3 Prozac+",
+          "vip": true
+        },
+        {
+          "nid": 19811840,
+          "title": "Raum Der Zeit",
+          "titleZh": "",
+          "artist": "WIZO",
+          "album": "Uuaarrgh!",
+          "vip": false
+        },
+        {
+          "nid": 550328152,
+          "title": "Leningrad skyline",
+          "titleZh": "",
+          "artist": "En Svensk Tiger",
+          "album": "Versace Style",
+          "vip": true
+        },
+        {
+          "nid": 1436778095,
+          "title": "Gravöl",
+          "titleZh": "",
+          "artist": "Köttgrottorna",
+          "album": "Sex Politik & Fåglar",
+          "vip": true
+        },
+        {
+          "nid": 2314712,
+          "title": "Tubthumping",
+          "titleZh": "",
+          "artist": "Chumbawamba",
+          "album": "Tubthumper",
+          "vip": true
+        },
+        {
+          "nid": 1329474428,
+          "title": "Mon Européenne",
+          "titleZh": "",
+          "artist": "Saez",
+          "album": "Le Manifeste (Vol. 1 Mon Européenne, Vol. 2 Lulu, Vol. 3 Les bords de Seine) [Extraits]",
+          "vip": true
+        },
+        {
+          "nid": 19564159,
+          "title": "Mad World",
+          "titleZh": "",
+          "artist": "Tears for Fears",
+          "album": "Mad World: The Collection",
+          "vip": true
+        },
+        {
+          "nid": 1983685189,
+          "title": "Titanic (English Version)",
+          "titleZh": "",
+          "artist": "Falco",
+          "album": "Titanic (The Complete Mixes)",
+          "vip": true
+        },
+        {
+          "nid": 1449518543,
+          "title": "Pohoda",
+          "titleZh": "",
+          "artist": "Kabát",
+          "album": "Suma Sumárum (Remastered 2013)",
+          "vip": true
+        },
+        {
+          "nid": 1719509,
+          "title": "Embarrassment",
+          "titleZh": "",
+          "artist": "Madness",
+          "album": "Complete Madness",
+          "vip": true
+        },
+        {
+          "nid": 1719452,
+          "title": "Tomorrow's (Just Another Day)",
+          "titleZh": "",
+          "artist": "Madness",
+          "album": "The Rise & Fall",
+          "vip": true
+        },
+        {
+          "nid": 3146899,
+          "title": "Johnny B. Rotten",
+          "titleZh": "",
+          "artist": "Monks",
+          "album": "Bad Habits",
+          "vip": true
+        },
+        {
+          "nid": 17369526,
+          "title": "Shot By Both Sides (Remastered)",
+          "titleZh": "",
+          "artist": "Magazine",
+          "album": "Real Life",
+          "vip": true
+        },
+        {
+          "nid": 1935299441,
+          "title": "Brighton Bomb",
+          "titleZh": "",
+          "artist": "Angelic Upstarts",
+          "album": "Never 'Ad Nothing",
+          "vip": true
+        },
+        {
+          "nid": 2001478691,
+          "title": "I-Spy",
+          "titleZh": "",
+          "artist": "Rudi",
+          "album": "Kids On The Street: UK Power Pop And New Wave 1977-81",
+          "vip": true
+        },
+        {
+          "nid": 23988185,
+          "title": "Do Anything You Wanna Do (Single Edit)",
+          "titleZh": "",
+          "artist": "Eddie & the Hot Rods",
+          "album": "Going Underground",
+          "vip": false
+        },
+        {
+          "nid": 4336687,
+          "title": "Back In The U.S.S.R. (Remastered)",
+          "titleZh": "",
+          "artist": "The Beatles",
+          "album": "The Beatles (Remastered)",
+          "vip": true
+        },
+        {
+          "nid": 5119041,
+          "title": "In The Army Now",
+          "titleZh": "",
+          "artist": "Status Quo",
+          "album": "The Best Rock Ballads Ever!2007",
+          "vip": true
+        },
+        {
+          "nid": 19681339,
+          "title": "But, What Ends When the Symbols Shatter?",
+          "titleZh": "可是，符号破碎时，何物终结？",
+          "artist": "Death in June",
+          "album": "But, What Ends When the Symbols Shatter?",
+          "vip": true
+        },
+        {
+          "nid": 22527880,
+          "title": "The National Front Disco (2014 Remaster)",
+          "titleZh": "",
+          "artist": "Morrissey",
+          "album": "Your Arsenal (Definitive Master)",
+          "vip": true
+        },
+        {
+          "nid": 21125371,
+          "title": "Irish Blood, English Heart",
+          "titleZh": "",
+          "artist": "Morrissey",
+          "album": "You Are the Quarry",
+          "vip": true
+        },
+        {
+          "nid": 17976684,
+          "title": "Enjoy the Silence",
+          "titleZh": "",
+          "artist": "Depeche Mode",
+          "album": "Late Night Tales: Groove Armada",
+          "vip": true
+        },
+        {
+          "nid": 17260931,
+          "title": "Policy of Truth",
+          "titleZh": "",
+          "artist": "Depeche Mode",
+          "album": "The Singles 86-98",
+          "vip": true
+        },
+        {
+          "nid": 23212509,
+          "title": "Going Underground",
+          "titleZh": "",
+          "artist": "The Jam",
+          "album": "Now That's What I Call a No. 1",
+          "vip": true
+        },
+        {
+          "nid": 18780205,
+          "title": "Feuer frei!",
+          "titleZh": "任意开火！",
+          "artist": "Rammstein",
+          "album": "Mutter",
+          "vip": true
+        },
+        {
+          "nid": 4263191,
+          "title": "Engel",
+          "titleZh": "天使",
+          "artist": "Rammstein",
+          "album": "Sehnsucht",
+          "vip": true
+        },
+        {
+          "nid": 1412290134,
+          "title": "Vision 2020 Vision",
+          "titleZh": "",
+          "artist": "Die Krupps",
+          "album": "Vision 2020 Vision",
+          "vip": true
+        },
+        {
+          "nid": 4417816,
+          "title": "We Walked in Line",
+          "titleZh": "",
+          "artist": "Von Thronstahl",
+          "album": "Bellum, Sacrum Bellum!?",
+          "vip": true
+        },
+        {
+          "nid": 1884113051,
+          "title": "Chłopcy idą na wojnę",
+          "titleZh": "",
+          "artist": "Pidżama Porno",
+          "album": "Marchef w butonierce",
+          "vip": true
+        },
+        {
+          "nid": 27334066,
+          "title": "Po co wolność",
+          "titleZh": "要自由干什么？",
+          "artist": "Kult",
+          "album": "Kaseta",
+          "vip": true
+        },
+        {
+          "nid": 18780451,
+          "title": "The Royal",
+          "titleZh": "",
+          "artist": "Royal Republic",
+          "album": "We Are the Royal",
+          "vip": true
+        },
+        {
+          "nid": 27434215,
+          "title": "This Fffire",
+          "titleZh": "",
+          "artist": "Franz Ferdinand",
+          "album": "This  fire",
+          "vip": true
+        },
+        {
+          "nid": 28367179,
+          "title": "The Factory Gates",
+          "titleZh": "",
+          "artist": "Kaiser Chiefs",
+          "album": "Education, Education, Education & War",
+          "vip": false
+        },
+        {
+          "nid": 1458584018,
+          "title": "Danger!",
+          "titleZh": "",
+          "artist": "ITCHY",
+          "album": "All We Know",
+          "vip": true
+        },
+        {
+          "nid": 1868510,
+          "title": "One Vision",
+          "titleZh": "",
+          "artist": "Queen",
+          "album": "Absolute Greatest",
+          "vip": true
+        },
+        {
+          "nid": 2717862645,
+          "title": "Princes Of The Universe",
+          "titleZh": "",
+          "artist": "Queen",
+          "album": "Heavy",
+          "vip": true
+        },
+        {
+          "nid": 17646724,
+          "title": "The Final Countdown",
+          "titleZh": "",
+          "artist": "Europe",
+          "album": "The Final Countdown: The Best Of Europe",
+          "vip": true
+        }
+      ]
+    },
+    "tfr-urban": {
+      "都市潮流": [
+        {
+          "nid": 1406633327,
+          "title": "Blinding Lights",
+          "titleZh": "",
+          "artist": "The Weeknd",
+          "album": "Blinding Lights",
+          "vip": true
+        },
+        {
+          "nid": 16957723,
+          "title": "Midnight City",
+          "titleZh": "",
+          "artist": "M83",
+          "album": "Hurry Up, We're Dreaming",
+          "vip": true
+        },
+        {
+          "nid": 18847216,
+          "title": "Virtual Insanity",
+          "titleZh": "",
+          "artist": "Jamiroquai",
+          "album": "Travelling Without Moving",
+          "vip": true
+        },
+        {
+          "nid": 1698218,
+          "title": "They Don't Care About Us (Single Version)",
+          "titleZh": "",
+          "artist": "Michael Jackson",
+          "album": "They Don't Care About Us",
+          "vip": true
+        },
+        {
+          "nid": 21231648,
+          "title": "Hung Up",
+          "titleZh": "",
+          "artist": "Madonna",
+          "album": "Confessions on a Dance Floor",
+          "vip": true
+        },
+        {
+          "nid": 4341278,
+          "title": "Everybody Wants to Rule the World",
+          "titleZh": "",
+          "artist": "Tears for Fears",
+          "album": "The Ultimate Collection",
+          "vip": true
+        },
+        {
+          "nid": 16650392,
+          "title": "Lady (Hear Me Tonight)",
+          "titleZh": "",
+          "artist": "Modjo",
+          "album": "Modjo (Remastered)",
+          "vip": true
+        },
+        {
+          "nid": 5052194,
+          "title": "I Ran (So Far Away)",
+          "titleZh": "",
+          "artist": "A Flock Of Seagulls",
+          "album": "Grand Theft Auto: Vice City Official Soundtrack Box Set",
+          "vip": true
+        },
+        {
+          "nid": 3225987,
+          "title": "So What",
+          "titleZh": "",
+          "artist": "P!nk",
+          "album": "Greatest Hits...So Far!!!",
+          "vip": true
+        },
+        {
+          "nid": 3028254,
+          "title": "Party in the U.S.A.",
+          "titleZh": "美国派对",
+          "artist": "Miley Cyrus",
+          "album": "Party in the U.S.A.",
+          "vip": true
+        },
+        {
+          "nid": 17570228,
+          "title": "Call On Me (Radio Edit)",
+          "titleZh": "",
+          "artist": "Eric Prydz",
+          "album": "Call On Me",
+          "vip": true
+        },
+        {
+          "nid": 3493398,
+          "title": "Music Sounds Better With You (Radio Edit)",
+          "titleZh": "",
+          "artist": "Stardust/Benjamin Diamond/Alan Braxe/Thomas Bangalter",
+          "album": "Music Sounds Better With You",
+          "vip": true
+        },
+        {
+          "nid": 402162269,
+          "title": "Never Come Down",
+          "titleZh": "",
+          "artist": "Brave Shores",
+          "album": "Brave Shores",
+          "vip": true
+        },
+        {
+          "nid": 27650639,
+          "title": "Control",
+          "titleZh": "",
+          "artist": "Scanners",
+          "album": "Love Is Symmetry",
+          "vip": true
+        },
+        {
+          "nid": 4128666,
+          "title": "I Love It",
+          "titleZh": "",
+          "artist": "Icona Pop/Charli xcx",
+          "album": "I Love It (feat. Charli XCX)",
+          "vip": true
+        },
+        {
+          "nid": 1331433390,
+          "title": "Bulletproof",
+          "titleZh": "",
+          "artist": "La Roux",
+          "album": "Bulletproof",
+          "vip": true
+        },
+        {
+          "nid": 573857749,
+          "title": "Civilization",
+          "titleZh": "",
+          "artist": "Justice",
+          "album": "Civilization - EP",
+          "vip": true
+        },
+        {
+          "nid": 1503678,
+          "title": "D.A.N.C.E.",
+          "titleZh": "",
+          "artist": "Justice",
+          "album": "Justice",
+          "vip": true
+        },
+        {
+          "nid": 16872117,
+          "title": "Blackout",
+          "titleZh": "",
+          "artist": "Breathe Carolina",
+          "album": "Hell Is What You Make It",
+          "vip": true
+        },
+        {
+          "nid": 18164771,
+          "title": "Hip To Be Square",
+          "titleZh": "",
+          "artist": "Huey Lewis & The News",
+          "album": "Fore!",
+          "vip": true
+        },
+        {
+          "nid": 21158594,
+          "title": "Kids",
+          "titleZh": "",
+          "artist": "MGMT",
+          "album": "Oracular Spectacular",
+          "vip": true
+        },
+        {
+          "nid": 33075107,
+          "title": "Space Song",
+          "titleZh": "",
+          "artist": "Beach House",
+          "album": "Depression Cherry",
+          "vip": true
+        },
+        {
+          "nid": 28267263,
+          "title": "Chamber Of Reflection",
+          "titleZh": "",
+          "artist": "Mac DeMarco",
+          "album": "Salad Days",
+          "vip": true
+        },
+        {
+          "nid": 26734064,
+          "title": "Paninaro '95",
+          "titleZh": "",
+          "artist": "Pet Shop Boys",
+          "album": "Paninaro '95",
+          "vip": true
+        },
+        {
+          "nid": 21852996,
+          "title": "Ballerina out of Control",
+          "titleZh": "",
+          "artist": "The Ocean Blue",
+          "album": "Cerulean",
+          "vip": true
+        },
+        {
+          "nid": 17159444,
+          "title": "Not In Love (Radio Version)",
+          "titleZh": "",
+          "artist": "Crystal Castles/Robert Smith",
+          "album": "(II)",
+          "vip": true
+        },
+        {
+          "nid": 2601203757,
+          "title": "Barking",
+          "titleZh": "",
+          "artist": "Foxing",
+          "album": "Foxing",
+          "vip": true
+        },
+        {
+          "nid": 33004499,
+          "title": "The Less I Know The Better",
+          "titleZh": "",
+          "artist": "Tame Impala",
+          "album": "Currents",
+          "vip": true
+        },
+        {
+          "nid": 32450013,
+          "title": "REALiTi",
+          "titleZh": "",
+          "artist": "Grimes",
+          "album": "REALiTi",
+          "vip": true
+        },
+        {
+          "nid": 22615767,
+          "title": "Hot N Cold",
+          "titleZh": "",
+          "artist": "Katy Perry",
+          "album": "One Of The Boys",
+          "vip": true
+        },
+        {
+          "nid": 1695346,
+          "title": "Kick Ass (Kick Ass Soundtrack Version)",
+          "titleZh": "",
+          "artist": "MIKA/RedOne",
+          "album": "Kick Ass (International Version)",
+          "vip": true
+        },
+        {
+          "nid": 17455810,
+          "title": "Veridis Quo",
+          "titleZh": "",
+          "artist": "Daft Punk",
+          "album": "Discovery",
+          "vip": true
+        },
+        {
+          "nid": 17455815,
+          "title": "Human After All",
+          "titleZh": "",
+          "artist": "Daft Punk",
+          "album": "Human After All",
+          "vip": true
+        },
+        {
+          "nid": 4175444,
+          "title": "Brother Louie",
+          "titleZh": "Brother Louie",
+          "artist": "Modern Talking",
+          "album": "Das Nr. 1 Album",
+          "vip": true
+        },
+        {
+          "nid": 21254922,
+          "title": "Who Will Save The World",
+          "titleZh": "",
+          "artist": "Modern Talking",
+          "album": "In The Garden Of Venus",
+          "vip": true
+        },
+        {
+          "nid": 442314112,
+          "title": "GOTH",
+          "titleZh": "",
+          "artist": "Sidewalks and Skeletons",
+          "album": "GOTH",
+          "vip": false
+        },
+        {
+          "nid": 489037756,
+          "title": "Mother Mary",
+          "titleZh": "",
+          "artist": "Mr.Kitty",
+          "album": "ETERNITY",
+          "vip": true
+        },
+        {
+          "nid": 1960246357,
+          "title": "Safe and Sound",
+          "titleZh": "",
+          "artist": "Capital Cities",
+          "album": "In A Tidal Wave of Mystery",
+          "vip": true
+        },
+        {
+          "nid": 463197560,
+          "title": "Feel It Still",
+          "titleZh": "",
+          "artist": "Portugal. The Man",
+          "album": "Feel It Still",
+          "vip": true
+        },
+        {
+          "nid": 2878469,
+          "title": "Kids In America",
+          "titleZh": "",
+          "artist": "Kim Wilde",
+          "album": "Kim Wilde",
+          "vip": true
+        },
+        {
+          "nid": 20787570,
+          "title": "Heads Will Roll",
+          "titleZh": "",
+          "artist": "Yeah Yeah Yeahs",
+          "album": "Heads Will Roll",
+          "vip": true
+        }
+      ]
+    },
+    "tfr-fire": {
+      "烈焰升腾原轨": [
+        {
+          "nid": 2638025436,
+          "title": "战争雷霆 - 铁雨(War Thunder - Steel Rain)",
+          "titleZh": "",
+          "artist": "娃娃鱼的鱼娃娃-",
+          "album": "[烈焰升腾音轨]The Fire Rises烈焰升腾TFR",
+          "vip": false
+        },
+        {
+          "nid": 2638021661,
+          "title": "希里乌斯 - 垂死:社会(Xurious - Dying Society)",
+          "titleZh": "",
+          "artist": "娃娃鱼的鱼娃娃-",
+          "album": "[烈焰升腾音轨]The Fire Rises烈焰升腾TFR",
+          "vip": false
+        },
+        {
+          "nid": 2638027410,
+          "title": "（疑似未使用）??? - 终局(??? - Endgame)",
+          "titleZh": "",
+          "artist": "娃娃鱼的鱼娃娃-",
+          "album": "[烈焰升腾音轨]The Fire Rises烈焰升腾TFR",
+          "vip": false
+        },
+        {
+          "nid": 2638015114,
+          "title": "TFR主题曲，以及收集有关博客查改修删的意见",
+          "titleZh": "",
+          "artist": "娃娃鱼的鱼娃娃-",
+          "album": "[烈焰升腾音轨]The Fire Rises烈焰升腾TFR",
+          "vip": false
+        },
+        {
+          "nid": 2638018056,
+          "title": "东西对抗 - 盟军之战 1(East vs. West - Allies Battle 1)",
+          "titleZh": "",
+          "artist": "娃娃鱼的鱼娃娃-",
+          "album": "[烈焰升腾音轨]The Fire Rises烈焰升腾TFR",
+          "vip": false
+        },
+        {
+          "nid": 2638025434,
+          "title": "东西对抗 - 戒备状态 1(East vs. West - Defcon 1)",
+          "titleZh": "",
+          "artist": "娃娃鱼的鱼娃娃-",
+          "album": "[烈焰升腾音轨]The Fire Rises烈焰升腾TFR",
+          "vip": false
+        },
+        {
+          "nid": 2638020666,
+          "title": "东西对抗 - 戒备状态 2/力竭之境(East vs. West - Defcon 2/Weary Situation)",
+          "titleZh": "",
+          "artist": "娃娃鱼的鱼娃娃-",
+          "album": "[烈焰升腾音轨]The Fire Rises烈焰升腾TFR",
+          "vip": false
+        },
+        {
+          "nid": 2638026474,
+          "title": "东西对抗 - 三级戒备状态(East vs. West - Defcon 3)",
+          "titleZh": "",
+          "artist": "娃娃鱼的鱼娃娃-",
+          "album": "[烈焰升腾音轨]The Fire Rises烈焰升腾TFR",
+          "vip": false
+        },
+        {
+          "nid": 2638027411,
+          "title": "东西对抗 - 欢愉之诗(East vs. West - Delightful Poetry)",
+          "titleZh": "",
+          "artist": "娃娃鱼的鱼娃娃-",
+          "album": "[烈焰升腾音轨]The Fire Rises烈焰升腾TFR",
+          "vip": false
+        },
+        {
+          "nid": 2638024502,
+          "title": "东西对抗 - 两难(East vs. West - Dilemma)",
+          "titleZh": "",
+          "artist": "娃娃鱼的鱼娃娃-",
+          "album": "[烈焰升腾音轨]The Fire Rises烈焰升腾TFR",
+          "vip": false
+        },
+        {
+          "nid": 2638020673,
+          "title": "东西对抗 - 消耗不断(East vs. West - Diminishment)",
+          "titleZh": "",
+          "artist": "娃娃鱼的鱼娃娃-",
+          "album": "[烈焰升腾音轨]The Fire Rises烈焰升腾TFR",
+          "vip": false
+        },
+        {
+          "nid": 2638027414,
+          "title": "东西对抗 - 总战(East vs. West - General Battle)",
+          "titleZh": "",
+          "artist": "娃娃鱼的鱼娃娃-",
+          "album": "[烈焰升腾音轨]The Fire Rises烈焰升腾TFR",
+          "vip": false
+        },
+        {
+          "nid": 2638017063,
+          "title": "东西对抗 - 责任(East vs. West - Responsibilities)",
+          "titleZh": "",
+          "artist": "娃娃鱼的鱼娃娃-",
+          "album": "[烈焰升腾音轨]The Fire Rises烈焰升腾TFR",
+          "vip": false
+        },
+        {
+          "nid": 2638020675,
+          "title": "东西对抗 - 俄罗斯之战 1(East vs. West - Russia Battle 1)",
+          "titleZh": "",
+          "artist": "娃娃鱼的鱼娃娃-",
+          "album": "[烈焰升腾音轨]The Fire Rises烈焰升腾TFR",
+          "vip": false
+        },
+        {
+          "nid": 2638015115,
+          "title": "东西对抗 - 为直升机所救(East vs. West - Saved By The Choppers)",
+          "titleZh": "",
+          "artist": "娃娃鱼的鱼娃娃-",
+          "album": "[烈焰升腾音轨]The Fire Rises烈焰升腾TFR",
+          "vip": false
+        },
+        {
+          "nid": 2638021662,
+          "title": "东西对抗 - 超级大国(East vs. West - Superpowers)",
+          "titleZh": "",
+          "artist": "娃娃鱼的鱼娃娃-",
+          "album": "[烈焰升腾音轨]The Fire Rises烈焰升腾TFR",
+          "vip": false
+        },
+        {
+          "nid": 2638017060,
+          "title": "东西对抗 - 关系破裂(East vs. West - Ties are Broken)",
+          "titleZh": "",
+          "artist": "娃娃鱼的鱼娃娃-",
+          "album": "[烈焰升腾音轨]The Fire Rises烈焰升腾TFR",
+          "vip": false
+        },
+        {
+          "nid": 2638023599,
+          "title": "东西对抗 - 平静(East vs. West - Tranquilité)",
+          "titleZh": "",
+          "artist": "娃娃鱼的鱼娃娃-",
+          "album": "[烈焰升腾音轨]The Fire Rises烈焰升腾TFR",
+          "vip": false
+        },
+        {
+          "nid": 2638024497,
+          "title": "东西对抗 - 三战(East vs. West - WW3)",
+          "titleZh": "",
+          "artist": "娃娃鱼的鱼娃娃-",
+          "album": "[烈焰升腾音轨]The Fire Rises烈焰升腾TFR",
+          "vip": false
+        },
+        {
+          "nid": 2638017059,
+          "title": "烈焰升腾 - 红军，红元帅(The Fire Rises - Red Army, Red Marshal)",
+          "titleZh": "",
+          "artist": "娃娃鱼的鱼娃娃-",
+          "album": "[烈焰升腾音轨]The Fire Rises烈焰升腾TFR",
+          "vip": false
+        },
+        {
+          "nid": 2638023600,
+          "title": "烈焰升腾 - 核战争(The Fire Rises - AtomKrieg)",
+          "titleZh": "",
+          "artist": "娃娃鱼的鱼娃娃-",
+          "album": "[烈焰升腾音轨]The Fire Rises烈焰升腾TFR",
+          "vip": false
+        },
+        {
+          "nid": 2638024498,
+          "title": "烈焰升腾 - 你身后(The Fire Rises - Behind You)",
+          "titleZh": "",
+          "artist": "娃娃鱼的鱼娃娃-",
+          "album": "[烈焰升腾音轨]The Fire Rises烈焰升腾TFR",
+          "vip": false
+        },
+        {
+          "nid": 2638017062,
+          "title": "烈焰升腾 - 贝尔格莱德交响曲(The Fire Rises - Belgradian Symphony)",
+          "titleZh": "",
+          "artist": "娃娃鱼的鱼娃娃-",
+          "album": "[烈焰升腾音轨]The Fire Rises烈焰升腾TFR",
+          "vip": false
+        },
+        {
+          "nid": 2638025442,
+          "title": "烈焰升腾 - 博而不精(The Fire Rises - Master Of None)",
+          "titleZh": "",
+          "artist": "娃娃鱼的鱼娃娃-",
+          "album": "[烈焰升腾音轨]The Fire Rises烈焰升腾TFR",
+          "vip": false
+        },
+        {
+          "nid": 2638026481,
+          "title": "烈焰升腾 - 卡斯卡迪亚仍存于世(The Fire Rises - Cascadia Lives)",
+          "titleZh": "",
+          "artist": "娃娃鱼的鱼娃娃-",
+          "album": "[烈焰升腾音轨]The Fire Rises烈焰升腾TFR",
+          "vip": false
+        },
+        {
+          "nid": 2638015116,
+          "title": "烈焰升腾 - 连锁反应(The Fire Rises - Chained Reaktion)",
+          "titleZh": "",
+          "artist": "娃娃鱼的鱼娃娃-",
+          "album": "[烈焰升腾音轨]The Fire Rises烈焰升腾TFR",
+          "vip": false
+        },
+        {
+          "nid": 2638017064,
+          "title": "烈焰升腾 - 穿越冥河(The Fire Rises - Crossing the Styx)",
+          "titleZh": "",
+          "artist": "娃娃鱼的鱼娃娃-",
+          "album": "[烈焰升腾音轨]The Fire Rises烈焰升腾TFR",
+          "vip": false
+        },
+        {
+          "nid": 2638025441,
+          "title": "烈焰升腾 - 自由暗面(The Fire Rises - Dark Side Of Freedom)",
+          "titleZh": "",
+          "artist": "娃娃鱼的鱼娃娃-",
+          "album": "[烈焰升腾音轨]The Fire Rises烈焰升腾TFR",
+          "vip": false
+        },
+        {
+          "nid": 2638021663,
+          "title": "烈焰升腾 - 俄罗斯的女儿(The Fire Rises - Daughter Of Russia)",
+          "titleZh": "",
+          "artist": "娃娃鱼的鱼娃娃-",
+          "album": "[烈焰升腾音轨]The Fire Rises烈焰升腾TFR",
+          "vip": false
+        },
+        {
+          "nid": 2638020679,
+          "title": "烈焰升腾 - 震怒之日(The Fire Rises - Day Of Rage)",
+          "titleZh": "",
+          "artist": "娃娃鱼的鱼娃娃-",
+          "album": "[烈焰升腾音轨]The Fire Rises烈焰升腾TFR",
+          "vip": false
+        },
+        {
+          "nid": 2638020667,
+          "title": "烈焰升腾 - 万念俱灰(The Fire Rises - Desepoir)",
+          "titleZh": "",
+          "artist": "娃娃鱼的鱼娃娃-",
+          "album": "[烈焰升腾音轨]The Fire Rises烈焰升腾TFR",
+          "vip": false
+        },
+        {
+          "nid": 2638021669,
+          "title": "烈焰升腾 - 拨号音(The Fire Rises - Dialtone)",
+          "titleZh": "",
+          "artist": "娃娃鱼的鱼娃娃-",
+          "album": "[烈焰升腾音轨]The Fire Rises烈焰升腾TFR",
+          "vip": false
+        },
+        {
+          "nid": 2638026477,
+          "title": "烈焰升腾 - 无畏长路(The Fire Rises - Fearless Highway)",
+          "titleZh": "",
+          "artist": "娃娃鱼的鱼娃娃-",
+          "album": "[烈焰升腾音轨]The Fire Rises烈焰升腾TFR",
+          "vip": false
+        },
+        {
+          "nid": 2638025438,
+          "title": "烈焰升腾 - 时间线支离破碎(The Fire Rises - Fractured Timeline)",
+          "titleZh": "",
+          "artist": "娃娃鱼的鱼娃娃-",
+          "album": "[烈焰升腾音轨]The Fire Rises烈焰升腾TFR",
+          "vip": false
+        },
+        {
+          "nid": 2638018057,
+          "title": "烈焰升腾 - 混沌微光(The Fire Rises - Glimmer of Chaos)",
+          "titleZh": "",
+          "artist": "娃娃鱼的鱼娃娃-",
+          "album": "[烈焰升腾音轨]The Fire Rises烈焰升腾TFR",
+          "vip": false
+        },
+        {
+          "nid": 2638018060,
+          "title": "烈焰升腾 - 地狱进行曲(The Fire Rises - Hell March)",
+          "titleZh": "",
+          "artist": "娃娃鱼的鱼娃娃-",
+          "album": "[烈焰升腾音轨]The Fire Rises烈焰升腾TFR",
+          "vip": false
+        },
+        {
+          "nid": 2638017061,
+          "title": "（疑似未使用）TFR_mu_tfr_hopes_are_ridin",
+          "titleZh": "",
+          "artist": "娃娃鱼的鱼娃娃-",
+          "album": "[烈焰升腾音轨]The Fire Rises烈焰升腾TFR",
+          "vip": false
+        },
+        {
+          "nid": 2638021666,
+          "title": "烈焰升腾 - 起义(The Fire Rises - Insurrection)",
+          "titleZh": "",
+          "artist": "娃娃鱼的鱼娃娃-",
+          "album": "[烈焰升腾音轨]The Fire Rises烈焰升腾TFR",
+          "vip": false
+        },
+        {
+          "nid": 2638020672,
+          "title": "烈焰升腾 - 孤立(The Fire Rises - Isolation)",
+          "titleZh": "",
+          "artist": "娃娃鱼的鱼娃娃-",
+          "album": "[烈焰升腾音轨]The Fire Rises烈焰升腾TFR",
+          "vip": false
+        },
+        {
+          "nid": 2638026479,
+          "title": "烈焰升腾 - 自由放克(The Fire Rises - Liberation Funk)",
+          "titleZh": "",
+          "artist": "娃娃鱼的鱼娃娃-",
+          "album": "[烈焰升腾音轨]The Fire Rises烈焰升腾TFR",
+          "vip": false
+        },
+        {
+          "nid": 2638024504,
+          "title": "烈焰升腾 - 统治进行曲(The Fire Rises - March Of Domination)",
+          "titleZh": "",
+          "artist": "娃娃鱼的鱼娃娃-",
+          "album": "[烈焰升腾音轨]The Fire Rises烈焰升腾TFR",
+          "vip": false
+        },
+        {
+          "nid": 2638020678,
+          "title": "烈焰升腾 - 我们将再次拥有故土(The Fire Rises - We'll Have Our Home Again)",
+          "titleZh": "",
+          "artist": "娃娃鱼的鱼娃娃-",
+          "album": "[烈焰升腾音轨]The Fire Rises烈焰升腾TFR",
+          "vip": false
+        },
+        {
+          "nid": 2638024500,
+          "title": "烈焰升腾 - 新秩序之祸(The Fire Rises - Peril Of The New Order)",
+          "titleZh": "",
+          "artist": "娃娃鱼的鱼娃娃-",
+          "album": "[烈焰升腾音轨]The Fire Rises烈焰升腾TFR",
+          "vip": false
+        },
+        {
+          "nid": 2638018067,
+          "title": "烈焰升腾 - 美丽的欧洲(The Fire Rises - Pulchritudo Europae)",
+          "titleZh": "",
+          "artist": "娃娃鱼的鱼娃娃-",
+          "album": "[烈焰升腾音轨]The Fire Rises烈焰升腾TFR",
+          "vip": false
+        },
+        {
+          "nid": 2638026483,
+          "title": "烈焰升腾 - 真正的美国人(The Fire Rises - Real American)",
+          "titleZh": "",
+          "artist": "娃娃鱼的鱼娃娃-",
+          "album": "[烈焰升腾音轨]The Fire Rises烈焰升腾TFR",
+          "vip": false
+        },
+        {
+          "nid": 2638018059,
+          "title": "烈焰升腾 - 往事追忆(The Fire Rises - Rememberance)",
+          "titleZh": "",
+          "artist": "娃娃鱼的鱼娃娃-",
+          "album": "[烈焰升腾音轨]The Fire Rises烈焰升腾TFR",
+          "vip": false
+        },
+        {
+          "nid": 2638015117,
+          "title": "烈焰升腾 - 赤色幽灵的复仇(The Fire Rises - Revenge Of The Red Spectre)",
+          "titleZh": "",
+          "artist": "娃娃鱼的鱼娃娃-",
+          "album": "[烈焰升腾音轨]The Fire Rises烈焰升腾TFR",
+          "vip": false
+        },
+        {
+          "nid": 2638023603,
+          "title": "烈焰升腾 - 戴蒙崛起(The Fire Rises - Rise Of The Dimon)",
+          "titleZh": "",
+          "artist": "娃娃鱼的鱼娃娃-",
+          "album": "[烈焰升腾音轨]The Fire Rises烈焰升腾TFR",
+          "vip": false
+        },
+        {
+          "nid": 2638020669,
+          "title": "烈焰升腾 - 再度崛起(The Fire Rises - Risen Again)",
+          "titleZh": "",
+          "artist": "娃娃鱼的鱼娃娃-",
+          "album": "[烈焰升腾音轨]The Fire Rises烈焰升腾TFR",
+          "vip": false
+        },
+        {
+          "nid": 2638020682,
+          "title": "烈焰升腾 - 巴比伦河畔(The Fire Rises - By the Rivers of Babylon)",
+          "titleZh": "",
+          "artist": "娃娃鱼的鱼娃娃-",
+          "album": "[烈焰升腾音轨]The Fire Rises烈焰升腾TFR",
+          "vip": false
+        },
+        {
+          "nid": 2638023608,
+          "title": "烈焰升腾 - 黑色火焰(The Fire Rises - Schwarzflammen)",
+          "titleZh": "",
+          "artist": "娃娃鱼的鱼娃娃-",
+          "album": "[烈焰升腾音轨]The Fire Rises烈焰升腾TFR",
+          "vip": false
+        },
+        {
+          "nid": 2638015121,
+          "title": "烈焰升腾 - 合成世纪(The Fire Rises - Synthesization)",
+          "titleZh": "",
+          "artist": "娃娃鱼的鱼娃娃-",
+          "album": "[烈焰升腾音轨]The Fire Rises烈焰升腾TFR",
+          "vip": false
+        },
+        {
+          "nid": 2638024510,
+          "title": "烈焰升腾 - 北方之泪(The Fire Rises - Tears of Aquilon)",
+          "titleZh": "",
+          "artist": "娃娃鱼的鱼娃娃-",
+          "album": "[烈焰升腾音轨]The Fire Rises烈焰升腾TFR",
+          "vip": false
+        },
+        {
+          "nid": 2638015118,
+          "title": "烈焰升腾 - 且听龙吟(The Fire Rises - The Dragon's Roar)",
+          "titleZh": "",
+          "artist": "娃娃鱼的鱼娃娃-",
+          "album": "[烈焰升腾音轨]The Fire Rises烈焰升腾TFR",
+          "vip": false
+        },
+        {
+          "nid": 2638023601,
+          "title": "烈焰升腾 - 旗仍高扬(The Fire Rises - The Flag Still Waving)",
+          "titleZh": "",
+          "artist": "娃娃鱼的鱼娃娃-",
+          "album": "[烈焰升腾音轨]The Fire Rises烈焰升腾TFR",
+          "vip": false
+        },
+        {
+          "nid": 2638018058,
+          "title": "烈焰升腾 - 旋焰高升(The Fire Rises - The Flame Gets Higher)",
+          "titleZh": "",
+          "artist": "娃娃鱼的鱼娃娃-",
+          "album": "[烈焰升腾音轨]The Fire Rises烈焰升腾TFR",
+          "vip": false
+        },
+        {
+          "nid": 2638024501,
+          "title": "烈焰升腾 - 人民的纽带(The Fire Rises - The People's Connection)",
+          "titleZh": "",
+          "artist": "娃娃鱼的鱼娃娃-",
+          "album": "[烈焰升腾音轨]The Fire Rises烈焰升腾TFR",
+          "vip": false
+        },
+        {
+          "nid": 2638027415,
+          "title": "烈焰升腾 - 时机已至(The Fire Rises - The Time Is Now)",
+          "titleZh": "",
+          "artist": "娃娃鱼的鱼娃娃-",
+          "album": "[烈焰升腾音轨]The Fire Rises烈焰升腾TFR",
+          "vip": false
+        },
+        {
+          "nid": 2638017068,
+          "title": "烈焰升腾 - 这是为了你(The Fire Rises - 'Tis for Thee)",
+          "titleZh": "",
+          "artist": "娃娃鱼的鱼娃娃-",
+          "album": "[烈焰升腾音轨]The Fire Rises烈焰升腾TFR",
+          "vip": false
+        },
+        {
+          "nid": 2638021668,
+          "title": "烈焰升腾 - 为何而战？(The Fire Rises - War, What Is It Good For?)",
+          "titleZh": "",
+          "artist": "娃娃鱼的鱼娃娃-",
+          "album": "[烈焰升腾音轨]The Fire Rises烈焰升腾TFR",
+          "vip": false
+        },
+        {
+          "nid": 2638024503,
+          "title": "??? - 最终胜利(??? - Endsieg)",
+          "titleZh": "",
+          "artist": "娃娃鱼的鱼娃娃-",
+          "album": "[烈焰升腾音轨]The Fire Rises烈焰升腾TFR",
+          "vip": false
+        },
+        {
+          "nid": 2638027413,
+          "title": "Xurious - 圣徒之营(Xurious - Camp Of The Saints)",
+          "titleZh": "",
+          "artist": "娃娃鱼的鱼娃娃-",
+          "album": "[烈焰升腾音轨]The Fire Rises烈焰升腾TFR",
+          "vip": false
+        },
+        {
+          "nid": 2638021667,
+          "title": "西方81 - 力量对抗力量，装甲对抗装甲，火力对抗火力(Zapad-81 - force against force)英文名太长写不下了",
+          "titleZh": "",
+          "artist": "娃娃鱼的鱼娃娃-",
+          "album": "[烈焰升腾音轨]The Fire Rises烈焰升腾TFR",
+          "vip": false
+        },
+        {
+          "nid": 2638023604,
+          "title": "西方81 - 新世界的英雄(Zapad-81 - The Hero of the New World)",
+          "titleZh": "",
+          "artist": "娃娃鱼的鱼娃娃-",
+          "album": "[烈焰升腾音轨]The Fire Rises烈焰升腾TFR",
+          "vip": false
+        },
+        {
+          "nid": 2638025439,
+          "title": "西方81 - 命令(Zapad-81 - Order)",
+          "titleZh": "",
+          "artist": "娃娃鱼的鱼娃娃-",
+          "album": "[烈焰升腾音轨]The Fire Rises烈焰升腾TFR",
+          "vip": false
+        },
+        {
+          "nid": 2638026480,
+          "title": "西方81 - 建立更好的新世界(Zapad-81 - We Will Build A Better World Than Before)",
+          "titleZh": "",
+          "artist": "娃娃鱼的鱼娃娃-",
+          "album": "[烈焰升腾音轨]The Fire Rises烈焰升腾TFR",
+          "vip": false
+        },
+        {
+          "nid": 2638026478,
+          "title": "简报区(Briefing Zone)",
+          "titleZh": "",
+          "artist": "娃娃鱼的鱼娃娃-",
+          "album": "[烈焰升腾音轨]The Fire Rises烈焰升腾TFR",
+          "vip": false
+        },
+        {
+          "nid": 2638064046,
+          "title": "CN - 核武之师(CN - AWD)",
+          "titleZh": "",
+          "artist": "娃娃鱼的鱼娃娃-",
+          "album": "[烈焰升腾音轨]The Fire Rises烈焰升腾TFR",
+          "vip": false
+        },
+        {
+          "nid": 2697336466,
+          "title": "New Order - Elegia",
+          "titleZh": "",
+          "artist": "娃娃鱼的鱼娃娃-",
+          "album": "[烈焰升腾音轨]The Fire Rises烈焰升腾TFR",
+          "vip": false
+        },
+        {
+          "nid": 2697332627,
+          "title": "CJShurup - Inexplicable, but the Fact",
+          "titleZh": "",
+          "artist": "娃娃鱼的鱼娃娃-",
+          "album": "[烈焰升腾音轨]The Fire Rises烈焰升腾TFR",
+          "vip": false
+        },
+        {
+          "nid": 2697338291,
+          "title": "Coldplay - Viva la Vida",
+          "titleZh": "",
+          "artist": "娃娃鱼的鱼娃娃-",
+          "album": "[烈焰升腾音轨]The Fire Rises烈焰升腾TFR",
+          "vip": false
+        },
+        {
+          "nid": 2697335675,
+          "title": "夜愿 - 歌剧魅影(Nightwish - The Phantom Of The Opera)",
+          "titleZh": "",
+          "artist": "娃娃鱼的鱼娃娃-",
+          "album": "[烈焰升腾音轨]The Fire Rises烈焰升腾TFR",
+          "vip": false
+        }
+      ]
+    }
+  }
+}

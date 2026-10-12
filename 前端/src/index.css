@@ -1,0 +1,258 @@
+/* ——————————————————————————————————————————————
+   全局样式与设计变量（二战主题）
+   主色取自电子管收音机：黄铜、奶油色刻度印刷、乌木玻璃、信号红指针、荧光绿魔眼
+   —————————————————————————————————————————————— */
+
+:root {
+  --ink: #0c0a08;
+  --glass: rgba(14, 11, 8, 0.58);
+  --glass-strong: rgba(12, 9, 7, 0.82);
+  --brass: #c9a45c;
+  --brass-hi: #f1d79a;
+  --brass-lo: #6e552a;
+  --cream: #efe3c6;
+  --cream-dim: rgba(239, 227, 198, 0.62);
+  --cream-faint: rgba(239, 227, 198, 0.34);
+  --needle: #ff5a36;
+  --phosphor: #7dffb2;
+  --accent: #c9a45c;
+  --accent-glow: #ffd98a;
+
+  --serif: 'Cormorant Garamond', 'Noto Serif SC', 'Songti SC', serif;
+  --serif-sc: 'Cormorant SC', 'Cormorant Garamond', 'Noto Serif SC', serif;
+  --zh: 'Noto Serif SC', 'Songti SC', 'SimSun', serif;
+  --sans: 'Segoe UI Variable Display', 'Segoe UI', 'PingFang SC', 'Microsoft YaHei UI', 'Noto Sans SC', sans-serif;
+  --mono: 'Cascadia Mono', 'JetBrains Mono', 'Consolas', 'SFMono-Regular', monospace;
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-io: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  font-family: var(--zh);
+  background: var(--ink);
+  color: var(--cream);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  user-select: none;
+  font-feature-settings: 'lnum' 1;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+button:focus-visible,
+[role='slider']:focus-visible,
+[role='switch']:focus-visible {
+  outline: 1px solid var(--brass-hi);
+  outline-offset: 3px;
+}
+
+.stage {
+  position: fixed !important;
+  inset: 0;
+}
+
+.app {
+  position: fixed;
+  inset: 0;
+}
+
+/* 界面层：歌曲信息与时钟常驻；控件在鼠标静止时隐去，把画面还给壁纸 */
+.ui,
+.controls,
+.skin {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+}
+.ui > *,
+.controls > *,
+.skin > * {
+  pointer-events: auto;
+}
+.ui > .controls,
+.controls > .skin {
+  pointer-events: none;
+}
+.ui {
+  transition: opacity 1s var(--ease-io);
+}
+.ui.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+.ui.is-hidden * {
+  pointer-events: none !important;
+}
+.controls {
+  transition: opacity 1.2s var(--ease-io), filter 1.2s var(--ease-io);
+}
+.controls.is-idle {
+  opacity: 0;
+  filter: blur(4px);
+}
+.controls.is-idle * {
+  pointer-events: none !important;
+}
+.app.is-idle,
+.app.is-idle * {
+  cursor: none !important;
+}
+
+/* 揭幕后界面依次入场 */
+.ui--enter .clock { animation: enter-down 1.6s 1.6s var(--ease-out) both; }
+.ui--enter .np { animation: enter-up 1.6s 2.1s var(--ease-out) both; }
+.ui--enter .brand { animation: enter-down 1.6s 1.9s var(--ease-out) both; }
+.ui--enter .rail { animation: enter-fade 1.6s 2.4s var(--ease-out) both; }
+.ui--enter .skin > * { animation: enter-up 1.6s 1.2s var(--ease-out) both; }
+@keyframes enter-up {
+  from { opacity: 0; translate: 0 26px; filter: blur(6px); }
+  to { opacity: 1; translate: 0 0; filter: blur(0); }
+}
+@keyframes enter-down {
+  from { opacity: 0; translate: 0 -18px; filter: blur(6px); }
+  to { opacity: 1; translate: 0 0; filter: blur(0); }
+}
+@keyframes enter-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* 底部与顶部的柔和暗幕，保证文字在任何壁纸上可读 */
+.scrim {
+  position: fixed;
+  left: 0;
+  right: 0;
+  pointer-events: none;
+  transition: opacity 1.4s var(--ease-io);
+}
+.scrim--bottom {
+  bottom: 0;
+  height: 46vh;
+  background: linear-gradient(to top, rgba(8, 6, 4, 0.78), rgba(8, 6, 4, 0.42) 38%, rgba(8, 6, 4, 0) 100%);
+}
+.scrim--top {
+  top: 0;
+  height: 22vh;
+  background: linear-gradient(to bottom, rgba(8, 6, 4, 0.5), rgba(8, 6, 4, 0));
+}
+.app.is-idle .scrim--top {
+  opacity: 0.4;
+}
+
+.latin {
+  font-family: var(--serif);
+}
+.sc {
+  font-family: var(--serif-sc);
+  letter-spacing: 0.18em;
+}
+.tnum {
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+/* 黄铜细线 */
+.hairline {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--brass) 18%, var(--brass) 82%, transparent);
+  opacity: 0.5;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--brass) 35%, transparent);
+}
+
+/* ——————————————————————————————————————————————
+   各主题的设计变量：界面组件只认上面这套变量，换主题时整套替换
+   —————————————————————————————————————————————— */
+
+/* 烈焰升腾：紫色霓虹、冷白字、品红指针、青色魔眼，西文改用窄体无衬线 */
+:root[data-theme='tfr'] {
+  --ink: #07030f;
+  --glass: rgba(16, 6, 32, 0.56);
+  --glass-strong: rgba(11, 4, 24, 0.84);
+  --brass: #b98cff;
+  --brass-hi: #ead6ff;
+  --brass-lo: #4e2a86;
+  --cream: #efe6ff;
+  --cream-dim: rgba(239, 230, 255, 0.64);
+  --cream-faint: rgba(239, 230, 255, 0.36);
+  --needle: #ff3ea5;
+  --phosphor: #6af3ff;
+  --accent: #c06bff;
+  --accent-glow: #ff9cf0;
+  --serif: 'Bahnschrift', 'Segoe UI', 'Noto Sans SC', sans-serif;
+  --serif-sc: 'Bahnschrift', 'Segoe UI', 'Noto Sans SC', sans-serif;
+  --zh: 'Microsoft YaHei UI', 'PingFang SC', 'Noto Sans SC', sans-serif;
+}
+:root[data-theme='tfr'] .scrim--bottom {
+  background: linear-gradient(to top, rgba(10, 3, 22, 0.82), rgba(10, 3, 22, 0.42) 38%, rgba(10, 3, 22, 0) 100%);
+}
+:root[data-theme='tfr'] .scrim--top {
+  background: linear-gradient(to bottom, rgba(10, 3, 22, 0.55), rgba(10, 3, 22, 0));
+}
+/* 霓虹主题下老式收音机整体转成紫铬面板；徽记、指针与魔眼荧光反转回来，保留各自的颜色 */
+:root[data-theme='tfr'] .radio {
+  filter: hue-rotate(228deg) saturate(1.15);
+}
+:root[data-theme='tfr'] .radio .dial__st svg,
+:root[data-theme='tfr'] .radio .dial__needle,
+:root[data-theme='tfr'] .radio .eye__fan {
+  filter: hue-rotate(-228deg);
+}
+
+/* 古典回音：更亮的鎏金、象牙白、朱红指针 */
+:root[data-theme='classical'] {
+  --ink: #0d0805;
+  --brass: #d9b56a;
+  --brass-hi: #fbe7a8;
+  --brass-lo: #7a5520;
+  --cream: #f6ead0;
+  --cream-dim: rgba(246, 234, 208, 0.64);
+  --cream-faint: rgba(246, 234, 208, 0.36);
+  --needle: #c43a2a;
+  --accent: #d9b56a;
+  --accent-glow: #ffe2a8;
+}
+
+/* 自建主题：现代无衬线，主色由主题定义写入 --accent / --accent-2 */
+:root[data-theme='diy'] {
+  --ink: #07080c;
+  --glass: rgba(16, 18, 24, 0.5);
+  --glass-strong: rgba(12, 14, 18, 0.82);
+  --brass: var(--accent);
+  --brass-hi: color-mix(in srgb, var(--accent) 45%, #fff);
+  --brass-lo: color-mix(in srgb, var(--accent) 45%, #000);
+  --cream: #f2f3f7;
+  --cream-dim: rgba(242, 243, 247, 0.64);
+  --cream-faint: rgba(242, 243, 247, 0.36);
+  --needle: var(--accent-2, var(--accent));
+  --phosphor: var(--accent-2, #7dffb2);
+  --accent-glow: color-mix(in srgb, var(--accent) 50%, #fff);
+  --serif: var(--sans);
+  --serif-sc: var(--sans);
+  --zh: var(--sans);
+}
+:root[data-theme='diy'] .scrim--bottom {
+  background: linear-gradient(to top, rgba(6, 7, 10, 0.78), rgba(6, 7, 10, 0.4) 38%, rgba(6, 7, 10, 0) 100%);
+}

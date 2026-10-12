@@ -1,0 +1,105 @@
+.callsign {
+  position: fixed;
+  left: 50%;
+  top: 38%;
+  translate: -50% -50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  pointer-events: none;
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.85);
+  z-index: 5;
+}
+.callsign svg {
+  filter: drop-shadow(0 0 18px var(--glow)) drop-shadow(0 6px 12px rgba(0, 0, 0, 0.6));
+}
+.callsign__call {
+  font-family: var(--zh);
+  font-size: 44px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: #fbeed2;
+  text-shadow: 0 0 26px color-mix(in srgb, var(--accent-glow) 35%, transparent), 0 2px 24px rgba(0, 0, 0, 0.85);
+}
+.callsign__call.latin {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 54px;
+  letter-spacing: 0.02em;
+}
+.callsign__meta {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 13px;
+  letter-spacing: 0.34em;
+  color: var(--cream-dim);
+}
+.callsign__meta i {
+  font-style: normal;
+  color: var(--brass);
+}
+.callsign__rule {
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--brass));
+}
+.callsign__rule:last-child {
+  background: linear-gradient(90deg, var(--brass), transparent);
+}
+
+/* —— 现代风格：城市名横扫 —— */
+.sweep {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  z-index: 5;
+}
+.sweep__band {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 160px;
+  margin-top: -80px;
+  transform-origin: left center;
+  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--glow) 22%, transparent) 40%, rgba(255, 255, 255, 0.18) 70%, transparent);
+  filter: blur(20px);
+}
+.sweep__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-shadow: 0 4px 40px rgba(0, 0, 0, 0.6);
+}
+.sweep__kicker {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 12px;
+  letter-spacing: 0.4em;
+  color: rgba(255, 255, 255, 0.72);
+}
+.sweep__city {
+  font-family: var(--zh);
+  font-weight: 900;
+  font-size: clamp(80px, 11vw, 168px);
+  line-height: 1;
+  letter-spacing: 0.2em;
+  margin-right: -0.2em;
+  color: #fff;
+}
+.sweep__pattern {
+  width: 220px !important;
+}
+.sweep__genre {
+  font-size: 15px;
+  letter-spacing: 0.5em;
+  margin-right: -0.5em;
+  color: rgba(255, 255, 255, 0.78);
+}

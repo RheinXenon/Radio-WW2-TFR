@@ -1,0 +1,234 @@
+.nclk {
+  --mag: #ff3ea5;
+  --vio: #b45cff;
+  --cyan: #6af3ff;
+  position: relative;
+  width: 236px;
+  padding: 11px 16px 12px;
+  font-family: 'Bahnschrift', 'DIN Alternate', 'Segoe UI', sans-serif;
+  color: #efe4ff;
+  background:
+    repeating-linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 0 1px, transparent 1px 3px),
+    radial-gradient(ellipse 80% 70% at 30% 45%, rgba(180, 92, 255, 0.16), transparent 70%),
+    linear-gradient(160deg, rgba(38, 12, 70, 0.56), rgba(10, 3, 24, 0.66));
+  -webkit-backdrop-filter: blur(14px) saturate(1.4);
+  backdrop-filter: blur(14px) saturate(1.4);
+  box-shadow:
+    inset 0 0 0 1px rgba(185, 140, 255, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 18px 40px rgba(0, 0, 0, 0.45),
+    0 0 46px rgba(180, 92, 255, 0.14);
+}
+/* 四角定位框：左上品红、右下青色 */
+.nclk::before {
+  --l: 13px;
+  content: '';
+  position: absolute;
+  inset: -1px;
+  pointer-events: none;
+  background:
+    linear-gradient(var(--mag), var(--mag)) top left / var(--l) 1.5px no-repeat,
+    linear-gradient(var(--mag), var(--mag)) top left / 1.5px var(--l) no-repeat,
+    linear-gradient(var(--vio), var(--vio)) top right / var(--l) 1.5px no-repeat,
+    linear-gradient(var(--vio), var(--vio)) top right / 1.5px var(--l) no-repeat,
+    linear-gradient(var(--vio), var(--vio)) bottom left / var(--l) 1.5px no-repeat,
+    linear-gradient(var(--vio), var(--vio)) bottom left / 1.5px var(--l) no-repeat,
+    linear-gradient(var(--cyan), var(--cyan)) bottom right / var(--l) 1.5px no-repeat,
+    linear-gradient(var(--cyan), var(--cyan)) bottom right / 1.5px var(--l) no-repeat;
+  filter: drop-shadow(0 0 3px rgba(255, 62, 165, 0.8));
+}
+
+.nclk__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--mono);
+  font-size: 9.5px;
+  letter-spacing: 0.16em;
+  color: rgba(201, 180, 255, 0.66);
+}
+.nclk__head span {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.nclk__rec {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--mag);
+  box-shadow: 0 0 6px var(--mag), 0 0 12px rgba(255, 62, 165, 0.6);
+  animation: nclk-rec 1.6s steps(1) infinite;
+}
+@keyframes nclk-rec {
+  50% { opacity: 0.2; box-shadow: none; }
+}
+
+.nclk__time {
+  display: flex;
+  align-items: flex-start;
+  margin-top: 4px;
+}
+/* 霓虹灯管：白热的芯，外圈品红与紫的辉光 */
+.nclk__hm {
+  position: relative;
+  font-size: 58px;
+  font-weight: 300;
+  font-stretch: 78%;
+  line-height: 1;
+  letter-spacing: 0.01em;
+  color: #fff3fc;
+  text-shadow:
+    0 0 1px #fff,
+    0 0 5px rgba(255, 140, 225, 0.95),
+    0 0 14px rgba(255, 62, 165, 0.8),
+    0 0 32px rgba(180, 92, 255, 0.65);
+  animation: nclk-hum 6.4s ease-in-out infinite;
+}
+/* 红青两道残影 */
+.nclk__hm::before,
+.nclk__hm::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  text-shadow: none;
+  mix-blend-mode: screen;
+  opacity: 0.5;
+  pointer-events: none;
+}
+.nclk__hm::before {
+  color: var(--mag);
+  transform: translateX(-1.2px);
+}
+.nclk__hm::after {
+  color: var(--cyan);
+  transform: translateX(1.2px);
+}
+@keyframes nclk-hum {
+  0%, 46%, 54%, 100% { filter: brightness(1); }
+  48% { filter: brightness(1.45); }
+  50% { filter: brightness(0.7); }
+  52% { filter: brightness(1.2); }
+}
+.nclk.is-glitch .nclk__hm {
+  animation: nclk-tear 0.3s steps(1) both;
+}
+.nclk.is-glitch .nclk__hm::before {
+  animation: nclk-split-a 0.3s steps(1) both;
+}
+.nclk.is-glitch .nclk__hm::after {
+  animation: nclk-split-b 0.3s steps(1) both;
+}
+@keyframes nclk-tear {
+  0% { transform: translateX(-3px) skewX(-6deg); clip-path: inset(0 0 42% 0); opacity: 0.9; }
+  25% { transform: translateX(4px); clip-path: inset(36% 0 0 0); }
+  50% { transform: translateX(-1px); clip-path: inset(0 0 0 0); opacity: 0.55; }
+  75% { transform: translateX(2px) skewX(4deg); clip-path: inset(18% 0 30% 0); opacity: 1; }
+  100% { transform: none; clip-path: inset(0); }
+}
+@keyframes nclk-split-a {
+  0% { transform: translate(-6px, 1px); clip-path: inset(0 0 58% 0); opacity: 0.9; }
+  40% { transform: translate(5px, -1px); clip-path: inset(30% 0 24% 0); }
+  100% { transform: translateX(-1.2px); clip-path: none; opacity: 0.5; }
+}
+@keyframes nclk-split-b {
+  0% { transform: translate(6px, -1px); clip-path: inset(52% 0 0 0); opacity: 0.9; }
+  40% { transform: translate(-5px, 1px); clip-path: inset(8% 0 56% 0); }
+  100% { transform: translateX(1.2px); clip-path: none; opacity: 0.5; }
+}
+
+.nclk__sec {
+  margin: 7px 0 0 8px;
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--cyan);
+  text-shadow: 0 0 6px rgba(106, 243, 255, 0.85), 0 0 16px rgba(106, 243, 255, 0.4);
+}
+
+/* 60 格秒条：亮格的颜色按位置从紫经品红过渡到青 */
+.nclk__secs {
+  display: grid;
+  grid-template-columns: repeat(60, 1fr);
+  gap: 1px;
+  height: 5px;
+  margin: 9px 0 8px;
+}
+.nclk__secs i {
+  background: rgba(185, 140, 255, 0.14);
+}
+.nclk__secs i.on {
+  background: linear-gradient(90deg, var(--vio), var(--mag) 55%, var(--cyan)) calc(var(--k) * 100%) 0 / 204px 100%;
+  box-shadow: 0 0 5px rgba(255, 62, 165, 0.45);
+}
+.nclk__secs i.head {
+  background: #fff;
+  box-shadow: 0 0 6px #fff, 0 0 12px var(--cyan);
+  animation: nclk-head 1s ease-out both;
+}
+@keyframes nclk-head {
+  from { opacity: 1; }
+  to { opacity: 0.45; }
+}
+
+/* 底部三组分区：上行小标签、下行主值，竖向渐隐线隔开 */
+.nclk__foot {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  gap: 10px;
+}
+.nclk__cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+}
+.nclk__cell em {
+  font-style: normal;
+  font-family: 'Microsoft YaHei UI', 'PingFang SC', sans-serif;
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  text-indent: 0.3em;
+  line-height: 1;
+}
+.nclk__cell b {
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 1;
+}
+.nclk__sep {
+  flex: none;
+  width: 1px;
+  margin: 3px 0;
+  background: linear-gradient(rgba(185, 140, 255, 0), rgba(185, 140, 255, 0.35), rgba(185, 140, 255, 0));
+}
+/* 日期组：青 */
+.nclk__cell--date em {
+  color: rgba(106, 243, 255, 0.92);
+}
+.nclk__cell--date b {
+  color: #d9fbff;
+  text-shadow: 0 0 6px rgba(106, 243, 255, 0.7);
+}
+/* 星期组：品红，单字稍大 */
+.nclk__cell--week em {
+  color: rgba(255, 62, 165, 0.88);
+}
+.nclk__cell--week b {
+  font-family: 'Microsoft YaHei UI', 'PingFang SC', sans-serif;
+  font-size: 16px;
+  color: #ffd7ee;
+  text-shadow: 0 0 7px rgba(255, 62, 165, 0.75);
+}
+/* 纪年组：紫粉 */
+.nclk__cell--era em {
+  color: rgba(255, 156, 240, 0.9);
+}
+.nclk__cell--era b {
+  font-family: 'Microsoft YaHei UI', 'PingFang SC', sans-serif;
+  font-size: 12.5px;
+  padding-top: 2px;
+  color: #ffd7f6;
+  text-shadow: 0 0 8px rgba(196, 107, 255, 0.6);
+}

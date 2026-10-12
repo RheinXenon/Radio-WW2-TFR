@@ -1,0 +1,9 @@
+.clock {
+  position: absolute;
+  top: 34px;
+  right: 40px;
+}
+.clock__face {
+  display: flex;
+  justify-content: flex-end;
+}

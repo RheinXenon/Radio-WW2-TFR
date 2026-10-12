@@ -1,0 +1,361 @@
+/* ——————————————— 鎏金音乐厅 ——————————————— */
+
+.gld {
+  position: absolute;
+  left: 40px;
+  right: 40px;
+  bottom: 24px;
+  height: 190px;
+  font-family: 'Noto Serif SC', 'Songti SC', serif;
+  color: #f6ead0;
+}
+.skin > .gld {
+  pointer-events: none;
+}
+.gld > * {
+  pointer-events: auto;
+}
+.gld button {
+  transition: color 0.3s, filter 0.25s, transform 0.12s, box-shadow 0.3s;
+}
+
+/* —— 台座：黑漆面板、双道金线，上下沿各一排齿饰 —— */
+.gld__plinth {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 66px;
+  display: flex;
+  justify-content: space-between;
+  border-radius: 8px;
+  background:
+    radial-gradient(ellipse 50% 120% at 50% 120%, rgba(255, 190, 110, 0.07), transparent 70%),
+    linear-gradient(180deg, rgba(36, 24, 14, 0.86), rgba(13, 8, 5, 0.92));
+  -webkit-backdrop-filter: blur(16px) saturate(1.2);
+  backdrop-filter: blur(16px) saturate(1.2);
+  box-shadow:
+    0 0 0 1px rgba(217, 181, 106, 0.62),
+    0 0 0 4px rgba(14, 9, 5, 0.86),
+    0 0 0 5px rgba(217, 181, 106, 0.28),
+    0 26px 54px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 236, 190, 0.14);
+}
+.gld__plinth::before,
+.gld__plinth::after {
+  content: '';
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  height: 3px;
+  background: repeating-linear-gradient(90deg, rgba(217, 181, 106, 0.42) 0 3px, transparent 3px 7px);
+  pointer-events: none;
+}
+.gld__plinth::before { top: 6px; }
+.gld__plinth::after { bottom: 6px; }
+.gld__wing {
+  width: calc(50% - var(--dial-w) / 2 - 6px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 0 30px;
+}
+.gld__sep {
+  width: 1px;
+  height: 30px;
+  background: linear-gradient(transparent, rgba(217, 181, 106, 0.5), transparent);
+}
+
+/* —— 鎏金按钮：转出来的金圈，中间是黑漆；播放键整枚鎏金 —— */
+.gld__transport {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.gld__btn {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  color: #f3dc9f;
+  background:
+    radial-gradient(circle at 50% 30%, #35261a, #140c07 72%) padding-box,
+    conic-gradient(from 200deg, #8a6526, #fbe7a8, #b38a3e, #f3d68f, #7a5520, #e8c77d, #8a6526) border-box;
+  box-shadow:
+    0 0 0 1px rgba(10, 6, 3, 0.9),
+    0 6px 14px rgba(0, 0, 0, 0.55),
+    inset 0 1px 1px rgba(255, 236, 190, 0.14),
+    inset 0 -3px 6px rgba(0, 0, 0, 0.5);
+}
+.gld__btn svg {
+  filter: drop-shadow(0 1px 0 rgba(0, 0, 0, 0.7));
+}
+.gld__btn:hover {
+  filter: brightness(1.14);
+}
+.gld__btn:active {
+  transform: translateY(1px) scale(0.96);
+}
+.gld__btn--play {
+  width: 52px;
+  height: 52px;
+  color: #2c1c0b;
+  background:
+    radial-gradient(circle at 44% 30%, #fff3cc, #e6c47c 42%, #a87d34 82%, #7a5520) padding-box,
+    conic-gradient(from 200deg, #7a5520, #fbe7a8, #a47b33, #f3d68f, #6e4e1a, #e8c77d, #7a5520) border-box;
+}
+.gld__btn--play svg {
+  filter: drop-shadow(0 1px 0 rgba(255, 244, 210, 0.6));
+}
+.gld__btn--play.is-on {
+  box-shadow:
+    0 0 0 1px rgba(10, 6, 3, 0.9),
+    0 6px 14px rgba(0, 0, 0, 0.55),
+    0 0 26px rgba(255, 206, 120, 0.32),
+    inset 0 1px 1px rgba(255, 244, 210, 0.5),
+    inset 0 -3px 6px rgba(70, 40, 10, 0.45);
+}
+
+/* —— 力度音量 —— */
+.gld__dyn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.gld__mark {
+  min-width: 46px;
+  text-align: right;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 600;
+  font-size: 26px;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: #f1d79a;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.6), 0 0 14px rgba(255, 200, 120, 0.22);
+}
+.gld__mark:hover {
+  color: #fbe7b4;
+}
+.gld__mark.is-tacet {
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: rgba(241, 215, 154, 0.55);
+}
+.gld__hairpin {
+  width: 132px;
+  height: 24px;
+  cursor: pointer;
+  touch-action: none;
+}
+.gld__hairpin svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  filter: drop-shadow(0 1px 0 rgba(0, 0, 0, 0.6));
+}
+
+/* —— 波段 —— */
+.gld__bands {
+  display: flex;
+  gap: 4px;
+}
+.gld__bands button {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  padding: 4px 12px 9px;
+}
+.gld__zh {
+  font-size: 13.5px;
+  letter-spacing: 0.24em;
+  margin-right: -0.24em;
+  color: rgba(246, 234, 208, 0.52);
+  transition: color 0.3s;
+}
+.gld__bands em,
+.gld__order em {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 14px;
+  line-height: 1.1;
+  color: rgba(217, 181, 106, 0.5);
+  transition: color 0.3s;
+}
+.gld__bands button:hover .gld__zh { color: rgba(246, 234, 208, 0.82); }
+.gld__bands .is-on .gld__zh { color: #fbf0d6; }
+.gld__bands .is-on em { color: #ecca80; }
+/* 选中波段下的饰线：两道金线夹一颗菱形 */
+.gld__orn {
+  position: absolute;
+  left: calc(50% - 20px);
+  bottom: 0;
+  width: 40px;
+  height: 5px;
+  background: linear-gradient(90deg, transparent, #d9b56a 30%, #d9b56a 70%, transparent) center / 100% 1px no-repeat;
+}
+.gld__orn::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 5px;
+  height: 5px;
+  margin: -2.5px 0 0 -2.5px;
+  transform: rotate(45deg);
+  background: #f3d68f;
+  box-shadow: 0 0 6px rgba(255, 210, 130, 0.6);
+}
+
+/* —— 播放顺序：反复记号 —— */
+.gld__order {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 4px;
+  color: #e9c97f;
+}
+.gld__order span {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.gld__order em {
+  font-size: 17px;
+  color: #f1d79a;
+}
+.gld__order small {
+  font-size: 10.5px;
+  letter-spacing: 0.24em;
+  color: rgba(246, 234, 208, 0.5);
+}
+.gld__order:hover {
+  filter: brightness(1.18);
+}
+
+/* —— 拱形表盘 —— */
+.gld__dial {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 460px;
+  height: 184px;
+  margin-left: -230px;
+  cursor: ew-resize;
+  touch-action: none;
+}
+.gld__dial > svg {
+  position: absolute;
+  inset: 0;
+  overflow: visible;
+  pointer-events: none;
+}
+/* 静态的表盘单独成层，指针转动时不必重绘纸纹与阴影 */
+.gld__face {
+  will-change: transform;
+  filter: drop-shadow(0 18px 28px rgba(0, 0, 0, 0.55)) drop-shadow(0 3px 5px rgba(0, 0, 0, 0.45));
+}
+.gld__rule {
+  fill: none;
+  stroke: #5a3f1a;
+  stroke-width: 0.9;
+}
+.gld__rule--thin {
+  stroke-width: 0.5;
+  opacity: 0.7;
+}
+.gld__ticks line {
+  stroke: #4a3418;
+  stroke-width: 0.7;
+  opacity: 0.75;
+}
+.gld__ticks line.major {
+  stroke-width: 1.3;
+  opacity: 0.95;
+}
+.gld__freq {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 600;
+  font-size: 11.5px;
+  fill: #6a4e26;
+}
+.gld__brand {
+  font-family: 'Cormorant SC', 'Cormorant Garamond', serif;
+  font-weight: 600;
+  font-size: 11.5px;
+  letter-spacing: 0.28em;
+  fill: #5c4220;
+}
+.gld__band {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  fill: #8a6a3a;
+}
+.gld__engrave {
+  font-family: 'Cormorant SC', 'Cormorant Garamond', serif;
+  font-weight: 600;
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  fill: #4a3410;
+  paint-order: stroke;
+  stroke: rgba(255, 244, 204, 0.45);
+  stroke-width: 0.6px;
+}
+.gld__labels {
+  position: absolute;
+  inset: 0;
+}
+
+/* 台名：顺着表盘弧线排开，指针靠近时被暖光照亮 */
+.gld__st {
+  --near: 0;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 4px;
+  white-space: nowrap;
+  font-family: 'Noto Serif SC', serif;
+  font-size: var(--fs);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: rgb(calc(110 - var(--near) * 80) calc(82 - var(--near) * 64) calc(48 - var(--near) * 40));
+  text-shadow: 0 0 calc(var(--near) * 12px) rgba(255, 236, 180, calc(var(--near) * 0.95));
+  cursor: pointer;
+}
+.gld__st svg {
+  opacity: calc(0.5 + var(--near) * 0.5);
+  filter: drop-shadow(0 0 1px rgba(40, 24, 8, 0.6));
+}
+.gld__st:hover {
+  color: #1c0f05;
+}
+.gld__st.is-cur::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -3px;
+  width: 4px;
+  height: 4px;
+  margin-left: -2px;
+  border-radius: 50%;
+  background: #b23a26;
+  box-shadow: 0 0 4px rgba(178, 58, 38, 0.6);
+}
+.gld__st.is-off {
+  opacity: 0.45;
+}
+.gld__st.is-off span {
+  text-decoration: line-through;
+  text-decoration-color: rgba(178, 58, 38, 0.8);
+}

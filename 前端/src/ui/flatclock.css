@@ -1,0 +1,107 @@
+.fclk {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-direction: row-reverse;
+  font-family: var(--sans);
+  color: #fff;
+}
+.fclk__dial {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  -webkit-backdrop-filter: blur(20px) saturate(1.5);
+  backdrop-filter: blur(20px) saturate(1.5);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.16), 0 14px 34px rgba(0, 0, 0, 0.32);
+}
+.fclk__dial svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.fclk__track {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.1);
+  stroke-width: 2.4;
+}
+.fclk__ring {
+  fill: none;
+  stroke: var(--accent-2, var(--accent));
+  stroke-width: 2.4;
+  stroke-linecap: round;
+}
+.fclk__dot {
+  fill: rgba(255, 255, 255, 0.55);
+}
+.fclk__hand {
+  stroke: #fff;
+  stroke-linecap: round;
+}
+.fclk__hand--h {
+  stroke-width: 3.6;
+}
+.fclk__hand--m {
+  stroke-width: 2.4;
+  opacity: 0.92;
+}
+.fclk__pin {
+  fill: var(--accent);
+}
+
+.fclk__text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+  text-shadow: 0 1px 14px rgba(0, 0, 0, 0.45);
+}
+.fclk__time {
+  display: flex;
+  align-items: center;
+  font-family: 'Segoe UI Variable Display', 'Segoe UI', 'PingFang SC', var(--sans);
+  font-size: 50px;
+  font-weight: 250;
+  line-height: 0.92;
+  letter-spacing: -0.01em;
+}
+/* 冒号是两颗主色圆点，慢慢呼吸 */
+.fclk__colon {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 11px;
+  width: 16px;
+  height: 0.7em;
+  align-items: center;
+  animation: fclk-breathe 2s ease-in-out infinite;
+}
+.fclk__colon::before,
+.fclk__colon::after {
+  content: '';
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+@keyframes fclk-breathe {
+  50% { opacity: 0.35; }
+}
+.fclk__date {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12.5px;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.66);
+}
+.fclk__date b {
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 11.5px;
+  letter-spacing: 0.1em;
+  color: #fff;
+  background: color-mix(in srgb, var(--accent) 38%, transparent);
+  text-shadow: none;
+}

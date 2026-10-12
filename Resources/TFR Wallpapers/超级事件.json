@@ -1,0 +1,986 @@
+[
+  {
+    "id": "GER_gunther_victory",
+    "title": "历史的终结",
+    "pool": "europe",
+    "quote": "以胜利止战。自由。和平。此刻降临。",
+    "author": "冈瑟·费林格",
+    "en": {
+      "title": "The End of History",
+      "quote": "End this war by victory. Freedom. Peace. Now.",
+      "author": "Gunther Fehlinger"
+    }
+  },
+  {
+    "id": "GER_gunther_war",
+    "title": "第二次欧陆战争",
+    "pool": "europe",
+    "quote": "唯一的解决方案……就是俄罗斯解体。",
+    "author": "冈瑟·费林格",
+    "en": {
+      "title": "Second European War",
+      "quote": "The only solution… is Russian dissolution.",
+      "author": "Gunther Fehlinger"
+    }
+  },
+  {
+    "id": "GER_schwab_victory",
+    "title": "新常态",
+    "pool": "europe",
+    "quote": "我们必须学会整合自身不同层次的身份认同。重要的不是非此即彼，而是兼收并蓄。",
+    "author": "克劳斯·施瓦布",
+    "en": {
+      "title": "New Normal",
+      "quote": "We must learn to integrate different levels of identity in ourselves. What matters is not either/or, but both/and.",
+      "author": "Klaus Schwab"
+    }
+  },
+  {
+    "id": "GER_third_european_war",
+    "title": "第三次欧陆战争",
+    "pool": "europe",
+    "quote": "他们只看见民众对左派的敌意，却忽视了民众对社会特权阶层的憎恨。",
+    "author": "红军旅",
+    "en": {
+      "title": "Third European War",
+      "quote": "They see in the population's hostility towards the left only the hostility towards the left, not the hatred against those who are socially privileged.",
+      "author": "Red Army Faction"
+    }
+  },
+  {
+    "id": "ThirdEuropeanWar_Junta",
+    "title": "第三次欧陆战争",
+    "pool": "europe",
+    "quote": "跟随我，并永远信任法兰西。",
+    "author": "菲利普·贝当",
+    "en": {
+      "title": "Third European War",
+      "quote": "Follow me, and keep your confidence in France eternal.",
+      "author": "Philippe Pétain"
+    }
+  },
+  {
+    "id": "ThirdEuropeanWar_Lafayette",
+    "title": "法兰克再征服战争",
+    "pool": "europe",
+    "quote": "交战双方都确信自己能够获胜，但最终摘取胜利果实的只会是毁灭与野性。",
+    "author": "爱德华·达拉第",
+    "en": {
+      "title": "Frankish War of Reconquest",
+      "quote": "Each of the two peoples will fight with confidence in their own victory, but the most certain victors will be the forces of destruction and barbarism.",
+      "author": "Edouard Daladier"
+    }
+  },
+  {
+    "id": "ThirdEuropeanWar_LatinEmpire",
+    "title": "第三次欧陆战争",
+    "pool": "europe",
+    "quote": "我来，我见，我征服",
+    "author": "尤利乌斯·凯撒",
+    "en": {
+      "title": "Third European War",
+      "quote": "I came, I saw, I conquered",
+      "author": "Julius Caesar"
+    }
+  },
+  {
+    "id": "ThirdEuropeanWar_LeDuc",
+    "title": "第三次欧陆战争",
+    "pool": "europe",
+    "quote": "我们从不与异见者浪费口舌，我们只会摧毁他们。",
+    "author": "贝尼托·墨索里尼",
+    "en": {
+      "title": "Third European War",
+      "quote": "We do not argue with those who disagree with us, we destroy them.",
+      "author": "Benito Mussolini"
+    }
+  },
+  {
+    "id": "ThirdEuropeanWar_Monarchists",
+    "title": "第三次欧陆战争",
+    "pool": "europe",
+    "quote": "法兰西之人民啊，回到你们的王身边。他将成为你们的父亲，你们的挚友。",
+    "author": "国王路易十六",
+    "en": {
+      "title": "Third European War",
+      "quote": "People of France, return to your king. He will always be your father, your best friend.",
+      "author": "King Louis XVI"
+    }
+  },
+  {
+    "id": "ThirdEuropeanWar_Napoleon",
+    "title": "第八次反法同盟战争",
+    "pool": "europe",
+    "quote": "我在沟渠中寻觅法兰西的桂冠。用剑将其挑起，擦拭干净，再为自己加冕为王。",
+    "author": "拿破仑·波拿巴",
+    "en": {
+      "title": "War of the Eighth Coalition",
+      "quote": "I found the crown of France in the gutter. I picked it up with the tip of my sword and cleaned it, and placed it atop my own head",
+      "author": "Napoleon Bonaparte"
+    }
+  },
+  {
+    "id": "ThirdEuropeanWar_Republic",
+    "title": "第三次欧陆战争",
+    "pool": "europe",
+    "quote": "爱国主义是将爱自己的人民放在首位；民族主义是将仇视自己以外的人放在首位。",
+    "author": "夏尔·戴高乐",
+    "en": {
+      "title": "Third European War",
+      "quote": "Patriotism is when love of your own people comes first; nationalism, when hate for people other than your own comes first.",
+      "author": "Charles de Gaulle"
+    }
+  },
+  {
+    "id": "super_GER_day_x",
+    "title": "X日",
+    "pool": "europe",
+    "quote": "坚定立场是我们唯一重要的事情。",
+    "author": "海因里希·希姆莱",
+    "en": {
+      "title": "Day X",
+      "quote": "The only thing that matters is that we stand firm.",
+      "author": "Heinrich Himmler"
+    }
+  },
+  {
+    "id": "super_NATO_victory",
+    "title": "北约赢得欧陆战争",
+    "pool": "europe",
+    "quote": "当你不能让他们看见光时，就让他们感觉到热。",
+    "author": "罗纳德·里根",
+    "en": {
+      "title": "NATO Victorious in Europe",
+      "quote": "When you can't make them see the light, make them feel the heat.",
+      "author": "Ronald Reagan"
+    }
+  },
+  {
+    "id": "super_SER_formation_yugoslavia",
+    "title": "南斯拉夫重生",
+    "pool": "europe",
+    "quote": "为了我们人民的兄弟情谊和团结一致，我们倾注了如海一般的心血，我们绝不允许任何人从内部撼动或毁坏它。",
+    "author": "约瑟普·布罗兹·铁托",
+    "en": {
+      "title": "Yugoslavia Reborn",
+      "quote": "We have spilt an ocean of blood for the brotherhood and unity of our peoples and we shall not allow anyone to touch or destroy it from within.",
+      "author": "Josip Broz Tito"
+    }
+  },
+  {
+    "id": "super_euro_victory",
+    "title": "欧洲之春",
+    "pool": "europe",
+    "quote": "我们尝过自由的滋味，就不会放弃它。",
+    "author": "弗拉基米尔·泽连斯基",
+    "en": {
+      "title": "The European Spring",
+      "quote": "We have tasted freedom and we will not give it up.",
+      "author": "Volodymyr Zelensky"
+    }
+  },
+  {
+    "id": "super_european_war",
+    "title": "欧陆战争",
+    "pool": "europe",
+    "quote": "欧洲人间的战争是一场内战。",
+    "author": "维克托·雨果",
+    "en": {
+      "title": "European War",
+      "quote": "A war between Europeans is a civil war.",
+      "author": "Victor Hugo"
+    }
+  },
+  {
+    "id": "super_juche_germany",
+    "title": "第三次欧陆战争",
+    "pool": "europe",
+    "quote": "被压迫的人民唯有通过斗争来解放自己。这是历史证明的真理。",
+    "author": "金日成",
+    "en": {
+      "title": "Third European War",
+      "quote": "The oppressed peoples can liberate themselves only through struggle. This is a simple and clear truth confirmed by history.",
+      "author": "Kim Il Sung"
+    }
+  },
+  {
+    "id": "super_second_european_war_communist",
+    "title": "第二次欧陆战争",
+    "pool": "europe",
+    "quote": "一根手指易折断，五根手指成铁拳！",
+    "author": "恩斯特·台尔曼",
+    "en": {
+      "title": "Second European War",
+      "quote": "One finger is easy to break, but five fingers make a fist!",
+      "author": "Ernst Thälmann"
+    }
+  },
+  {
+    "id": "super_second_european_war_communist_victory",
+    "title": "共产国际欧陆凯旋",
+    "pool": "europe",
+    "quote": "牛和驴都阻挡不了社会主义的前进。",
+    "author": "埃里希·昂纳克",
+    "en": {
+      "title": "Internationale Victory",
+      "quote": "Neither an ox nor a donkey is able to stop the progress of socialism.",
+      "author": "Erich Honecker"
+    }
+  },
+  {
+    "id": "super_second_european_war_fascist",
+    "title": "第二次欧陆战争",
+    "pool": "europe",
+    "quote": "我们肩负着沉重，也就此而伟大的命运。",
+    "author": "阿尔弗雷德·罗森贝格",
+    "en": {
+      "title": "Second European War",
+      "quote": "We bear a heavy and therefore a great destiny.",
+      "author": "Alfred Rosenberg"
+    }
+  },
+  {
+    "id": "super_second_european_war_fascist_victory",
+    "title": "钢铁盟约凯旋",
+    "pool": "europe",
+    "quote": "唯有浴血方能驱动历史的车轮。",
+    "author": "贝尼托·墨索里尼",
+    "en": {
+      "title": "Pact of Steel Victory",
+      "quote": "It is blood which moves the wheels of history.",
+      "author": "Benito Mussolini"
+    }
+  },
+  {
+    "id": "super_second_european_war_nafo",
+    "title": "第二次欧陆战争",
+    "pool": "europe",
+    "quote": "对抗极端分子最好的回应就是建立一个更美好的世界。",
+    "author": "克劳斯·施瓦布",
+    "en": {
+      "title": "Second European War",
+      "quote": "The best answer to the extremists is to build a better world.",
+      "author": "Klaus Schwab"
+    }
+  },
+  {
+    "id": "super_second_european_war_nafo_victory",
+    "title": "历史的终结",
+    "pool": "europe",
+    "quote": "是的，这就是欧洲，从大西洋到乌拉尔山脉，这就是欧洲，而整个欧洲，将决定世界的命运。",
+    "author": "夏尔·戴高乐",
+    "en": {
+      "title": "The End of History",
+      "quote": "Yes, it is Europe, from the Atlantic to the Urals, it is Europe, it is the whole of Europe, that will decide the fate of the world.",
+      "author": "Charles de Gaulle"
+    }
+  },
+  {
+    "id": "super_centrist_victory",
+    "title": "东亚防御倡议协定凯旋",
+    "pool": "east",
+    "quote": "我们一步一步地共同劳动着，向着我们的胜利的早晨走近。",
+    "author": "殷夫",
+    "en": {
+      "title": "EADI Victory",
+      "quote": "Step by step, we labor together, drawing closer to our victorious dawn.",
+      "author": "Yin Fu"
+    }
+  },
+  {
+    "id": "super_chinese_empire",
+    "title": "帝政复辟",
+    "pool": "east",
+    "quote": "所以世界上的民族，我们最大；世界上的历史，我们最长。",
+    "author": "傅斯年",
+    "en": {
+      "title": "The Empire Returns",
+      "quote": "Among the nations of the world, ours is the largest; among the histories of the world, ours is the longest.",
+      "author": "Fu Sinian"
+    }
+  },
+  {
+    "id": "super_cn_imper_won",
+    "title": "帝国统一亚洲",
+    "pool": "east",
+    "quote": "吾等必践誓言，匡世一统，帝皇万岁！",
+    "author": "战锤40K编年史",
+    "en": {
+      "title": "Imperium Unifies Asia",
+      "quote": "We shall carry our word, We will correct and unify, Hail the Emperor!",
+      "author": "Warhammer 40,000 Compendium"
+    }
+  },
+  {
+    "id": "super_eadi_victory",
+    "title": "东亚防御倡议协定凯旋",
+    "pool": "east",
+    "quote": "上下同欲者胜，风雨同舟者兴。",
+    "author": "孙武",
+    "en": {
+      "title": "EADI Victory",
+      "quote": "When people are unified, they put aside petty differences as they fight for a shared, greater cause. When plans make sense to them, they will support them. When they realize that the leader cares about them, they will fight for the leader and the leader's ideals.",
+      "author": "Wu Qi"
+    }
+  },
+  {
+    "id": "super_great_asian_war",
+    "title": "大亚洲战争",
+    "pool": "east",
+    "quote": "兵者，国之大事，死生之地，存亡之道，不可不察也。",
+    "author": "孙子",
+    "en": {
+      "title": "The Great Asian War",
+      "quote": "War is a great work of the state, the basis of life and death, the path to survival or death. This needs to be carefully weighed and considered.",
+      "author": "Sun Tzu"
+    }
+  },
+  {
+    "id": "super_invasion_of_taiwan",
+    "title": "台海战争",
+    "pool": "east",
+    "quote": "大家要晓得：现代的战争，不是单纯的军队的战争，而是整个的组织的战争！",
+    "author": "蒋介石",
+    "en": {
+      "title": "The Invasion Of Taiwan",
+      "quote": "You must all be aware that modern war is not a mere matter of military operations. It involves the whole strength and all the resources of the nation.",
+      "author": "Chiang Kai-Shek"
+    }
+  },
+  {
+    "id": "super_loji_victory",
+    "title": "东亚防御倡议协定凯旋",
+    "pool": "east",
+    "quote": "我没有时间考虑过去；我只考虑未来。",
+    "author": "钱学森",
+    "en": {
+      "title": "EADI Victory",
+      "quote": "I don't dwell on the past; I focus solely on the future.",
+      "author": "Qian Xuesen"
+    }
+  },
+  {
+    "id": "super_new_left_victory",
+    "title": "东亚防御倡议协定凯旋",
+    "pool": "east",
+    "quote": "不，决不会的！我们相信，中国一定有个可赞美的光明前途。",
+    "author": "方志敏",
+    "en": {
+      "title": "EADI Victory",
+      "quote": "No, never! We firmly believe that China is bound to have a glorious and admirable future.",
+      "author": "Fang Zhiming"
+    }
+  },
+  {
+    "id": "super_nick_land_victory",
+    "title": "尼克·兰德统一中国",
+    "pool": "east",
+    "quote": "历史的垃圾时间已去。你还能做什么让它到达二级呢？",
+    "author": "尼克·兰德",
+    "en": {
+      "title": "Nick Land Reunifies China",
+      "quote": "Garbage time is running out. Can what is playing you make it to level-2?",
+      "author": "Nick Land"
+    }
+  },
+  {
+    "id": "super_reformist_victory",
+    "title": "东亚防御倡议协定凯旋",
+    "pool": "east",
+    "quote": "取义成仁今日事，人间遍种自由花。",
+    "author": "陈毅",
+    "en": {
+      "title": "EADI Victory",
+      "quote": "Today I sacrifice my life for the sake of righteousness. The world will be blooming with flowers of freedom.",
+      "author": "Chen Yi"
+    }
+  },
+  {
+    "id": "super_revanchist_victory",
+    "title": "东亚防御倡议协定凯旋",
+    "pool": "east",
+    "quote": "我们的民族将再也不是一个被人侮辱的民族了，我们已经站起来了。",
+    "author": "毛泽东",
+    "en": {
+      "title": "EADI Victory",
+      "quote": "Ours will no longer be a nation subject to insult and humiliation. We have stood up.",
+      "author": "Mao Zedong"
+    }
+  },
+  {
+    "id": "super_japanese_civil_war",
+    "title": "日本内战",
+    "pool": "moshi",
+    "quote": "这死出山之上，\n往来者何其多！\n如此芸芸众生，\n何苦与他们一样，\n把尘世牵念带到冥途去？",
+    "author": "西行",
+    "en": {
+      "title": "Japanese Civil War",
+      "quote": "Shide no yama.\nCountless hordes are coming\nThrough the Mountains of Death.\nAnd there is no end in sight!\nThe number of the slain is increasing...",
+      "author": "Saigyo"
+    }
+  },
+  {
+    "id": "super_pdto_victory",
+    "title": "太平洋防卫条约组织凯旋",
+    "pool": "moshi",
+    "quote": "凯旋之种诞于微胜。",
+    "author": "丰臣秀吉",
+    "en": {
+      "title": "PDTO Victory",
+      "quote": "The seeds of great victory lie in minor triumphs.",
+      "author": "Toyotomi Hideyoshi"
+    }
+  },
+  {
+    "id": "super_SOV_LDPR_victory",
+    "title": "俄罗斯欧陆凯旋",
+    "pool": "dekabr",
+    "quote": "一想到俄罗斯的前景，我就会痴狂，我们将成为最伟大的民族、最伟大的国家，而世间一切都将向我们俯首。",
+    "author": "尼古拉二世",
+    "en": {
+      "title": "Russia Victorious in Europe",
+      "quote": "I go crazy when I think about the prospects of Russia, we will become the greatest people, the greatest state, everything in the world will be done with our permission.",
+      "author": "Nicholas II"
+    }
+  },
+  {
+    "id": "super_SOV_eurasian_victory",
+    "title": "欧亚国凯旋",
+    "pool": "dekabr",
+    "quote": "和平是战争的高潮，是战争的典范，是精神强度的极限。",
+    "author": "亚历山大·杜金",
+    "en": {
+      "title": "Eurasian Victory",
+      "quote": "Peace is the culmination of war, its apotheosis, the limit of its spiritual intensity.",
+      "author": "Alexander Dugin"
+    }
+  },
+  {
+    "id": "super_SOV_medvedev_nato_victory_2",
+    "title": "胜利日",
+    "pool": "dekabr",
+    "quote": "几个世纪以来，他们一直都以人肉饱腹，一再中饱私囊。现在这群吸血鬼们该意识到，他们的恶宴将走向终幕。",
+    "author": "弗拉基米尔·普京",
+    "en": {
+      "title": "Victory Day",
+      "quote": "They're used to stuffing their bellies with human flesh and their pockets with money for centuries. But they must realise that their vampire banquet is coming to an end.",
+      "author": "Vladimir Putin"
+    }
+  },
+  {
+    "id": "super_SOV_navalny_victory",
+    "title": "俄罗斯之胜",
+    "pool": "dekabr",
+    "quote": "胜利是由战争的艺术，指挥官的英勇与士兵的无畏铸就的。",
+    "author": "彼得大帝",
+    "en": {
+      "title": "Russian Victory",
+      "quote": "Victory is decided by the art of war and the bravery of the commanders and the fearlessness of the soldiers.",
+      "author": "Peter the Great"
+    }
+  },
+  {
+    "id": "super_SOV_navalny_war",
+    "title": "第二次俄欧战争",
+    "pool": "dekabr",
+    "quote": "风险越大，荣耀越盛。",
+    "author": "彼得大帝",
+    "en": {
+      "title": "Second Russo-European War",
+      "quote": "The greater is the danger, the greater the glory.",
+      "author": "Peter the Great"
+    }
+  },
+  {
+    "id": "super_SOV_soviet_nato_victory",
+    "title": "苏维埃联盟重建",
+    "pool": "dekabr",
+    "quote": "在革命的信念普遍之时，革命便已然开始。",
+    "author": "弗拉基米尔·列宁",
+    "en": {
+      "title": "Restoration of the Soviet Union",
+      "quote": "Universal faith in the revolution is already the beginning of the revolution.",
+      "author": "Vladimir Lenin"
+    }
+  },
+  {
+    "id": "super_SOV_soviet_nato_victory_2",
+    "title": "胜利日",
+    "pool": "dekabr",
+    "quote": "俄罗斯之名将成为孩童入眠前饱含祝福的摇篮曲，也将成为拂去法西斯主义窒息般噩梦的救世主。",
+    "author": "阿列克谢·托尔斯泰",
+    "en": {
+      "title": "Victory Day",
+      "quote": "Russian will become a name that children from the cradle will get used to blessing, as a deliverer from the suffocating, deadly nightmare of fascism.",
+      "author": "Alexey Tolstoy"
+    }
+  },
+  {
+    "id": "super_SOV_zhir_nato_victory_2",
+    "title": "俄罗斯之胜",
+    "pool": "dekabr",
+    "quote": "造物主只创造了一个俄罗斯。因此，她没有对手。我们是俄罗斯人，我们会征服一切。",
+    "author": "亚历山大·苏沃洛夫",
+    "en": {
+      "title": "Russian Victory",
+      "quote": "Nature has created only one Russia. She has no rivals. We are Russians, we will conquer everything.",
+      "author": "Alexander Suvorov"
+    }
+  },
+  {
+    "id": "super_UR_nato_victory",
+    "title": "俄罗斯欧陆凯旋",
+    "pool": "dekabr",
+    "quote": "维利·勃兰特，赫尔穆特·施密特和夏尔·戴高乐的才华早已湮没在历史的长河，欧洲正在变得日益浅薄易破。",
+    "author": "德米特里·梅德韦杰夫",
+    "en": {
+      "title": "Russia Victorious in Europe",
+      "quote": "The caliber of Willy Brandt, Helmut Schmidt or Charles Andre Joseph Marie de Gaulle remained in the deep past. Europe is getting shallower.",
+      "author": "Dmitry Medvedev"
+    }
+  },
+  {
+    "id": "super_alikhanov_victory",
+    "title": "俄罗斯凯旋",
+    "pool": "dekabr",
+    "quote": "俄罗斯人民建立了世界上最强大的国家，最伟大的帝国。",
+    "author": "尼古拉·别尔嘉耶夫",
+    "en": {
+      "title": "Russian Victory",
+      "quote": "The Russian people have created the most powerful state in the world, the greatest empire.",
+      "author": "Nikolai Berdyaev"
+    }
+  },
+  {
+    "id": "super_alikhanov_war",
+    "title": "第二次欧陆战争",
+    "pool": "dekabr",
+    "quote": "一分钟可决定战斗的结局，一小时可决定战局的胜负，一昼夜可决定帝国的命运。",
+    "author": "亚历山大·苏沃洛夫",
+    "en": {
+      "title": "Second Russian-European War",
+      "quote": "One minute decides the outcome of the battle; one hour — the success of the campaign; one day — the fate of the empire.",
+      "author": "Alexander Suvorov"
+    }
+  },
+  {
+    "id": "super_eurasian_chinese_war",
+    "title": "欧亚国-欧洲战争",
+    "pool": "dekabr",
+    "quote": "没错，我们并不平等。西方集团为了征服地球霸权而发动战争，而我们只为自身生命而战，为自身本该拥有的权利而战斗。",
+    "author": "亚历山大·杜金",
+    "en": {
+      "title": "Eurasian-European War",
+      "quote": "Yes, we are not on an equal footing. The collective West fights for its planetary supremacy, while we fight only to be, only for life, only for the right to be what we are.",
+      "author": "Alexander Dugin"
+    }
+  },
+  {
+    "id": "super_second_european_war_wagner",
+    "title": "第二次俄欧战争",
+    "pool": "dekabr",
+    "quote": "有人曾问及签证问题——我们不需要签证，只需要最高总指挥的一道命令。",
+    "author": "弗拉基米尔·沙马诺夫",
+    "en": {
+      "title": "Second Russo-European War",
+      "quote": "I was once asked about visas - we don't need visas, we just need an order from the Supreme Commander.",
+      "author": "Vladimir Shamanov"
+    }
+  },
+  {
+    "id": "super_second_european_war_wagner_victory",
+    "title": "",
+    "pool": "dekabr",
+    "quote": "战争之伟力非存乎黄金满室，而在于勇士效死；纵有黄金万两，难换勇士成行，然得精兵一旅，自有金山相迎。",
+    "author": "尼可罗·马基雅维利",
+    "en": {
+      "title": "",
+      "quote": "The sinews of war are not gold, but good soldiers; for gold alone will not procure good soldiers, but good soldiers will always procure gold.",
+      "author": "Niccolo Machiavelli"
+    }
+  },
+  {
+    "id": "super_30_days_war",
+    "title": "三十日战争",
+    "pool": "urban",
+    "quote": "所有男人、女人和孩童皆活于一把悬于脆弱细线的达摩克利斯之剑之下。",
+    "author": "约瑟夫·F·肯尼迪",
+    "en": {
+      "title": "The 30 Days War",
+      "quote": "Every man, woman, and child lives under a nuclear sword of Damocles, hanging by the slenderest of threads..",
+      "author": "John F. Kennedy"
+    }
+  },
+  {
+    "id": "super_APA_victory_anarchists",
+    "title": "美利坚无政府地区",
+    "pool": "urban",
+    "quote": "无政府主义带来共产主义，共产主义通向无政府主义。",
+    "author": "彼得·克鲁泡特金",
+    "en": {
+      "title": "American Anarchy",
+      "quote": "Anarchy leads to Communism, and Communism to Anarchy.",
+      "author": "Peter Kropotkin"
+    }
+  },
+  {
+    "id": "super_APA_victory_jacobins",
+    "title": "第二次美国革命",
+    "pool": "urban",
+    "quote": "正如历代爱国者前仆后继一般，有革命的先驱就会存在革命的后继者。",
+    "author": "金正日",
+    "en": {
+      "title": "Second American Revolution",
+      "quote": "Just as when there are patriotic ancestors there are patriotic descendants, where there are revolutionary forerunners there are revolutionary successors.",
+      "author": "Kim Jong Il"
+    }
+  },
+  {
+    "id": "super_APA_victory_moderates",
+    "title": "赤色黎明",
+    "pool": "urban",
+    "quote": "革命是历史的火车头。",
+    "author": "卡尔·马克思",
+    "en": {
+      "title": "Red Dawn",
+      "quote": "Revolutions are the locomotives of history.",
+      "author": "Karl Marx"
+    }
+  },
+  {
+    "id": "super_APA_victory_neosocialists",
+    "title": "新美国崛起",
+    "pool": "urban",
+    "quote": "社会主义并非必将到来的宿命，而是等待我们去完成的起步任务。",
+    "author": "迈克尔·哈灵顿",
+    "en": {
+      "title": "Rise of a New America",
+      "quote": "Socialism is still beginning, a task to be accomplished, not a destiny to be awaited.",
+      "author": "Michael Harrington"
+    }
+  },
+  {
+    "id": "super_ATW_the_final_solution",
+    "title": "最终解决方案",
+    "pool": "urban",
+    "quote": "他们想要利用一切手段确保他们的计划成功。而我的朋友们，我们将动用我们手中一切手段，确保他们的阴谋不会成功……",
+    "author": "威廉·路德·皮尔斯",
+    "en": {
+      "title": "The Final Solution",
+      "quote": "They want to use every means at their disposal to make sure their plan succeeds. And, my friends, we will resort to every means at our disposal to insure that their scheme does not succeed...",
+      "author": "William Luther Pierce"
+    }
+  },
+  {
+    "id": "super_ATW_victory_accelerationists",
+    "title": "被围困的美国",
+    "pool": "urban",
+    "quote": "人性亘古不变，迟早浮出水面。",
+    "author": "詹姆斯·梅森",
+    "en": {
+      "title": "America Under Siege",
+      "quote": "Human nature remains the same, and it will rise to the surface sooner or later.",
+      "author": "James Mason"
+    }
+  },
+  {
+    "id": "super_LOS_confederacy_old_guard",
+    "title": "美利坚联盟国重建",
+    "pool": "urban",
+    "quote": "我们的主张必将被再次提出，尽管它出现的方式和时间会不尽相同。",
+    "author": "杰斐逊·戴维斯",
+    "en": {
+      "title": "Restoration of the Confederacy",
+      "quote": "The principle for which we contend is bound to reassert itself, though it may be at another time and in another form.",
+      "author": "Jefferson Davis"
+    }
+  },
+  {
+    "id": "super_LOS_confederacy_populists",
+    "title": "美利坚联盟国重建",
+    "pool": "urban",
+    "quote": "一位真正拥有荣誉感的绅士，会为他在不自觉中让别人自惭形秽而感到歉疚。",
+    "author": "罗伯特·E·李",
+    "en": {
+      "title": "Restoration of the Confederacy",
+      "quote": "A true man of honor feels humbled when he cannot help humbling others.",
+      "author": "Robert E. Lee"
+    }
+  },
+  {
+    "id": "super_NSM_victory_hardliners",
+    "title": "新亚美利加",
+    "pool": "urban",
+    "quote": "我们的心坚若钢铁，抵御地狱之门。\n没有任何枪弹炮火，能遏止我们的雄音。",
+    "author": "乔治·林肯·洛克威尔",
+    "en": {
+      "title": "Ein Neues Amerika",
+      "quote": "Our hearts are steeled against the gates of hell. No shot nor shell, can still our mighty song.",
+      "author": "George Lincoln Rockwell"
+    }
+  },
+  {
+    "id": "super_NSM_victory_reformists",
+    "title": "新秩序的建立",
+    "pool": "urban",
+    "quote": "我们是在他们的仇视与迫害的烈火中诞生的新‘蛮子’，钢铁般的坚韧塑造了我们。",
+    "author": "乔治·林肯·洛克威尔",
+    "en": {
+      "title": "A New Order",
+      "quote": "We are the new 'barbarians' formed in iron hardness in the fires of their hate and persecution.",
+      "author": "George Lincoln Rockwell"
+    }
+  },
+  {
+    "id": "super_PTF_victory_nationalists",
+    "title": "第二次美国革命",
+    "pool": "urban",
+    "quote": "",
+    "author": "",
+    "en": {
+      "title": "Second American Revolution",
+      "quote": "",
+      "author": ""
+    }
+  },
+  {
+    "id": "super_USA_civil_war",
+    "title": "第二次美国内战",
+    "pool": "urban",
+    "quote": "如果毁灭是我们的命运，我们必须自己成为它的创造者和终结者。作为一个自由人的国家，我们将永远活着，或者自我灭亡。",
+    "author": "亚伯拉罕·林肯",
+    "en": {
+      "title": "The Second American Civil War",
+      "quote": "If destruction be our lot, we must ourselves be its author and finisher. As a nation of freemen, we must live through all time, or die by suicide.",
+      "author": "Abraham Lincoln"
+    }
+  },
+  {
+    "id": "super_USA_victory_caligula",
+    "title": "美利坚的卡利古拉",
+    "pool": "urban",
+    "quote": "凡吾所及之处，皆是寸草不生。",
+    "author": "阿提拉",
+    "en": {
+      "title": "The American Caligula",
+      "quote": "There, where I have passed, the grass will never grow again.",
+      "author": "Attila"
+    }
+  },
+  {
+    "id": "super_USA_victory_nss",
+    "title": "美国统一",
+    "pool": "urban",
+    "quote": "成为守门人非吾所愿，然舍我其谁。",
+    "author": "林登·B·约翰逊",
+    "en": {
+      "title": "American Reunification",
+      "quote": "We did not choose to be the guardians of the gate, but there is no one else.",
+      "author": "Lyndon B. Johnson"
+    }
+  },
+  {
+    "id": "super_USC_dark_trump",
+    "title": "特朗普统一美国",
+    "pool": "urban",
+    "quote": "团结致胜，分而治之。",
+    "author": "唐纳德·特朗普",
+    "en": {
+      "title": "Trump Reunifies America",
+      "quote": "Unite to win. Divide to conquer.",
+      "author": "Donald Trump"
+    }
+  },
+  {
+    "id": "super_USC_maga_king",
+    "title": "特朗普派统一美国",
+    "pool": "urban",
+    "quote": "只要我一息尚存，便会为你战斗——并且绝不会让你失望。",
+    "author": "唐纳德·特朗普",
+    "en": {
+      "title": "Trumpists Reunify America",
+      "quote": "I will fight for you with every breath in my body – and I will never, ever let you down.",
+      "author": "Donald Trump"
+    }
+  },
+  {
+    "id": "super_american_iranian_war",
+    "title": "美伊战争",
+    "pool": "urban",
+    "quote": "我他妈就是一个挑起了第三次世界大战的傻逼。",
+    "author": "美军战斗机飞行员",
+    "en": {
+      "title": "American Iranian War",
+      "quote": "I'm the motherfucker that started world war 3.",
+      "author": "American Fighter Pilot"
+    }
+  },
+  {
+    "id": "super_bloomberg_sweep",
+    "title": "企业派统一美国",
+    "pool": "urban",
+    "quote": "若要等到完成再交付民主程序之后，那早已是明日黄花了。",
+    "author": "迈克尔·布隆伯格",
+    "en": {
+      "title": "Corporatocrats Reunify America",
+      "quote": "By the time you get it done and go through democracy, it's so outdated.",
+      "author": "Michael Bloomberg"
+    }
+  },
+  {
+    "id": "super_gmac_victory",
+    "title": "真正自由的美国",
+    "pool": "urban",
+    "quote": "我身虽死，但自由之灵魂尚存，我依然是一个无政府主义者，不跪服在天地间的任何人身前。",
+    "author": "伏尔泰琳·克蕾",
+    "en": {
+      "title": "A Truly Free America",
+      "quote": "I die, as I have lived, a free spirit, an Anarchist, owing no allegiance to rulers, heavenly or earthly.",
+      "author": "Voltairine de Cleyre"
+    }
+  },
+  {
+    "id": "super_hillary_clinton_victory",
+    "title": "希拉里·克林顿的任期",
+    "pool": "urban",
+    "quote": "是时候让女人站在与男性并肩的位置上，迈入那些决定人民命运、他们子孙后代命运的房间了。",
+    "author": "希拉里·克林顿",
+    "en": {
+      "title": "The Hillary Clinton Presidency",
+      "quote": "It is past time for women to take their rightful place, side by side with men, in the rooms where the fates of peoples, where their children's and grandchildren's fates, are decided.",
+      "author": "Hillary Clinton"
+    }
+  },
+  {
+    "id": "super_joe_biden_victory",
+    "title": "联邦派统一美利坚",
+    "pool": "urban",
+    "quote": "在这个社会中，我们已经已经太久地无节制崇拜个人主义，而忽略了共同社群。",
+    "author": "乔·拜登",
+    "en": {
+      "title": "Unionists Reunify America",
+      "quote": "For too long in this society, we have celebrated unrestrained individualism over common community.",
+      "author": "Joe Biden"
+    }
+  },
+  {
+    "id": "super_patriot_victory",
+    "title": "第二次美国革命",
+    "pool": "urban",
+    "quote": "我们的传统是革命到底，我们的家乡是暴君坟冢。",
+    "author": "爱国者阵线宣言",
+    "en": {
+      "title": "Second American Revolution",
+      "quote": "Our tradition is revolution and our land is where tyrants come to die.",
+      "author": "Patriot Front Manifesto"
+    }
+  },
+  {
+    "id": "super_third_american_civil_war",
+    "title": "第三次美国内战",
+    "pool": "urban",
+    "quote": "我的父亲曾告诉我，‘当你亲眼见证你的孩子超越你时，你便成功了。’",
+    "author": "乔·拜登",
+    "en": {
+      "title": "Third American Civil War",
+      "quote": "My dad used to say, 'You know you're a success when you look at your kids and realize they turned out better than you.'",
+      "author": "Joe Biden"
+    }
+  },
+  {
+    "id": "super_trump_third_term",
+    "title": "特朗普派统一美国",
+    "pool": "urban",
+    "quote": "当你一再受到冤屈时，最糟的事莫过于接着忍受，要反击！",
+    "author": "唐纳德·特朗普",
+    "en": {
+      "title": "Trumpists Reunify America",
+      "quote": "When you are wronged repeatedly, the worst thing you can do is continue taking it, fight back! ",
+      "author": "Donald Trump"
+    }
+  },
+  {
+    "id": "super_trump_victory",
+    "title": "宪政派统一美利坚",
+    "pool": "urban",
+    "quote": "最终，评判你的不是你承担了多少，而是你完成了什么。",
+    "author": "唐纳德·特朗普",
+    "en": {
+      "title": "Constitutionalists Reunify America",
+      "quote": "In the end, you're measured not by how much you undertake but by what you finally accomplish.",
+      "author": "Donald Trump"
+    }
+  },
+  {
+    "id": "super_CHA_sahara_expansion",
+    "title": "撒哈拉崩溃",
+    "pool": "fire",
+    "quote": "天哪！天……",
+    "author": "",
+    "en": {
+      "title": "Collapse of the Sahara",
+      "quote": "The horror... the horror...",
+      "author": ""
+    }
+  },
+  {
+    "id": "super_SAU_civil_war",
+    "title": "沙特阿拉伯内战",
+    "pool": "fire",
+    "quote": "你们当轻装地，或重装地出征，你们当借你们的财产和生命为真主而奋斗。这对于你们是更好的，如果你们知道。",
+    "author": "《古兰经》9:41",
+    "en": {
+      "title": "Saudi Arabian Civil War",
+      "quote": "Go forth to war, whether it be easy or difficult, and strive hard in God's cause with your possessions and your lives: this is for you own good-if you but knew it!",
+      "author": "Quran, 9:41"
+    }
+  },
+  {
+    "id": "super_arab_world",
+    "title": "阿拉伯民众国成立",
+    "pool": "fire",
+    "quote": "民族若被摧毁，国家亦难立足。",
+    "author": "穆阿迈尔·卡扎菲",
+    "en": {
+      "title": "Formation of the Arab Jamahiriya",
+      "quote": "Nations whose nationalism is destroyed are subject to ruin.",
+      "author": "Muammar Gaddafi"
+    }
+  },
+  {
+    "id": "super_cartel_war",
+    "title": "毒品战争",
+    "pool": "fire",
+    "quote": "我并非一个受过教育的人，我除了学习如何作战之外并无任何学习的机会。",
+    "author": "潘乔·维拉",
+    "en": {
+      "title": "The Cartel War",
+      "quote": "I am not an educated man. I never had an opportunity to learn anything except how to fight.",
+      "author": "Pancho Villa"
+    }
+  },
+  {
+    "id": "super_north_korean_civil_war",
+    "title": "朝鲜内战",
+    "pool": "fire",
+    "quote": "以奴隶般屈服换来的和平并非真和平。",
+    "author": "金日成",
+    "en": {
+      "title": "North Korean Civil War",
+      "quote": "Peace secured by slavish submission is not peace.",
+      "author": "Kim Il Sung"
+    }
+  },
+  {
+    "id": "super_unmatched_power_of_the_sun",
+    "title": "天国降临",
+    "pool": "fire",
+    "quote": "王又要向那左边的说：‘你们这被咒诅的人，离开我，进入那为魔鬼和他的使者所预备的永火里去！",
+    "author": "马太福音 25:41",
+    "en": {
+      "title": "Kingdom Come",
+      "quote": "Then he will say to those on his left, 'Depart from me, you who are cursed, into the eternal fire prepared for the devil and his angels.'",
+      "author": "Matthew 25:41"
+    }
+  }
+]

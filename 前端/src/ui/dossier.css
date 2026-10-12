@@ -1,0 +1,690 @@
+/* ——————————————— 史实档案 ———————————————
+   乌木黄铜的档案箱：左为看片台，右为夹在铜夹下的象牙纸档案卡 */
+
+.dos {
+  position: fixed;
+  inset: 0;
+  z-index: 32;
+  display: grid;
+  place-items: center;
+  background: rgba(8, 6, 5, 0.94);
+}
+
+.dos__backdrop {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.dos__backdrop img {
+  position: absolute;
+  inset: -60px;
+  width: calc(100% + 120px);
+  height: calc(100% + 120px);
+  object-fit: cover;
+  filter: blur(38px) saturate(0.7) brightness(0.34);
+}
+.dos__vignette {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 50% 45%, transparent 30%, rgba(5, 4, 3, 0.75) 100%),
+    linear-gradient(180deg, rgba(5, 4, 3, 0.3), transparent 30%, transparent 70%, rgba(5, 4, 3, 0.5));
+}
+
+/* —— 箱体 —— */
+.dos__case {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: min(1440px, calc(100vw - 64px));
+  height: min(880px, calc(100vh - 56px));
+  border-radius: 14px;
+  background:
+    radial-gradient(ellipse at 30% 0%, color-mix(in srgb, var(--brass) 7%, transparent), transparent 55%),
+    linear-gradient(180deg, rgba(20, 15, 11, 0.9), rgba(10, 8, 6, 0.94));
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--brass) 42%, transparent),
+    0 0 0 5px rgba(10, 8, 6, 0.7),
+    0 0 0 6px color-mix(in srgb, var(--brass) 14%, transparent),
+    0 40px 110px rgba(0, 0, 0, 0.75),
+    inset 0 1px 0 rgba(255, 235, 190, 0.09);
+}
+/* 四角的一字铜螺钉，槽口方向各不相同 */
+.dos__screw {
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: conic-gradient(from 30deg, var(--brass-lo), var(--brass-hi), var(--brass), var(--brass-hi), var(--brass-lo));
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.8), inset 0 0 0 0.5px rgba(255, 245, 210, 0.4);
+}
+.dos__screw::after {
+  content: '';
+  position: absolute;
+  left: 1px;
+  right: 1px;
+  top: 50%;
+  height: 1.2px;
+  margin-top: -0.6px;
+  background: rgba(50, 36, 16, 0.85);
+  transform: rotate(var(--r));
+}
+.dos__screw--tl { top: 11px; left: 11px; --r: 35deg; }
+.dos__screw--tr { top: 11px; right: 11px; --r: -20deg; }
+.dos__screw--bl { bottom: 11px; left: 11px; --r: 80deg; }
+.dos__screw--br { bottom: 11px; right: 11px; --r: 10deg; }
+
+/* —— 抬头 —— */
+.dos__head {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 24px 32px 18px;
+}
+.dos__emblem {
+  flex: none;
+  filter: drop-shadow(0 0 12px var(--glow));
+}
+.dos__titles {
+  flex: 1;
+  min-width: 0;
+}
+.dos__title {
+  font-size: 25px;
+  font-weight: 600;
+  letter-spacing: 0.26em;
+  color: var(--cream);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.dos__latin {
+  margin-top: 3px;
+  font-size: 15px;
+  font-style: italic;
+  letter-spacing: 0.04em;
+  color: var(--cream-dim);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.dos__tools {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.dos__showing {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12.5px;
+  letter-spacing: 0.24em;
+  color: var(--brass-hi);
+}
+.dos__showing i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent-glow);
+  box-shadow: 0 0 8px color-mix(in srgb, var(--accent-glow) 90%, transparent), 0 0 2px color-mix(in srgb, var(--accent-glow) 55%, #fff);
+}
+.dos__pager {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px;
+  border-radius: 20px;
+  background: linear-gradient(180deg, #0a0806, #1a130d);
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.9), 0 0 0 1px color-mix(in srgb, var(--brass) 30%, transparent);
+}
+.dos__pager button {
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: var(--cream-dim);
+  transition: color 0.25s, background 0.25s;
+}
+.dos__pager button:hover {
+  color: var(--ink);
+  background: linear-gradient(180deg, var(--brass-hi), var(--brass) 60%, var(--brass-lo));
+}
+.dos__pager span {
+  min-width: 62px;
+  text-align: center;
+  font-size: 15px;
+  letter-spacing: 0.08em;
+  color: var(--cream);
+}
+.dos__pager span i {
+  font-style: normal;
+  margin: 0 5px;
+  color: var(--cream-faint);
+}
+
+/* —— 正文：看片台与档案卡 —— */
+.dos__body {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(340px, 1fr);
+  gap: 28px;
+  padding: 22px 32px 30px;
+}
+
+.dos__viewer {
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+/* 看片台：凹进箱体的乌木台面，台面中心透出一层暖光 */
+.dos__stage {
+  flex: 1;
+  min-height: 0;
+  padding: 28px;
+  border-radius: 10px;
+  background:
+    radial-gradient(ellipse at 50% 50%, color-mix(in srgb, var(--accent-glow) 7%, transparent), transparent 70%),
+    linear-gradient(180deg, #0b0907, #120d09);
+  box-shadow:
+    inset 0 3px 14px rgba(0, 0, 0, 0.9),
+    inset 0 0 0 1px rgba(0, 0, 0, 0.6),
+    0 0 0 1px color-mix(in srgb, var(--brass) 20%, transparent),
+    0 1px 0 rgba(255, 235, 190, 0.05);
+}
+.dos__field {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* 图版 */
+.dos__plate {
+  position: absolute;
+  border-radius: 3px;
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--brass) 40%, transparent), 0 22px 48px rgba(0, 0, 0, 0.65);
+  transition: box-shadow 0.7s var(--ease-out), opacity 0.5s;
+}
+/* 相纸白边：原照档与并列档里，原照像一张冲印出来的新闻照片 */
+.dos__plate--photo.is-print {
+  box-shadow:
+    0 0 0 7px #ece3cc,
+    0 0 0 8px rgba(90, 70, 40, 0.5),
+    0 22px 48px rgba(0, 0, 0, 0.7);
+}
+.dos__plate--photo.is-under {
+  opacity: 0;
+  transition: box-shadow 0.7s var(--ease-out), opacity 0.4s 0.5s;
+}
+.dos__inner {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: inherit;
+  background: #0b0907;
+}
+/* 显影前的相纸浸在暗房红灯里 */
+.dos__inner--photo {
+  background: radial-gradient(ellipse at 50% 50%, #3a120c, #120605 80%);
+}
+.dos__inner img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.dos__thumb {
+  filter: blur(6px);
+  transform: scale(1.03);
+}
+.dos__full {
+  opacity: 0;
+  transition: opacity 0.8s var(--ease-io);
+}
+.dos__full.is-in {
+  opacity: 1;
+}
+.dos__grain {
+  position: absolute;
+  inset: -50%;
+  pointer-events: none;
+  opacity: 0.1;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation: grain 0.9s steps(5) infinite;
+}
+
+.dos__tag {
+  position: absolute;
+  top: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 11px;
+  border-radius: 3px;
+  font-size: 11.5px;
+  letter-spacing: 0.3em;
+  white-space: nowrap;
+  color: var(--cream);
+  background: rgba(12, 9, 7, 0.66);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--brass) 42%, transparent);
+}
+.dos__tag b {
+  font-weight: 500;
+  font-size: 13.5px;
+  letter-spacing: 0.08em;
+  color: var(--brass-hi);
+}
+.dos__tag--l { left: 12px; }
+.dos__tag--r { right: 12px; }
+
+/* 分界线 */
+.dos__divider {
+  position: absolute;
+  pointer-events: none;
+}
+.dos__divider.is-on {
+  pointer-events: auto;
+  cursor: ew-resize;
+  touch-action: none;
+}
+.dos__line {
+  position: absolute;
+  top: -10px;
+  bottom: -10px;
+  width: 2px;
+  margin-left: -1px;
+  background: linear-gradient(180deg, transparent, var(--brass-hi) 8%, var(--brass) 50%, var(--brass-hi) 92%, transparent);
+  box-shadow: 0 0 12px color-mix(in srgb, var(--accent-glow) 55%, transparent), 0 0 2px rgba(0, 0, 0, 0.8);
+}
+.dos__grip {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 40px;
+  height: 40px;
+  margin: -20px 0 0 -20px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: var(--ink);
+  background: conic-gradient(from 30deg, var(--brass-lo), var(--brass-hi), var(--brass), var(--brass-hi), var(--brass), var(--brass-hi), var(--brass-lo));
+  box-shadow:
+    0 0 0 3px rgba(12, 9, 7, 0.85),
+    0 0 0 4px color-mix(in srgb, var(--brass) 50%, transparent),
+    0 6px 16px rgba(0, 0, 0, 0.7),
+    0 0 22px color-mix(in srgb, var(--accent-glow) 35%, transparent);
+  transition: transform 0.35s var(--ease-out);
+}
+.dos__grip:focus-visible {
+  outline: 1px solid var(--brass-hi);
+  outline-offset: 6px;
+}
+.dos__divider.is-on:hover .dos__grip,
+.dos__divider.is-on:active .dos__grip {
+  transform: scale(1.1);
+}
+
+/* 空相纸 */
+.dos__blank {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border-radius: 3px;
+  overflow: hidden;
+  background: radial-gradient(ellipse at 50% 42%, rgba(130, 30, 20, 0.28), transparent 70%), #0d0a08;
+  box-shadow: inset 0 0 0 1px rgba(239, 227, 198, 0.08), 0 22px 48px rgba(0, 0, 0, 0.6);
+  outline: 1px dashed color-mix(in srgb, var(--brass) 28%, transparent);
+  outline-offset: -12px;
+}
+.dos__blankpat {
+  position: absolute;
+  inset: 0;
+}
+.dos__blank strong {
+  position: relative;
+  margin-top: 6px;
+  font-weight: 500;
+  font-size: 16px;
+  letter-spacing: 0.4em;
+  margin-right: -0.4em;
+  color: var(--cream-dim);
+}
+.dos__blank span {
+  position: relative;
+  font-size: 12px;
+  letter-spacing: 0.3em;
+  margin-right: -0.3em;
+  color: var(--cream-faint);
+}
+
+/* 档位拨片 */
+.dos__bar {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  padding: 0 4px;
+}
+.dos__switch {
+  position: relative;
+  flex: none;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  width: 304px;
+  height: 36px;
+  padding: 3px;
+  border-radius: 18px;
+  background: linear-gradient(180deg, #0a0806, #1a130d);
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.9), 0 0 0 1px color-mix(in srgb, var(--brass) 32%, transparent);
+}
+.dos__knob {
+  position: absolute;
+  top: 3px;
+  bottom: 3px;
+  left: 3px;
+  width: calc((100% - 6px) / 4);
+  border-radius: 15px;
+  background: linear-gradient(180deg, var(--brass-hi), var(--brass) 45%, var(--brass-lo));
+  box-shadow:
+    0 2px 5px rgba(0, 0, 0, 0.7),
+    inset 0 1px 0 rgba(255, 250, 225, 0.75),
+    inset 0 -1px 0 rgba(90, 65, 25, 0.6),
+    0 0 14px color-mix(in srgb, var(--accent-glow) 25%, transparent);
+}
+.dos__switch button {
+  position: relative;
+  z-index: 1;
+  font-size: 12.5px;
+  letter-spacing: 0.3em;
+  text-indent: 0.3em;
+  color: var(--cream-dim);
+  border-radius: 15px;
+  transition: color 0.3s;
+}
+.dos__switch button:not(:disabled):not(.is-on):hover {
+  color: var(--cream);
+}
+.dos__switch button.is-on {
+  color: var(--ink);
+  font-weight: 600;
+}
+.dos__switch button:disabled {
+  color: rgba(239, 227, 198, 0.2);
+  cursor: not-allowed;
+  text-decoration: line-through;
+  text-decoration-color: color-mix(in srgb, var(--brass) 35%, transparent);
+}
+.dos__hint {
+  font-size: 12.5px;
+  letter-spacing: 0.16em;
+  color: var(--cream-faint);
+}
+
+/* —— 档案卡 —— */
+.dos__side {
+  position: relative;
+  min-height: 0;
+  padding-top: 10px;
+}
+/* 夹住档案卡的黄铜长尾夹 */
+.dos__clip {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  z-index: 2;
+  width: 92px;
+  height: 22px;
+  margin-left: -46px;
+  border-radius: 4px 4px 6px 6px;
+  background: linear-gradient(180deg, var(--brass-hi), var(--brass) 40%, var(--brass-lo));
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 250, 225, 0.7), inset 0 -2px 0 rgba(80, 58, 22, 0.55);
+}
+.dos__clip::before,
+.dos__clip::after {
+  content: '';
+  position: absolute;
+  top: -9px;
+  width: 22px;
+  height: 14px;
+  border: 2px solid color-mix(in srgb, var(--brass) 70%, var(--brass-lo));
+  border-bottom: none;
+  border-radius: 8px 8px 0 0;
+}
+.dos__clip::before { left: 16px; }
+.dos__clip::after { right: 16px; }
+
+.dos__card {
+  position: relative;
+  height: 100%;
+  border-radius: 4px;
+  overflow: hidden;
+  color: #2b2118;
+  background:
+    radial-gradient(ellipse at 20% 0%, rgba(255, 251, 238, 0.7), transparent 55%),
+    radial-gradient(ellipse at 100% 100%, rgba(168, 128, 64, 0.22), transparent 60%),
+    linear-gradient(180deg, #efe6cd, #e5d7b6);
+  box-shadow:
+    0 0 0 1px rgba(110, 85, 42, 0.55),
+    0 26px 56px rgba(0, 0, 0, 0.6),
+    inset 0 0 70px rgba(130, 95, 40, 0.22);
+}
+/* 纸纤维 */
+.dos__card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.22;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.45 0 0 0 0 0.35 0 0 0 0 0.2 0 0 0 0.9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.dos__scroll {
+  position: relative;
+  height: 100%;
+  overflow-y: auto;
+  padding: 38px 34px 34px;
+  user-select: text;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(110, 85, 42, 0.45) transparent;
+}
+.dos__scroll::selection,
+.dos__scroll *::selection {
+  background: rgba(163, 53, 42, 0.22);
+}
+
+/* 红印章：油墨不匀，盖得略歪 */
+.dos__stamp {
+  position: absolute;
+  top: 26px;
+  right: 26px;
+  width: 84px;
+  height: 84px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: #a3352a;
+  border: 2.5px solid currentColor;
+  box-shadow: inset 0 0 0 4px rgba(239, 230, 205, 0.6), inset 0 0 0 5.5px currentColor;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  -webkit-mask-image: radial-gradient(circle at 30% 30%, #000 40%, rgba(0, 0, 0, 0.7) 70%, #000 90%);
+  mask-image: radial-gradient(circle at 30% 30%, #000 40%, rgba(0, 0, 0, 0.7) 70%, #000 90%);
+}
+.dos__stamp span {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  margin-right: -0.3em;
+}
+.dos__stamp b {
+  margin-top: 1px;
+  font-size: 19px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+}
+
+.dos__fields {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  justify-content: start;
+  column-gap: 26px;
+  row-gap: 6px;
+  padding-right: 96px;
+  padding-bottom: 18px;
+  margin-bottom: 4px;
+  border-bottom: 1px solid rgba(90, 66, 30, 0.35);
+}
+.dos__fields div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.dos__fields dt {
+  font-size: 10.5px;
+  letter-spacing: 0.32em;
+  color: rgba(60, 44, 24, 0.6);
+}
+.dos__fields dd {
+  font-size: 15.5px;
+  letter-spacing: 0.08em;
+  color: #2b2118;
+  padding-bottom: 2px;
+  border-bottom: 1px dotted rgba(90, 66, 30, 0.5);
+}
+
+.dos__scroll h4 {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 22px 0 10px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.42em;
+  color: #7a2a1f;
+}
+.dos__scroll h4::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(122, 42, 31, 0.4), transparent);
+}
+.dos__origin,
+.dos__points {
+  font-size: 13.5px;
+  line-height: 1.9;
+  letter-spacing: 0.04em;
+  text-align: justify;
+  color: #3a2d1f;
+}
+.dos__points {
+  padding: 10px 14px;
+  border-left: 2px solid rgba(122, 42, 31, 0.45);
+  background: rgba(120, 90, 40, 0.07);
+}
+.dos__story {
+  font-size: 14.5px;
+  line-height: 2;
+  letter-spacing: 0.04em;
+  text-align: justify;
+  text-indent: 2em;
+  color: #2b2118;
+}
+.dos__story + .dos__story {
+  margin-top: 10px;
+}
+
+.dos__annex {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 26px;
+  margin-top: 26px;
+  padding-top: 16px;
+  border-top: 1px dashed rgba(90, 66, 30, 0.4);
+  font-size: 12.5px;
+  letter-spacing: 0.16em;
+  color: rgba(60, 44, 24, 0.55);
+}
+.dos__annex li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.dos__annex i {
+  position: relative;
+  width: 13px;
+  height: 13px;
+  border: 1.2px solid rgba(60, 44, 24, 0.55);
+  border-radius: 2px;
+}
+.dos__annex li.is-on {
+  color: #2b2118;
+}
+.dos__annex li.is-on i::after {
+  content: '';
+  position: absolute;
+  left: 3px;
+  top: -1px;
+  width: 4px;
+  height: 8px;
+  border: solid #7a2a1f;
+  border-width: 0 2px 2px 0;
+  transform: rotate(40deg);
+}
+.dos__annex em {
+  font-style: normal;
+  font-size: 11.5px;
+  color: rgba(60, 44, 24, 0.55);
+}
+
+/* —— 窄屏：看片台在上，档案卡接在下方，整页滚动 —— */
+@media (max-width: 980px) {
+  .dos__case {
+    height: calc(100vh - 32px);
+    width: calc(100vw - 32px);
+  }
+  .dos__head {
+    flex-wrap: wrap;
+    padding: 20px 22px 14px;
+  }
+  .dos__tools {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .dos__body {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    padding: 18px 22px 24px;
+  }
+  .dos__stage {
+    flex: none;
+    height: min(64vw, 56vh);
+    padding: 18px;
+  }
+  .dos__bar {
+    flex-wrap: wrap;
+  }
+  .dos__card {
+    height: auto;
+  }
+  .dos__scroll {
+    overflow: visible;
+  }
+}

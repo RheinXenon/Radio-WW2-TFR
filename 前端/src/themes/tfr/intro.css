@@ -1,0 +1,266 @@
+.tfi {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: radial-gradient(ellipse at 50% 60%, #1a0733 0%, #07020f 70%);
+  color: #efe4ff;
+  font-family: var(--zh);
+}
+.tfi.is-leaving {
+  animation: tfi-out 1s 0.15s linear forwards;
+}
+/* 退场：几下故障式的闪断后熄灭 */
+@keyframes tfi-out {
+  0% { opacity: 1; transform: none; }
+  12% { opacity: 0.55; transform: translateX(14px); filter: hue-rotate(40deg); }
+  22% { opacity: 1; transform: translateX(-9px); filter: none; }
+  34% { opacity: 0.35; transform: translateX(4px) scaleY(1.02); }
+  46% { opacity: 0.8; transform: none; }
+  100% { opacity: 0; visibility: hidden; }
+}
+
+/* 显像管点亮：先是一道细线，再撑开成满屏 */
+.tfi__crt {
+  position: absolute;
+  inset: 0;
+  background: #07020f;
+  z-index: 3;
+  pointer-events: none;
+  animation: tfi-crt 0.75s 0.05s cubic-bezier(0.7, 0, 0.2, 1) forwards;
+}
+.tfi__crt::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 2px;
+  background: #e6c8ff;
+  box-shadow: 0 0 24px 6px #b45cff, 0 0 80px 20px rgba(180, 92, 255, 0.5);
+  transform: scaleX(0);
+  animation: tfi-line 0.75s 0.05s cubic-bezier(0.7, 0, 0.2, 1) forwards;
+}
+@keyframes tfi-line {
+  0% { transform: scaleX(0); opacity: 1; }
+  45% { transform: scaleX(1); opacity: 1; }
+  100% { transform: scaleX(1) scaleY(60); opacity: 0; }
+}
+@keyframes tfi-crt {
+  0%, 45% { clip-path: inset(50% 0 50% 0); background: transparent; }
+  0% { opacity: 1; }
+  100% { opacity: 0; visibility: hidden; }
+}
+
+.tfi__log {
+  position: absolute;
+  left: 48px;
+  top: 44px;
+  font-family: var(--mono);
+  font-size: 12.5px;
+  line-height: 1.9;
+  letter-spacing: 0.06em;
+  color: #b9a6ff;
+  text-shadow: 0 0 8px rgba(185, 120, 255, 0.6);
+}
+.tfi__log div {
+  overflow: hidden;
+  white-space: pre;
+  width: 0;
+  animation: tfi-type 0.36s calc(0.7s + var(--i) * 0.38s) steps(28) forwards;
+}
+.tfi__log div:last-child { color: #7ae8ff; }
+@keyframes tfi-type {
+  to { width: 46ch; }
+}
+
+.tfi__center {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.tfi.is-leaving .tfi__center {
+  animation: tfi-push 0.9s var(--ease-io) forwards;
+}
+@keyframes tfi-push {
+  to { transform: scale(1.12); filter: blur(6px) saturate(1.6); }
+}
+
+.tfi__kicker {
+  font-size: 12px;
+  letter-spacing: 0.7em;
+  margin-right: -0.7em;
+  color: rgba(239, 228, 255, 0.45);
+  opacity: 0;
+  margin-bottom: 26px;
+  animation: tfi-fade 1s 1.9s ease forwards;
+}
+
+/* 主题名：红蓝两道错位的残影在故障中抖动，随后归位 */
+.tfi__title {
+  position: relative;
+  font-size: clamp(64px, 9vw, 128px);
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  margin-right: -0.22em;
+  line-height: 1;
+  color: #f6eeff;
+  text-shadow: 0 0 22px rgba(196, 107, 255, 0.85), 0 0 70px rgba(255, 79, 176, 0.45);
+  opacity: 0;
+  animation: tfi-title 1.1s 2.25s steps(1) forwards, tfi-hum 3.6s 3.4s ease-in-out infinite;
+}
+.tfi__title::before,
+.tfi__title::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  mix-blend-mode: screen;
+  opacity: 0.85;
+}
+.tfi__title::before {
+  color: #ff2fa0;
+  animation: tfi-split-a 2.6s 2.25s infinite;
+}
+.tfi__title::after {
+  color: #2fe3ff;
+  animation: tfi-split-b 2.6s 2.25s infinite;
+}
+@keyframes tfi-title {
+  0% { opacity: 1; clip-path: inset(40% 0 45% 0); transform: translateX(-14px); }
+  12% { clip-path: inset(10% 0 70% 0); transform: translateX(18px); }
+  24% { opacity: 0.2; clip-path: inset(0 0 0 0); transform: none; }
+  32% { opacity: 1; clip-path: inset(62% 0 8% 0); transform: translateX(-8px); }
+  44%, 100% { opacity: 1; clip-path: inset(0 0 0 0); transform: none; }
+}
+@keyframes tfi-split-a {
+  0% { transform: translate(-6px, 1px); clip-path: inset(0 0 60% 0); }
+  6% { transform: translate(5px, -2px); clip-path: inset(30% 0 30% 0); }
+  12%, 100% { transform: translate(-1.5px, 0); clip-path: inset(0 0 0 0); }
+}
+@keyframes tfi-split-b {
+  0% { transform: translate(6px, -1px); clip-path: inset(55% 0 0 0); }
+  6% { transform: translate(-5px, 2px); clip-path: inset(10% 0 55% 0); }
+  12%, 100% { transform: translate(1.5px, 0); clip-path: inset(0 0 0 0); }
+}
+@keyframes tfi-hum {
+  0%, 100% { filter: brightness(1); }
+  48% { filter: brightness(1); }
+  50% { filter: brightness(1.5); }
+  52% { filter: brightness(0.85); }
+}
+
+.tfi__latin {
+  margin-top: 22px;
+  font-family: var(--mono);
+  font-size: 15px;
+  letter-spacing: 1.1em;
+  margin-right: -1.1em;
+  color: #c9b4ff;
+  opacity: 0;
+  animation: tfi-fade 1.2s 2.9s ease forwards;
+}
+
+.tfi__stations {
+  display: flex;
+  gap: 34px;
+  margin-top: 54px;
+}
+.tfi__st {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  opacity: 0;
+  filter: brightness(0.3) blur(2px);
+  animation: tfi-lamp 0.9s calc(3.3s + var(--i) * 0.17s) var(--ease-out) forwards;
+}
+.tfi__st span {
+  font-size: 13px;
+  letter-spacing: 0.24em;
+  color: #e9dcff;
+}
+.tfi__st em {
+  font-style: normal;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--glow);
+  text-shadow: 0 0 8px var(--glow);
+}
+@keyframes tfi-lamp {
+  0% { opacity: 0; filter: brightness(3) blur(4px); transform: translateY(8px); }
+  30% { opacity: 1; filter: brightness(2.2) blur(0); }
+  100% { opacity: 1; filter: brightness(1) blur(0); transform: none; }
+}
+
+.tfi__quote {
+  margin-top: 46px;
+  font-size: 14px;
+  letter-spacing: 0.4em;
+  color: rgba(239, 228, 255, 0.7);
+  text-align: center;
+  opacity: 0;
+  animation: tfi-fade 1.4s 4.4s ease forwards;
+}
+.tfi__quote i {
+  display: block;
+  margin-top: 10px;
+  font-family: var(--serif);
+  font-size: 15px;
+  letter-spacing: 0.12em;
+  color: rgba(201, 180, 255, 0.55);
+}
+
+/* 底部升起的紫焰 */
+.tfi__fire {
+  position: absolute;
+  left: -10%;
+  right: -10%;
+  bottom: -20%;
+  height: 70%;
+  background:
+    radial-gradient(ellipse 30% 60% at 20% 100%, rgba(255, 120, 200, 0.55), transparent 70%),
+    radial-gradient(ellipse 26% 70% at 55% 100%, rgba(190, 90, 255, 0.6), transparent 70%),
+    radial-gradient(ellipse 30% 55% at 85% 100%, rgba(255, 150, 110, 0.45), transparent 70%);
+  filter: blur(26px);
+  transform: translateY(70%);
+  opacity: 0;
+  animation: tfi-rise 2.4s 4.2s cubic-bezier(0.3, 0, 0.2, 1) forwards, tfi-flicker 0.9s 4.2s ease-in-out infinite alternate;
+}
+@keyframes tfi-rise {
+  to { transform: translateY(0); opacity: 1; }
+}
+@keyframes tfi-flicker {
+  from { filter: blur(26px) brightness(1); }
+  to { filter: blur(30px) brightness(1.25); }
+}
+
+.tfi__scan {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 4;
+  background: repeating-linear-gradient(to bottom, rgba(0, 0, 0, 0.18) 0 1px, transparent 1px 3px);
+  mix-blend-mode: multiply;
+}
+.tfi__scan::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 18vh;
+  background: linear-gradient(to bottom, transparent, rgba(190, 120, 255, 0.06), transparent);
+  animation: tfi-roll 4s linear infinite;
+}
+@keyframes tfi-roll {
+  from { top: -20vh; }
+  to { top: 110vh; }
+}
+
+@keyframes tfi-fade {
+  to { opacity: 1; }
+}

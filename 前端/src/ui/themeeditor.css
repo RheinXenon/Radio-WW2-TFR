@@ -1,0 +1,472 @@
+/* 主题工坊：右侧滑出的编辑面板，现代的磨砂玻璃样式，强调色取所编辑主题的主色 */
+.ted {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  background: rgba(4, 4, 6, 0.55);
+  backdrop-filter: blur(6px);
+  font-family: var(--sans);
+  color: #eef0f4;
+}
+.ted__sheet {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  bottom: 16px;
+  width: min(760px, calc(100vw - 32px));
+  display: flex;
+  flex-direction: column;
+  border-radius: 22px;
+  background: rgba(16, 17, 22, 0.86);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  box-shadow: 0 40px 120px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(30px) saturate(1.3);
+  overflow: hidden;
+}
+.ted__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 28px 32px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+.ted__kicker {
+  font-size: 11.5px;
+  letter-spacing: 0.32em;
+  color: color-mix(in srgb, var(--ac) 70%, #fff);
+}
+.ted__head h2 {
+  margin-top: 8px;
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+.ted__x {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: rgba(238, 240, 244, 0.7);
+  transition: background 0.25s, color 0.25s;
+}
+.ted__x:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+
+.ted__body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 6px 32px 24px;
+  user-select: text;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.18) transparent;
+}
+.ted__sec {
+  padding: 22px 0 6px;
+}
+.ted__sec + .ted__sec {
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+.ted__sec h3 {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 16px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  color: rgba(238, 240, 244, 0.9);
+}
+.ted__sec h3 em {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: rgba(238, 240, 244, 0.42);
+}
+
+.ted__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px 16px;
+}
+.ted__field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  min-width: 0;
+}
+.ted__field.is-wide {
+  grid-column: 1 / -1;
+}
+.ted__label {
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  color: rgba(238, 240, 244, 0.55);
+}
+.ted__label em {
+  margin-left: 8px;
+  font-style: normal;
+  color: rgba(238, 240, 244, 0.3);
+}
+.ted__in {
+  width: 100%;
+  height: 38px;
+  padding: 0 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.04);
+  color: #f4f5f8;
+  font: inherit;
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  outline: none;
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+}
+.ted__in:focus {
+  border-color: color-mix(in srgb, var(--ac) 70%, transparent);
+  background: rgba(255, 255, 255, 0.07);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ac) 22%, transparent);
+}
+.ted__in--big {
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+}
+.ted__in--area {
+  height: auto;
+  padding: 10px 12px;
+  resize: none;
+  line-height: 1.7;
+}
+.ted__pair {
+  display: flex;
+  gap: 8px;
+}
+
+.ted__seg {
+  display: flex;
+  padding: 3px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+.ted__seg button {
+  flex: 1;
+  height: 30px;
+  border-radius: 7px;
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  color: rgba(238, 240, 244, 0.6);
+  transition: background 0.25s, color 0.25s;
+}
+.ted__seg button.is-on {
+  background: rgba(255, 255, 255, 0.92);
+  color: #0c0d11;
+}
+
+.ted__palettes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.ted__palettes > button,
+.ted__custom {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  height: 40px;
+  padding: 0 14px 0 6px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  color: rgba(238, 240, 244, 0.75);
+  transition: border-color 0.25s, background 0.25s;
+  cursor: pointer;
+}
+.ted__palettes > button i {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+}
+.ted__palettes > button.is-on {
+  border-color: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+}
+.ted__custom input,
+.ted__color {
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: none;
+  cursor: pointer;
+  overflow: hidden;
+}
+.ted__custom input::-webkit-color-swatch-wrapper,
+.ted__color::-webkit-color-swatch-wrapper { padding: 0; }
+.ted__custom input::-webkit-color-swatch,
+.ted__color::-webkit-color-swatch { border: 2px solid rgba(255, 255, 255, 0.25); border-radius: 50%; }
+
+.ted__moods {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+.ted__mood {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 6px 6px 10px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  text-align: left;
+  transition: border-color 0.25s, background 0.25s, transform 0.35s var(--ease-out);
+}
+.ted__mood:hover {
+  transform: translateY(-2px);
+}
+.ted__mood img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 9px;
+  margin-bottom: 6px;
+}
+.ted__mood b {
+  padding: 0 4px;
+  font-size: 13.5px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+}
+.ted__mood span {
+  padding: 0 4px;
+  font-size: 11.5px;
+  line-height: 1.5;
+  color: rgba(238, 240, 244, 0.45);
+}
+.ted__mood.is-on {
+  border-color: color-mix(in srgb, var(--ac) 80%, #fff);
+  background: color-mix(in srgb, var(--ac) 12%, transparent);
+}
+
+.ted__stations {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.ted__st {
+  display: flex;
+  gap: 16px;
+  padding: 14px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+.ted__st.is-locked {
+  align-items: center;
+  padding: 10px 14px;
+  opacity: 0.72;
+}
+.ted__stmain {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+.ted__stmain b {
+  font-size: 14px;
+  letter-spacing: 0.14em;
+}
+.ted__stmain span {
+  font-size: 12px;
+  color: rgba(238, 240, 244, 0.45);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ted__tag {
+  font-style: normal;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  padding: 3px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: rgba(238, 240, 244, 0.5);
+}
+.ted__glyph {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  flex: none;
+}
+.ted__in--glyph {
+  width: 44px;
+  height: 30px;
+  padding: 0;
+  text-align: center;
+}
+.ted__stgrid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 12px;
+  min-width: 0;
+}
+.ted__patterns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.ted__patterns button {
+  width: 64px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 7px 7px 5px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 11px;
+  color: rgba(238, 240, 244, 0.55);
+  transition: border-color 0.2s, color 0.2s;
+}
+.ted__patterns button.is-on {
+  border-color: rgba(255, 255, 255, 0.55);
+  color: #fff;
+}
+.ted__stops {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.ted__stops button {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  color: rgba(238, 240, 244, 0.6);
+  transition: background 0.2s, color 0.2s;
+}
+.ted__stops button:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+.ted__stops button:disabled {
+  opacity: 0.25;
+  cursor: default;
+}
+.ted__stops .is-danger:hover {
+  color: #ff7a7a !important;
+}
+.ted__add {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  height: 46px;
+  margin-top: 10px;
+  border-radius: 14px;
+  border: 1px dashed rgba(255, 255, 255, 0.2);
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  color: rgba(238, 240, 244, 0.75);
+  transition: border-color 0.25s, background 0.25s;
+}
+.ted__add:hover:not(:disabled) {
+  border-color: color-mix(in srgb, var(--ac) 80%, #fff);
+  background: color-mix(in srgb, var(--ac) 10%, transparent);
+}
+.ted__add:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.ted__paths {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.ted__paths li {
+  display: flex;
+  gap: 14px;
+  align-items: baseline;
+  font-size: 13px;
+}
+.ted__paths span {
+  width: 5em;
+  flex: none;
+  color: rgba(238, 240, 244, 0.5);
+}
+.ted__paths code {
+  font-family: var(--mono);
+  font-size: 12.5px;
+  color: color-mix(in srgb, var(--ac) 55%, #fff);
+}
+.ted__note {
+  margin-top: 12px;
+  font-size: 12.5px;
+  line-height: 1.8;
+  color: rgba(238, 240, 244, 0.45);
+}
+
+.ted__foot {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 24px 16px 32px;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  background: rgba(10, 11, 14, 0.6);
+}
+.ted__problem {
+  flex: 1;
+  font-size: 12.5px;
+  color: #ffb08a;
+  text-align: right;
+}
+.ted__cancel,
+.ted__save,
+.ted__del {
+  height: 40px;
+  padding: 0 20px;
+  border-radius: 999px;
+  font-size: 13.5px;
+  letter-spacing: 0.16em;
+  transition: background 0.25s, color 0.25s, opacity 0.25s, box-shadow 0.25s;
+}
+.ted__cancel {
+  color: rgba(238, 240, 244, 0.7);
+}
+.ted__cancel:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+.ted__save {
+  background: #f4f5f8;
+  color: #0b0c10;
+  font-weight: 600;
+  box-shadow: 0 8px 30px color-mix(in srgb, var(--ac) 40%, transparent);
+}
+.ted__save:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+.ted__del {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 14px;
+  color: rgba(255, 140, 140, 0.75);
+}
+.ted__del.is-armed {
+  background: rgba(255, 90, 90, 0.16);
+  color: #ff9a9a;
+}

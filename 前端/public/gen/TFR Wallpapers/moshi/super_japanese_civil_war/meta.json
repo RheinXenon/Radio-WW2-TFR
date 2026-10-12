@@ -1,0 +1,15 @@
+{
+  "width": 982,
+  "height": 594,
+  "light": {
+    "x": 0.724,
+    "y": 0.0,
+    "strength": 0.851
+  },
+  "palette": {
+    "light": "#c7b39a",
+    "shadow": "#2d2928",
+    "accent": "#cd743f",
+    "mean": "#725e56"
+  }
+}
