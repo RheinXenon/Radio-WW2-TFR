@@ -1,6 +1,7 @@
 // 外壳：待机 → 开机 → 主题页 → 主题开场 → 正式播出；播出中可随时回到主题页换主题
 import { Fragment, useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
+import { Analytics } from '@vercel/analytics/react'
 import { useRadio, getRadio } from './store.js'
 import { t } from './i18n/index.js'
 import { engine } from './audio/engine.js'
@@ -333,6 +334,8 @@ export default function App() {
       {(phase === 'off' || phase === 'boot') && <Boot on={phase === 'boot'} onPower={powerOn} onDone={booted} />}
       {phase === 'intro' && <Intro key={themeId} onReveal={reveal} onDone={() => set({ phase: 'live' })} />}
       <AnimatePresence>{editing && <ThemeEditor key="editor" id={editing} />}</AnimatePresence>
+      {/* 访客统计：数据在 Vercel 后台的 Analytics 页查看 */}
+      <Analytics />
     </div>
   )
 }
