@@ -340,6 +340,11 @@
 .gld__st:hover {
   color: #1c0f05;
 }
+/* 英文台名比中文长，按比例缩小并收紧字距，避免弧线上互相侵占 */
+html:lang(en) .gld__st {
+  font-size: calc(var(--fs) * 0.76);
+  letter-spacing: 0.03em;
+}
 .gld__st.is-cur::after {
   content: '';
   position: absolute;

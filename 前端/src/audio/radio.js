@@ -2,6 +2,7 @@
 import { create } from 'zustand'
 import { engine } from './engine.js'
 import { useRadio, getRadio, listSongIds, listName, FAV, isOn } from '../store.js'
+import { t } from '../i18n/index.js'
 import { theme, NOISE } from '../themes/index.js'
 import { isAnalog } from '../skins.js'
 import { directUrl } from '../netease/api.js'
@@ -304,9 +305,9 @@ export const radio = {
     const target = { ...s, band, list }
     const songs = listFor(target)
     if (band !== 'station' && !songs.length) {
-      const text = band === 'all' ? '没有可播的频道，请在设置或歌单中打开'
-        : list === FAV ? '珍藏里还没有歌：点歌名旁的印章即可收入'
-          : `歌单“${listName(s, list)}”还是空的，可在歌单面板里添歌`
+      const text = band === 'all' ? t('没有可播的频道，请在设置或歌单中打开')
+        : list === FAV ? t('珍藏里还没有歌：点歌名旁的印章即可收入')
+          : t('歌单“{name}”还是空的，可在歌单面板里添歌', { name: listName(s, list) })
       return set({ notice: { text, at: performance.now() } })
     }
     set({ band, list })

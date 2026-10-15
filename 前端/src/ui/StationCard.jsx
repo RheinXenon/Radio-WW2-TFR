@@ -4,6 +4,7 @@
 import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
 import { useRadio, isOn } from '../store.js'
+import { useT, useLoc } from '../i18n/index.js'
 import { events } from '../audio/radio.js'
 import { theme } from '../themes/index.js'
 import { isAnalog } from '../skins.js'
@@ -12,6 +13,8 @@ import './stationcard.css'
 
 export default function StationCard() {
   const analog = useRadio((s) => isAnalog(s.style))
+  const t = useT()
+  const L = useLoc()
   const [card, setCard] = useState(null)
 
   useEffect(() => {
@@ -49,10 +52,10 @@ export default function StationCard() {
           transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
         >
           <Emblem kind={st.emblem} size={46} />
-          <div className={`callsign__call ${/[぀-鿿]/.test(st.call) ? '' : 'latin'}`}>{st.call}</div>
+          <div className={`callsign__call ${/[぀-鿿]/.test(L(st, 'call')) ? '' : 'latin'}`}>{L(st, 'call')}</div>
           <div className="callsign__meta">
             <span className="callsign__rule" />
-            <span>这里是 {st.city}</span>
+            <span>{t('这里是 {city}', { city: L(st, 'city') })}</span>
             <i>·</i>
             <span className="latin tnum">{theme.dial.fmt(st.freq)} {theme.dial.unit}</span>
             <span className="callsign__rule" />
@@ -85,9 +88,9 @@ export default function StationCard() {
               <span className="sc">{st.latin}</span>
               <span className="latin tnum">{theme.dial.fmt(st.freq)} {theme.dial.unit}</span>
             </div>
-            <div className="sweep__city">{st.city}</div>
+            <div className="sweep__city">{L(st, 'city')}</div>
             <Pattern kind={st.pattern} color={st.glow} height={6} opacity={0.6} className="sweep__pattern" />
-            <div className="sweep__genre">{card.offAir ? '本台已停播' : `${st.name} · ${st.genre}`}</div>
+            <div className="sweep__genre">{card.offAir ? t('本台已停播') : `${L(st, 'name')} · ${L(st, 'genre')}`}</div>
           </motion.div>
         </motion.div>
       )}

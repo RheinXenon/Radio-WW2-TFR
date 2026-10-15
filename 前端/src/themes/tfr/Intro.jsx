@@ -4,6 +4,7 @@
 // 底部紫焰升起，画面几下闪断后熄灭，城市显影
 import { useEffect, useRef, useState } from 'react'
 import { engine } from '../../audio/engine.js'
+import { useT, useLoc } from '../../i18n/index.js'
 import { theme } from '../index.js'
 import { Emblem } from './marks.jsx'
 import { STATIONS, DIAL } from './stations.js'
@@ -20,6 +21,9 @@ const ARP = [220, 261.63, 329.63, 392, 440, 523.25]
 export default function Intro({ onReveal, onDone }) {
   const done = useRef(false)
   const [leaving, setLeaving] = useState(false)
+  const t = useT()
+  const L = useLoc()
+  const name = L(theme, 'name')
   const freqs = theme.stations.map((st) => st.freq)
   const LOG = [...LOG_HEAD, `> ${freqs.length} STATIONS ONLINE  ·  ${DIAL.band} ${DIAL.fmt(freqs[0])} — ${DIAL.fmt(freqs[freqs.length - 1])}`]
 
@@ -62,8 +66,8 @@ export default function Intro({ onReveal, onDone }) {
         {LOG.map((l, i) => <div key={i} style={{ '--i': i }}>{l}</div>)}
       </div>
       <div className="tfi__center">
-        <div className="tfi__kicker">第二主题 · 接入</div>
-        <h1 className="tfi__title" data-text="烈焰升腾">烈焰升腾</h1>
+        <div className="tfi__kicker">{t('第二主题 · 接入')}</div>
+        <h1 className="tfi__title" data-text={name}>{name}</h1>
         <div className="tfi__latin">THE&nbsp;FIRE&nbsp;RISES</div>
         <div className="tfi__stations">
           {STATIONS.map((s, i) => (
@@ -74,7 +78,7 @@ export default function Intro({ onReveal, onDone }) {
             </div>
           ))}
         </div>
-        <div className="tfi__quote">烈焰升腾，舞台属于你。<i>The fire rises, and the stage is yours.</i></div>
+        <div className="tfi__quote">{t('烈焰升腾，舞台属于你。')}</div>
       </div>
       <div className="tfi__fire" />
       <div className="tfi__scan" />

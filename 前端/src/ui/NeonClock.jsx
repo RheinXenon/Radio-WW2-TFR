@@ -3,7 +3,9 @@
 // 秒数以青色小字缀在一旁，下方 60 格秒条逐格点亮；每隔几秒，读数被信号干扰撕开一下又归位
 // 底部日期、星期、纪年各占一组上下两行的分区，隔以渐隐竖线，分别用青、品红、紫点亮
 import { useEffect, useState } from 'react'
-import { useNow, pad2, WEEK } from './clockTime.js'
+import { useRadio } from '../store.js'
+import { useT } from '../i18n/index.js'
+import { useNow, pad2, weekChar, fullStamp } from './clockTime.js'
 import './neonclock.css'
 
 const SLOTS = Array.from({ length: 60 }, (_, i) => i)
@@ -34,11 +36,13 @@ function useGlitch() {
 export default function NeonClock() {
   const date = useNow(1000)
   const glitch = useGlitch()
+  const lang = useRadio((s) => s.lang)
+  const t = useT()
   const hm = `${pad2(date.getHours())}:${pad2(date.getMinutes())}`
   const sec = date.getSeconds()
 
   return (
-    <div className={`nclk ${glitch ? 'is-glitch' : ''}`} title={date.toLocaleString('zh-CN')}>
+    <div className={`nclk ${glitch ? 'is-glitch' : ''}`} title={fullStamp(date, lang)}>
       <div className="nclk__head">
         <span><i className="nclk__rec" />TFR//LOCAL</span>
         <span>{utcLabel(date)}</span>
@@ -57,13 +61,13 @@ export default function NeonClock() {
         </span>
         <i className="nclk__sep" />
         <span className="nclk__cell nclk__cell--week">
-          <em>星期</em>
-          <b>{WEEK[date.getDay()]}</b>
+          <em>{t('星期')}</em>
+          <b>{weekChar(date, lang)}</b>
         </span>
         <i className="nclk__sep" />
         <span className="nclk__cell nclk__cell--era">
-          <em>新世界</em>
-          <b>第 {date.getFullYear() - 2019} 年</b>
+          <em>{t('新世界')}</em>
+          <b>{t('第 {n} 年', { n: date.getFullYear() - 2019 })}</b>
         </span>
       </div>
     </div>

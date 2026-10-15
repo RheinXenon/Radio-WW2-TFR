@@ -1,11 +1,21 @@
-// 各款时钟共用：中文日期写法、按时刷新的当前时间、逐帧回调与指针角度
+// 各款时钟共用：双语日期写法、按时刷新的当前时间、逐帧回调与指针角度
 import { useEffect, useRef, useState } from 'react'
 
 export const WEEK = '日一二三四五六'
+const WEEK_EN = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+const MONTH_EN = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 const NUM = '〇一二三四五六七八九'
 export const zhNum = (n) => (n <= 10 ? (n === 10 ? '十' : NUM[n]) : n < 20 ? '十' + NUM[n - 10] : NUM[Math.floor(n / 10)] + '十' + (n % 10 ? NUM[n % 10] : ''))
-export const zhDate = (d) => `${zhNum(d.getMonth() + 1)}月${zhNum(d.getDate())}日 · 星期${WEEK[d.getDay()]}`
 export const pad2 = (n) => String(n).padStart(2, '0')
+
+// 以下日期助手按 lang 分支：中文保持原写法，英文用 Mon/Sun、Nov 13 之类短写法
+export const weekName = (d, lang) => (lang === 'en' ? WEEK_EN[d.getDay()] : `周${WEEK[d.getDay()]}`)
+export const weekChar = (d, lang) => (lang === 'en' ? WEEK_EN[d.getDay()] : WEEK[d.getDay()])
+export const dateLine = (d, lang) => (lang === 'en'
+  ? `${WEEK_EN[d.getDay()]} · ${MONTH_EN[d.getMonth()]} ${d.getDate()}`
+  : `${zhNum(d.getMonth() + 1)}月${zhNum(d.getDate())}日 · 星期${WEEK[d.getDay()]}`)
+export const dateNum = (d, lang) => (lang === 'en' ? `${MONTH_EN[d.getMonth()]} ${d.getDate()}` : `${d.getMonth() + 1} 月 ${d.getDate()} 日`)
+export const fullStamp = (d, lang) => d.toLocaleString(lang === 'en' ? 'en-US' : 'zh-CN')
 
 // 当前时间：对齐到 ms 毫秒的整数倍刷新（15 秒一刷时，分钟恰好在整分翻页），供数字读数与日期使用
 export function useNow(ms = 15000) {

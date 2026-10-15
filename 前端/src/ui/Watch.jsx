@@ -1,7 +1,8 @@
 // 腕表时钟：以二战飞行员观测表为原型
 // 黑色哑光表盘、夜光数字、12 点三角标、洋葱头表冠；秒针每秒 6 跳，如同 21600 次/时的机芯
 import { useRef } from 'react'
-import { useNow, useFrame, handAngles, rotate, zhDate, pad2 } from './clockTime.js'
+import { useRadio } from '../store.js'
+import { useNow, useFrame, handAngles, rotate, dateLine, fullStamp, pad2 } from './clockTime.js'
 import './watch.css'
 
 function Hand({ len, w, tail = 0, lume, color, r }) {
@@ -18,6 +19,7 @@ function Hand({ len, w, tail = 0, lume, color, r }) {
 export default function Watch() {
   const h = useRef(), m = useRef(), s = useRef()
   const date = useNow()
+  const lang = useRadio((s) => s.lang)
 
   useFrame((now) => {
     const a = handAngles(now, 6)
@@ -25,7 +27,7 @@ export default function Watch() {
   })
 
   return (
-    <div className="watch" title={date.toLocaleString('zh-CN')}>
+    <div className="watch" title={fullStamp(date, lang)}>
       <svg viewBox="-60 -60 132 120" className="watch__face" aria-hidden>
         <defs>
           <radialGradient id="dial" cx="0.4" cy="0.35" r="0.8">
@@ -92,7 +94,7 @@ export default function Watch() {
       </svg>
       <div className="watch__date">
         <span className="watch__time latin tnum">{pad2(date.getHours())}<i>:</i>{pad2(date.getMinutes())}</span>
-        <span className="watch__day">{zhDate(date)}</span>
+        <span className="watch__day">{dateLine(date, lang)}</span>
       </div>
     </div>
   )

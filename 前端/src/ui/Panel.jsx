@@ -1,11 +1,13 @@
 // 面板外壳与通用控件
 import { motion } from 'motion/react'
 import { useRadio } from '../store.js'
+import { useT } from '../i18n/index.js'
 import { engine } from '../audio/engine.js'
 import { Icon } from './Icon.jsx'
 import './panel.css'
 
 export function Panel({ title, sub, width = 520, children, footer, className = '' }) {
+  const t = useT()
   const close = () => useRadio.setState({ panel: null })
   return (
     <motion.aside
@@ -22,7 +24,7 @@ export function Panel({ title, sub, width = 520, children, footer, className = '
           <div className="panel__sub sc">{sub}</div>
           <h2 className="panel__title">{title}</h2>
         </div>
-        <button className="panel__close" onClick={close} title="关闭（Esc）"><Icon name="close" size={18} /></button>
+        <button className="panel__close" onClick={close} title={t('关闭（Esc）')}><Icon name="close" size={18} /></button>
       </header>
       <div className="hairline" />
       <div className="panel__body">{children}</div>

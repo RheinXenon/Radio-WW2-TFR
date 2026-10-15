@@ -6,6 +6,7 @@ import { AnimatePresence, motion } from 'motion/react'
 import { useRadio } from '../store.js'
 import { engine } from '../audio/engine.js'
 import { theme } from '../themes/index.js'
+import { useT, useLoc } from '../i18n/index.js'
 import { Emblem, Pattern } from '../themes/marks.jsx'
 import { resolveWall } from '../scene/Stage.jsx'
 import { stepDossier } from './Dossier.jsx'
@@ -33,6 +34,7 @@ const LINE = {
 
 export default function SuperEvent() {
   const key = useRadio((s) => s.dossier)
+  const t = useT()
   const entry = theme.photoMap[key]
   const index = theme.photos.indexOf(entry)
   const n = theme.photos.length
@@ -73,11 +75,11 @@ export default function SuperEvent() {
       >
         <AnimatePresence mode="wait" custom={nav.dir}>
           <motion.div key={key} className="sev__page" custom={nav.dir} variants={PAGE} initial="enter" animate="show" exit="leave">
-            <Plate entry={entry} station={station} />
-            <Strip entry={entry} index={index} total={n} />
+        <Plate entry={entry} station={station} />
+        <Strip entry={entry} index={index} total={n} />
           </motion.div>
         </AnimatePresence>
-        <button className="panel__close sev__close" onClick={close} title="返回画廊（Esc）"><Icon name="close" size={18} /></button>
+        <button className="panel__close sev__close" onClick={close} title={t('返回画廊（Esc）')}><Icon name="close" size={18} /></button>
       </motion.article>
     </motion.div>
   )
@@ -110,13 +112,14 @@ function Backdrop({ entry }) {
 // 插画：先铺缩略图，原尺寸图读完后如显像管通电般泛白显影；罩扫描线与一道游走的亮带
 function Plate({ entry, station }) {
   const [full, setFull] = useState(false)
+  const t = useT()
   const wall = entry.wall
   if (!wall) {
     return (
       <div className="sev__plate sev__plate--empty">
         <Pattern kind={station.pattern} color={station.accent} height={16} opacity={0.1} style={{ height: '100%' }} />
         <Emblem kind={station.emblem} size={54} style={{ opacity: 0.4 }} />
-        <strong>插画待收录</strong>
+        <strong>{t('插画待收录')}</strong>
       </div>
     )
   }
@@ -138,48 +141,58 @@ function Plate({ entry, station }) {
 }
 
 // 事件条：眉题与编号、事件标题、引语与署名、底部工具行
+// 中英两语各有主副行：当前语言为主，另一语言退为拉丁副行（用户语言切换即互换顺序）
 function Strip({ entry, index, total }) {
-  const t = theme.terms
+  const t = useT()
+  const L = useLoc()
+  const terms = theme.terms
+  const isEn = useRadio((s) => s.lang) === 'en'
+  const title = isEn ? entry.en?.title ?? entry.title : entry.title
+  const titleAlt = isEn ? entry.title : entry.en?.title
+  const quote = isEn ? entry.en?.quote ?? entry.quote : entry.quote
+  const quoteAlt = isEn ? entry.quote : entry.en?.quote
+  const author = isEn ? entry.en?.author ?? entry.author : entry.author
+  const authorAlt = isEn ? entry.author : entry.en?.author
   const sel = useRadio((s) => s.wallpaper)
   const showing = entry.wall && resolveWall(sel)?.id === entry.wall.id
   return (
     <motion.footer className="sev__strip">
       <motion.div className="sev__brow sc" variants={LINE}>
         <i className="sev__tick" aria-hidden />
-        {t.recordLatin} · {theme.pools[entry.pool].name}
+        {isEn ? terms.recordLatin : terms.record} · {isEn ? terms.record : terms.recordLatin} · {L(theme.pools[entry.pool], 'name')}
         <b className="latin tnum sev__num">{pad(index + 1)}<i>/</i>{pad(total)}</b>
       </motion.div>
 
-      <motion.h2 className="sev__title sc" variants={LINE}>{entry.title}</motion.h2>
-      {entry.en?.title && <motion.div className="sev__latin latin" variants={LINE}>{entry.en.title}</motion.div>}
+      <motion.h2 className="sev__title sc" variants={LINE}>{title}</motion.h2>
+      {titleAlt && titleAlt !== title && <motion.div className="sev__latin latin" variants={LINE}>{titleAlt}</motion.div>}
 
-      {entry.quote && (
-        <motion.p className="sev__quote sc" variants={LINE}>“{entry.quote}”</motion.p>
+      {quote && (
+        <motion.p className="sev__quote sc" variants={LINE}>“{quote}”</motion.p>
       )}
-      {(entry.author || entry.en?.author) && (
+      {(author || authorAlt) && (
         <motion.p className="sev__author sc" variants={LINE}>
-          {entry.author && <>— {entry.author}</>}
-          {entry.en?.author && <span className="latin">{entry.author ? ` · ${entry.en.author}` : `— ${entry.en.author}`}</span>}
+          {author && <>— {author}</>}
+          {authorAlt && authorAlt !== author && <span className="latin">{author ? ` · ${authorAlt}` : `— ${authorAlt}`}</span>}
         </motion.p>
       )}
-      {entry.en?.quote && (
-        <motion.p className="sev__enq latin" variants={LINE}>“{entry.en.quote}”</motion.p>
+      {quoteAlt && quoteAlt !== quote && (
+        <motion.p className="sev__enq latin" variants={LINE}>“{quoteAlt}”</motion.p>
       )}
 
       <motion.div className="sev__bar" variants={LINE}>
         {entry.wall && (showing
-          ? <span className="sev__showing"><i />正在展出</span>
+          ? <span className="sev__showing"><i />{t('正在展出')}</span>
           : (
             <button
               className="pbtn"
               onClick={() => { engine.click('soft'); useRadio.setState({ wallpaper: { pool: entry.pool, name: entry.wall.name } }) }}
             >
-              设为壁纸
+              {t('设为壁纸')}
             </button>
           ))}
         <div className="sev__pager">
-          <button onClick={() => stepDossier(-1)} aria-label="上一个事件" title="上一个（←）"><Icon name="back" size={15} /></button>
-          <button onClick={() => stepDossier(1)} aria-label="下一个事件" title="下一个（→）"><Icon name="forward" size={15} /></button>
+          <button onClick={() => stepDossier(-1)} aria-label={t('上一个事件')} title={t('上一个（←）')}><Icon name="back" size={15} /></button>
+          <button onClick={() => stepDossier(1)} aria-label={t('下一个事件')} title={t('下一个（→）')}><Icon name="forward" size={15} /></button>
         </div>
       </motion.div>
     </motion.footer>

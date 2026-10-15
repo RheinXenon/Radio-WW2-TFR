@@ -6,6 +6,7 @@
 //  - 浏览器模式（线上）：库按主题存 localStorage；为空时以构建时烘焙进清单的库为种子
 import { useRadio } from '../store.js'
 import { builtThemes, onAssemble, refreshStationGroups } from '../themes/index.js'
+import { t } from '../i18n/index.js'
 import manifest from 'virtual:radio-manifest'
 import { get, post, sessionCookie } from './api.js'
 
@@ -264,7 +265,7 @@ export const cloudLibrary = {
   // 整库导入（与导出的 JSON 同构，写进当前主题的库文件）
   async replace(lib) {
     if (!lib || typeof lib !== 'object' || typeof lib.stations !== 'object' || Array.isArray(lib.stations)) {
-      throw new Error('库格式不对')
+      throw new Error(t('库格式不对'))
     }
     const id = useRadio.getState().theme
     applyLibrary(id, remote ? await post('/library/replace', { theme: id, ...lib }) : (writeLocal(id, lib), JSON.parse(JSON.stringify(lib))))

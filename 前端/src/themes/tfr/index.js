@@ -6,6 +6,7 @@ import { PRESETS } from '../../scene/presets.js'
 import { Emblem, Pattern } from './marks.jsx'
 import Intro from './Intro.jsx'
 import { STATIONS, DIAL } from './stations.js'
+import { t } from '../../i18n/index.js'
 
 // 每台的壁纸氛围，按池名登记
 const ATMOS = {
@@ -28,27 +29,35 @@ function atmosphereFor(id) {
 // dossier: 'event' 让打开详情时渲染 SuperEvent 弹窗（App 分流），wallName 给未登记的加载屏起画廊名
 const terms = {
   record: '事件档案',
+  recordEn: 'Event Dossier',
   recordLatin: 'Super Event',
   story: '引语',
+  storyEn: 'Quote',
   nation: '电台',
+  nationEn: 'Station',
   wall: '原画',
+  wallEn: 'Artwork',
   legend: '带霓虹光晕的是超级事件插画：双击或掀开折角查看事件与引语',
+  legendEn: 'Neon-haloed entries are super event illustrations: double-click or lift the corner to view the event and its quote',
 }
 
 const wallName = (name) => {
-  if (name === 'main_menu') return '主菜单'
+  if (name === 'main_menu') return t('主菜单')
   const m = /^load_(.+)$/.exec(name)
   if (!m) return name
-  return /^\d+$/.test(m[1]) ? `加载屏 ${Number(m[1])}` : `加载屏 ${m[1].replace(/_/g, ' ').toUpperCase()}`
+  return /^\d+$/.test(m[1]) ? t('加载屏 {n}', { n: Number(m[1]) }) : t('加载屏 {name}', { name: m[1].replace(/_/g, ' ').toUpperCase() })
 }
 
 export default {
   id: 'tfr',
   name: '烈焰升腾',
+  nameEn: 'The Fire Rises',
   latin: 'The Fire Rises',
   subtitle: '《钢铁雄心 4》模组世界 · 新世界电台',
+  subtitleEn: 'A Hearts of Iron IV Mod World · Radio of the New World',
   years: ['2020', '20XX'],
   blurb: '2020 年，旧秩序在疫情与动荡里崩裂，“新世界将在战火中锻造”。霓虹照着雨夜，六座电台仍在播：欧陆迪斯科、华语金曲、城市流行、俄语摇滚，还有为这个世界写下的原声。',
+  blurbEn: 'In 2020 the old order cracked amid pandemic and unrest, and "a new world will be forged in the fires of war". Under the neon-lit rainy night, six stations keep broadcasting: Euro disco, Chinese golden hits, city pop, Russian rock, and the soundtrack written for this world.',
   radioRoot: 'TFR Radio',
   wallRoot: 'TFR Wallpapers',
   stations: STATIONS,

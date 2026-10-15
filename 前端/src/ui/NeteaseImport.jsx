@@ -13,6 +13,7 @@ import { Panel, Section } from './Panel.jsx'
 import { Icon } from './Icon.jsx'
 import { Emblem } from '../themes/marks.jsx'
 import qrcode from 'qrcode-generator'
+import { useT } from '../i18n/index.js'
 import './netease.css'
 
 const LEVELS = [
@@ -36,6 +37,7 @@ const parseNeteaseLink = (text) => {
 
 // 二维码自绘 SVG
 function QrSvg({ url, size = 176 }) {
+  const t = useT()
   const rects = useMemo(() => {
     const qr = qrcode(0, 'M')
     qr.addData(url)
@@ -48,7 +50,7 @@ function QrSvg({ url, size = 176 }) {
     return out
   }, [url])
   return (
-    <svg className="ncm__qr" viewBox="0 0 100 100" width={size} height={size} shapeRendering="crispEdges" aria-label="登录二维码">
+    <svg className="ncm__qr" viewBox="0 0 100 100" width={size} height={size} shapeRendering="crispEdges" aria-label={t('登录二维码')}>
       <rect width="100" height="100" fill="#f4efe4" />
       {rects.map(([x, y, w], i) => <rect key={i} x={x} y={y} width={w} height={w} fill="#1a140d" />)}
     </svg>
@@ -58,16 +60,17 @@ function QrSvg({ url, size = 176 }) {
 // 组内一行：把手拖动排序，点歌名即播放，行尾移除单曲
 function CloudRow({ song, onNotice }) {
   const controls = useDragControls()
+  const t = useT()
   return (
     <Reorder.Item as="li" value={song} dragListener={false} dragControls={controls} className="ncm__grow"
       whileDrag={{ backgroundColor: 'rgba(38, 29, 20, 0.96)', boxShadow: '0 10px 28px rgba(0, 0, 0, 0.55)' }}>
-      <span className="ncm__grip" onPointerDown={(e) => controls.start(e)} title="拖动调整顺序"><Icon name="grip" size={14} /></span>
-      <button className="ncm__gsong" onClick={() => radio.pick(song)} title="播放">
+      <span className="ncm__grip" onPointerDown={(e) => controls.start(e)} title={t('拖动调整顺序')}><Icon name="grip" size={14} /></span>
+      <button className="ncm__gsong" onClick={() => radio.pick(song)} title={t('播放')}>
         <span className="ncm__gtitle">{song.title}</span>
-        {song.vip && <i className="ncm__vip" title="需要会员">VIP</i>}
+        {song.vip && <i className="ncm__vip" title={t('需要会员')}>VIP</i>}
         <em>{song.artist || song.album || ''}</em>
       </button>
-      <button className="ncm__mdel" onClick={() => cloudLibrary.remove(song).catch((e) => onNotice(e.message))} title="移除这首">
+      <button className="ncm__mdel" onClick={() => cloudLibrary.remove(song).catch((e) => onNotice(e.message))} title={t('移除这首')}>
         <Icon name="close" size={13} />
       </button>
     </Reorder.Item>
@@ -77,9 +80,10 @@ function CloudRow({ song, onNotice }) {
 // 已加入组的管理单元：展开列出组内歌曲，可拖动排序、逐首移除；
 // 双击组名改名（目标名已存在则两组合并），删除整组需二次确认
 function ManageGroup({ g, open, onToggle, onRenamed, onNotice }) {
+  const t = useT()
   const [rename, setRename] = useState(null) // 编辑中的组名
   const [confirm, setConfirm] = useState(false)
-  useEffect(() => { if (!confirm) return; const t = setTimeout(() => setConfirm(false), 3000); return () => clearTimeout(t) }, [confirm])
+  useEffect(() => { if (!confirm) return; const timer = setTimeout(() => setConfirm(false), 3000); return () => clearTimeout(timer) }, [confirm])
 
   const submitRename = async () => {
     const name = (rename?.value ?? '').trim()
@@ -89,7 +93,7 @@ function ManageGroup({ g, open, onToggle, onRenamed, onNotice }) {
     try {
       await cloudLibrary.rename(g.station, old, name)
       onRenamed(`${g.station}/${old}`, `${g.station}/${name}`)
-      onNotice(`已改名 ${name}`)
+      onNotice(t('已改名 {name}', { name }))
     } catch (e) { onNotice(e.message) }
   }
 
@@ -100,7 +104,7 @@ function ManageGroup({ g, open, onToggle, onRenamed, onNotice }) {
   return (
     <li className="ncm__grp">
       <div className="ncm__mgroup">
-        <button className="ncm__foldbtn" onClick={onToggle} aria-expanded={open} title={open ? '收起' : '展开管理'}>
+        <button className="ncm__foldbtn" onClick={onToggle} aria-expanded={open} title={open ? t('收起') : t('展开管理')}>
           <Icon name="chevron" size={12} className={`ncm__fold ${open ? 'is-on' : ''}`} />
         </button>
         <Emblem kind={theme.stationMap[g.station]?.emblem} size={18} ring={false} />
@@ -113,22 +117,22 @@ function ManageGroup({ g, open, onToggle, onRenamed, onNotice }) {
             onChange={(e) => setRename({ value: e.target.value })}
             onBlur={submitRename}
             onKeyDown={(e) => { if (e.key === 'Enter') submitRename(); if (e.key === 'Escape') setRename(null) }}
-            aria-label="子歌单名称"
+            aria-label={t('子歌单名称')}
           />
         ) : (
           <>
-            <strong title="双击改名" onDoubleClick={() => setRename({ value: g.group })}>{g.group}</strong>
-            <button className="ncm__mren" onClick={() => setRename({ value: g.group })} title="给这个子歌单改名">
+            <strong title={t('双击改名')} onDoubleClick={() => setRename({ value: g.group })}>{g.group}</strong>
+            <button className="ncm__mren" onClick={() => setRename({ value: g.group })} title={t('给这个子歌单改名')}>
               <Icon name="edit" size={13} />
             </button>
           </>
         )}
-        <em className="tnum">{g.songs.length} 首 · {g.name}</em>
+        <em className="tnum">{t('{n} 首 · {name}', { n: g.songs.length, name: g.name })}</em>
         <button
           className={`ncm__mdel ${confirm ? 'is-warn' : ''}`}
           onClick={() => (confirm ? cloudLibrary.removeGroup(g.station, g.group).catch((e) => onNotice(e.message)) : setConfirm(true))}
         >
-          {confirm ? '确认删除' : '删除整组'}
+          {confirm ? t('确认删除') : t('删除整组')}
         </button>
       </div>
       {open && !!g.songs.length && (
@@ -136,12 +140,13 @@ function ManageGroup({ g, open, onToggle, onRenamed, onNotice }) {
           {g.songs.map((song) => <CloudRow key={song.id} song={song} onNotice={onNotice} />)}
         </Reorder.Group>
       )}
-      {open && !g.songs.length && <p className="ncm__empty">组是空的，从上面加歌进来</p>}
+      {open && !g.songs.length && <p className="ncm__empty">{t('组是空的，从上面加歌进来')}</p>}
     </li>
   )
 }
 
 export default function NeteaseImport() {
+  const t = useT()
   const [session, setSession] = useState(null)
   const [qr, setQr] = useState(null)
   const [qrMsg, setQrMsg] = useState('')
@@ -171,7 +176,7 @@ export default function NeteaseImport() {
   const myPageCur = Math.min(myPage, myPages - 1)
 
   const flash = (text) => setNotice(text)
-  useEffect(() => { if (!notice) return; const t = setTimeout(() => setNotice(''), 2600); return () => clearTimeout(t) }, [notice])
+  useEffect(() => { if (!notice) return; const timer = setTimeout(() => setNotice(''), 2600); return () => clearTimeout(timer) }, [notice])
 
   const refreshSession = () => cloudLibrary.refreshSession()
     .then((s) => { const norm = s.nickname ? s : null; setSession(norm); return norm })
@@ -182,20 +187,20 @@ export default function NeteaseImport() {
   // 二维码轮询：801 等扫码 802 待确认 803 成功 800 过期
   useEffect(() => {
     if (!qr) return
-    const t = setInterval(async () => {
+    const timer = setInterval(async () => {
       try {
         const s = await get(`/qr?key=${encodeURIComponent(qr.key)}`)
-        if (s.code === 801) setQrMsg('打开网易云音乐 App 扫码')
-        else if (s.code === 802) setQrMsg('已扫码，请在手机上确认')
+        if (s.code === 801) setQrMsg(t('打开网易云音乐 App 扫码'))
+        else if (s.code === 802) setQrMsg(t('已扫码，请在手机上确认'))
         else if (s.code === 803) {
           // 登录态交由浏览器保管，之后所有请求都会带上
           if (s.cookie) sessionCookie.set(s.cookie)
           setQr(null); setQrMsg(''); await refreshSession()
         }
-        else if (s.code === 800) { setQr(null); setQrMsg(''); flash('二维码已过期，请重新获取') }
+        else if (s.code === 800) { setQr(null); setQrMsg(''); flash(t('二维码已过期，请重新获取')) }
       } catch { /* 网络抖动则等下一轮 */ }
     }, 2000)
-    return () => clearInterval(t)
+    return () => clearInterval(timer)
   }, [qr])
 
   useEffect(() => {
@@ -203,7 +208,7 @@ export default function NeteaseImport() {
   }, [session])
 
   const openQr = async () => {
-    try { setQr(await post('/qr')); setQrMsg('打开网易云音乐 App 扫码') } catch (e) { flash(e.message) }
+    try { setQr(await post('/qr')); setQrMsg(t('打开网易云音乐 App 扫码')) } catch (e) { flash(e.message) }
   }
 
   const logout = async () => {
@@ -229,28 +234,28 @@ export default function NeteaseImport() {
     const p = parseNeteaseLink(link)
     setLinkMeta(null)
     setLinkErr('')
-    if (!p) { setLinkErr('没认出链接，请粘贴网易云的歌曲、歌单、专辑或播客地址，也可以直接输入数字 ID'); return }
+    if (!p) { setLinkErr(t('没认出链接，请粘贴网易云的歌曲、歌单、专辑或播客地址，也可以直接输入数字 ID')); return }
     setBusy(true)
     try {
       if (p.kind === 'dj') {
         const d = await get(`/dj?id=${p.id}`)
-        setLinkMeta({ kind: 'dj', ...d.song, main: d.song.title, sub: `${d.radioName || '播客'}${d.serial ? ` · 第${d.serial}期` : ''}` })
+        setLinkMeta({ kind: 'dj', ...d.song, main: d.song.title, sub: `${d.radioName || t('播客')}${d.serial ? ` · ${t('第{n}期', { n: d.serial })}` : ''}` })
       } else if (p.kind === 'djradio') {
         const r = await get(`/djradio?id=${p.id}`)
-        setLinkMeta({ kind: 'djradio', ...r, main: r.name, sub: `${r.count} 期` })
+        setLinkMeta({ kind: 'djradio', ...r, main: r.name, sub: t('{n} 期', { n: r.count }) })
       } else if (p.kind === 'album') {
         const m = await get(`/album?id=${p.id}`)
-        setLinkMeta({ kind: 'album', ...m, main: m.name, sub: `${m.artist ? `${m.artist} · ` : ''}${m.count} 首` })
+        setLinkMeta({ kind: 'album', ...m, main: m.name, sub: `${m.artist ? `${m.artist} · ` : ''}${t('{n} 首', { n: m.count })}` })
       } else if (p.kind === 'playlist') {
         const m = await get(`/playlist?id=${p.id}`)
-        setLinkMeta({ kind: 'playlist', ...m, main: m.name, sub: `${m.count} 首` })
+        setLinkMeta({ kind: 'playlist', ...m, main: m.name, sub: t('{n} 首', { n: m.count }) })
       } else {
         try {
           const s = await get(`/song?id=${p.id}`)
-          setLinkMeta({ kind: 'song', ...s, main: s.title, sub: s.artist || '单曲' })
+          setLinkMeta({ kind: 'song', ...s, main: s.title, sub: s.artist || t('单曲') })
         } catch {
           const m = await get(`/playlist?id=${p.id}`)
-          setLinkMeta({ kind: 'playlist', ...m, main: m.name, sub: `${m.count} 首` })
+          setLinkMeta({ kind: 'playlist', ...m, main: m.name, sub: t('{n} 首', { n: m.count }) })
         }
       }
     } catch (e) { setLinkErr(e.message) }
@@ -260,13 +265,13 @@ export default function NeteaseImport() {
   // 加入当前目的地；歌单与播客电台整张作为新子歌单（组名默认取名字，写进“新建”栏可改）
   // items 为完整歌曲对象（搜索、单曲、播客）或纯 id 数组（歌单导入，库那边会先取元数据）
   const add = async (items, groupOverride) => {
-    if (!st) { flash('先在「加入到」里选择一个频道'); return false }
+    if (!st) { flash(t('先在「加入到」里选择一个频道')); return false }
     const g = (groupOverride ?? destGroup).trim()
-    if (!g) { flash('先选一个子歌单，或填写新名字'); return false }
+    if (!g) { flash(t('先选一个子歌单，或填写新名字')); return false }
     setBusy(true)
     try {
       await cloudLibrary.add(station, g, items)
-      flash(`已加入 ${st.name} · ${destGroupName}`)
+      flash(t('已加入 {name}', { name: `${st.name} · ${destGroupName}` }))
       // 本次建的是新组时切到它的 chip 并清空输入框，免得输入框与新组重复显示
       if (newGroup.trim() === g) { setGroup(g); setNewGroup('') }
       return true
@@ -306,13 +311,13 @@ export default function NeteaseImport() {
     setExtMeta(null)
     setExtErr('')
     const p = parseExtLink(extLink)
-    if (!p) { setExtErr('没认出来:粘贴 mp3 等音频直链,或 archive.org 的合集 / 文件页链接'); return }
+    if (!p) { setExtErr(t('没认出来:粘贴 mp3 等音频直链,或 archive.org 的合集 / 文件页链接')); return }
     if (p.kind === 'direct') {
       try {
         const u = new URL(p.url)
-        const title = decodeURIComponent((u.pathname.split('/').pop() || '').replaceAll('+', ' ')).replace(/\.[a-z0-9]+$/i, '') || '未命名音频'
+        const title = decodeURIComponent((u.pathname.split('/').pop() || '').replaceAll('+', ' ')).replace(/\.[a-z0-9]+$/i, '') || t('未命名音频')
         setExtMeta({ kind: 'direct', song: { url: p.url, title, titleZh: '', artist: u.host, vip: false } })
-      } catch { setExtErr('链接格式不对') }
+      } catch { setExtErr(t('链接格式不对')) }
       return
     }
     setBusy(true)
@@ -329,10 +334,10 @@ export default function NeteaseImport() {
           if (stem.length >= 4) {
             const s = await fetch(`https://archive.org/advancedsearch.php?q=${encodeURIComponent(`identifier:*${stem}*`)}&fl%5B%5D=identifier&rows=5&output=json`)
             const docs = (await s.json())?.response?.docs ?? []
-            if (docs.length) hint = `相近的合集:${docs.map((x) => x.identifier).join('、')}`
+            if (docs.length) hint = t('相近的合集:{names}', { names: docs.map((x) => x.identifier).join(t('、')) })
           }
         } catch { /* 搜索失败不影响提示 */ }
-        setExtErr(`archive.org 上没有「${p.id}」这个合集(标识符区分大小写)。${hint}`)
+        setExtErr(t('archive.org 上没有「{id}」这个合集(标识符区分大小写)。{hint}', { id: p.id, hint }))
         return
       }
       const files = d.files
@@ -350,7 +355,7 @@ export default function NeteaseImport() {
         : new Set(smart)
       setExtMeta({ kind: 'archive', id: p.id, name: d?.metadata?.title || p.id, files, smart })
       setExtSel(sel)
-    } catch (e) { setExtErr(`读取合集失败(需能访问 archive.org 的网络):${e.message}`) }
+    } catch (e) { setExtErr(t('读取合集失败(需能访问 archive.org 的网络):{msg}', { msg: e.message })) }
     finally { setBusy(false) }
   }
 
@@ -378,7 +383,7 @@ export default function NeteaseImport() {
     URL.revokeObjectURL(a.href)
   }
   const importLib = async (file) => {
-    try { await cloudLibrary.replace(JSON.parse(await file.text())); flash('已导入') }
+    try { await cloudLibrary.replace(JSON.parse(await file.text())); flash(t('已导入')) }
     catch (e) { flash(e.message) }
   }
 
@@ -404,43 +409,43 @@ export default function NeteaseImport() {
 
   return (
     <Panel
-      title="云音乐"
-      sub="Netease · 加入频道歌单"
+      title={t('云音乐')}
+      sub={t('Netease · 加入频道歌单')}
       width={560}
-      footer={<span>云音乐与外链歌曲在线播放不占磁盘 · 付费歌曲需会员账号完整播放 · 展开已加入的组可排序、改名、逐首增删</span>}
+      footer={<span>{t('云音乐与外链歌曲在线播放不占磁盘 · 付费歌曲需会员账号完整播放 · 展开已加入的组可排序、改名、逐首增删')}</span>}
     >
       {notice && <div className="ncm__notice">{notice}</div>}
 
-      <Section title="账号">
+      <Section title={t('账号')}>
         {session ? (
           <div className="ncm__account">
             <img src={session.avatarUrl} alt="" className="ncm__avatar" />
             <div className="ncm__who">
               <strong>{session.nickname}</strong>
-              <em>{session.vipType ? '会员账号 · 付费歌曲完整播放' : '普通账号 · 付费歌曲只有试听'}</em>
+              <em>{session.vipType ? t('会员账号 · 付费歌曲完整播放') : t('普通账号 · 付费歌曲只有试听')}</em>
             </div>
-            <button className="pbtn" onClick={logout}>退出</button>
+            <button className="pbtn" onClick={logout}>{t('退出')}</button>
           </div>
         ) : qr ? (
           <div className="ncm__loginqr">
             <QrSvg url={qr.url} />
             <div className="ncm__loginhint">
               <p>{qrMsg}</p>
-              <button className="pbtn" onClick={() => { setQr(null); setQrMsg('') }}>取消</button>
+              <button className="pbtn" onClick={() => { setQr(null); setQrMsg('') }}>{t('取消')}</button>
             </div>
           </div>
         ) : (
           <div className="ncm__guide">
             <div className="ncm__guidetext">
-              <strong>强烈建议先登录网易云账号</strong>
-              <p>未登录时以匿名访客取流：免费歌曲也有概率被限流而播放失败，付费（VIP）歌曲必须登录后才能播放。登录后还可导入自己账号的歌单。</p>
+              <strong>{t('强烈建议先登录网易云账号')}</strong>
+              <p>{t('未登录时以匿名访客取流：免费歌曲也有概率被限流而播放失败，付费（VIP）歌曲必须登录后才能播放。登录后还可导入自己账号的歌单。')}</p>
             </div>
-            <button className="pbtn" onClick={openQr}>扫码登录</button>
+            <button className="pbtn" onClick={openQr}>{t('扫码登录')}</button>
           </div>
         )}
       </Section>
 
-      <Section title="加入到" hint={st ? `当前：${st.name} · ${destGroupName}` : '先选择一个频道，再挑子歌单'}>
+      <Section title={t('加入到')} hint={st ? t('当前：{name}', { name: `${st.name} · ${destGroupName}` }) : t('先选择一个频道，再挑子歌单')}>
         <div className="ncm__stations">
           {theme.stations.map((s) => (
             <button
@@ -458,133 +463,133 @@ export default function NeteaseImport() {
           <div className="ncm__groups">
             {st.groups.map((g) => (
               <button key={g.id} className={`ncm__chip ${!newGroup.trim() && group === g.id ? 'is-on' : ''}`}
-                onClick={() => { setGroup(g.id); setNewGroup('') }} title={`${g.count} 首`}>
+                onClick={() => { setGroup(g.id); setNewGroup('') }} title={t('{n} 首', { n: g.count })}>
                 {g.name}
               </button>
             ))}
             <input
               className={`ncm__newgroup ${newGroup.trim() ? 'is-on' : ''}`}
               value={newGroup}
-              placeholder="新建子歌单…"
+              placeholder={t('新建子歌单…')}
               maxLength={24}
               onChange={(e) => setNewGroup(e.target.value)}
-              aria-label="新建子歌单名称"
+              aria-label={t('新建子歌单名称')}
             />
           </div>
         )}
       </Section>
 
       {session && (
-        <Section title="我的歌单" hint={myLists?.length > MY_PAGE_SIZE ? `${myLists.length} 个 · 整张作为子歌单加入` : '整张作为子歌单加入'}>
-          {myLists === null ? <p className="ncm__empty">正在读取……</p>
-            : !myLists.length ? <p className="ncm__empty">账号里还没有歌单</p>
+        <Section title={t('我的歌单')} hint={myLists?.length > MY_PAGE_SIZE ? t('{n} 个 · 整张作为子歌单加入', { n: myLists.length }) : t('整张作为子歌单加入')}>
+          {myLists === null ? <p className="ncm__empty">{t('正在读取……')}</p>
+            : !myLists.length ? <p className="ncm__empty">{t('账号里还没有歌单')}</p>
             : <>
               {myLists.slice(myPageCur * MY_PAGE_SIZE, myPageCur * MY_PAGE_SIZE + MY_PAGE_SIZE).map((p) => (
                 <div className="ncm__item" key={p.id}>
                   <img src={p.cover} alt="" loading="lazy" />
                   <span className="ncm__itemname">{p.name}</span>
-                  <em className="tnum">{p.count} 首</em>
-                  <button className="ncm__merge" disabled={busy} title={`加进 ${st?.name ?? ''} · ${destGroupName}`} onClick={() => addMyPlaylist(p, true)}>并入</button>
-                  <button className="pbtn" disabled={busy} onClick={() => addMyPlaylist(p)}>加入</button>
+                  <em className="tnum">{t('{n} 首', { n: p.count })}</em>
+                  <button className="ncm__merge" disabled={busy} title={t('加进 {name}', { name: `${st?.name ?? ''} · ${destGroupName}` })} onClick={() => addMyPlaylist(p, true)}>{t('并入')}</button>
+                  <button className="pbtn" disabled={busy} onClick={() => addMyPlaylist(p)}>{t('加入')}</button>
                 </div>
               ))}
               {myPages > 1 && (
                 <div className="ncm__pager">
-                  <button className="pbtn" disabled={myPageCur === 0} onClick={() => setMyPage(myPageCur - 1)}>上一页</button>
+                  <button className="pbtn" disabled={myPageCur === 0} onClick={() => setMyPage(myPageCur - 1)}>{t('上一页')}</button>
                   <em className="tnum">{myPageCur + 1} / {myPages}</em>
-                  <button className="pbtn" disabled={myPageCur === myPages - 1} onClick={() => setMyPage(myPageCur + 1)}>下一页</button>
+                  <button className="pbtn" disabled={myPageCur === myPages - 1} onClick={() => setMyPage(myPageCur + 1)}>{t('下一页')}</button>
                 </div>
               )}
             </>}
         </Section>
       )}
 
-      <Section title="搜索单曲">
+      <Section title={t('搜索单曲')}>
         <div className="ncm__searchbar">
           <Icon name="search" size={15} />
           <input
             value={kw}
-            placeholder="歌名或歌手，加入当前选中的子歌单"
+            placeholder={t('歌名或歌手，加入当前选中的子歌单')}
             onChange={(e) => setKw(e.target.value)}
             onKeyDown={(e) => { if (e.key === 'Enter') doSearch() }}
           />
-          <button className="pbtn" disabled={busy || !kw.trim()} onClick={doSearch}>搜索</button>
+          <button className="pbtn" disabled={busy || !kw.trim()} onClick={doSearch}>{t('搜索')}</button>
         </div>
         {results && (
           results.length ? results.map((song) => (
             <div className="ncm__item" key={song.nid}>
               <span className="ncm__itemname">{song.title}<em>{song.artist || '—'}</em></span>
-              {song.vip && <i className="ncm__vip" title="需要会员">VIP</i>}
-              <button className="pbtn" disabled={busy} onClick={() => add([song])}>加入</button>
+              {song.vip && <i className="ncm__vip" title={t('需要会员')}>VIP</i>}
+              <button className="pbtn" disabled={busy} onClick={() => add([song])}>{t('加入')}</button>
             </div>
-          )) : <p className="ncm__empty">没有找到</p>
+          )) : <p className="ncm__empty">{t('没有找到')}</p>
         )}
       </Section>
 
-      <Section title="歌曲、歌单、专辑或播客链接">
+      <Section title={t('歌曲、歌单、专辑或播客链接')}>
         <div className="ncm__searchbar">
           <Icon name="list" size={15} />
           <input
             value={link}
-            placeholder="粘贴网易云歌曲 / 歌单 / 专辑 / 播客链接或数字 ID"
+            placeholder={t('粘贴网易云歌曲 / 歌单 / 专辑 / 播客链接或数字 ID')}
             onChange={(e) => { setLink(e.target.value); setLinkMeta(null); setLinkErr('') }}
             onKeyDown={(e) => { if (e.key === 'Enter') lookupLink() }}
           />
-          <button className="pbtn" disabled={busy || !link.trim()} onClick={lookupLink}>查询</button>
+          <button className="pbtn" disabled={busy || !link.trim()} onClick={lookupLink}>{t('查询')}</button>
         </div>
         {linkErr && <p className="ncm__empty">{linkErr}</p>}
         {linkMeta && (
           <div className="ncm__item">
             <span className="ncm__itemname">{linkMeta.main}<em>{linkMeta.sub}</em></span>
             {linkMeta.kind === 'song' || linkMeta.kind === 'dj' ? (
-              <button className="pbtn" disabled={busy} onClick={() => add([{ nid: linkMeta.nid, title: linkMeta.title, artist: linkMeta.artist, album: linkMeta.album, vip: linkMeta.vip }])}>加入</button>
+              <button className="pbtn" disabled={busy} onClick={() => add([{ nid: linkMeta.nid, title: linkMeta.title, artist: linkMeta.artist, album: linkMeta.album, vip: linkMeta.vip }])}>{t('加入')}</button>
             ) : (
               <>
                 <button
                   className="ncm__merge"
                   disabled={busy}
-                  title={`加进 ${st?.name ?? ''} · ${destGroupName}`}
+                  title={t('加进 {name}', { name: `${st?.name ?? ''} · ${destGroupName}` })}
                   onClick={() => add(linkMeta.kind === 'djradio' ? linkMeta.songs : linkMeta.trackIds)}
-                >并入当前</button>
+                >{t('并入当前')}</button>
                 <button
                   className="pbtn"
                   disabled={busy}
                   onClick={() => addWhole(linkMeta.name, linkMeta.kind === 'djradio' ? linkMeta.songs : linkMeta.trackIds)}
-                >新建子歌单</button>
+                >{t('新建子歌单')}</button>
               </>
             )}
           </div>
         )}
       </Section>
 
-      <Section title="外链与 archive.org" hint="加入当前选中的子歌单">
+      <Section title={t('外链与 archive.org')} hint={t('加入当前选中的子歌单')}>
         <div className="ncm__searchbar">
           <Icon name="list" size={15} />
           <input
             value={extLink}
-            placeholder="粘贴 mp3 等音频直链,或 archive.org 合集 / 文件页链接"
+            placeholder={t('粘贴 mp3 等音频直链,或 archive.org 合集 / 文件页链接')}
             onChange={(e) => { setExtLink(e.target.value); setExtMeta(null); setExtErr('') }}
             onKeyDown={(e) => { if (e.key === 'Enter') lookupExt() }}
           />
-          <button className="pbtn" disabled={busy || !extLink.trim()} onClick={lookupExt}>解析</button>
+          <button className="pbtn" disabled={busy || !extLink.trim()} onClick={lookupExt}>{t('解析')}</button>
         </div>
         {extErr && <p className="ncm__empty">{extErr}</p>}
         {extMeta?.kind === 'direct' && (
           <div className="ncm__item">
             <span className="ncm__itemname">{extMeta.song.title}<em>{extMeta.song.artist}</em></span>
-            <button className="pbtn" disabled={busy} onClick={addExtDirect}>加入</button>
+            <button className="pbtn" disabled={busy} onClick={addExtDirect}>{t('加入')}</button>
           </div>
         )}
         {extMeta?.kind === 'archive' && (
           <>
             <div className="ncm__extbar">
               <strong title={extMeta.name}>{extMeta.name}</strong>
-              <em className="tnum">{extSel.size} / {extMeta.files.length} 首</em>
+              <em className="tnum">{t('{n} / {total} 首', { n: extSel.size, total: extMeta.files.length })}</em>
               <button className="ncm__exttoggle"
                 onClick={() => setExtSel(extSel.size ? new Set() : new Set(extMeta.smart))}>
-                {extSel.size ? '全不选' : '全选'}
+                {extSel.size ? t('全不选') : t('全选')}
               </button>
-              <button className="pbtn" disabled={busy || !extSel.size} onClick={addExtArchive}>加入所选</button>
+              <button className="pbtn" disabled={busy || !extSel.size} onClick={addExtArchive}>{t('加入所选')}</button>
             </div>
             <div className="ncm__extlist">
               {extMeta.files.map((f) => (
@@ -608,23 +613,23 @@ export default function NeteaseImport() {
         )}
       </Section>
 
-      <Section title="在线音质" hint="以账号实际权限为准">
+      <Section title={t('在线音质')} hint={t('以账号实际权限为准')}>
         <div className="choices">
           {LEVELS.map((l) => (
             <button key={l.id} className={`choice ${level === l.id ? 'is-on' : ''}`} onClick={() => setLevelOf(l.id)}>
-              <div className="choice__name">{l.name}</div>
-              <div className="choice__desc">{l.desc}</div>
+              <div className="choice__name">{t(l.name)}</div>
+              <div className="choice__desc">{t(l.desc)}</div>
             </button>
           ))}
         </div>
       </Section>
 
       <Section
-        title="已加入的云音乐歌曲"
-        hint={cloudGroups.length ? `${cloudGroups.reduce((n, g) => n + g.songs.length, 0)} 首 · 存于${cloudLibrary.remote ? '本地文件' : '此浏览器'}` : `暂无 · 存于${cloudLibrary.remote ? '本地文件' : '此浏览器'}`}
+        title={t('已加入的云音乐歌曲')}
+        hint={cloudGroups.length ? t('{n} 首 · 存于{place}', { n: cloudGroups.reduce((n, g) => n + g.songs.length, 0), place: t(cloudLibrary.remote ? '本地文件' : '此浏览器') }) : t('暂无 · 存于{place}', { place: t(cloudLibrary.remote ? '本地文件' : '此浏览器') })}
       >
         {!cloudGroups.length ? (
-          <p className="ncm__empty">从上面把歌曲加进频道的子歌单后，在这里展开管理：拖动排序、点组名旁的铅笔改名（双击组名也行）、逐首增删</p>
+          <p className="ncm__empty">{t('从上面把歌曲加进频道的子歌单后，在这里展开管理：拖动排序、点组名旁的铅笔改名（双击组名也行）、逐首增删')}</p>
         ) : (
           <div className="ncm__manage">
             {cloudGroups.map((g) => {
@@ -653,9 +658,9 @@ export default function NeteaseImport() {
           </div>
         )}
         <div className="ncm__libio">
-          <span>库{cloudLibrary.remote ? `按主题存于仓库的 Netease Cloud/${theme.id}.json` : '只存在这个浏览器里，清数据会丢'}</span>
-          <button className="pbtn" onClick={exportLib}>导出 JSON</button>
-          <button className="pbtn" onClick={() => fileRef.current?.click()}>导入</button>
+          <span>{cloudLibrary.remote ? t('库按主题存于仓库的 {file}', { file: `Netease Cloud/${theme.id}.json` }) : t('库只存在这个浏览器里，清数据会丢')}</span>
+          <button className="pbtn" onClick={exportLib}>{t('导出 JSON')}</button>
+          <button className="pbtn" onClick={() => fileRef.current?.click()}>{t('导入')}</button>
           <input
             ref={fileRef}
             type="file"

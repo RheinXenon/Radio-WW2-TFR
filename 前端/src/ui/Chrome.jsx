@@ -3,15 +3,18 @@ import { useEffect } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
 import { useRadio } from '../store.js'
 import { theme } from '../themes/index.js'
+import { useT, useLoc } from '../i18n/index.js'
 import { Icon } from './Icon.jsx'
 import './chrome.css'
 
 export function Brand() {
+  const t = useT()
+  const L = useLoc()
   return (
     <div className="brand">
-      <div className="brand__name">沉浸式电台</div>
+      <div className="brand__name">{t('沉浸式电台')}</div>
       <div className="brand__theme">
-        <span>{theme.name}</span>
+        <span>{L(theme, 'name')}</span>
         {theme.years && <><i /><span className="latin tnum">{theme.years[0]}—{theme.years[1]}</span></>}
       </div>
     </div>
@@ -30,28 +33,29 @@ const RAIL = [
 const openThemes = () => window.dispatchEvent(new CustomEvent('radio:themes'))
 
 export function Rail() {
+  const t = useT()
   const panel = useRadio((s) => s.panel)
   const toggle = useRadio((s) => s.togglePanel)
   return (
     <nav className="rail">
       {RAIL.map(([id, icon, label, key]) => (
-        <button key={id} className={`rail__btn ${panel === id ? 'is-on' : ''}`} onClick={() => toggle(id)} aria-label={label}>
+        <button key={id} className={`rail__btn ${panel === id ? 'is-on' : ''}`} onClick={() => toggle(id)} aria-label={t(label)}>
           <Icon name={icon} size={19} />
-          <span className="rail__tip">{label}<kbd>{key}</kbd></span>
+          <span className="rail__tip">{t(label)}<kbd>{key}</kbd></span>
         </button>
       ))}
-      <button className="rail__btn" onClick={openThemes} aria-label="主题">
+      <button className="rail__btn" onClick={openThemes} aria-label={t('主题')}>
         <Icon name="themes" size={19} />
-        <span className="rail__tip">主题<kbd>T</kbd></span>
+        <span className="rail__tip">{t('主题')}<kbd>T</kbd></span>
       </button>
       <span className="rail__sep" />
-      <button className="rail__btn" onClick={() => useRadio.setState({ uiHidden: true, panel: null })} aria-label="隐藏界面">
+      <button className="rail__btn" onClick={() => useRadio.setState({ uiHidden: true, panel: null })} aria-label={t('隐藏界面')}>
         <Icon name="hide" size={19} />
-        <span className="rail__tip">只看壁纸<kbd>H</kbd></span>
+        <span className="rail__tip">{t('只看壁纸')}<kbd>H</kbd></span>
       </button>
-      <button className={`rail__btn ${panel === 'help' ? 'is-on' : ''}`} onClick={() => toggle('help')} aria-label="快捷键">
+      <button className={`rail__btn ${panel === 'help' ? 'is-on' : ''}`} onClick={() => toggle('help')} aria-label={t('快捷键')}>
         <Icon name="help" size={19} />
-        <span className="rail__tip">快捷键<kbd>?</kbd></span>
+        <span className="rail__tip">{t('快捷键')}<kbd>?</kbd></span>
       </button>
     </nav>
   )
@@ -81,6 +85,7 @@ const KEYS = [
 ]
 
 export function Help() {
+  const t = useT()
   return (
     <motion.div
       className="help"
@@ -98,17 +103,17 @@ export function Help() {
         onPointerDown={(e) => e.stopPropagation()}
       >
         <div className="panel__sub sc">Keyboard</div>
-        <h2 className="panel__title">快捷键</h2>
+        <h2 className="panel__title">{t('快捷键')}</h2>
         <div className="hairline" style={{ margin: '18px 0 8px' }} />
         <dl>
           {KEYS.map(([k, v]) => (
             <div key={k} className="help__row">
-              <dt>{k.split(' ').map((x) => <kbd key={x}>{x}</kbd>)}</dt>
-              <dd>{v}</dd>
+              <dt>{k.split(' ').map((x) => <kbd key={x}>{t(x)}</kbd>)}</dt>
+              <dd>{t(v)}</dd>
             </div>
           ))}
         </dl>
-        <p className="help__foot">鼠标静止片刻，控件会自动隐去；歌曲信息与时钟常驻</p>
+        <p className="help__foot">{t('鼠标静止片刻，控件会自动隐去；歌曲信息与时钟常驻')}</p>
       </motion.div>
     </motion.div>
   )

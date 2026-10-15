@@ -8,6 +8,8 @@ import { useRadio, getRadio } from '../store.js'
 import { engine } from '../audio/engine.js'
 import { listThemes, MAX_STATIONS } from '../themes/index.js'
 import { Emblem } from '../themes/marks.jsx'
+import { useT, useLoc } from '../i18n/index.js'
+import { entryTitle } from './Dossier.jsx'
 import { Icon } from './Icon.jsx'
 import './themeselect.css'
 
@@ -24,12 +26,18 @@ function shuffled(a) {
 }
 
 // 每个池随机抽两幅作放映片段，整卷再洗乱；各放映台一致随机，每次进页重新抽
-function reelOf(t) {
-  const frames = t.poolOrder.flatMap((id) => {
-    const p = t.pools[id]
-    const st = t.stationMap[p.station]
+// 场景说明按当前语言读：登记照片取 en.title，否则用池名的 nameEn
+function reelOf(th) {
+  const en = getRadio().lang === 'en'
+  const frames = th.poolOrder.flatMap((id) => {
+    const p = th.pools[id]
+    const st = th.stationMap[p.station]
     const walls = shuffled(p.walls).slice(0, 2)
-    return walls.map((w) => ({ wall: w, st, scene: w.scene ?? t.photoMap?.[`${id}/${w.name}`]?.title ?? p.name }))
+    return walls.map((w) => {
+      const ph = th.photoMap?.[`${id}/${w.name}`]
+      const scene = w.scene ?? (ph ? entryTitle(ph) : en ? p.nameEn ?? p.name : p.name)
+      return { wall: w, st, scene }
+    })
   })
   return shuffled(frames)
 }
@@ -110,7 +118,7 @@ function Sprockets({ label }) {
 }
 
 // —— 放映台：霓虹监视屏 ——
-function Neon({ reel, tick, t }) {
+function Neon({ reel, tick, th }) {
   const r = reel[tick % reel.length]
   const [hex, setHex] = useState('00')
   useEffect(() => {
@@ -137,8 +145,8 @@ function Neon({ reel, tick, t }) {
         <div className="neon__scan" />
         <div className="neon__hud">
           <span className="neon__live"><i />LIVE</span>
-          <span>CH {String(t.stations.indexOf(r.st) + 1).padStart(2, '0')}</span>
-          <span>{r.st ? `${t.dial.fmt(r.st.freq)} ${t.dial.unit}` : ''}</span>
+          <span>CH {String(th.stations.indexOf(r.st) + 1).padStart(2, '0')}</span>
+          <span>{r.st ? `${th.dial.fmt(r.st.freq)} ${th.dial.unit}` : ''}</span>
           <span className="neon__hex">0x{hex}</span>
         </div>
         {['tl', 'tr', 'bl', 'br'].map((c) => <i key={c} className={`neon__corner neon__corner--${c}`} />)}
@@ -150,6 +158,7 @@ function Neon({ reel, tick, t }) {
 
 // —— 放映台：鎏金画框 ——
 function Gilded({ reel, tick }) {
+  const L = useLoc()
   const r = reel[tick % reel.length]
   return (
     <div className="gild">
@@ -174,14 +183,14 @@ function Gilded({ reel, tick }) {
       </div>
       <div className="gild__plaque">
         <b>{r.scene}</b>
-        <span>{r.st ? `${r.st.name} · ${r.st.years ?? r.st.city}` : ''}</span>
+        <span>{r.st ? `${L(r.st, 'name')} · ${r.st.years ?? L(r.st, 'city')}` : ''}</span>
       </div>
     </div>
   )
 }
 
 // —— 放映台：磨砂玻璃 ——
-function Glass({ reel, tick, t }) {
+function Glass({ reel, tick, th }) {
   const r = reel[tick % reel.length]
   return (
     <div className="glass">
@@ -199,7 +208,7 @@ function Glass({ reel, tick, t }) {
           />
         </AnimatePresence>
         <div className="glass__chip">
-          {r.st && <Emblem kind={r.st.emblem} of={t} size={22} />}
+          {r.st && <Emblem kind={r.st.emblem} of={th} size={22} />}
           <span>{r.scene}</span>
         </div>
       </div>
@@ -209,6 +218,7 @@ function Glass({ reel, tick, t }) {
 }
 
 function Caption({ r }) {
+  const L = useLoc()
   if (!r) return null
   return (
     <AnimatePresence mode="wait">
@@ -221,7 +231,7 @@ function Caption({ r }) {
         transition={{ duration: 0.45 }}
       >
         <span>{r.scene}</span>
-        {r.st && <em>{r.st.name}</em>}
+        {r.st && <em>{L(r.st, 'name')}</em>}
       </motion.div>
     </AnimatePresence>
   )
@@ -239,14 +249,15 @@ function NewPreview() {
 }
 
 // 没有壁纸的主题：一块中性的空放映位，提示图片该放到哪里
-function EmptyPreview({ t }) {
+function EmptyPreview({ th }) {
+  const t = useT()
   return (
     <div className="glass">
       <div className="glass__card ts__blank">
         <div className="ts__blankmesh" />
         <div className="ts__blankhint">
-          <span>壁纸待放入</span>
-          <em>Resources/{t.wallRoot}/</em>
+          <span>{t('壁纸待放入')}</span>
+          <em>Resources/{th.wallRoot}/</em>
         </div>
       </div>
     </div>
@@ -255,56 +266,61 @@ function EmptyPreview({ t }) {
 
 const PREVIEW = { film: Film, neon: Neon, gilded: Gilded, glass: Glass }
 
-function Preview({ t }) {
-  // 每次进页都重新抽片、随机排序
-  const reel = useMemo(() => reelOf(t), [t])
-  const tick = useTicker(reel.length, t.frame === 'film' ? 3600 : 5200, t.id)
-  const P = PREVIEW[t.frame] ?? Glass
-  if (!reel.length) return <EmptyPreview t={t} />
-  return <P reel={reel} tick={tick} t={t} />
+function Preview({ th }) {
+  // 每次进页都重新抽片、随机排序；语言切换后场景说明也要跟着换
+  const lang = useRadio((s) => s.lang)
+  const reel = useMemo(() => reelOf(th), [th, lang])
+  const tick = useTicker(reel.length, th.frame === 'film' ? 3600 : 5200, th.id)
+  const P = PREVIEW[th.frame] ?? Glass
+  if (!reel.length) return <EmptyPreview th={th} />
+  return <P reel={reel} tick={tick} th={th} />
 }
 
 // —— 一屏主题 ——
-function Slide({ t, i, cur, booted, current, onEnter, onFocus }) {
-  const left = MAX_STATIONS - t.stations.length
+function Slide({ th, i, cur, booted, current, onEnter, onFocus }) {
+  const t = useT()
+  const L = useLoc()
+  const left = MAX_STATIONS - th.stations.length
   return (
     <section
       className={`ts__slide ${cur ? 'is-cur' : ''}`}
-      data-frame={t.frame}
-      style={{ '--ac': t.accent ?? t.stations[0]?.accent, '--ac2': t.accent2 ?? t.stations[1]?.accent }}
+      data-frame={th.frame}
+      style={{ '--ac': th.accent ?? th.stations[0]?.accent, '--ac2': th.accent2 ?? th.stations[1]?.accent }}
       onClick={cur ? undefined : onFocus}
     >
-      <div className="ts__no"><b>{String(i + 1).padStart(2, '0')}</b><span>{FRAME_NAME[t.frame]}</span></div>
-      <div className="ts__latin">{t.latin}</div>
-      <h2 className="ts__name">{t.name}</h2>
+      <div className="ts__no"><b>{String(i + 1).padStart(2, '0')}</b><span>{t(FRAME_NAME[th.frame])}</span></div>
+      <div className="ts__latin">{th.latin}</div>
+      <h2 className="ts__name">{L(th, 'name')}</h2>
       <div className="ts__sub">
-        <span>{t.subtitle}</span>
-        {t.years && <em>{t.years[0]} — {t.years[1]}</em>}
+        <span>{L(th, 'subtitle')}</span>
+        {th.years && <em>{th.years[0]} — {th.years[1]}</em>}
       </div>
-      <p className="ts__blurb">{t.blurb}</p>
+      <p className="ts__blurb">{L(th, 'blurb')}</p>
       <ul className="ts__roster">
-        {t.stations.map((st) => (
+        {th.stations.map((st) => (
           <li key={st.id} style={{ '--glow': st.glow }}>
-            <Emblem kind={st.emblem} of={t} size={26} />
-            <span>{st.name}</span>
+            <Emblem kind={st.emblem} of={th} size={26} />
+            <span>{L(st, 'name')}</span>
           </li>
         ))}
       </ul>
       <div className="ts__count">
-        {t.stations.length} 个频道{left > 0 ? ` · 还可添加 ${left} 个` : ' · 频道已满'}
+        {left > 0
+          ? t('{n} 个频道 · 还可添加 {m} 个', { n: th.stations.length, m: left })
+          : t('{n} 个频道 · 频道已满', { n: th.stations.length })}
       </div>
       <div className="ts__actions">
-        <button className="ts__go" onClick={(e) => { e.stopPropagation(); onEnter(t.id) }} tabIndex={cur ? 0 : -1}>
-          <span>{!booted ? '开始收听' : current ? '回到正在播的电台' : '切换到这个主题'}</span>
+        <button className="ts__go" onClick={(e) => { e.stopPropagation(); onEnter(th.id) }} tabIndex={cur ? 0 : -1}>
+          <span>{!booted ? t('开始收听') : current ? t('回到正在播的电台') : t('切换到这个主题')}</span>
           <Icon name="forward" size={18} />
         </button>
         <button
           className="ts__edit"
           tabIndex={cur ? 0 : -1}
-          onClick={(e) => { e.stopPropagation(); useRadio.setState({ editing: t.id }) }}
+          onClick={(e) => { e.stopPropagation(); useRadio.setState({ editing: th.id }) }}
         >
-          <Icon name={t.custom ? 'edit' : 'plus'} size={16} />
-          <span>{t.custom ? '编辑主题' : '添加频道'}</span>
+          <Icon name={th.custom ? 'edit' : 'plus'} size={16} />
+          <span>{th.custom ? t('编辑主题') : t('添加频道')}</span>
         </button>
       </div>
     </section>
@@ -312,19 +328,19 @@ function Slide({ t, i, cur, booted, current, onEnter, onFocus }) {
 }
 
 function NewSlide({ i, cur, onFocus }) {
+  const t = useT()
   return (
     <section className={`ts__slide is-new ${cur ? 'is-cur' : ''}`} data-frame="glass" onClick={cur ? undefined : onFocus}>
-      <div className="ts__no"><b>{String(i + 1).padStart(2, '0')}</b><span>自己动手</span></div>
+      <div className="ts__no"><b>{String(i + 1).padStart(2, '0')}</b><span>{t('自己动手')}</span></div>
       <div className="ts__latin">Your Own Frequency</div>
-      <h2 className="ts__name">新建主题</h2>
-      <div className="ts__sub"><span>名字、配色、画面与频道，全部由你决定</span></div>
+      <h2 className="ts__name">{t('新建主题')}</h2>
+      <div className="ts__sub"><span>{t('名字、配色、画面与频道，全部由你决定')}</span></div>
       <p className="ts__blurb">
-        新主题默认采用现代风格：磨砂玻璃的控制条与程序生成的抽象画面。最多八个频道，
-        音乐可以放进本地目录，也可以从云音乐导入歌单；放进壁纸目录的图片会排在程序画面之前。
+        {t('新主题默认采用现代风格：磨砂玻璃的控制条与程序生成的抽象画面。最多八个频道，音乐可以放进本地目录，也可以从云音乐导入歌单；放进壁纸目录的图片会排在程序画面之前。')}
       </p>
       <div className="ts__actions">
         <button className="ts__go" tabIndex={cur ? 0 : -1} onClick={(e) => { e.stopPropagation(); useRadio.setState({ editing: 'new' }) }}>
-          <span>开始创建</span>
+          <span>{t('开始创建')}</span>
           <Icon name="plus" size={18} />
         </button>
       </div>
@@ -333,15 +349,17 @@ function NewSlide({ i, cur, onFocus }) {
 }
 
 export default function ThemeSelect({ booted, onEnter }) {
+  const t = useT()
+  const L = useLoc()
   const customThemes = useRadio((s) => s.customThemes)
   const userStations = useRadio((s) => s.userStations)
   const active = useRadio((s) => s.theme)
   const editing = useRadio((s) => s.editing)
   const themes = useMemo(() => listThemes(getRadio()), [customThemes, userStations])
   const total = themes.length + 1
-  const [index, setIndex] = useState(() => Math.max(0, themes.findIndex((t) => t.id === active)))
+  const [index, setIndex] = useState(() => Math.max(0, themes.findIndex((x) => x.id === active)))
   const focus = Math.min(index, total - 1)
-  const t = themes[focus]
+  const th = themes[focus]
 
   // 新建的主题保存后，列表停到它上面
   const lastCount = useRef(customThemes.length)
@@ -389,7 +407,7 @@ export default function ThemeSelect({ booted, onEnter }) {
       else if (k === 'End') setIndex(total - 1)
       else if (k === 'Enter' || k === ' ') {
         e.preventDefault()
-        if (t) go(t.id)
+        if (th) go(th.id)
         else useRadio.setState({ editing: 'new' })
       } else if (k === 'Escape' && booted) go(active)
     }
@@ -411,16 +429,16 @@ export default function ThemeSelect({ booted, onEnter }) {
       window.removeEventListener('pointerdown', down)
       window.removeEventListener('pointerup', up)
     }
-  }, [editing, total, t?.id, booted, active])
+  }, [editing, total, th?.id, booted, active])
 
-  const frame = t?.frame ?? 'glass'
-  const reelBg = t ? reelOf(t)[0]?.wall.thumb : null
+  const frame = th?.frame ?? 'glass'
+  const reelBg = th ? reelOf(th)[0]?.wall.thumb : null
 
   return (
     <motion.div
       className="ts"
       data-frame={frame}
-      style={{ '--ac': t?.accent ?? t?.stations[0]?.accent ?? '#8a9bff' }}
+      style={{ '--ac': th?.accent ?? th?.stations[0]?.accent ?? '#8a9bff' }}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0, scale: 1.02, filter: 'blur(10px)' }}
@@ -428,7 +446,7 @@ export default function ThemeSelect({ booted, onEnter }) {
     >
       <AnimatePresence initial={false}>
         <motion.div
-          key={t?.id ?? 'new'}
+          key={th?.id ?? 'new'}
           className="ts__bg"
           style={{ backgroundImage: reelBg ? `url(${reelBg})` : undefined }}
           initial={{ opacity: 0 }}
@@ -440,30 +458,30 @@ export default function ThemeSelect({ booted, onEnter }) {
       <div className="ts__tint" />
 
       <header className="ts__brand">
-        <span className="ts__logo">沉浸式电台</span>
+        <span className="ts__logo">{t('沉浸式电台')}</span>
         <i />
-        <span>选择今晚的频率</span>
+        <span>{t('选择今晚的频率')}</span>
       </header>
 
-      <nav className="ts__rail" aria-label="主题">
+      <nav className="ts__rail" aria-label={t('主题')}>
         {Array.from({ length: total }, (_, i) => (
-          <button key={i} className={i === focus ? 'is-on' : ''} onClick={() => setIndex(i)} aria-label={themes[i]?.name ?? '新建主题'}>
+          <button key={i} className={i === focus ? 'is-on' : ''} onClick={() => setIndex(i)} aria-label={themes[i] ? L(themes[i], 'name') : t('新建主题')}>
             <i />
-            <span>{themes[i]?.name ?? '新建'}</span>
+            <span>{themes[i] ? L(themes[i], 'name') : t('新建')}</span>
           </button>
         ))}
       </nav>
 
       <div className="ts__viewport">
         <div className="ts__list" style={{ transform: `translateY(${-focus * 100}vh)` }}>
-          {themes.map((th, i) => (
+          {themes.map((x, i) => (
             <Slide
-              key={th.id}
-              t={th}
+              key={x.id}
+              th={x}
               i={i}
               cur={i === focus}
               booted={booted}
-              current={booted && th.id === active}
+              current={booted && x.id === active}
               onEnter={go}
               onFocus={() => setIndex(i)}
             />
@@ -475,22 +493,22 @@ export default function ThemeSelect({ booted, onEnter }) {
       <div className="ts__stage">
         <AnimatePresence mode="wait">
           <motion.div
-            key={t?.id ?? 'new'}
+            key={th?.id ?? 'new'}
             className="ts__stageinner"
             initial={{ opacity: 0, y: 40, filter: 'blur(10px)' }}
             animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
             exit={{ opacity: 0, y: -30, filter: 'blur(8px)' }}
             transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
           >
-            {t ? <Preview t={t} /> : <NewPreview />}
+            {th ? <Preview th={th} /> : <NewPreview />}
           </motion.div>
         </AnimatePresence>
       </div>
 
       <footer className="ts__hint">
-        <span><kbd>滚轮</kbd><kbd>↑</kbd><kbd>↓</kbd> 浏览</span>
-        <span><kbd>Enter</kbd> 进入</span>
-        {booted && <span><kbd>Esc</kbd> 返回</span>}
+        <span><kbd>{t('滚轮')}</kbd><kbd>↑</kbd><kbd>↓</kbd>{' '}{t('浏览')}</span>
+        <span><kbd>Enter</kbd>{' '}{t('进入')}</span>
+        {booted && <span><kbd>Esc</kbd>{' '}{t('返回')}</span>}
       </footer>
     </motion.div>
   )

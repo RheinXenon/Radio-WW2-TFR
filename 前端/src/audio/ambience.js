@@ -4,17 +4,17 @@
 import { engine, makeBrownBuffer, decodeCached } from './engine.js'
 import { NOISE } from '../themes/index.js'
 
-// 已知条目的中文名与图标；未知文件用说明文档里的描述或文件名
+// 已知条目的中文名与图标（labelEn 英文名，界面按语言选择）；未知文件用说明文档里的描述或文件名
 const KNOWN = {
-  rain: { label: '雨', icon: 'rain' },
-  wind: { label: '风', icon: 'wind' },
-  forest: { label: '林间', icon: 'forest' },
-  fireplace: { label: '篝火', icon: 'fire' },
-  'artillery-trench': { label: '战壕炮火', icon: 'trench' },
-  'artillery-distant': { label: '远方炮声', icon: 'distant' },
-  snow: { label: '雪夜', icon: 'snow' },
-  radio: { label: '电台杂音', icon: 'radio' },
-  clock: { label: '座钟', icon: 'clock' },
+  rain: { label: '雨', labelEn: 'Rain', icon: 'rain' },
+  wind: { label: '风', labelEn: 'Wind', icon: 'wind' },
+  forest: { label: '林间', labelEn: 'Forest', icon: 'forest' },
+  fireplace: { label: '篝火', labelEn: 'Fireplace', icon: 'fire' },
+  'artillery-trench': { label: '战壕炮火', labelEn: 'Trench Fire', icon: 'trench' },
+  'artillery-distant': { label: '远方炮声', labelEn: 'Distant Guns', icon: 'distant' },
+  snow: { label: '雪夜', labelEn: 'Snowfall', icon: 'snow' },
+  radio: { label: '电台杂音', labelEn: 'Radio Static', icon: 'radio' },
+  clock: { label: '座钟', labelEn: 'Wall Clock', icon: 'clock' },
 }
 const SYNTH = ['radio', 'snow', 'clock']
 
@@ -23,13 +23,14 @@ export const CHANNELS = (() => {
     id: it.id,
     url: it.url,
     label: KNOWN[it.id]?.label ?? (it.note ? it.note.slice(0, 6) : it.id),
+    labelEn: KNOWN[it.id]?.labelEn,
     note: it.note,
     icon: KNOWN[it.id]?.icon ?? 'wave',
     synth: false,
   }))
   const have = new Set(files.map((f) => f.id))
   const synth = SYNTH.filter((id) => !have.has(id)).map((id) => ({
-    id, label: KNOWN[id].label, icon: KNOWN[id].icon, synth: true,
+    id, label: KNOWN[id].label, labelEn: KNOWN[id].labelEn, icon: KNOWN[id].icon, synth: true,
     note: { radio: '短波静电与远方的电码', snow: '落雪的低沉寂静', clock: '老座钟的摆锤' }[id],
   }))
   return [...files, ...synth]

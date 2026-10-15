@@ -72,6 +72,7 @@ export const useRadio = create(
       offAir: null, // 调到已停用频道时为该频道 id
 
       // —— 外观 ——
+      lang: 'zh-CN', // 界面语言 zh-CN / en
       style: 'vintage', // 播放控件，见 skins.js 的 STYLES
       clock: 'pilot', // 时钟样式，见 skins.js 的 CLOCKS
       reactive: true, // 随乐律动
@@ -159,7 +160,7 @@ export const useRadio = create(
       partialize: (s) => ({
         theme: s.theme, themeMemo: s.themeMemo, customThemes: s.customThemes, userStations: s.userStations, station: s.station, band: s.band, list: s.list, order: s.order, enabled: s.enabled,
         groupsOff: s.groupsOff, groupsFolded: s.groupsFolded, skipped: s.skipped, favorites: s.favorites, playlists: s.playlists,
-        volume: s.volume, muted: s.muted, style: s.style, clock: s.clock, reactive: s.reactive, disc: s.disc,
+        volume: s.volume, muted: s.muted, style: s.style, clock: s.clock, reactive: s.reactive, disc: s.disc, lang: s.lang,
         parallax: s.parallax, panMode: s.panMode, wallFollows: s.wallFollows, wallRotate: s.wallRotate,
         wallRotateSec: s.wallRotateSec, wallpaper: s.wallpaper, mixer: s.mixer,
         skipVipWithoutMember: s.skipVipWithoutMember,

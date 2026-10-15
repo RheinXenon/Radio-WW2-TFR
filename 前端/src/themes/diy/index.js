@@ -12,14 +12,14 @@ export const DIAL = {
   fmt: (f) => f.toFixed(1),
 }
 
-// 配色预设：主色 + 辅色
+// 配色预设：主色 + 辅色（nameEn 供界面切换英文时显示）
 export const PALETTES = [
-  { id: 'aurora', name: '极光', accent: '#7c8cff', accent2: '#3ee6c4' },
-  { id: 'dusk', name: '暮色', accent: '#ff7a8a', accent2: '#ffb36b' },
-  { id: 'sea', name: '海盐', accent: '#4fb3ff', accent2: '#a8f0ff' },
-  { id: 'forest', name: '森屿', accent: '#5fd08a', accent2: '#d6f07a' },
-  { id: 'ink', name: '墨白', accent: '#e8e6e1', accent2: '#8c8a86' },
-  { id: 'violet', name: '紫雾', accent: '#b07cff', accent2: '#ff7ad9' },
+  { id: 'aurora', name: '极光', nameEn: 'Aurora', accent: '#7c8cff', accent2: '#3ee6c4' },
+  { id: 'dusk', name: '暮色', nameEn: 'Dusk', accent: '#ff7a8a', accent2: '#ffb36b' },
+  { id: 'sea', name: '海盐', nameEn: 'Sea Salt', accent: '#4fb3ff', accent2: '#a8f0ff' },
+  { id: 'forest', name: '森屿', nameEn: 'Forest Isle', accent: '#5fd08a', accent2: '#d6f07a' },
+  { id: 'ink', name: '墨白', nameEn: 'Ink & White', accent: '#e8e6e1', accent2: '#8c8a86' },
+  { id: 'violet', name: '紫雾', nameEn: 'Violet Mist', accent: '#b07cff', accent2: '#ff7ad9' },
 ]
 
 const ATMOS = {
@@ -46,6 +46,7 @@ export function newDiyTheme(n = 1) {
     name: n > 1 ? `我的电台 ${n}` : '我的电台',
     latin: 'My Station',
     subtitle: '自己调制的频率',
+  subtitleEn: 'A frequency of your own',
     years: ['', ''],
     blurb: '',
     accent: pal.accent,
@@ -61,6 +62,7 @@ export function diyTheme(raw) {
     ...raw,
     years: raw.years?.[0] ? raw.years : null,
     blurb: raw.blurb || '由你命名、由你配色的电台。把音乐放进本地目录，或从云音乐导入歌单，这里就是你自己的频率。',
+  blurbEn: raw.blurb ? raw.blurbEn : 'Your radio, your name, your colors. Put music in a local folder or import from NetEase Cloud — this frequency is yours.',
     radioRoot: `${raw.name} Radio`,
     wallRoot: `${raw.name} Wallpapers`,
     groups: {},

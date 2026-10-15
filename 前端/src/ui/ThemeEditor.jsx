@@ -11,6 +11,7 @@ import { Emblem, Glyph, GENERIC_PATTERNS, Pattern } from '../themes/marks.jsx'
 import { PALETTES, MOODS, newDiyTheme, newStation } from '../themes/diy/index.js'
 import { paint as diyPaint } from '../themes/diy/paint.js'
 import { paintedWall } from '../scene/paint.js'
+import { useT, useLoc } from '../i18n/index.js'
 import { Icon } from './Icon.jsx'
 import './themeeditor.css'
 
@@ -28,6 +29,7 @@ function Field({ label, hint, children, wide }) {
 
 // 画面风格的缩略图：用草稿里的配色现场画出
 function MoodCard({ mood, label, desc, on, accent: a1, accent2: a2, onPick }) {
+  const t = useT()
   // 拖动取色器时配色连续变化，缩略图跟在后面慢一拍重画
   const accent = useDeferredValue(a1)
   const accent2 = useDeferredValue(a2)
@@ -38,22 +40,24 @@ function MoodCard({ mood, label, desc, on, accent: a1, accent2: a2, onPick }) {
   return (
     <button className={`ted__mood ${on ? 'is-on' : ''}`} onClick={onPick} type="button">
       <img src={src} alt="" draggable={false} />
-      <b>{label}</b>
-      <span>{desc}</span>
+      <b>{t(label)}</b>
+      <span>{t(desc)}</span>
     </button>
   )
 }
 
 function StationRow({ st, i, n, locked, of, onChange, onMove, onRemove }) {
+  const t = useT()
+  const L = useLoc()
   if (locked) {
     return (
       <div className="ted__st is-locked">
         <Emblem kind={st.emblem} of={of} size={34} />
         <div className="ted__stmain">
-          <b>{st.name}</b>
-          <span>{st.genre} · {st.call}</span>
+          <b>{L(st, 'name')}</b>
+          <span>{L(st, 'genre')} · {L(st, 'call')}</span>
         </div>
-        <em className="ted__tag">内置</em>
+        <em className="ted__tag">{t('内置')}</em>
       </div>
     )
   }
@@ -67,52 +71,54 @@ function StationRow({ st, i, n, locked, of, onChange, onMove, onRemove }) {
           value={st.glyph ?? ''}
           placeholder={chars(st.name)[0] ?? '字'}
           onChange={(e) => set({ glyph: chars(e.target.value).slice(-1).join('') })}
-          aria-label="徽记用字"
+          aria-label={t('徽记用字')}
         />
-        <input type="color" className="ted__color" value={st.accent} onChange={(e) => set({ accent: e.target.value })} aria-label="频道主色" />
+        <input type="color" className="ted__color" value={st.accent} onChange={(e) => set({ accent: e.target.value })} aria-label={t('频道主色')} />
       </div>
       <div className="ted__stgrid">
-        <Field label="频道名" hint="也是歌单与壁纸目录名">
+        <Field label={t('频道名')} hint={t('也是歌单与壁纸目录名')}>
           <input className="ted__in" value={st.name} maxLength={12} onChange={(e) => set({ name: e.target.value.replace(/[\\/:*?"<>|]/g, '') })} />
         </Field>
-        <Field label="曲风">
-          <input className="ted__in" value={st.genre ?? ''} maxLength={14} placeholder="比如：城市流行" onChange={(e) => set({ genre: e.target.value })} />
+        <Field label={t('曲风')}>
+          <input className="ted__in" value={st.genre ?? ''} maxLength={14} placeholder={t('比如：城市流行')} onChange={(e) => set({ genre: e.target.value })} />
         </Field>
-        <Field label="呼号" hint="锁定电台时浮现">
-          <input className="ted__in" value={st.call ?? ''} maxLength={28} placeholder={`这里是${st.name}`} onChange={(e) => set({ call: e.target.value })} />
+        <Field label={t('呼号')} hint={t('锁定电台时浮现')}>
+          <input className="ted__in" value={st.call ?? ''} maxLength={28} placeholder={t('这里是{name}', { name: st.name })} onChange={(e) => set({ call: e.target.value })} />
         </Field>
-        <Field label="地点 / 西文名">
+        <Field label={t('地点 / 西文名')}>
           <div className="ted__pair">
-            <input className="ted__in" value={st.city ?? ''} maxLength={10} placeholder="地点" onChange={(e) => set({ city: e.target.value })} />
+            <input className="ted__in" value={st.city ?? ''} maxLength={10} placeholder={t('地点')} onChange={(e) => set({ city: e.target.value })} />
             <input className="ted__in" value={st.latin ?? ''} maxLength={24} placeholder="LATIN" onChange={(e) => set({ latin: e.target.value.toUpperCase() })} />
           </div>
         </Field>
-        <Field label="纹样" wide>
+        <Field label={t('纹样')} wide>
           <div className="ted__patterns">
             {GENERIC_PATTERNS.map(([id, name]) => (
-              <button key={id} type="button" className={st.pattern === id ? 'is-on' : ''} onClick={() => set({ pattern: id })} title={name}>
+              <button key={id} type="button" className={st.pattern === id ? 'is-on' : ''} onClick={() => set({ pattern: id })} title={t(name)}>
                 <Pattern kind={id} color={st.accent} height={8} />
-                <span>{name}</span>
+                <span>{t(name)}</span>
               </button>
             ))}
           </div>
         </Field>
       </div>
       <div className="ted__stops">
-        <button type="button" disabled={i === 0} onClick={() => onMove(-1)} aria-label="上移"><Icon name="up" size={16} /></button>
-        <button type="button" disabled={i === n - 1} onClick={() => onMove(1)} aria-label="下移"><Icon name="down" size={16} /></button>
-        <button type="button" onClick={onRemove} aria-label="删除频道" className="is-danger"><Icon name="trash" size={16} /></button>
+        <button type="button" disabled={i === 0} onClick={() => onMove(-1)} aria-label={t('上移')}><Icon name="up" size={16} /></button>
+        <button type="button" disabled={i === n - 1} onClick={() => onMove(1)} aria-label={t('下移')}><Icon name="down" size={16} /></button>
+        <button type="button" onClick={onRemove} aria-label={t('删除频道')} className="is-danger"><Icon name="trash" size={16} /></button>
       </div>
     </div>
   )
 }
 
 export default function ThemeEditor({ id }) {
+  const t = useT()
+  const L = useLoc()
   const s = getRadio()
   const isNew = id === 'new'
-  const builtin = BUILTIN.find((t) => t.id === id)
+  const builtin = BUILTIN.find((x) => x.id === id)
   const built = isNew ? null : getTheme(id, s)
-  const [draft, setDraft] = useState(() => (isNew ? newDiyTheme(s.customThemes.length + 1) : builtin ? null : structuredClone(s.customThemes.find((t) => t.id === id))))
+  const [draft, setDraft] = useState(() => (isNew ? newDiyTheme(s.customThemes.length + 1) : builtin ? null : structuredClone(s.customThemes.find((x) => x.id === id))))
   const [extra, setExtra] = useState(() => (builtin ? structuredClone(s.userStations[id] ?? []) : []))
   const [confirmDelete, setConfirmDelete] = useState(false)
   useEffect(() => {
@@ -129,11 +135,11 @@ export default function ThemeEditor({ id }) {
 
   const names = [...base, ...own].map((st) => st.name.trim())
   const dupName = names.find((n, i) => n && names.indexOf(n) !== i)
-  const problem = (draft && !draft.name.trim()) ? '主题需要一个名字'
-    : own.some((st) => !st.name.trim()) ? '每个频道都需要名字'
-      : dupName ? `频道名“${dupName}”重复了，它同时是目录名，需要互不相同`
-        : (draft && !own.length) ? '至少保留一个频道'
-          : (draft && [...BUILTIN, ...s.customThemes].some((t) => t.id !== draft.id && t.name === draft.name.trim())) ? '已有同名主题，换个名字吧'
+  const problem = (draft && !draft.name.trim()) ? t('主题需要一个名字')
+    : own.some((st) => !st.name.trim()) ? t('每个频道都需要名字')
+      : dupName ? t('频道名“{name}”重复了，它同时是目录名，需要互不相同', { name: dupName })
+        : (draft && !own.length) ? t('至少保留一个频道')
+          : (draft && [...BUILTIN, ...s.customThemes].some((x) => x.id !== draft.id && x.name === draft.name.trim())) ? t('已有同名主题，换个名字吧')
             : null
 
   const addStation = () => {
@@ -171,7 +177,7 @@ export default function ThemeEditor({ id }) {
     if (wasActive) radio.stop()
   }
 
-  const title = isNew ? '新建主题' : builtin ? `${builtin.name} · 频道` : `编辑 ${built?.name ?? ''}`
+  const title = isNew ? t('新建主题') : builtin ? `${L(builtin, 'name')} · ${t('频道')}` : t('编辑 {name}', { name: built?.name ?? '' })
   const folderName = draft?.name.trim() || builtin?.name
   const radioRoot = builtin?.radioRoot ?? `${folderName} Radio`
   const wallRoot = builtin?.wallRoot ?? `${folderName} Wallpapers`
@@ -197,55 +203,55 @@ export default function ThemeEditor({ id }) {
       >
         <header className="ted__head">
           <div>
-            <div className="ted__kicker">主题工坊 · Theme Studio</div>
+            <div className="ted__kicker">{t('主题工坊 · Theme Studio')}</div>
             <h2>{title}</h2>
           </div>
-          <button className="ted__x" onClick={close} aria-label="关闭"><Icon name="close" size={18} /></button>
+          <button className="ted__x" onClick={close} aria-label={t('关闭')}><Icon name="close" size={18} /></button>
         </header>
 
         <div className="ted__body">
           {draft && (
             <>
               <section className="ted__sec">
-                <h3>基本信息</h3>
+                <h3>{t('基本信息')}</h3>
                 <div className="ted__grid">
-                  <Field label="主题名" hint="也是资源目录名">
+                  <Field label={t('主题名')} hint={t('也是资源目录名')}>
                     <input className="ted__in ted__in--big" value={draft.name} maxLength={12} onChange={(e) => setDraft({ ...draft, name: e.target.value.replace(/[\\/:*?"<>|]/g, '') })} />
                   </Field>
-                  <Field label="西文名">
+                  <Field label={t('西文名')}>
                     <input className="ted__in" value={draft.latin} maxLength={32} onChange={(e) => setDraft({ ...draft, latin: e.target.value })} />
                   </Field>
-                  <Field label="副标题">
+                  <Field label={t('副标题')}>
                     <input className="ted__in" value={draft.subtitle} maxLength={28} onChange={(e) => setDraft({ ...draft, subtitle: e.target.value })} />
                   </Field>
-                  <Field label="年代" hint="可留空">
+                  <Field label={t('年代')} hint={t('可留空')}>
                     <div className="ted__pair">
-                      <input className="ted__in" value={draft.years[0]} maxLength={6} placeholder="起" onChange={(e) => setDraft({ ...draft, years: [e.target.value, draft.years[1]] })} />
-                      <input className="ted__in" value={draft.years[1]} maxLength={6} placeholder="止" onChange={(e) => setDraft({ ...draft, years: [draft.years[0], e.target.value] })} />
+                      <input className="ted__in" value={draft.years[0]} maxLength={6} placeholder={t('起')} onChange={(e) => setDraft({ ...draft, years: [e.target.value, draft.years[1]] })} />
+                      <input className="ted__in" value={draft.years[1]} maxLength={6} placeholder={t('止')} onChange={(e) => setDraft({ ...draft, years: [draft.years[0], e.target.value] })} />
                     </div>
                   </Field>
-                  <Field label="播放控件" hint="进入主题时的默认值">
+                  <Field label={t('播放控件')} hint={t('进入主题时的默认值')}>
                     <div className="ted__seg">
                       {STYLES.map((v) => (
-                        <button key={v.id} type="button" className={(draft.style ?? 'modern') === v.id ? 'is-on' : ''} onClick={() => setDraft({ ...draft, style: v.id })}>{v.short}</button>
+                        <button key={v.id} type="button" className={(draft.style ?? 'modern') === v.id ? 'is-on' : ''} onClick={() => setDraft({ ...draft, style: v.id })}>{L(v, 'short')}</button>
                       ))}
                     </div>
                   </Field>
-                  <Field label="时钟">
+                  <Field label={t('时钟')}>
                     <div className="ted__seg">
                       {CLOCKS.map((v) => (
-                        <button key={v.id} type="button" className={(draft.clock ?? 'flat') === v.id ? 'is-on' : ''} onClick={() => setDraft({ ...draft, clock: v.id })}>{v.short}</button>
+                        <button key={v.id} type="button" className={(draft.clock ?? 'flat') === v.id ? 'is-on' : ''} onClick={() => setDraft({ ...draft, clock: v.id })}>{L(v, 'short')}</button>
                       ))}
                     </div>
                   </Field>
-                  <Field label="一段介绍" hint="显示在主题页" wide>
-                    <textarea className="ted__in ted__in--area" value={draft.blurb} maxLength={120} rows={2} placeholder="写几句这个电台的气质" onChange={(e) => setDraft({ ...draft, blurb: e.target.value })} />
+                  <Field label={t('一段介绍')} hint={t('显示在主题页')} wide>
+                    <textarea className="ted__in ted__in--area" value={draft.blurb} maxLength={120} rows={2} placeholder={t('写几句这个电台的气质')} onChange={(e) => setDraft({ ...draft, blurb: e.target.value })} />
                   </Field>
                 </div>
               </section>
 
               <section className="ted__sec">
-                <h3>配色</h3>
+                <h3>{t('配色')}</h3>
                 <div className="ted__palettes">
                   {PALETTES.map((p) => (
                     <button
@@ -255,19 +261,19 @@ export default function ThemeEditor({ id }) {
                       onClick={() => setDraft({ ...draft, accent: p.accent, accent2: p.accent2 })}
                     >
                       <i style={{ background: `linear-gradient(135deg, ${p.accent}, ${p.accent2})` }} />
-                      <span>{p.name}</span>
+                      <span>{t(p.name)}</span>
                     </button>
                   ))}
                   <label className="ted__custom">
                     <input type="color" value={draft.accent} onChange={(e) => setDraft({ ...draft, accent: e.target.value })} />
                     <input type="color" value={draft.accent2} onChange={(e) => setDraft({ ...draft, accent2: e.target.value })} />
-                    <span>自定主色 / 辅色</span>
+                    <span>{t('自定主色 / 辅色')}</span>
                   </label>
                 </div>
               </section>
 
               <section className="ted__sec">
-                <h3>画面风格<em>放入壁纸目录的图片会排在程序画面之前</em></h3>
+                <h3>{t('画面风格')}<em>{t('放入壁纸目录的图片会排在程序画面之前')}</em></h3>
                 <div className="ted__moods">
                   {MOODS.map(([m, label, desc]) => (
                     <MoodCard key={m} mood={m} label={label} desc={desc} on={draft.mood === m} accent={draft.accent} accent2={draft.accent2} onPick={() => setDraft({ ...draft, mood: m })} />
@@ -278,7 +284,7 @@ export default function ThemeEditor({ id }) {
           )}
 
           <section className="ted__sec">
-            <h3>频道<em>{base.length + own.length} / {MAX_STATIONS}</em></h3>
+            <h3>{t('频道')}<em>{base.length + own.length} / {MAX_STATIONS}</em></h3>
             <div className="ted__stations">
               {base.map((st) => <StationRow key={st.id} st={built?.stationMap[st.id] ?? st} locked of={built} />)}
               {own.map((st, i) => (
@@ -295,18 +301,18 @@ export default function ThemeEditor({ id }) {
             </div>
             <button className="ted__add" type="button" disabled={room <= 0} onClick={addStation}>
               <Icon name="plus" size={16} />
-              <span>{room > 0 ? `添加频道（还可添加 ${room} 个）` : `已到 ${MAX_STATIONS} 个频道的上限`}</span>
+              <span>{room > 0 ? t('添加频道（还可添加 {n} 个）', { n: room }) : t('已到 {n} 个频道的上限', { n: MAX_STATIONS })}</span>
             </button>
           </section>
 
           <section className="ted__sec">
-            <h3>音乐与壁纸放在哪里</h3>
+            <h3>{t('音乐与壁纸放在哪里')}</h3>
             <ul className="ted__paths">
-              <li><span>本地音乐</span><code>Resources/{radioRoot}/&lt;频道名&gt;/</code></li>
-              <li><span>壁纸</span><code>Resources/{wallRoot}/&lt;频道名&gt;/</code></li>
-              <li><span>在线歌单</span><code>云音乐面板（N）选中频道后导入</code></li>
+              <li><span>{t('本地音乐')}</span><code>Resources/{radioRoot}/&lt;{t('频道名')}&gt;/</code></li>
+              <li><span>{t('壁纸')}</span><code>Resources/{wallRoot}/&lt;{t('频道名')}&gt;/</code></li>
+              <li><span>{t('在线歌单')}</span><code>{t('云音乐面板（N）选中频道后导入')}</code></li>
             </ul>
-            <p className="ted__note">音频直接丢进目录即可，文件名写成“歌手 - 歌名”会自动拆开；子文件夹会成为频道下的分组。目录变化后页面自动刷新。</p>
+            <p className="ted__note">{t('音频直接丢进目录即可，文件名写成“歌手 - 歌名”会自动拆开；子文件夹会成为频道下的分组。目录变化后页面自动刷新。')}</p>
           </section>
         </div>
 
@@ -314,12 +320,12 @@ export default function ThemeEditor({ id }) {
           {draft && !isNew && (
             <button type="button" className={`ted__del ${confirmDelete ? 'is-armed' : ''}`} onClick={remove}>
               <Icon name="trash" size={15} />
-              <span>{confirmDelete ? '再点一次，确认删除' : '删除主题'}</span>
+              <span>{confirmDelete ? t('再点一次，确认删除') : t('删除主题')}</span>
             </button>
           )}
           <span className="ted__problem">{problem}</span>
-          <button type="button" className="ted__cancel" onClick={close}>取消</button>
-          <button type="button" className="ted__save" disabled={!!problem} onClick={save}>{isNew ? '创建主题' : '保存'}</button>
+          <button type="button" className="ted__cancel" onClick={close}>{t('取消')}</button>
+          <button type="button" className="ted__save" disabled={!!problem} onClick={save}>{isNew ? t('创建主题') : t('保存')}</button>
         </footer>
       </motion.aside>
     </motion.div>

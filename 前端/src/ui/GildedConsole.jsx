@@ -5,6 +5,7 @@
 import { useEffect, useMemo, useRef } from 'react'
 import { motion } from 'motion/react'
 import { useRadio } from '../store.js'
+import { useT, useLoc } from '../i18n/index.js'
 import { radio, needlePos } from '../audio/radio.js'
 import { engine } from '../audio/engine.js'
 import { theme } from '../themes/index.js'
@@ -69,6 +70,8 @@ function ticksOf(dial) {
 
 // —— 表盘 ——
 function ArchDial() {
+  const t = useT()
+  const L = useLoc()
   const stations = theme.stations
   const dial = theme.dial
   const box = useRef(), light = useRef(), needle = useRef(), shaft = useRef(), pomme = useRef()
@@ -224,10 +227,10 @@ function ArchDial() {
               className={`gld__st ${st.id === current ? 'is-cur' : ''} ${on ? '' : 'is-off'}`}
               style={{ left: x, top: y, transform: `translate(-50%, -50%) rotate(${tangent(st.pos)}deg)`, '--glow': st.glow }}
               onClick={() => radio.tune(st.id)}
-              title={`${st.name} · ${st.genre}${on ? '' : '（已停播）'}`}
+              title={`${L(st, 'name')} · ${L(st, 'genre')}${on ? '' : t('（已停播）')}`}
             >
               <Emblem kind={st.emblem} size={14} ring={false} />
-              <span>{st.label}</span>
+              <span>{L(st, 'label')}</span>
             </button>
           )
         })}
@@ -264,21 +267,23 @@ const MARKS = [[0.06, 'ppp'], [0.2, 'pp'], [0.36, 'p'], [0.52, 'mp'], [0.68, 'mf
 const markOf = (v) => MARKS.find(([lim]) => v < lim)[1]
 
 function Transport() {
+  const t = useT()
   const playing = useRadio((s) => s.playing)
   const press = (fn) => () => { engine.click('key'); fn() }
   return (
     <div className="gld__transport">
-      <button className="gld__btn" onClick={press(radio.prev)} title="上一首（←）"><Icon name="prev" size={15} /></button>
-      <button className={`gld__btn gld__btn--play ${playing ? 'is-on' : ''}`} onClick={press(radio.toggle)} title="播放 / 暂停（空格）">
+      <button className="gld__btn" onClick={press(radio.prev)} title={t('上一首（←）')}><Icon name="prev" size={15} /></button>
+      <button className={`gld__btn gld__btn--play ${playing ? 'is-on' : ''}`} onClick={press(radio.toggle)} title={t('播放 / 暂停（空格）')}>
         <Icon name={playing ? 'pause' : 'play'} size={19} />
       </button>
-      <button className="gld__btn" onClick={press(radio.next)} title="下一首（→）"><Icon name="next" size={15} /></button>
+      <button className="gld__btn" onClick={press(radio.next)} title={t('下一首（→）')}><Icon name="next" size={15} /></button>
     </div>
   )
 }
 
 // 音量画成乐谱上的渐强记号：楔形里的金色随音量涨满，旁边写着对应的力度
 function Dynamics() {
+  const t = useT()
   const volume = useRadio((s) => s.volume)
   const muted = useRadio((s) => s.muted)
   const v = muted ? 0 : volume
@@ -288,13 +293,13 @@ function Dynamics() {
   }
   return (
     <div className="gld__dyn">
-      <button className={`gld__mark ${muted ? 'is-tacet' : ''}`} onClick={radio.toggleMute} title="静音（M）">{muted ? 'tacet' : markOf(volume)}</button>
+      <button className={`gld__mark ${muted ? 'is-tacet' : ''}`} onClick={radio.toggleMute} title={t('静音（M）')}>{muted ? 'tacet' : markOf(volume)}</button>
       <div
         className="gld__hairpin"
         role="slider"
-        aria-label="音量"
+        aria-label={t('音量')}
         aria-valuenow={Math.round(v * 100)}
-        title="音量：点按、拖动或滚轮（↑ ↓）"
+        title={t('音量：点按、拖动或滚轮（↑ ↓）')}
         onPointerDown={(e) => { e.currentTarget.setPointerCapture(e.pointerId); setAt(e) }}
         onPointerMove={(e) => { if (e.buttons & 1) setAt(e) }}
         onWheel={(e) => radio.setVolume(volume + (e.deltaY < 0 ? 0.04 : -0.04))}
@@ -323,12 +328,13 @@ const ORDER_NEXT = { seq: 'shuffle', shuffle: 'one', one: 'seq' }
 const ORDER = { seq: ['attacca', '顺序播放', 'seq'], shuffle: ['ad lib.', '随机播放', 'shuffle'], one: ['da capo', '单曲循环', 'one'] }
 
 function Bands() {
+  const t = useT()
   const band = useRadio((s) => s.band)
   return (
     <div className="gld__bands">
       {BANDS.map(([id, zh, it, key]) => (
-        <button key={id} className={band === id ? 'is-on' : ''} onClick={() => radio.setBand(id)} title={`${zh}（${key}）`}>
-          <span className="gld__zh">{zh}</span>
+        <button key={id} className={band === id ? 'is-on' : ''} onClick={() => radio.setBand(id)} title={`${t(zh)}${t('（{k}）', { k: key })}`}>
+          <span className="gld__zh">{t(zh)}</span>
           <em>{it}</em>
           {band === id && <motion.i layoutId="gld-band" className="gld__orn" transition={{ type: 'spring', stiffness: 380, damping: 34 }} />}
         </button>
@@ -338,12 +344,13 @@ function Bands() {
 }
 
 function Order() {
+  const t = useT()
   const order = useRadio((s) => s.order)
   const [term, zh, icon] = ORDER[order]
   return (
-    <button className="gld__order" onClick={() => useRadio.setState({ order: ORDER_NEXT[order] })} title={`${zh}（S）`}>
+    <button className="gld__order" onClick={() => useRadio.setState({ order: ORDER_NEXT[order] })} title={`${t(zh)}${t('（S）')}`}>
       <Icon name={icon} size={16} />
-      <span><em>{term}</em><small>{zh}</small></span>
+      <span><em>{term}</em><small>{t(zh)}</small></span>
     </button>
   )
 }

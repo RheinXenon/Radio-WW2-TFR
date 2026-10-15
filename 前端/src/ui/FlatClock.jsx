@@ -1,7 +1,8 @@
 // 极简时钟：扁平的磨砂圆盘配细体数字，颜色取主题主色
 // 圆盘上只有两根圆头指针与十二个小点，秒数画成沿边缘的一道细环：偶数分钟从零长满，奇数分钟从起点收尽，首尾相接不跳变
 import { useRef } from 'react'
-import { useNow, useFrame, handAngles, rotate, pad2, WEEK } from './clockTime.js'
+import { useRadio } from '../store.js'
+import { useNow, useFrame, handAngles, rotate, pad2, dateNum, weekName, fullStamp } from './clockTime.js'
 import './flatclock.css'
 
 const R = 28.5
@@ -10,6 +11,7 @@ const C = 2 * Math.PI * R
 export default function FlatClock() {
   const h = useRef(), m = useRef(), ring = useRef()
   const date = useNow()
+  const lang = useRadio((s) => s.lang)
 
   useFrame((now) => {
     const a = handAngles(now)
@@ -21,7 +23,7 @@ export default function FlatClock() {
   })
 
   return (
-    <div className="fclk" title={date.toLocaleString('zh-CN')}>
+    <div className="fclk" title={fullStamp(date, lang)}>
       <div className="fclk__dial">
         <svg viewBox="-32 -32 64 64" aria-hidden>
           <circle r={R} className="fclk__track" />
@@ -38,8 +40,8 @@ export default function FlatClock() {
       <div className="fclk__text">
         <span className="fclk__time tnum">{pad2(date.getHours())}<i className="fclk__colon" />{pad2(date.getMinutes())}</span>
         <span className="fclk__date">
-          <b>周{WEEK[date.getDay()]}</b>
-          <span className="tnum">{date.getMonth() + 1} 月 {date.getDate()} 日</span>
+          <b>{weekName(date, lang)}</b>
+          <span className="tnum">{dateNum(date, lang)}</span>
         </span>
       </div>
     </div>

@@ -2,17 +2,17 @@
 import { useRadio } from '../store.js'
 import { radio } from './radio.js'
 import { theme, genreOf } from '../themes/index.js'
-
-const BASE = '沉浸式电台'
+import { t, loc } from '../i18n/index.js'
 
 function titleFor(s) {
+  const BASE = t('沉浸式电台')
   if (s.phase !== 'live') return BASE
-  if (s.offAir) return `停播 · ${theme.stationMap[s.offAir]?.name ?? ''} — ${BASE}`
+  if (s.offAir) return t('停播 · {name}', { name: loc(theme.stationMap[s.offAir], 'name') ?? '' }) + ' — ' + BASE
   if (!s.track) return BASE
-  const t = s.track
-  const zh = t.titleZh && t.titleZh !== t.title ? `（${t.titleZh}）` : ''
-  const artist = t.artist || t.artistZh
-  return `${s.playing ? '♪ ' : '❙❙ '}${t.title}${zh}${artist ? ' — ' + artist : ''}`
+  const tr = s.track
+  const zh = tr.titleZh && tr.titleZh !== tr.title ? `（${tr.titleZh}）` : ''
+  const artist = tr.artist || tr.artistZh
+  return `${s.playing ? '♪ ' : '❙❙ '}${tr.title}${zh}${artist ? ' — ' + artist : ''}`
 }
 
 export function startSession() {
@@ -35,8 +35,8 @@ export function startSession() {
       const wall = pool?.walls.find((w) => w.name === s.wallpaper.name) ?? pool?.walls[0]
       ms.metadata = new MediaMetadata({
         title: s.track.title,
-        artist: s.track.artist || s.track.artistZh || '佚名',
-        album: [st?.name, genreOf(st, s.track)].filter(Boolean).join(' · '),
+        artist: s.track.artist || s.track.artistZh || t('佚名'),
+        album: [loc(st, 'name'), genreOf(st, s.track)].filter(Boolean).join(' · '),
         artwork: wall?.thumb ? [{ src: wall.thumb, sizes: '480x270', type: 'image/jpeg' }] : [],
       })
     }

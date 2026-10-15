@@ -2,6 +2,7 @@
 import { Fragment, useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
 import { useRadio, getRadio } from './store.js'
+import { t } from './i18n/index.js'
 import { engine } from './audio/engine.js'
 import { radio } from './audio/radio.js'
 import { startSession } from './audio/session.js'
@@ -92,7 +93,7 @@ function stepWallpaper(dir, { quiet } = {}) {
   if (!cur) return
   const pool = cur.id.split('/')[0]
   if (!theme.pools[pool] || theme.pools[pool].walls.length < 2) {
-    if (!quiet && theme.pools[pool]) notify(`${theme.pools[pool].name}目前只有这一幅壁纸`)
+    if (!quiet && theme.pools[pool]) notify(t('{name}目前只有这一幅壁纸', { name: theme.pools[pool].name }))
     return
   }
   const dk = deckFor(pool)
@@ -121,12 +122,12 @@ function onKey(e) {
     1: () => radio.setBand('station'),
     2: () => radio.setBand('all'),
     3: () => radio.setBand('list'),
-    s: () => { set({ order: ORDER_NEXT[s.order] }); notify(ORDER_LABEL[ORDER_NEXT[s.order]]) },
+    s: () => { set({ order: ORDER_NEXT[s.order] }); notify(t(ORDER_LABEL[ORDER_NEXT[s.order]])) },
     f: () => {
       if (!s.track) return
       const had = s.favorites.includes(s.track.id)
       s.toggleFavorite(s.track.id)
-      notify(had ? '已移出珍藏' : `已收入珍藏：${s.track.title}`)
+      notify(had ? t('已移出珍藏') : t('已收入珍藏：{title}', { title: s.track.title }))
     },
     q: () => stepWallpaper(-1),
     w: () => stepWallpaper(1),
@@ -136,8 +137,8 @@ function onKey(e) {
     e: () => s.togglePanel('mixer'),
     o: () => s.togglePanel('settings'),
     t: openThemes,
-    v: () => { const v = nextOf(STYLES, s.style); set({ style: v.id }); notify(`播放控件：${v.name}`) },
-    c: () => { const c = nextOf(CLOCKS, s.clock); set({ clock: c.id }); notify(`时钟：${c.name}`) },
+    v: () => { const v = nextOf(STYLES, s.style); set({ style: v.id }); notify(t('播放控件：{name}', { name: s.lang === 'en' ? v.nameEn ?? v.name : v.name })) },
+    c: () => { const c = nextOf(CLOCKS, s.clock); set({ clock: c.id }); notify(t('时钟：{name}', { name: s.lang === 'en' ? c.nameEn ?? c.name : c.name })) },
     h: () => set({ uiHidden: !s.uiHidden, panel: null }),
     '?': () => s.togglePanel('help'),
     Escape: () => (s.panel ? set({ panel: null }) : s.uiHidden && set({ uiHidden: false })),
@@ -186,7 +187,7 @@ export default function App() {
           set({ wallpaper: { pool, name: walls[Math.floor(Math.random() * walls.length)].name } })
         }
       }
-      if (s.uiHidden && !prev.uiHidden) notify('按 H 或 Esc 恢复界面')
+      if (s.uiHidden && !prev.uiHidden) notify(t('按 H 或 Esc 恢复界面'))
     })
     window.addEventListener('keydown', onKey)
     window.addEventListener('radio:themes', openThemes)
@@ -209,6 +210,12 @@ export default function App() {
       else root.style.removeProperty(k)
     }
   }, [themeId, themeRev])
+
+  // 界面语言联动：<html lang> 与标签页标题随 store.lang 走
+  const lang = useRadio((s) => s.lang)
+  useEffect(() => {
+    document.documentElement.lang = lang
+  }, [lang])
 
   // 入场动画只在首次揭幕时播放
   useEffect(() => {

@@ -149,6 +149,51 @@
   opacity: 0;
   pointer-events: none;
 }
+
+/* 待机页语言快捷切换：开机钮上方两个极简文字钮 */
+.boot__lang {
+  position: absolute;
+  bottom: calc(14vh + 112px);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  transition: opacity 0.4s;
+}
+.is-on .boot__lang {
+  opacity: 0;
+  pointer-events: none;
+}
+.boot__lang button {
+  padding: 5px 13px;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-indent: 0.22em;
+  color: var(--cream-dim);
+  border-radius: 2px;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--brass) 40%, transparent);
+  background: color-mix(in srgb, var(--brass) 6%, transparent);
+  transition: color 0.3s, box-shadow 0.3s, background 0.3s, text-shadow 0.3s;
+}
+.boot__lang button:hover {
+  color: var(--cream);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--brass) 70%, transparent);
+}
+.boot__lang button.is-on {
+  color: var(--brass-hi);
+  background: color-mix(in srgb, var(--brass) 16%, transparent);
+  box-shadow:
+    inset 0 0 0 1px var(--brass),
+    0 0 16px color-mix(in srgb, var(--accent-glow) 30%, transparent),
+    0 0 4px color-mix(in srgb, var(--accent-glow) 40%, transparent);
+  text-shadow: 0 0 8px rgba(241, 215, 154, 0.4);
+}
+.boot__lang i {
+  width: 1px;
+  height: 10px;
+  background: var(--cream-faint);
+}
 .boot__knob {
   width: 54px;
   height: 54px;

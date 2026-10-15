@@ -1,6 +1,7 @@
 // 复古收音机：音量旋钮、魔眼、乌玻璃刻度盘、调谐旋钮、象牙琴键
 import { useEffect, useRef, useState } from 'react'
 import { useRadio, listName } from '../store.js'
+import { useT, useLoc } from '../i18n/index.js'
 import { radio, needlePos, useDial } from '../audio/radio.js'
 import { engine } from '../audio/engine.js'
 import { theme } from '../themes/index.js'
@@ -84,6 +85,7 @@ function Knob({ read, size, label, ticks, onTurn, onStart, onEnd, onWheel, title
 // —— 魔眼 ——
 // 荧光扇面的缺口随信号强度收拢；音乐响时轻轻跳动
 function MagicEye() {
+  const t = useT()
   const ref = useRef()
   useEffect(() => {
     let raf
@@ -108,12 +110,12 @@ function MagicEye() {
     return () => cancelAnimationFrame(raf)
   }, [])
   return (
-    <div className="eye" ref={ref} title="调谐指示">
+    <div className="eye" ref={ref} title={t('调谐指示')}>
       <div className="eye__glass">
         <div className="eye__fan" />
         <div className="eye__cap" />
       </div>
-      <span className="knob__label">调谐</span>
+      <span className="knob__label">{t('调谐')}</span>
     </div>
   )
 }
@@ -134,6 +136,8 @@ function dialTicks(dial) {
 }
 
 function Dial() {
+  const t = useT()
+  const L = useLoc()
   const stations = theme.stations
   const dial = theme.dial
   const root = useRef()
@@ -192,10 +196,10 @@ function Dial() {
                 className={`dial__st ${st.id === current ? 'is-cur' : ''} ${enabled[st.id] !== false ? '' : 'is-off'}`}
                 style={{ left: `${st.pos * 100}%`, '--glow': st.glow }}
                 onClick={() => radio.tune(st.id)}
-                title={`${st.name} · ${st.genre}${enabled[st.id] !== false ? '' : '（已停播）'}`}
+                title={`${L(st, 'name')} · ${L(st, 'genre')}${enabled[st.id] !== false ? '' : t('（已停播）')}`}
               >
                 <Emblem kind={st.emblem} size={15} ring={false} />
-                <span className="dial__city">{st.label}</span>
+                <span className="dial__city">{L(st, 'label')}</span>
               </button>
             ))}
           </div>
@@ -222,6 +226,7 @@ function Dial() {
 
 // —— 琴键 ——
 function Keys() {
+  const t = useT()
   const playing = useRadio((s) => s.playing)
   const band = useRadio((s) => s.band)
   const order = useRadio((s) => s.order)
@@ -241,20 +246,20 @@ function Keys() {
   return (
     <div className="keys">
       <div className="keys__group">
-        <Key id="prev" onClick={radio.prev} title="上一首（←）"><Icon name="prev" size={13} /></Key>
-        <Key id="play" onClick={radio.toggle} title="播放 / 暂停（空格）" wide>
-          <Icon name={playing ? 'pause' : 'play'} size={13} /><em>{playing ? '暂停' : '播放'}</em>
+        <Key id="prev" onClick={radio.prev} title={t('上一首（←）')}><Icon name="prev" size={13} /></Key>
+        <Key id="play" onClick={radio.toggle} title={t('播放 / 暂停（空格）')} wide>
+          <Icon name={playing ? 'pause' : 'play'} size={13} /><em>{playing ? t('暂停') : t('播放')}</em>
         </Key>
-        <Key id="next" onClick={radio.next} title="下一首（→）"><Icon name="next" size={13} /></Key>
+        <Key id="next" onClick={radio.next} title={t('下一首（→）')}><Icon name="next" size={13} /></Key>
       </div>
       <div className="keys__group">
-        <Key id="station" latched={band === 'station'} onClick={() => radio.setBand('station')} title="只听当前频道（1）"><em>本台</em></Key>
-        <Key id="all" latched={band === 'all'} onClick={() => radio.setBand('all')} title="在所有启用的频道间混播（2）"><em>全频段</em></Key>
-        <Key id="list" latched={band === 'list'} onClick={() => radio.setBand('list')} title={`播放歌单：${listTitle}（3）`}><em>歌单</em></Key>
+        <Key id="station" latched={band === 'station'} onClick={() => radio.setBand('station')} title={t('只听当前频道（1）')}><em>{t('本台')}</em></Key>
+        <Key id="all" latched={band === 'all'} onClick={() => radio.setBand('all')} title={t('在所有启用的频道间混播（2）')}><em>{t('全频段')}</em></Key>
+        <Key id="list" latched={band === 'list'} onClick={() => radio.setBand('list')} title={t('播放歌单：{name}（3）', { name: t(listTitle) })}><em>{t('歌单')}</em></Key>
       </div>
       <div className="keys__group">
-        <Key id="order" onClick={() => useRadio.setState({ order: ORDER_NEXT[order] })} title="播放顺序（S）" wide>
-          <Icon name={order === 'seq' ? 'seq' : order === 'one' ? 'one' : 'shuffle'} size={14} /><em>{ORDER_LABEL[order]}</em>
+        <Key id="order" onClick={() => useRadio.setState({ order: ORDER_NEXT[order] })} title={t('播放顺序（S）')} wide>
+          <Icon name={order === 'seq' ? 'seq' : order === 'one' ? 'one' : 'shuffle'} size={14} /><em>{t(ORDER_LABEL[order])}</em>
         </Key>
       </div>
     </div>
@@ -269,6 +274,7 @@ const readVolume = () => {
 const readTune = () => needlePos() * 1080
 
 export default function VintageRadio() {
+  const t = useT()
   const lastDetent = useRef(0)
 
   const stepStation = (dir) => {
@@ -285,9 +291,9 @@ export default function VintageRadio() {
       <div className="radio__body">
         <Knob
           size={78}
-          label="音量"
+          label={t('音量')}
           ticks
-          title="音量：拖动或滚轮（↑ ↓）"
+          title={t('音量：拖动或滚轮（↑ ↓）')}
           read={readVolume}
           onTurn={(d) => radio.setVolume(useRadio.getState().volume + d / 270)}
           onWheel={(dir) => radio.setVolume(useRadio.getState().volume + dir * 0.04)}
@@ -296,8 +302,8 @@ export default function VintageRadio() {
         <Dial />
         <Knob
           size={92}
-          label="调谐"
-          title="调谐：拖动旋转，滚轮逐台切换"
+          label={t('调谐')}
+          title={t('调谐：拖动旋转，滚轮逐台切换')}
           read={readTune}
           onStart={() => radio.scrubStart()}
           onTurn={(d) => {

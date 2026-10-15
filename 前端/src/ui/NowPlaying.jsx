@@ -2,7 +2,8 @@
 // 换歌时逐字显影，换台途中随信号闪烁
 // 云音乐歌曲（网易云导入）在歌手下方随进度显示歌词
 import { useEffect, useRef, useState } from 'react'
-import { useRadio, listName, nextListName, FAV } from '../store.js'
+import { useRadio, listName, FAV } from '../store.js'
+import { useT, useLoc } from '../i18n/index.js'
 import { radio } from '../audio/radio.js'
 import { engine } from '../audio/engine.js'
 import { useLyric } from '../audio/lyric.js'
@@ -32,6 +33,7 @@ function Letters({ text, delay = 0, step = 0.022 }) {
 }
 
 function Progress() {
+  const t = useT()
   const fill = useRef(), cur = useRef(), dur = useRef(), bar = useRef()
   useEffect(() => {
     let raf
@@ -39,8 +41,8 @@ function Progress() {
     const el = engine.el
     const tick = () => {
       const d = el.duration
-      const t = el.currentTime
-      const p = Number.isFinite(d) && d > 0 ? t / d : 0
+      const ct = el.currentTime
+      const p = Number.isFinite(d) && d > 0 ? ct / d : 0
       // 进度是匀速量:量化到 0.1% 后交给 CSS 线性补间,不必每帧写 transform;
       // 拖动或跳转造成的陡变先关掉补间,免得进度条扫过整条轨道
       const ps = p.toFixed(3)
@@ -53,7 +55,7 @@ function Progress() {
       // 光点位置与时间文本变了才写,免得页面每帧样式失效
       if (bar.current && ps !== lastP) bar.current.style.setProperty('--p', ps)
       if (ps !== lastP) lastP = ps
-      if (cur.current) { const s = fmt(t); if (s !== lastT) { lastT = s; cur.current.textContent = s } }
+      if (cur.current) { const s = fmt(ct); if (s !== lastT) { lastT = s; cur.current.textContent = s } }
       if (dur.current) { const s = fmt(d); if (s !== lastD) { lastD = s; dur.current.textContent = s } }
       raf = requestAnimationFrame(tick)
     }
@@ -76,7 +78,7 @@ function Progress() {
   return (
     <div className="np__progress">
       <span ref={cur} className="np__time latin tnum">0:00</span>
-      <div ref={bar} className="np__bar" onPointerDown={onDown} role="slider" aria-label="播放进度">
+      <div ref={bar} className="np__bar" onPointerDown={onDown} role="slider" aria-label={t('播放进度')}>
         <div className="np__track" />
         <div ref={fill} className="np__fill" />
         <div className="np__bead" />
@@ -92,6 +94,7 @@ export function Seal({ on, songId, onClick }) {
   const [menu, setMenu] = useState(false)
   const hold = useRef(null)
   const firedAt = useRef(0)
+  const t = useT()
   const favorites = useRadio((s) => s.favorites)
   const playlists = useRadio((s) => s.playlists)
 
@@ -121,7 +124,7 @@ export function Seal({ on, songId, onClick }) {
   }
   const end = () => { if (hold.current) { clearTimeout(hold.current.timer); hold.current = null } }
 
-  const lists = [{ id: FAV, name: '珍藏', songs: favorites }, ...playlists]
+  const lists = [{ id: FAV, name: t('珍藏'), songs: favorites }, ...playlists]
   const { toggleInList, createList } = useRadio.getState()
 
   return (
@@ -134,7 +137,7 @@ export function Seal({ on, songId, onClick }) {
         onPointerUp={end}
         onPointerCancel={end}
         onContextMenu={(e) => e.preventDefault()}
-        title={on ? '已收入珍藏，再按一次取消；长按加入歌单' : '收入珍藏；长按加入歌单'}
+        title={on ? t('已收入珍藏，再按一次取消；长按加入歌单') : t('收入珍藏；长按加入歌单')}
         aria-pressed={on}
       >
         <svg viewBox="0 0 40 40" aria-hidden>
@@ -158,7 +161,7 @@ export function Seal({ on, songId, onClick }) {
       </button>
       {menu && (
         <div className="pl__menu is-up seal__menu">
-          <div className="pl__menulabel">加入歌单</div>
+          <div className="pl__menulabel">{t('加入歌单')}</div>
           {lists.map((l) => (
             <button key={l.id} onClick={() => toggleInList(l.id, songId)}>
               <Icon name="check" size={14} style={{ visibility: l.songs.includes(songId) ? 'visible' : 'hidden' }} />
@@ -166,9 +169,9 @@ export function Seal({ on, songId, onClick }) {
             </button>
           ))}
           <hr />
-          <button onClick={() => { createList(nextListName(playlists), [songId]); setMenu(false) }}>
+          <button onClick={() => { createList(t('新歌单 {n}', { n: playlists.length + 1 }), [songId]); setMenu(false) }}>
             <Icon name="plus" size={14} />
-            <span>新建歌单并加入</span>
+            <span>{t('新建歌单并加入')}</span>
           </button>
         </div>
       )}
@@ -249,6 +252,9 @@ function Lyric({ track }) {
 }
 
 export default function NowPlaying() {
+  const t = useT()
+  const L = useLoc()
+  const lang = useRadio((s) => s.lang)
   const track = useRadio((s) => s.track)
   const tuning = useRadio((s) => s.tuning)
   const band = useRadio((s) => s.band)
@@ -262,21 +268,22 @@ export default function NowPlaying() {
   // 停播有两种：频道被停用，或频道启用着但分组与逐首跳过把歌都关掉了
   if (offAir) {
     const st = theme.stationMap[offAir]
+    const title = t('本台今夜停播')
     return (
       <section className="np is-offair" style={{ '--accent': st.accent, '--glow': st.glow }}>
         <header className="np__head">
           <Emblem kind={st.emblem} size={22} />
-          <span>{st.city} · {st.genre}</span>
+          <span>{L(st, 'city')} · {L(st, 'genre')}</span>
           <i className="np__dot" />
-          <span className="np__band">停播</span>
+          <span className="np__band">{t('停播')}</span>
         </header>
-        <h2 className="np__title np__title--zh" style={{ fontSize: 50 }}>本台今夜停播</h2>
-        <p className="np__zh">{offAirEnabled ? '本台的歌都已关闭，只剩静电' : '只收得到静电与远方的电码'}</p>
+        <h2 className={`np__title ${CJK.test(title) ? 'np__title--zh' : 'latin'}`} style={{ fontSize: 50 }}>{title}</h2>
+        <p className="np__zh">{offAirEnabled ? t('本台的歌都已关闭，只剩静电') : t('只收得到静电与远方的电码')}</p>
         {offAirEnabled
-          ? <button className="np__restore" onClick={() => useRadio.setState({ panel: 'playlist' })}>打开歌单</button>
+          ? <button className="np__restore" onClick={() => useRadio.setState({ panel: 'playlist' })}>{t('打开歌单')}</button>
           : <button className="np__restore" onClick={() => {
             useRadio.setState((s) => ({ enabled: { ...s.enabled, [offAir]: true } }))
-          }}>恢复本台播出</button>}
+          }}>{t('恢复本台播出')}</button>}
       </section>
     )
   }
@@ -284,21 +291,24 @@ export default function NowPlaying() {
   if (!track) return <section className="np is-empty" />
 
   const st = theme.stationMap[track.station]
-  const genre = genreOf(st, track)
+  // 频道副题：中文模式显示当前歌所属子歌单名（分组），英文模式退回频道流派的双语字段
+  const genre = lang === 'en' ? L(st, 'genre') : genreOf(st, track)
+  // 歌名与歌手：原文为主、中文小字为辅——原文多为英文，两种语言下主副行不必互换；
+  // 中文歌的 titleZh 与 title 相同，副行自然隐藏
   const zhTitle = track.titleZh && track.titleZh !== track.title ? track.titleZh : ''
   const artist = track.artist
   const artistZh = track.artistZh && track.artistZh !== track.artist ? track.artistZh : ''
   const cjk = CJK.test(track.title)
-  const bandLabel = band === 'all' ? '全频段混播' : band === 'list' ? listTitle : '本台'
+  const bandLabel = band === 'all' ? t('全频段混播') : band === 'list' ? t(listTitle) : t('本台')
 
   return (
     <section className={`np ${tuning ? 'is-weak' : ''}`} style={{ '--accent': st.accent, '--glow': st.glow }}>
       <div key={track.id} className="np__inner">
         <header className="np__head">
           <Emblem kind={st.emblem} size={22} />
-          <span>现正播送</span>
+          <span>{t('现正播送')}</span>
           <i className="np__dot" />
-          <span className="np__genre">{st.city} · {genre}</span>
+          <span className="np__genre">{L(st, 'city')} · {genre}</span>
           <i className="np__dot" />
           <span className="np__band">{bandLabel}</span>
         </header>
@@ -309,7 +319,7 @@ export default function NowPlaying() {
         </h2>
         {zhTitle && <p className="np__zh"><Letters text={zhTitle} delay={0.35} step={0.04} /></p>}
         <p className="np__artist">
-          {artist ? <span className="latin np__artist-o">{artist}</span> : <span className="np__artist-o np__artist-anon">佚名</span>}
+          {artist ? <span className="latin np__artist-o">{artist}</span> : <span className="np__artist-o np__artist-anon">{t('佚名')}</span>}
           {artistZh && <span className="np__artist-zh">{artistZh}</span>}
         </p>
         {track.cloud && <Lyric track={track} />}

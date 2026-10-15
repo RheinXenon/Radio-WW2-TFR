@@ -4,7 +4,8 @@
 // 最后黑幕退去，壁纸由远及近显影
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { engine } from '../../audio/engine.js'
-import { NOISE } from '../index.js'
+import { useT, useLoc } from '../../i18n/index.js'
+import { NOISE, theme } from '../index.js'
 import { STATIONS } from './stations.js'
 import { Emblem } from './Emblem.jsx'
 import './intro.css'
@@ -12,6 +13,8 @@ import './intro.css'
 const MORSE = { 1: '.----', 9: '----.', 3: '...--', 4: '....-', 5: '.....' }
 
 export default function Intro({ onReveal, onDone }) {
+  const t = useT()
+  const L = useLoc()
   const marks = useMemo(() => {
     const out = []
     for (const word of ['1939', '1945']) {
@@ -55,7 +58,7 @@ export default function Intro({ onReveal, onDone }) {
   return (
     <div className={`intro ${leaving ? 'is-leaving' : ''}`}>
       <div className="intro__center">
-        <div className="intro__kicker">第一主题 · 收听自</div>
+        <div className="intro__kicker">{t('第一主题 · 收听自')}</div>
         <div className="intro__line">
           <span className="intro__year intro__year--l latin">1939</span>
           <div className="intro__rule">
@@ -68,9 +71,9 @@ export default function Intro({ onReveal, onDone }) {
           <span className="intro__year intro__year--r latin">1945</span>
         </div>
         <h1 className="intro__title">
-          {[...'烽火电波'].map((c, i) => <span key={i} style={{ '--i': i }}>{c}</span>)}
+          {[...L(theme, 'name')].map((c, i) => <span key={i} style={{ '--i': i }}>{c}</span>)}
         </h1>
-        <div className="intro__sub">第二次世界大战 · 广播年代</div>
+        <div className="intro__sub">{t('第二次世界大战 · 广播年代')}</div>
         <div className="intro__emblems">
           {STATIONS.map((s, i) => (
             <div key={s.id} className="intro__emblem" style={{ '--i': i, '--glow': s.glow }}>

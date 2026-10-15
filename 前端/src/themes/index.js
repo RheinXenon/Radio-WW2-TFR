@@ -7,6 +7,7 @@ import wwii from './wwii/index.js'
 import tfr from './tfr/index.js'
 import classical from './classical/index.js'
 import { diyTheme } from './diy/index.js'
+import { loc } from '../i18n/index.js'
 
 export const MAX_STATIONS = 8
 export const BUILTIN = [wwii, tfr, classical]
@@ -15,30 +16,35 @@ const NONE = []
 
 // 档案界面用语，默认是二战的讲法；主题在定义里给 terms 覆盖个别词，
 // photo 一词只在 theme.hasPhotos（登记的壁纸里有带原图的）时才会出现在界面上
+// 中英双份（xxxEn 后缀），界面按 store.lang 选择
 const TERMS = {
-  record: '史实档案', // 画廊与档案页对这类壁纸的称呼
+  record: '史实档案', recordEn: 'Historical Record', // 画廊与档案页对这类壁纸的称呼
   recordLatin: 'Historical Record',
-  stamp: '史实', // 档案卡上的印章
-  story: '史实', // 背景文字小节的标题
-  nation: '国别', // 池在档案卡里的字段名
-  photo: '原照', // 登记里附带的原图
-  wall: '转绘', // 壁纸一侧的叫法
+  stamp: '史实', stampEn: 'RECORD', // 档案卡上的印章
+  story: '史实', storyEn: 'The Story', // 背景文字小节的标题
+  nation: '国别', nationEn: 'Nation', // 池在档案卡里的字段名
+  photo: '原照', photoEn: 'Original Photo', // 登记里附带的原图
+  wall: '转绘', wallEn: 'Painting', // 壁纸一侧的叫法
   legend: '带黄铜光晕的是史实转绘：停留可见历史原照，双击或掀开纸角查看出处与史实',
+  legendEn: 'Brass-haloed entries are painted records: hover for the original photo, double-click or lift the corner for provenance and the story',
 }
 
 // 正在播放界面的频道副题：当前歌所属子歌单（分组）名；歌散在频道根目录时退回频道预写的流派
 export const genreOf = (st, song) => {
   const g = st?.groups?.find((x) => x.id === song?.group)
-  return g?.id ? g.name : st?.genre ?? ''
+  return g?.id ? loc(g, 'name') : loc(st, 'genre')
 }
 
 // 按频道当前的 songs 重算分组列表；云音乐歌曲运行时增删后由 library.js 调用
+// 分组名的登记值兼容字符串与 { name, nameEn } 对象两种形式
+const gv = (g) => (typeof g === 'string' ? { name: g } : g ?? {})
 export function refreshStationGroups(station, songs = station.songs, groups = station.groupNames ?? {}) {
   const ids = [...new Set(songs.map((song) => song.group))]
   station.groups = ids.map((id) => ({
     id,
     key: `${station.id}/${id}`,
-    name: groups[id] ?? (id || '未分组'),
+    name: gv(groups[id]).name ?? (id || '未分组'),
+    nameEn: gv(groups[id]).nameEn ?? id ?? 'Ungrouped',
     count: songs.filter((song) => song.group === id).length,
   }))
 }
@@ -75,6 +81,8 @@ function assemble(def, extra) {
     }
     s.pos = (s.freq - dial.min) / (dial.max - dial.min)
     s.label = (def.dialLabel && s[def.dialLabel]) || s.name // 刻度盘与控制条上的台名
+    // 盘面台名的英文可用 labelEn 给短词（如古典四时期），否则退回 dialLabel/nameEn
+    s.labelEn = s.labelEn ?? ((def.dialLabel && (s[def.dialLabel + 'En'] ?? s[def.dialLabel])) || s.nameEn || s.name)
     s.songs = (lists.find((l) => l.folder === folder)?.songs ?? []).map((song) => ({ ...song, station: s.id }))
     s.songs.forEach((song) => songIndex.set(song.id, song))
     refreshStationGroups(s)
@@ -83,7 +91,7 @@ function assemble(def, extra) {
   const declared = def.pools ?? []
   const pools = [
     ...declared,
-    ...stations.filter((st) => !declared.some((p) => p.id === st.pool)).map((st) => ({ id: st.pool, name: st.name, station: st.id })),
+    ...stations.filter((st) => !declared.some((p) => p.id === st.pool)).map((st) => ({ id: st.pool, name: st.name, nameEn: st.nameEn, station: st.id })),
   ]
   const poolMap = Object.fromEntries(pools.map((p) => [p.id, { ...p, walls: [...(files[p.id] ?? [])] }]))
   const stationMap = Object.fromEntries(stations.map((s) => [s.id, s]))

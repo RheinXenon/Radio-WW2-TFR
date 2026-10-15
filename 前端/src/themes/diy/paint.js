@@ -1,11 +1,12 @@
 // 自建主题的程序壁纸：四种现代抽象画面，配色取主题主色、辅色与频道主色
 import { shade, hexToHsl } from '../../scene/paint.js'
 
+// 每项为 [id, name, desc, nameEn, descEn]，前三位沿用数组解构读取
 export const MOODS = [
-  ['aurora', '极光', '夜空里流动的光幕与层叠山影'],
-  ['mesh', '流光', '柔和的渐变光斑与悬浮的玻璃球'],
-  ['horizon', '地平线', '极简的落日、海面与沙丘'],
-  ['grid', '几何', '暗场中漂浮的线框几何体'],
+  ['aurora', '极光', '夜空里流动的光幕与层叠山影', 'Aurora', 'Shimmering curtains of light over layered ridges'],
+  ['mesh', '流光', '柔和的渐变光斑与悬浮的玻璃球', 'Streaming Light', 'Soft gradient glows and floating glass spheres'],
+  ['horizon', '地平线', '极简的落日、海面与沙丘', 'Horizon', 'A minimalist sunset, sea and dunes'],
+  ['grid', '几何', '暗场中漂浮的线框几何体', 'Geometry', 'Wireframe solids drifting in the dark'],
 ]
 
 function aurora(p, a, b) {

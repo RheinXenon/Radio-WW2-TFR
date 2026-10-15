@@ -276,6 +276,11 @@
   background: color-mix(in srgb, var(--brass) 14%, transparent);
   box-shadow: inset 0 0 0 1px var(--brass-hi);
 }
+.pbtn.is-on {
+  background: color-mix(in srgb, var(--brass) 18%, transparent);
+  box-shadow: inset 0 0 0 1px var(--brass);
+  color: var(--brass-hi);
+}
 
 /* 会员歌曲小标签：云音乐面板与歌单面板共用 */
 .ncm__vip {

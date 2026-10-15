@@ -4,6 +4,8 @@
 // 最后谱线化作一片暖光，帷幕后的画面显影
 import { useEffect, useRef, useState } from 'react'
 import { engine } from '../../audio/engine.js'
+import { useT, useLoc } from '../../i18n/index.js'
+import { theme } from '../index.js'
 import { Emblem } from './marks.jsx'
 import { STATIONS } from './stations.js'
 import './intro.css'
@@ -11,6 +13,8 @@ import './intro.css'
 export default function Intro({ onReveal, onDone }) {
   const done = useRef(false)
   const [leaving, setLeaving] = useState(false)
+  const t = useT()
+  const L = useLoc()
 
   useEffect(() => {
     const timers = []
@@ -46,14 +50,14 @@ export default function Intro({ onReveal, onDone }) {
   return (
     <div className={`cli ${leaving ? 'is-leaving' : ''}`}>
       <div className="cli__center">
-        <div className="cli__kicker">第三主题 · 演出即将开始</div>
+        <div className="cli__kicker">{t('第三主题 · 演出即将开始')}</div>
         <div className="cli__staff">
           {Array.from({ length: 5 }, (_, i) => <i key={i} style={{ '--i': i }} />)}
           <span className="cli__clef">𝄞</span>
           <span className="cli__a latin">A 440</span>
         </div>
         <h1 className="cli__title">
-          {[...'古典回音'].map((c, i) => <span key={i} style={{ '--i': i, '--y': `${[10, -14, 6, -6][i]}px` }}>{c}</span>)}
+          {[...L(theme, 'name')].map((c, i) => <span key={i} style={{ '--i': i, '--y': `${[10, -14, 6, -6][i] ?? 0}px` }}>{c}</span>)}
         </h1>
         <div className="cli__latin sc">Echoes of the Classics</div>
         <div className="cli__eras">
@@ -65,7 +69,7 @@ export default function Intro({ onReveal, onDone }) {
             </div>
           ))}
         </div>
-        <div className="cli__quote">“音乐是比一切智慧、一切哲学更高的启示。”<i>—— 贝多芬</i></div>
+        <div className="cli__quote">{t('“音乐是比一切智慧、一切哲学更高的启示。”')}<i>{t('—— 贝多芬')}</i></div>
       </div>
       <div className="cli__light" />
     </div>

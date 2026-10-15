@@ -9,6 +9,7 @@ import { engine } from '../audio/engine.js'
 import { theme } from '../themes/index.js'
 import { Emblem } from '../themes/marks.jsx'
 import { Icon } from './Icon.jsx'
+import { useT, useLoc } from '../i18n/index.js'
 import './neondeck.css'
 
 const BANDS = [['station', '本台'], ['all', '全频段'], ['list', '歌单']]
@@ -88,6 +89,7 @@ function useReadout(root, num, canvas) {
 
 // 阶梯音量：12 根由矮到高的斜柱，点按或拖动设定，滚轮微调
 function Volume() {
+  const t = useT()
   const volume = useRadio((s) => s.volume)
   const muted = useRadio((s) => s.muted)
   const lit = muted ? 0 : Math.round(volume * 12)
@@ -97,13 +99,13 @@ function Volume() {
   }
   return (
     <div className="neo__vol">
-      <button onClick={radio.toggleMute} title="静音（M）"><Icon name={muted || volume === 0 ? 'mute' : 'volume'} size={17} /></button>
+      <button onClick={radio.toggleMute} title={t('静音（M）')}><Icon name={muted || volume === 0 ? 'mute' : 'volume'} size={17} /></button>
       <div
         className="neo__bars"
         role="slider"
-        aria-label="音量"
+        aria-label={t('音量')}
         aria-valuenow={Math.round((muted ? 0 : volume) * 100)}
-        title="音量：点按、拖动或滚轮（↑ ↓）"
+        title={t('音量：点按、拖动或滚轮（↑ ↓）')}
         onPointerDown={(e) => { e.currentTarget.setPointerCapture(e.pointerId); setAt(e) }}
         onPointerMove={(e) => { if (e.buttons & 1) setAt(e) }}
         onWheel={(e) => radio.setVolume(volume + (e.deltaY < 0 ? 0.04 : -0.04))}
@@ -115,6 +117,8 @@ function Volume() {
 }
 
 export default function NeonDeck() {
+  const t = useT()
+  const L = useLoc()
   const root = useRef(), num = useRef(), canvas = useRef()
   const playing = useRadio((s) => s.playing)
   const band = useRadio((s) => s.band)
@@ -142,11 +146,11 @@ export default function NeonDeck() {
       </div>
 
       <div className="neo__transport">
-        <button className="neo__skip" onClick={radio.prev} title="上一首（←）"><Icon name="prev" size={17} /></button>
-        <button className={`neo__play ${playing ? 'is-on' : ''}`} onClick={radio.toggle} title="播放 / 暂停（空格）">
+        <button className="neo__skip" onClick={radio.prev} title={t('上一首（←）')}><Icon name="prev" size={17} /></button>
+        <button className={`neo__play ${playing ? 'is-on' : ''}`} onClick={radio.toggle} title={t('播放 / 暂停（空格）')}>
           <span className="neo__hex"><Icon name={playing ? 'pause' : 'play'} size={20} /></span>
         </button>
-        <button className="neo__skip" onClick={radio.next} title="下一首（→）"><Icon name="next" size={17} /></button>
+        <button className="neo__skip" onClick={radio.next} title={t('下一首（→）')}><Icon name="next" size={17} /></button>
       </div>
 
       <div className="neo__readout">
@@ -167,14 +171,14 @@ export default function NeonDeck() {
             key={st.id}
             className={`neo__st ${current === st.id ? 'is-cur' : ''} ${enabled[st.id] !== false ? '' : 'is-off'}`}
             onClick={() => radio.tune(st.id)}
-            title={`${st.name} · ${st.genre}${enabled[st.id] !== false ? '' : '（已停播）'}`}
+            title={`${L(st, 'name')} · ${L(st, 'genre')}${enabled[st.id] !== false ? '' : t('（已停播）')}`}
             style={{ '--glow': st.glow, '--acc': st.accent }}
           >
             {current === st.id && (
               <motion.span layoutId="neo-ind" className="neo__ind" transition={{ type: 'spring', stiffness: 420, damping: 36 }}><i /></motion.span>
             )}
             <Emblem kind={st.emblem} size={16} ring={false} />
-            <span className="neo__stname">{st.label}</span>
+            <span className="neo__stname">{L(st, 'label')}</span>
           </button>
         ))}
       </div>
@@ -183,11 +187,11 @@ export default function NeonDeck() {
         {BANDS.map(([id, label]) => (
           <button key={id} className={band === id ? 'is-on' : ''} onClick={() => radio.setBand(id)}>
             <i className="neo__led" />
-            <span>{label}</span>
+            <span>{t(label)}</span>
           </button>
         ))}
       </div>
-      <button className="neo__order" onClick={() => useRadio.setState({ order: ORDER_NEXT[order] })} title={`${ORDER_LABEL[order]}（S）`}>
+      <button className="neo__order" onClick={() => useRadio.setState({ order: ORDER_NEXT[order] })} title={`${t(ORDER_LABEL[order])}（S）`}>
         <Icon name={ORDER_ICON[order]} size={17} />
         <span>{ORDER_CODE[order]}</span>
       </button>

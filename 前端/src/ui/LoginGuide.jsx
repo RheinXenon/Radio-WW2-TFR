@@ -3,12 +3,14 @@
 import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
 import { useRadio } from '../store.js'
+import { useT } from '../i18n/index.js'
 import { cloudLibrary } from '../netease/library.js'
 import './netease.css'
 
 let seen = false // 本次页面只弹一次：换主题重新揭幕也不再来
 
 export default function LoginGuide() {
+  const t = useT()
   const [shown, setShown] = useState(false)
   const panel = useRadio((s) => s.panel)
 
@@ -40,14 +42,14 @@ export default function LoginGuide() {
             onPointerDown={(e) => e.stopPropagation()}
           >
             <div className="panel__sub sc">Netease Cloud · Login</div>
-            <h2 className="panel__title">强烈建议登录网易云账号</h2>
+            <h2 className="panel__title">{t('强烈建议登录网易云账号')}</h2>
             <div className="hairline" style={{ margin: '16px 0 12px' }} />
             <p className="login-guide__text">
-              未登录时以匿名访客取流：免费歌曲也有概率被限流而播放失败，付费（VIP）歌曲必须登录后才能播放。登录后还可导入自己账号的歌单。
+              {t('未登录时以匿名访客取流：免费歌曲也有概率被限流而播放失败，付费（VIP）歌曲必须登录后才能播放。登录后还可导入自己账号的歌单。')}
             </p>
             <div className="login-guide__btns">
-              <button className="pbtn login-guide__primary" onClick={() => useRadio.setState({ panel: 'netease' })}>去登录</button>
-              <button className="pbtn" onClick={() => setShown(false)}>暂不</button>
+              <button className="pbtn login-guide__primary" onClick={() => useRadio.setState({ panel: 'netease' })}>{t('去登录')}</button>
+              <button className="pbtn" onClick={() => setShown(false)}>{t('暂不')}</button>
             </div>
           </motion.div>
         </motion.div>

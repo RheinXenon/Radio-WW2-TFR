@@ -7,6 +7,7 @@ import { AnimatePresence, animate, motion, useMotionValue, useTransform } from '
 import { useRadio, getRadio } from '../store.js'
 import { engine } from '../audio/engine.js'
 import { theme } from '../themes/index.js'
+import { useT, useLoc, locProxy } from '../i18n/index.js'
 import { Emblem, Pattern } from '../themes/marks.jsx'
 import { resolveWall } from '../scene/Stage.jsx'
 import { Icon } from './Icon.jsx'
@@ -17,8 +18,24 @@ const WALL_RATIO = 16 / 9
 const keyOf = (entry) => `${entry.pool}/${entry.id}`
 const pad = (n) => String(n).padStart(2, '0')
 
+// 当前语言下的条目标题与史实正文；英文缺译回退中文
+export const entryTitle = (entry, lang = getRadio().lang) =>
+  (lang === 'en' ? entry.en?.title ?? entry.title : entry.title)
+const entryStory = (entry, lang = getRadio().lang) =>
+  (lang === 'en' ? entry.en?.story ?? entry.story : entry.story)?.map((s) => s.trim()).filter(Boolean) ?? []
+
 // 出处一段拆成“来历”与“画面要点”，并取出原题与年份（登记 meta 给了年份时优先用它）
-export function readSource(entry) {
+// 英文条目的 en 块自带 source（纯出处）与独立的 points，无需再拆
+export function readSource(entry, lang = getRadio().lang) {
+  const en = lang === 'en' && entry.en
+  if (en) {
+    return {
+      origin: (en.source ?? entry.source).trim(),
+      points: en.points?.trim() ?? null,
+      latin: null,
+      year: /(\d{3,4})/.exec(en.year ?? entry.meta?.year ?? '')?.[1] ?? null,
+    }
+  }
   const source = entry.source
   const [origin, points] = source.split(/画面要点[：:]/)
   return {
@@ -187,14 +204,16 @@ function Backdrop({ entry }) {
 
 function Head({ entry, index, total, station }) {
   const sel = useRadio((s) => s.wallpaper)
-  const t = theme.terms
+  const t = useT()
+  const L = useLoc()
+  const terms = locProxy(theme.terms, L)
   const { latin } = readSource(entry)
   const showing = entry.wall && resolveWall(sel)?.id === entry.wall.id
   return (
     <header className="dos__head">
       <Emblem kind={station.emblem} size={40} className="dos__emblem" />
       <div className="dos__titles">
-        <div className="panel__sub sc">{t.record} · {t.recordLatin} · {theme.pools[entry.pool].name}</div>
+        <div className="panel__sub sc">{terms.record} · {terms.recordLatin} · {L(theme.pools[entry.pool], 'name')}</div>
         <AnimatePresence mode="wait" initial={false}>
           <motion.div
             key={entry.id}
@@ -203,7 +222,7 @@ function Head({ entry, index, total, station }) {
             exit={{ opacity: 0, y: -6, filter: 'blur(4px)' }}
             transition={{ duration: 0.35, ease: EASE }}
           >
-            <h2 className="dos__title">{entry.title}</h2>
+            <h2 className="dos__title">{entryTitle(entry)}</h2>
             {latin && <div className="dos__latin latin">{latin}</div>}
           </motion.div>
         </AnimatePresence>
@@ -211,21 +230,21 @@ function Head({ entry, index, total, station }) {
 
       <div className="dos__tools">
         {entry.wall && (showing
-          ? <span className="dos__showing"><i />正在展出</span>
+          ? <span className="dos__showing"><i />{t('正在展出')}</span>
           : (
             <button
               className="pbtn"
               onClick={() => { engine.click('soft'); useRadio.setState({ wallpaper: { pool: entry.pool, name: entry.wall.name } }) }}
             >
-              设为壁纸
+              {t('设为壁纸')}
             </button>
           ))}
         <div className="dos__pager">
-          <button onClick={() => stepDossier(-1)} aria-label="上一份档案" title="上一份（←）"><Icon name="back" size={16} /></button>
+          <button onClick={() => stepDossier(-1)} aria-label={t('上一份档案')} title={t('上一份（←）')}><Icon name="back" size={16} /></button>
           <span className="latin tnum">{pad(index + 1)}<i>/</i>{pad(total)}</span>
-          <button onClick={() => stepDossier(1)} aria-label="下一份档案" title="下一份（→）"><Icon name="forward" size={16} /></button>
+          <button onClick={() => stepDossier(1)} aria-label={t('下一份档案')} title={t('下一份（→）')}><Icon name="forward" size={16} /></button>
         </div>
-        <button className="panel__close" onClick={close} title="返回画廊（Esc）"><Icon name="close" size={18} /></button>
+        <button className="panel__close" onClick={close} title={t('返回画廊（Esc）')}><Icon name="close" size={18} /></button>
       </div>
     </header>
   )
@@ -235,11 +254,13 @@ function Head({ entry, index, total, station }) {
 
 // 看片台档位：登记里带原图的主题（hasPhotos）才有原照一侧；壁纸即原作的主题（如古典的名画）
 // 只剩壁纸一档，档位唯一时整个切换器收起
-const modesOf = (t, hasPhotos) => [
-  hasPhotos && { id: 'photo', label: t.photo },
-  hasPhotos && { id: 'split', label: '分界' },
-  hasPhotos && { id: 'apart', label: '并列' },
-  { id: 'wall', label: t.wall },
+// 英文档位一律用短词（Photo/Split/Compare/Painting），长术语会把文字挤出按钮
+const MODE_EN = { photo: 'Photo', split: 'Split', apart: 'Compare', wall: 'Painting' }
+const modesOf = (terms, hasPhotos, isEn) => [
+  hasPhotos && { id: 'photo', label: isEn ? MODE_EN.photo : terms.photo },
+  hasPhotos && { id: 'split', label: isEn ? MODE_EN.split : '分界' },
+  hasPhotos && { id: 'apart', label: isEn ? MODE_EN.apart : '并列' },
+  { id: 'wall', label: isEn ? MODE_EN.wall : terms.wall },
 ].filter(Boolean)
 
 const fit = (W, H, r) => (W / H > r ? { w: H * r, h: H } : { w: W, h: W / r })
@@ -278,9 +299,12 @@ const SHIFT = { duration: 0.9, ease: EASE }
 function Viewer({ entry }) {
   const field = useRef(null)
   const size = useSize(field)
-  const t = theme.terms
+  const t = useT()
+  const L = useLoc()
+  const isEn = useRadio((s) => s.lang) === 'en'
+  const terms = locProxy(theme.terms, L)
   const ph = theme.hasPhotos
-  const modes = modesOf(t, ph)
+  const modes = modesOf(terms, ph, isEn)
   const ratio = useRatio(entry.photo)
   const hasPhoto = ratio > 0
   const hasWall = !!entry.wall
@@ -311,15 +335,15 @@ function Viewer({ entry }) {
   }
 
   const rects = size && mode ? plates(mode, size, hasPhoto ? ratio : WALL_RATIO) : null
-  const hint = loading ? `${t.photo}冲洗中`
-    : !mode ? (ph ? `${t.photo}与${t.wall}都尚未收录，档案文字见右侧` : `${t.wall}尚未上架，档案文字见右侧`)
-      : !hasWall ? (ph ? `${t.wall}尚未绘制，仅可查看${t.photo}` : `${t.wall}尚未上架，档案文字见右侧`)
-        : !hasPhoto ? (ph ? `${t.photo}暂未收录，仅可查看${t.wall}` : `${t.wall} · 16 : 9`)
+  const hint = loading ? t('{photo}冲洗中', { photo: terms.photo })
+    : !mode ? (ph ? t('{photo}与{wall}都尚未收录，档案文字见右侧', { photo: terms.photo, wall: terms.wall }) : t('{wall}尚未上架，档案文字见右侧', { wall: terms.wall }))
+      : !hasWall ? (ph ? t('{wall}尚未绘制，仅可查看{photo}', { wall: terms.wall, photo: terms.photo }) : t('{wall}尚未上架，档案文字见右侧', { wall: terms.wall }))
+        : !hasPhoto ? (ph ? t('{photo}暂未收录，仅可查看{wall}', { photo: terms.photo, wall: terms.wall }) : t('{wall} · 16 : 9', { wall: terms.wall }))
           : {
-            photo: `历史${t.photo}`,
-            split: `拖动黄铜分界线，对照${t.photo}与${t.wall}`,
-            apart: `左为历史${t.photo}，右为${t.wall}壁纸`,
-            wall: `${t.wall}壁纸 · 16 : 9`,
+            photo: t('历史{photo}', { photo: terms.photo }),
+            split: t('拖动黄铜分界线，对照{photo}与{wall}', { photo: terms.photo, wall: terms.wall }),
+            apart: t('左为历史{photo}，右为{wall}壁纸', { photo: terms.photo, wall: terms.wall }),
+            wall: t('{wall}壁纸 · 16 : 9', { wall: terms.wall }),
           }[mode]
 
   return (
@@ -338,7 +362,7 @@ function Viewer({ entry }) {
 
       <div className="dos__bar">
         {modes.length > 1 && (
-          <div className="dos__switch" role="radiogroup" aria-label="查看方式">
+          <div className="dos__switch" role="radiogroup" aria-label={t('查看方式')}>
             {mode && (
               <motion.span
                 className="dos__knob"
@@ -354,7 +378,7 @@ function Viewer({ entry }) {
                 aria-checked={mode === m.id}
                 className={mode === m.id ? 'is-on' : ''}
                 disabled={!can[m.id]}
-                title={can[m.id] ? undefined : !hasPhoto ? `${t.photo}暂未收录` : `${t.wall}尚未绘制`}
+                title={can[m.id] ? undefined : !hasPhoto ? t('{photo}暂未收录', { photo: terms.photo }) : t('{wall}尚未绘制', { wall: terms.wall })}
                 onClick={() => pick(m.id)}
               >
                 {m.label}
@@ -382,9 +406,11 @@ function Viewer({ entry }) {
 // 原照：像冲印的相纸一样从白中显影；原照档与并列档里带一圈相纸白边
 function PhotoPlate({ entry, rect, p, mode }) {
   const [ready, setReady] = useState(false)
+  const t = useT()
+  const L = useLoc()
   const clip = useTransform(p, (v) => `inset(0 ${(1 - v) * 100}% 0 0)`)
   const { year } = readSource(entry)
-  const orig = `历史${theme.terms.photo}`
+  const orig = t('历史{photo}', { photo: locProxy(theme.terms, L).photo })
   return (
     <motion.div
       className={`dos__plate dos__plate--photo ${mode === 'photo' || mode === 'apart' ? 'is-print' : ''} ${mode === 'wall' ? 'is-under' : ''}`}
@@ -413,6 +439,8 @@ function PhotoPlate({ entry, rect, p, mode }) {
 // 转绘：先铺缩略图，原尺寸图读完后淡入
 function WallPlate({ wall, rect, hidden }) {
   const [full, setFull] = useState(false)
+  const L = useLoc()
+  const terms = locProxy(theme.terms, L)
   return (
     <motion.div
       className="dos__plate dos__plate--wall"
@@ -425,12 +453,12 @@ function WallPlate({ wall, rect, hidden }) {
         <img
           className={`dos__full ${full ? 'is-in' : ''}`}
           src={wall.url}
-          alt={`${theme.terms.wall}壁纸`}
+          alt={`${terms.wall}壁纸`}
           draggable={false}
           decoding="async"
           onLoad={() => setFull(true)}
         />
-        <span className="dos__tag dos__tag--r">{theme.terms.wall}</span>
+        <span className="dos__tag dos__tag--r">{terms.wall}</span>
       </div>
     </motion.div>
   )
@@ -438,6 +466,7 @@ function WallPlate({ wall, rect, hidden }) {
 
 // 分界线：只在分界档出现；点击画面任意处即把分界线移过去，按住拖动跟随
 function Divider({ rect, p, active, onMove }) {
+  const t = useT()
   const left = useTransform(p, (v) => `${v * 100}%`)
   const to = (t) => { onMove(t); p.stop(); p.set(t) }
   const down = (e) => {
@@ -474,7 +503,7 @@ function Divider({ rect, p, active, onMove }) {
           className="dos__grip"
           role="slider"
           tabIndex={active ? 0 : -1}
-          aria-label="原照与转绘的分界"
+          aria-label={t('原照与转绘的分界')}
           aria-valuenow={Math.round(p.get() * 100)}
           onKeyDown={key}
         >
@@ -490,7 +519,9 @@ function Divider({ rect, p, active, onMove }) {
 // 原照与转绘都缺：暗房红灯下一张空相纸
 function Blank({ entry, size }) {
   const st = theme.stationMap[theme.pools[entry.pool].station]
-  const t = theme.terms
+  const t = useT()
+  const L = useLoc()
+  const terms = locProxy(theme.terms, L)
   const r = fit(size.w, size.h, 4 / 3)
   return (
     <motion.div
@@ -502,8 +533,8 @@ function Blank({ entry, size }) {
     >
       <Pattern kind={st.pattern} color={st.accent} height={16} opacity={0.1} className="dos__blankpat" style={{ height: '100%' }} />
       <Emblem kind={st.emblem} size={46} style={{ opacity: 0.35 }} />
-      <strong>底片待冲洗</strong>
-      <span>{theme.hasPhotos ? `${t.photo}与${t.wall}都尚未收录` : `${t.wall}尚未上架`}</span>
+      <strong>{t('底片待冲洗')}</strong>
+      <span>{theme.hasPhotos ? t('{photo}与{wall}都尚未收录，档案文字见右侧', { photo: terms.photo, wall: terms.wall }) : t('{wall}尚未上架，档案文字见右侧', { wall: terms.wall })}</span>
     </motion.div>
   )
 }
@@ -511,9 +542,11 @@ function Blank({ entry, size }) {
 // ———————————————————— 档案卡 ————————————————————
 
 function Card({ entry, index, station }) {
-  const t = theme.terms
+  const t = useT()
+  const L = useLoc()
+  const terms = locProxy(theme.terms, L)
   const { origin, points, year } = readSource(entry)
-  const story = entry.story.map((s) => s.trim()).filter(Boolean)
+  const story = entryStory(entry)
   return (
     <motion.section className="dos__side" variants={LINE}>
       <span className="dos__clip" aria-hidden />
@@ -526,33 +559,33 @@ function Card({ entry, index, station }) {
             animate={{ opacity: 0.86, scale: 1, rotate: -11 }}
             transition={{ delay: 0.75, duration: 0.45, ease: [0.3, 1.5, 0.5, 1] }}
           >
-            <span>{t.stamp}</span>
+            <span>{terms.stamp}</span>
             <b className="latin tnum">{year ?? '—'}</b>
           </motion.div>
 
           <motion.dl className="dos__fields" variants={LINE}>
-            <div><dt>档案编号</dt><dd className="latin tnum">No. {pad(index + 1)}</dd></div>
-            <div><dt>{t.nation}</dt><dd>{theme.pools[entry.pool].name}</dd></div>
-            <div><dt>年份</dt><dd className="latin tnum">{entry.meta?.year ?? year ?? '不详'}</dd></div>
+            <div><dt>{t('档案编号')}</dt><dd className="latin tnum">No. {pad(index + 1)}</dd></div>
+            <div><dt>{terms.nation}</dt><dd>{L(theme.pools[entry.pool], 'name')}</dd></div>
+            <div><dt>{t('年份')}</dt><dd className="latin tnum">{entry.meta?.year ?? year ?? t('不详')}</dd></div>
           </motion.dl>
 
-          <motion.h4 variants={LINE}>出处</motion.h4>
+          <motion.h4 variants={LINE}>{t('出处')}</motion.h4>
           <motion.p className="dos__origin" variants={LINE}>{origin}</motion.p>
           {points && (
             <>
-              <motion.h4 variants={LINE}>画面要点</motion.h4>
+              <motion.h4 variants={LINE}>{t('画面要点')}</motion.h4>
               <motion.p className="dos__points" variants={LINE}>{points}</motion.p>
             </>
           )}
 
-          <motion.h4 variants={LINE}>{t.story}</motion.h4>
+          <motion.h4 variants={LINE}>{terms.story}</motion.h4>
           {story.map((s, i) => <motion.p key={i} className="dos__story" variants={LINE}>{s}</motion.p>)}
 
           <motion.ul className="dos__annex" variants={LINE}>
             {theme.hasPhotos && (
-              <li className={entry.photo ? 'is-on' : ''}><i />历史{t.photo}<em>{entry.photo ? '已收录' : '暂未收录'}</em></li>
+              <li className={entry.photo ? 'is-on' : ''}><i />{t('历史{photo}', { photo: terms.photo })}<em>{entry.photo ? t('已收录') : t('暂未收录')}</em></li>
             )}
-            <li className={entry.wall ? 'is-on' : ''}><i />{t.wall}壁纸<em>{entry.wall ? '已上架' : theme.hasPhotos ? '尚未绘制' : '尚未上架'}</em></li>
+            <li className={entry.wall ? 'is-on' : ''}><i />{t('{wall}壁纸', { wall: terms.wall })}<em>{entry.wall ? t('已上架') : theme.hasPhotos ? t('尚未绘制') : t('尚未上架')}</em></li>
           </motion.ul>
         </div>
       </div>

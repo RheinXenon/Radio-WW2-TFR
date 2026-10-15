@@ -2,7 +2,8 @@
 // 金壳硬币边、12 点处的柄头与提环；银色表盘中央是玑镂玫瑰纹，外圈放射状罗马数字与铁轨式分钟圈；
 // 蓝钢苹果针、6 点处的小秒针（每秒 5 跳，如同 18000 次/时的老机芯），12 点下方开一扇月相窗
 import { useRef } from 'react'
-import { useNow, useFrame, handAngles, rotate, zhDate, pad2 } from './clockTime.js'
+import { useRadio } from '../store.js'
+import { useNow, useFrame, handAngles, rotate, dateLine, fullStamp, pad2 } from './clockTime.js'
 import './pocketwatch.css'
 
 const ROMAN = ['XII', 'I', 'II', 'III', 'IIII', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI']
@@ -12,15 +13,15 @@ const NEW_MOON = Date.UTC(2000, 0, 6, 18, 14) // 2000 年 1 月 6 日的新月�
 // 月龄在朔望月中的位置：0 新月，0.5 满月
 const moonPhase = (d) => ((((d - NEW_MOON) / 86400000) % SYNODIC) + SYNODIC) % SYNODIC / SYNODIC
 
-// 一天里的时段写成乐章速度
-function tempoOf(h) {
-  if (h < 5) return ['Lento', '慢板']
-  if (h < 8) return ['Aubade', '晨曲']
-  if (h < 12) return ['Allegro', '快板']
-  if (h < 14) return ['Andante', '行板']
-  if (h < 18) return ['Moderato', '中板']
-  if (h < 21) return ['Serenata', '小夜曲']
-  return ['Notturno', '夜曲']
+// 一天里的时段写成乐章速度，后一项是按语言的注释词
+function tempoOf(h, lang) {
+  if (h < 5) return ['Lento', lang === 'en' ? 'Slow' : '慢板']
+  if (h < 8) return ['Aubade', lang === 'en' ? 'Morning Music' : '晨曲']
+  if (h < 12) return ['Allegro', lang === 'en' ? 'Fast' : '快板']
+  if (h < 14) return ['Andante', lang === 'en' ? 'Walking Pace' : '行板']
+  if (h < 18) return ['Moderato', lang === 'en' ? 'Moderate' : '中板']
+  if (h < 21) return ['Serenata', lang === 'en' ? 'Serenade' : '小夜曲']
+  return ['Notturno', lang === 'en' ? 'Nocturne' : '夜曲']
 }
 
 // 苹果针：细杆穿过一枚空心圆环，环外收成尖。ring 为圆环圆心到轴心的距离，rr 为圆环半径
@@ -40,6 +41,7 @@ const ROSETTE = Array.from({ length: 40 }, (_, i) => i * 9)
 export default function PocketWatch() {
   const h = useRef(), m = useRef(), s = useRef()
   const date = useNow()
+  const lang = useRadio((s) => s.lang)
 
   useFrame((now) => {
     const a = handAngles(now, 5)
@@ -47,10 +49,10 @@ export default function PocketWatch() {
   })
 
   const moonX = -20 + moonPhase(date.getTime()) * 40
-  const [tempo, tempoZh] = tempoOf(date.getHours())
+  const [tempo, tempoZh] = tempoOf(date.getHours(), lang)
 
   return (
-    <div className="pw" title={date.toLocaleString('zh-CN')}>
+    <div className="pw" title={fullStamp(date, lang)}>
       <svg viewBox="-60 -88 120 148" className="pw__face" aria-hidden>
         <defs>
           <linearGradient id="pw-gold" x1="0" y1="0" x2="1" y2="1">
@@ -166,7 +168,7 @@ export default function PocketWatch() {
       </svg>
       <div className="pw__text">
         <span className="pw__time tnum">{pad2(date.getHours())}<i>:</i>{pad2(date.getMinutes())}</span>
-        <span className="pw__day">{zhDate(date)}</span>
+        <span className="pw__day">{dateLine(date, lang)}</span>
         <span className="pw__tempo"><em>{tempo}</em><b />{tempoZh}</span>
       </div>
     </div>
